@@ -63,6 +63,9 @@
         <table tableName="countries" domainObjectName="Country">
             <generatedKey column="cid" sqlStatement="Mysql" identity="true" />
         </table>
+        <table tableName="site_view_histories" domainObjectName="SiteViewHistory">
+            <generatedKey column="hid" sqlStatement="Mysql" identity="true" />
+        </table>
 
 
 
