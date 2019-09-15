@@ -58,13 +58,43 @@
         </javaClientGenerator>
         <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
         <table tableName="admins" domainObjectName="Admin">
-            <generatedKey column="uid" sqlStatement="Mysql" identity="true" />
+            <generatedKey column="aid" sqlStatement="Mysql" identity="true" />
         </table>
+
         <table tableName="countries" domainObjectName="Country">
             <generatedKey column="cid" sqlStatement="Mysql" identity="true" />
         </table>
+
+        <!--        关联表 无主键-->
+        <table tableName="countries_sites" domainObjectName="CountriesSite">
+        </table>
+
         <table tableName="site_view_histories" domainObjectName="SiteViewHistory">
             <generatedKey column="hid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="sites" domainObjectName="Site">
+            <generatedKey column="sid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="user_settings" domainObjectName="UserSetting">
+            <generatedKey column="sid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="users" domainObjectName="User">
+            <generatedKey column="uid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <!--        关联表 无主键-->
+        <table tableName="users_sites" domainObjectName="UserSite">
+        </table>
+
+        <table tableName="bg_pictures" domainObjectName="BgPicture">
+            <generatedKey column="pid" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="site_categories" domainObjectName="SiteCategory">
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true" />
         </table>
 
 
