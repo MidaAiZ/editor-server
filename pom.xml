@@ -40,7 +40,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
+            <version>RELEASE</version>
             <scope>runtime</scope>
         </dependency>
         <!-- mapper -->
@@ -72,6 +72,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
+                        <version>RELEASE</version>
                     </dependency>
                 </dependencies>
             </plugin>
