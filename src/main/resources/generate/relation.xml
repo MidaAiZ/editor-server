@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables>
+    <!--<table domainName="User" tabName="core_user_base">-->
+    <!--<many>-->
+    <!--<table domainName="UserBusiness" tabName="core_user_business" column="user_id"-->
+    <!--columnType="java.lang.Integer" property="userBusinesses"/>-->
+    <!--</many>-->
+    <!--<many>-->
+    <!--<table domainName="UserRole" tabName="core_user_role" column="user_id" columnType="java.lang.Integer"-->
+    <!--property="userRoles"/>-->
+    <!--</many>-->
+    <!--<one>-->
+    <!--<table domainName="Department" tabName="core_department" column="dept_id" columnType="java.lang.Integer"-->
+    <!--property="department"/>-->
+    <!--</one>-->
+    <!--<one>-->
+    <!--<table domainName="ServiceAbility" tabName="core_service_ability" column="user_id"-->
+    <!--columnType="java.lang.Integer" property="serviceAbility"/>-->
+    <!--</one>-->
+    <!--<one>-->
+    <!--<table domainName="Domain" tabName="core_domain" column="domain_id" columnType="java.lang.Integer"-->
+    <!--property="domain"/>-->
+    <!--</one>-->
+    <!--</table>-->
+
+    <!--<table domainName="UserBusiness" tabName="core_user_business">-->
+    <!--<one>-->
+    <!--<table domainName="BusinessType" tabName="core_business_type" column="business_type_id"-->
+    <!--columnType="java.lang.Integer" property="businessType"/>-->
+    <!--</one>-->
+    <!--</table>-->
+
+    <!--<table domainName="UserRole" tabName="core_user_role">-->
+    <!--<one>-->
+    <!--<table domainName="Role" tabName="core_role" column="role_id" columnType="java.lang.Integer"-->
+    <!--property="role"/>-->
+    <!--</one>-->
+    <!--</table>-->
+
+    <!--<table domainName="RolePerm" tabName="core_role_perm">-->
+    <!--<one>-->
+    <!--<table domainName="Perm" tabName="core_perm" column="perm_id" columnType="java.lang.Integer"-->
+    <!--property="perm"/>-->
+    <!--</one>-->
+    <!--</table>-->
+
+    <!--<table domainName="Node" tabName="core_node">-->
+    <!--<one>-->
+    <!--<table domainName="Node" tabName="core_node" column="parent_node_id" alignColumn="node_id"-->
+    <!--columnType="java.lang.Integer" property="parent"/>-->
+    <!--</one>-->
+    <!--<many>-->
+    <!--<table domainName="Node" tabName="core_node" column="node_id" alignColumn="parent_node_id"-->
+    <!--columnType="java.lang.Integer" property="children"/>-->
+    <!--</many>-->
+    <!--</table>-->
+</tables>
