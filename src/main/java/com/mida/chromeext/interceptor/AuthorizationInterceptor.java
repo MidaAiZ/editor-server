@@ -1,19 +1,20 @@
 package com.mida.chromeext.interceptor;
 
 
-import com.mida.chromeext.annotation.LoginRequired;
-import com.mida.chromeext.pojo.Users;
-import com.mida.chromeext.utils.JwtUtils;
-import com.mida.chromeext.utils.MyException;
-import io.jsonwebtoken.Claims;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.mida.chromeext.annotation.LoginRequired;
+import com.mida.chromeext.utils.JwtUtils;
+import com.mida.chromeext.utils.MyException;
+
+import io.jsonwebtoken.Claims;
 
 /**
  * 类AuthorizationInterceptor的功能描述:

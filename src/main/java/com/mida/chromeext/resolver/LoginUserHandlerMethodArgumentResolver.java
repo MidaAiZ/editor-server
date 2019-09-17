@@ -1,8 +1,5 @@
 package com.mida.chromeext.resolver;
 
-import com.mida.chromeext.annotation.CurrentUser;
-import com.mida.chromeext.interceptor.AuthorizationInterceptor;
-import com.mida.chromeext.pojo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -12,18 +9,22 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.mida.chromeext.annotation.CurrentUser;
+import com.mida.chromeext.interceptor.AuthorizationInterceptor;
+import com.mida.chromeext.pojo.User;
+
 /**
  * 类LoginUserHandlerMethodArgumentResolver的功能描述:
  * 要想 @loginUser 起作用，需要编写一个配套解析器，做法是实现 spring 提供的 HandlerMethodArgumentResolver 接口。
  */
 @Component
 public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-    @Autowired
+//    @Autowired
 //    private ApiUserService userService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(Users.class) && parameter.hasParameterAnnotation(CurrentUser.class);
+        return parameter.getParameterType().isAssignableFrom(User.class) && parameter.hasParameterAnnotation(CurrentUser.class);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
         }
         //获取用户信息
 //        Users user = userService.userInfo((String) object);
-        Users user = new Users();
+        User user = new User();
         return user;
     }
 }
