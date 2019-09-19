@@ -4,6 +4,7 @@ package com.mida.chromeext.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mida.chromeext.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     private JwtUtils jwtUtils;
 
     @Autowired
-//    private ApiUserService userApiService;
+    private UserService userService;
 
     public static final String CURRENT_USER = "userId";
 
@@ -44,9 +45,10 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        //需要验证，获取用户凭证
+        // 需要验证，获取用户凭证
+        // 优先通过请求报头获取token
         String token = request.getHeader(jwtUtils.getHeader());
-
+        // 通过参数获取token
         if(StringUtils.isBlank(token)){
             token = request.getParameter(jwtUtils.getHeader());
         }
@@ -63,7 +65,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
 
         //验证用户信息
-//        Users user = userApiService.queryObject(claims.getSubject());
+//        User user = userService.getUserById(Integer.valueOf(claims.getSubject()));
 //        if (user == null) {
 //            throw new RuntimeException("用户不存在，请重新登录");
 //        }

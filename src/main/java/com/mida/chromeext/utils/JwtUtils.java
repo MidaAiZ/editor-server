@@ -21,6 +21,7 @@ import java.util.Date;
 public class JwtUtils {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    // 以下参数通过配置文件注入
     private String secret;
     private long expire;
     private String header;
@@ -50,7 +51,7 @@ public class JwtUtils {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-        }catch (Exception e){
+        } catch (Exception e){
             logger.debug("token验证错误,请重新登陆 ", e);
             return null;
         }

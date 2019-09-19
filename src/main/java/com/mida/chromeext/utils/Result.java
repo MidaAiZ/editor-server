@@ -7,8 +7,11 @@ import java.util.Map;
 public class Result extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
 
+    private HashMap<String, Object> data;
+
     public Result() {
-        put("code", "0");
+
+        put("code", ResultCode.SUCCESS);
     }
 
     public Result(String code,String msg) {
@@ -17,11 +20,11 @@ public class Result extends HashMap<String, Object> {
     }
 
     public static Result error() {
-        return new Result(Constant.RESULT.CODE_NO.getValue(), Constant.RESULT.MSG_NO.getValue());
+        return new Result(ResultCode.FAIL.code(), "");
     }
 
-    public static Result error(String msg) {
-        return error(Constant.RESULT.CODE_NO.getValue(), msg);
+    public static Result error(String code) {
+        return error(ResultCode.FAIL.code(), "");
     }
 
     public static Result error(String code, String msg) {
@@ -39,16 +42,16 @@ public class Result extends HashMap<String, Object> {
 
     public static Result ok(Map<String, Object> map) {
         Result r = new Result();
-        r.putAll(map);
+        r.data.putAll(map);
         return r;
     }
 
     public static Result ok() {
-        return new Result(Constant.RESULT.CODE_YES.getValue(),Constant.RESULT.MSG_YES.getValue());
+        return new Result(ResultCode.SUCCESS.code(),"");
     }
 
     public Result put(String key, Object value) {
-        super.put(key, value);
+        data.put(key, value);
         return this;
     }
 }

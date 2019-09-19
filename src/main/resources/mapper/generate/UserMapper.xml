@@ -17,6 +17,7 @@
     <result column="tel_prefix" jdbcType="TINYINT" property="telPrefix" />
     <result column="occupation" jdbcType="VARCHAR" property="occupation" />
     <result column="country_id" jdbcType="TINYINT" property="countryId" />
+    <result column="country_id" jdbcType="TINYINT" property="countryId" />
     <result column="country_name" jdbcType="VARCHAR" property="countryName" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />

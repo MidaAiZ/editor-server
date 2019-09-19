@@ -1,5 +1,6 @@
 package com.mida.chromeext.resolver;
 
+import com.mida.chromeext.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,8 @@ import com.mida.chromeext.pojo.User;
  */
 @Component
 public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-//    @Autowired
-//    private ApiUserService userService;
+    @Autowired
+    private UserService userService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -36,8 +37,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
             return null;
         }
         //获取用户信息
-//        Users user = userService.userInfo((String) object);
-        User user = new User();
+        User user = userService.getUserById((Integer) object);
         return user;
     }
 }
