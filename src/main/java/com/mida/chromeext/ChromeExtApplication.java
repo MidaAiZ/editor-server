@@ -58,11 +58,21 @@ public class ChromeExtApplication implements ApplicationRunner {
         Scanner scanner = new Scanner(System.in);
         List<TempCountry> list = new ArrayList<>();
         while(!scanner.hasNext("gg")){
-            String name = scanner.next();
-            String zh_name = scanner.next();
-            String code = scanner.next();
-            String telPrefix = scanner.next();
-            String timeZone = scanner.next();
+            String temp = scanner.nextLine();
+            String[] strings = temp.split(" ");
+            int len = strings.length;
+            String name ="";
+            for(int i = 0; i < len - 4; i++){
+                if(i == 0)
+                name += strings[i];
+                else{
+                    name += " "+strings[i];
+                }
+            }
+            String zh_name = strings[len-4];
+            String code = strings[len-3];
+            String telPrefix = strings[len-2];
+            String timeZone = strings[len-1];
             list.add(new TempCountry(name,code,telPrefix,timeZone));
         }
         System.out.println(list);
