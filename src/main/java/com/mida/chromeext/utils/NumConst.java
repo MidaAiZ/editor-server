@@ -8,6 +8,8 @@ public interface NumConst {
 
     int NUM0 = 0;
 
+    int NUM1 = 1;
+
     int NUM16 = 16;
 
 }

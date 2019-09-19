@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mida.chromeext.dao.UserSiteDAO">
+
+<select id="listSiteByUserId" parameterType="integer" resultType="com.mida.chromeext.pojo.Site">
+    SELECT
+	s.sid,
+	s.title,
+	s.url,
+	s.icon,
+	s.used_count,
+	s.page_views,
+	s.weight,
+	s.created_by,
+	s.created_at,
+	s.updated_at
+FROM
+	sites s
+	JOIN users_sites us ON s.sid = us.site_id
+WHERE
+	us.user_id = #{userId}
+
+</select>
+
+</mapper>

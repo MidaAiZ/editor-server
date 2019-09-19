@@ -1,17 +1,22 @@
 package com.mida.chromeext.service;
 
-import com.mida.chromeext.dao.UserDAO;
-import com.mida.chromeext.pojo.User;
-import com.mida.chromeext.pojo.UserExample;
-import com.mida.chromeext.utils.MyException;
-import com.mida.chromeext.utils.NumConst;
-import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.utils.ShiroUtils;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
+import com.mida.chromeext.dao.UserDAO;
+import com.mida.chromeext.exception.BaseException;
+import com.mida.chromeext.exception.ExceptionEnum;
+import com.mida.chromeext.pojo.User;
+import com.mida.chromeext.pojo.UserExample;
+import com.mida.chromeext.utils.MyException;
+import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.utils.ShiroUtils;
+import com.mida.chromeext.validation.UserValidation;
 
 /**
  * @author lihaoyu
@@ -57,7 +62,7 @@ public class UserService {
      */
     public User login(User loginUser) throws MyException {
         if(StringUtils.isEmpty(loginUser.getNumber())){
-            throw new MyException("登陆用户名不能为空!");
+            throw new BaseException(ExceptionEnum.USER_NUMBER_NULL);
         }
         if(StringUtils.isEmpty(loginUser.getPassword())){
             throw new MyException("登陆密码不能为空!");
@@ -89,16 +94,22 @@ public class UserService {
     }
 
     /**
-     * 用户注册，校验。未填字段 created_at,updated_at,
+     * 用户注册，有校验。
      *
-     * @param user
+     * @param preValidationUser
      * @return Result对象
      * @author lihaoyu
      * @date 2019/9/17 14:14
      */
-    public Result registerUser(User user) {
-
-        return null;
+    public User registerUser(User preValidationUser) throws BaseException{
+        User user = UserValidation.validateUser(preValidationUser);
+        user.setSalt(UUID.randomUUID().toString());
+        Date date = new Date();
+        user.setCreatedAt(date);
+        user.setUpdatedAt(date);
+        int number = userDAO.insertSelective(user);
+        user.setNumber(String.valueOf(number));
+        return user;
     }
 
 }
