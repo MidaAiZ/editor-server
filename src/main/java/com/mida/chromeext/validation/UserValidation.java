@@ -5,6 +5,9 @@ import com.mida.chromeext.exception.ExceptionEnum;
 import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.utils.RegexConst;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * 用户注册校验类
  * 
@@ -38,7 +41,7 @@ public class UserValidation extends BaseValidation {
      * @date 2019/9/17 15:03
      */
     public static boolean isGender(Byte gender) {
-        return gender != null && (gender.byteValue() == 0 || gender.byteValue() == 1);
+        return gender == null || gender.byteValue() == 0 || gender.byteValue() == 1;
     }
 
     /**

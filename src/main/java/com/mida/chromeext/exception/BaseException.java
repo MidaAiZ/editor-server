@@ -16,4 +16,12 @@ public class BaseException extends RuntimeException {
         this.message = exceptionEnum.getMessage();
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
 }

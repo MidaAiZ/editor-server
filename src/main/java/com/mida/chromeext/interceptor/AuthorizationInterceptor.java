@@ -13,7 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.utils.JwtUtils;
-import com.mida.chromeext.utils.MyException;
+import com.mida.chromeext.exception.MyException;
 
 import io.jsonwebtoken.Claims;
 

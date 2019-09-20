@@ -13,7 +13,7 @@ import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.exception.ExceptionEnum;
 import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.pojo.UserExample;
-import com.mida.chromeext.utils.MyException;
+import com.mida.chromeext.exception.MyException;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.ShiroUtils;
 import com.mida.chromeext.validation.UserValidation;
@@ -72,7 +72,7 @@ public class UserService {
             throw new MyException("登陆用户名或密码错误");
         }
         //密码错误
-        if(!user.getPassword().equals(ShiroUtils.EncodeSalt(user.getPassword(), user.getSalt()))){
+        if(!user.getPassword().equals(ShiroUtils.EncodeSalt(loginUser.getPassword(), user.getSalt()))){
             throw new MyException("登陆用户名或密码错误");
         }
         return user;
@@ -101,12 +101,13 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/9/17 14:14
      */
-    public User registerUser(User preValidationUser) throws BaseException{
+    public User register(User preValidationUser) throws BaseException {
         User user = UserValidation.validateUser(preValidationUser);
         user.setSalt(UUID.randomUUID().toString());
         Date date = new Date();
         user.setCreatedAt(date);
         user.setUpdatedAt(date);
+        user.setPassword(ShiroUtils.EncodeSalt(user.getPassword(), user.getSalt()));
         int number = userDAO.insertSelective(user);
         user.setNumber(String.valueOf(number));
         return user;

@@ -3,11 +3,12 @@ package com.mida.chromeext.controller;
 import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.service.UserService;
 import com.mida.chromeext.utils.JwtUtils;
-import com.mida.chromeext.utils.MyException;
+import com.mida.chromeext.exception.MyException;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,14 +30,16 @@ public class SessionController {
      * @return
      */
     @PostMapping("login")
-    public Result login(@RequestParam String number, @RequestParam String password, @RequestParam String imgCode) {
+    public Result login(@RequestBody Map params) {
         User loginUser = new User();
-        loginUser.setNumber(number);
-        loginUser.setPassword(password);
+        loginUser.setNumber((String)params.get("number"));
+        loginUser.setPassword((String)params.get("password"));
+
         try {
            loginUser = userService.login(loginUser);
         } catch (MyException e) {
-            return Result.error(ResultCode.FAIL.code(), e.getMessage());
+            Result r = Result.error(ResultCode.FAIL.code(), e.getMessage());
+            return r;
         }
 
         // 生成token

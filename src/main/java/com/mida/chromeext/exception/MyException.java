@@ -1,4 +1,4 @@
-package com.mida.chromeext.utils;
+package com.mida.chromeext.exception;
 
 /**
  * 自定义 异常
