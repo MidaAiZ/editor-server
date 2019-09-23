@@ -1,18 +1,19 @@
 package com.mida.chromeext.validation;
 
+import com.mida.chromeext.utils.RegexConst;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mida.chromeext.utils.RegexConst;
-
 /**
  * 基础校验类
+ *
  * @author lihaoyu
  * @date 2019/9/17 14:38
  */
 public class BaseValidation {
     /**
-     *  邮箱校验
+     * 邮箱校验
      *
      * @param email 字符串
      * @return boolean
@@ -21,10 +22,10 @@ public class BaseValidation {
      */
     public static boolean isEmail(String email) {
         String regex = RegexConst.REGEX_EMAIL;
-       return regexMatch(email, regex);
+        return regexMatch(email, regex);
     }
 
-    public static boolean regexMatch(String sourceString, String regex){
+    public static boolean regexMatch(String sourceString, String regex) {
         if (null == sourceString || "".equals(sourceString)) {
             return false;
         }
@@ -32,8 +33,7 @@ public class BaseValidation {
         Matcher m = p.matcher(sourceString);
         if (m.matches()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

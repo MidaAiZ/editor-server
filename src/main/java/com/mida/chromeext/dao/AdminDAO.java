@@ -9,7 +9,4 @@ import com.mida.chromeext.mapper.AdminMapper;
 public interface AdminDAO extends AdminMapper {
 
 
-
-
-
 }

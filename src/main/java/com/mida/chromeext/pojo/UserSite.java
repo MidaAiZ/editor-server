@@ -3,11 +3,9 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class UserSite implements Serializable {
-    private Integer userId;
-
-    private Integer siteId;
-
     private static final long serialVersionUID = 1L;
+    private Integer userId;
+    private Integer siteId;
 
     public Integer getUserId() {
         return userId;

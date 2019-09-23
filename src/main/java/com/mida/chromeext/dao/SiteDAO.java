@@ -1,10 +1,8 @@
 package com.mida.chromeext.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.mida.chromeext.mapper.SiteMapper;
+
+import java.util.List;
 
 /**
  * @author lihaoyu

@@ -2,8 +2,9 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.RolePermission;
 import com.mida.chromeext.pojo.RolePermissionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RolePermissionMapper {
     long countByExample(RolePermissionExample example);

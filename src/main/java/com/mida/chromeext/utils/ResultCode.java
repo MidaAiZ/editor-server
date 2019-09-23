@@ -84,14 +84,6 @@ public enum ResultCode {
         this.code = code;
     }
 
-    public String code() {
-        return this.code;
-    }
-
-    public int status() {
-        return status;
-    }
-
     public static Boolean isValidateStateType(String... stateType) {
         for (int i = 0; i < stateType.length; i++) {
             ResultCode[] value = ResultCode.values();
@@ -109,6 +101,13 @@ public enum ResultCode {
         return true;
     }
 
+    public String code() {
+        return this.code;
+    }
+
+    public int status() {
+        return status;
+    }
 
     @Override
     public String toString() {

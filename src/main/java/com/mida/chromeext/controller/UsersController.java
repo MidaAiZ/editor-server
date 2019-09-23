@@ -4,36 +4,38 @@ import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.service.UserService;
 import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.utils.ResultCode;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("users")
+@Api(tags = "前台用户操作接口", description = "提供用户相关的 Rest API")
 public class UsersController {
     @Autowired
     UserService userService;
 
     @PostMapping("")
-    public Result register(@RequestBody Map params) {
-        User regUser = new User();
-        regUser.setNumber((String)params.get("number"));
-        regUser.setPassword((String)params.get("password"));
-        regUser.setEmail((String)params.get("email"));
+    @ApiOperation("用户注册接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "number", value = "账号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),
+    })
+    public Result<User> register(@ApiIgnore User regUser) {
+        User user;
         try {
-            regUser = userService.register(regUser);
+            user = userService.register(regUser);
+            System.out.println(user);
         } catch (BaseException e) {
             return Result.error(e.getCode(), e.getMessage());
         }
-
-        return Result.ok().put("user", regUser);
-    }
-
-
-    @RequestMapping("")
-    public Result update(@RequestParam String number, @RequestParam String password, @RequestParam String email) {
-       return Result.ok();
+        return Result.ok(user);
     }
 }

@@ -4,35 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private Integer uid;
-
-    private String number;
-
-    private String password;
-
-    private String avatar;
-
-    private String salt;
-
-    private String email;
-
-    private Byte gender;
-
-    private Integer tel;
-
-    private Byte telPrefix;
-
-    private String occupation;
-
-    private Byte countryCode;
-
-    private String countryName;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
     private static final long serialVersionUID = 1L;
+    private Integer uid;
+    private String number;
+    private String password;
+    private String avatar;
+    private String salt;
+    private String email;
+    private Byte gender;
+    private Integer tel;
+    private Byte telPrefix;
+    private String occupation;
+    private Byte countryCode;
+    private String countryName;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Integer getUid() {
         return uid;

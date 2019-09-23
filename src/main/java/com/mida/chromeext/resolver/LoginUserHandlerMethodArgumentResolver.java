@@ -1,5 +1,8 @@
 package com.mida.chromeext.resolver;
 
+import com.mida.chromeext.annotation.CurrentUser;
+import com.mida.chromeext.interceptor.AuthorizationInterceptor;
+import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -9,10 +12,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import com.mida.chromeext.annotation.CurrentUser;
-import com.mida.chromeext.interceptor.AuthorizationInterceptor;
-import com.mida.chromeext.pojo.User;
 
 /**
  * 类LoginUserHandlerMethodArgumentResolver的功能描述:
@@ -33,7 +32,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
                                   NativeWebRequest webRequest, WebDataBinderFactory factory) throws Exception {
         //这一句是从 request 作用域中取出名为 userId 的属性
         Object object = webRequest.getAttribute(AuthorizationInterceptor.CURRENT_USER, RequestAttributes.SCOPE_REQUEST);
-        if(object == null){
+        if (object == null) {
             return null;
         }
         //获取用户信息

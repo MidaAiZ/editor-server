@@ -5,12 +5,9 @@ import com.mida.chromeext.exception.ExceptionEnum;
 import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.utils.RegexConst;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * 用户注册校验类
- * 
+ *
  * @author lihaoyu
  * @date 2019/9/17 14:56
  */

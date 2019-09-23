@@ -4,25 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Admin implements Serializable {
-    private Integer aid;
-
-    private String number;
-
-    private String pwd;
-
-    private String email;
-
-    private Integer tel;
-
-    private Byte telPrefix;
-
-    private String roles;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
     private static final long serialVersionUID = 1L;
+    private Integer aid;
+    private String number;
+    private String pwd;
+    private String email;
+    private Integer tel;
+    private Byte telPrefix;
+    private String roles;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Integer getAid() {
         return aid;

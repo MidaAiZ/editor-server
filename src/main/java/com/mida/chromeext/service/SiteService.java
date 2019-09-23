@@ -1,12 +1,11 @@
 package com.mida.chromeext.service;
 
+import com.mida.chromeext.dao.SiteDAO;
+import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.mida.chromeext.dao.SiteDAO;
-import com.mida.chromeext.pojo.Site;
 
 import java.util.Date;
 import java.util.List;
@@ -37,7 +36,7 @@ public class SiteService {
     /**
      * 管理员添加网站 未做校验
      *
-     * @param site 被添加的site
+     * @param site    被添加的site
      * @param adminId 添加者id
      * @return site 添加的网站po
      * @author lihaoyu

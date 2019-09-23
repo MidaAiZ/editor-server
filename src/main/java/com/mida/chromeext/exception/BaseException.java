@@ -11,7 +11,7 @@ public class BaseException extends RuntimeException {
 
     protected String message;
 
-    public BaseException(ExceptionEnum exceptionEnum){
+    public BaseException(ExceptionEnum exceptionEnum) {
         this.code = exceptionEnum.getCode();
         this.message = exceptionEnum.getMessage();
     }

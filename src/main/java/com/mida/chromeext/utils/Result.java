@@ -1,79 +1,99 @@
 package com.mida.chromeext.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
+public class Result<T> implements Serializable {
+    private static final long serialVersionUID = -8782333365744933352L;
 
-public class Result extends HashMap<String, Object> {
-    private static final long serialVersionUID = 1L;
+    private String code;
+    private String message = "";
+    private boolean success = true;
+    private T data;
 
-    private HashMap<String, Object> data = new HashMap<>();
-
-    public Result() {
-        setData(data);
-        setCode(ResultCode.SUCCESS.code());
+    private Result() {
+        this.code = ResultCode.SUCCESS.code();
     }
 
-    public Result(String code,String msg) {
-        setData(data);
-        setCode(code);
-        setMsg(msg);
+    private Result(String code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
-    public static Result error() {
-        return new Result(ResultCode.FAIL.code(), "");
+    private Result(String code, T data, String message) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
-    public static Result error(String code) {
-        return error(ResultCode.FAIL.code(), "");
+    public static <T> Result<T> error() {
+        return error(ResultCode.FAIL.code(), "未知异常，请联系管理员");
     }
 
-    public static Result error(String code, String msg) {
-        Result r = new Result();
-        r.setCode(code);
-        r.setMsg(msg);
-
-        return r;
+    public static <T> Result<T> error(String message) {
+        return error(ResultCode.FAIL.code(), message);
     }
 
-    public static Result ok(String msg) {
-        Result r = new Result();
-        r.setMsg(msg);
-        return r;
+    public static <T> Result<T> error(String code, String message) {
+        Result result = new Result(code, message);
+        result.setSuccess(false);
+        return result;
     }
 
-    public static Result ok(Map<String, Object> map) {
-        Result r = new Result();
-        r.setData((HashMap) map);
-        return r;
+    public static <T> Result<T> error(String code, T data, String message) {
+        Result result = new Result(code, data, message);
+        result.setSuccess(false);
+        return result;
     }
 
-    public static Result ok() {
-        return new Result(ResultCode.SUCCESS.code(),"");
+    public static <T> Result<T> ok() {
+        return ok(ResultCode.SUCCESS.code(), null, "");
     }
 
-    public Result put(String key, Object value) {
-        super.put(key, value);
-        return this;
+    public static <T> Result<T> ok(T data) {
+        return ok(ResultCode.SUCCESS.code(), data);
     }
 
-    public Result setCode(String code) {
-        return this.put("code", code);
+    public static <T> Result<T> ok(String code) {
+        return ok(code, null);
     }
 
-    public Result setMsg(String msg) {
-        return this.put("message", msg);
+    public static <T> Result<T> ok(String code, T data) {
+        return ok(ResultCode.SUCCESS.code(), data, "");
     }
 
-
-    public Result setData(HashMap map) {
-        this.put("data", map);
-        if (!this.data.equals(map)) this.data = (HashMap)map.clone();
-        return this;
+    public static <T> Result<T> ok(String code, T data, String message) {
+        return new Result(code, data, message);
     }
 
-    public Result putData(String key, Object value) {
-        this.data.put(key, value);
-        return this;
+    public String getCode() {
+        return this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public boolean isSuccess() {
+        return this.success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public T getData() {
+        return this.data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

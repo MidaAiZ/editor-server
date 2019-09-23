@@ -13,53 +13,55 @@ import org.apache.shiro.subject.Subject;
  */
 public class ShiroUtils {
 
-	/**  加密算法 */
-	public final static String algorithmName = "SHA-256";
-	/**
-	 * 加密散列次数
-	 */
-	public static final int hashIterations= 1;
+    /**
+     * 加密算法
+     */
+    public final static String algorithmName = "SHA-256";
+    /**
+     * 加密散列次数
+     */
+    public static final int hashIterations = 1;
 
-	public static String EncodeSalt(String password, String salt) {
-		return new SimpleHash(algorithmName, password, salt, hashIterations).toString();
-	}
+    public static String EncodeSalt(String password, String salt) {
+        return new SimpleHash(algorithmName, password, salt, hashIterations).toString();
+    }
 
-	public static Session getSession() {
-		return SecurityUtils.getSubject().getSession();
-	}
+    public static Session getSession() {
+        return SecurityUtils.getSubject().getSession();
+    }
 
-	public static Subject getSubject() {
-		return SecurityUtils.getSubject();
-	}
+    public static Subject getSubject() {
+        return SecurityUtils.getSubject();
+    }
 
-	public static User getUserEntity() {
-		return (User) SecurityUtils.getSubject().getPrincipal();
-	}
+    public static User getUserEntity() {
+        return (User) SecurityUtils.getSubject().getPrincipal();
+    }
 
-	public static Integer getUserId() {
-		return getUserEntity().getUid();
-	}
-	
-	public static void setSessionAttribute(Object key, Object value) {
-		getSession().setAttribute(key, value);
-	}
+    public static Integer getUserId() {
+        return getUserEntity().getUid();
+    }
 
-	public static Object getSessionAttribute(Object key) {
-		return getSession().getAttribute(key);
-	}
+    public static void setSessionAttribute(Object key, Object value) {
+        getSession().setAttribute(key, value);
+    }
 
-	public static boolean isLogin() {
-		return SecurityUtils.getSubject().getPrincipal() != null;
-	}
+    public static Object getSessionAttribute(Object key) {
+        return getSession().getAttribute(key);
+    }
 
-	public static void logout() {
-		SecurityUtils.getSubject().logout();
-	}
-	
-	public static String getKaptcha(String key) {
-		String kaptcha = getSessionAttribute(key).toString();
-		getSession().removeAttribute(key);
-		return kaptcha;
-	}
+    public static boolean isLogin() {
+        return SecurityUtils.getSubject().getPrincipal() != null;
+    }
+
+    public static void logout() {
+        SecurityUtils.getSubject().logout();
+    }
+
+    public static String getKaptcha(String key) {
+        String kaptcha = getSessionAttribute(key).toString();
+        getSession().removeAttribute(key);
+        return kaptcha;
+    }
 
 }

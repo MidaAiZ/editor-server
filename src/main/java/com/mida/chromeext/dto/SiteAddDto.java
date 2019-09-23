@@ -8,8 +8,7 @@ import java.util.Date;
  */
 public class SiteAddDto {
 
-        private Date fromTime;
-
+    private Date fromTime;
 
 
 }

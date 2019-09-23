@@ -1,20 +1,20 @@
 package com.mida.chromeext.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.mida.chromeext.dao.SiteDAO;
 import com.mida.chromeext.dao.UserSiteDAO;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.UserSite;
 import com.mida.chromeext.pojo.UserSiteExample;
 import com.mida.chromeext.utils.NumConst;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 用户网站关联服务
+ *
  * @author lihaoyu
  * @date 2019/9/17 12:26
  */
@@ -36,7 +36,7 @@ public class UserSiteService {
      * @author lihaoyu
      * @date 2019/9/19 16:31
      */
-    public List<Site> listSiteByUserId(Integer userId){
+    public List<Site> listSiteByUserId(Integer userId) {
         return userSiteDAO.listSiteByUserId(userId);
     }
 
@@ -51,9 +51,9 @@ public class UserSiteService {
      * @date 2019/9/19 15:06
      */
     @Transactional(rollbackFor = Exception.class)
-    public UserSite addSiteByUserIdAndSiteId(Integer userId, Integer siteId){
+    public UserSite addSiteByUserIdAndSiteId(Integer userId, Integer siteId) {
         Site site = siteDAO.selectByPrimaryKey(siteId);
-        if(site == null){
+        if (site == null) {
             return null;
         }
         UserSite userSite = new UserSite();
@@ -68,17 +68,17 @@ public class UserSiteService {
     /**
      * 用户批量添加网站 网站used_count自增1
      *
-     * @param userId 用户id
+     * @param userId  用户id
      * @param siteIds 网站ids
      * @return boolean 是否成功
      * @author lihaoyu
      * @date 2019/9/22 12:57
      */
     @Transactional(rollbackFor = Exception.class)
-    public boolean addSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds){
+    public boolean addSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds) {
         boolean exist = siteService.isExist(siteIds);
         // 被添加的网站有不存在于数据库中的
-        if(!exist){
+        if (!exist) {
             return false;
         }
         userSiteDAO.batchInsert(userId, siteIds);
@@ -94,10 +94,10 @@ public class UserSiteService {
      * @param siteId 网站Id
      * @return boolean 是否成功删除
      * @author lihaoyu
-     * @date 2019/9/19 16:41 
+     * @date 2019/9/19 16:41
      */
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteSiteByUserIdAndSiteId(Integer userId, Integer siteId){
+    public boolean deleteSiteByUserIdAndSiteId(Integer userId, Integer siteId) {
         UserSite userSite = new UserSite();
         userSite.setSiteId(siteId);
         userSite.setUserId(userId);
@@ -105,7 +105,7 @@ public class UserSiteService {
         example.createCriteria().andSiteIdEqualTo(siteId).andUserIdEqualTo(userId);
         int affectedRows = userSiteDAO.deleteByExample(example);
         // 网站被引用计数减一
-        if(affectedRows != NumConst.NUM0){
+        if (affectedRows != NumConst.NUM0) {
             siteService.decreaseUsedCount(siteId);
         }
         return affectedRows == NumConst.NUM1;
@@ -114,17 +114,17 @@ public class UserSiteService {
     /**
      * 用户批量删除网站 网站used_count自减1
      *
-     * @param userId 用户id
+     * @param userId  用户id
      * @param siteIds 网站ids
      * @return boolean 是否成功
      * @author lihaoyu
      * @date 2019/9/22 12:57
      */
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds){
+    public boolean deleteSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds) {
         boolean exist = siteService.isExist(siteIds);
         // 被删除的网站有不存在于数据库中的
-        if(!exist){
+        if (!exist) {
             return false;
         }
         userSiteDAO.batchDelete(userId, siteIds);

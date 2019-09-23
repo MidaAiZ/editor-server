@@ -4,27 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Site implements Serializable {
-    private Integer sid;
-
-    private String title;
-
-    private String url;
-
-    private String icon;
-
-    private Integer usedCount;
-
-    private Integer pageViews;
-
-    private Float weight;
-
-    private Integer createdBy;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
     private static final long serialVersionUID = 1L;
+    private Integer sid;
+    private String title;
+    private String url;
+    private String icon;
+    private Integer usedCount;
+    private Integer pageViews;
+    private Float weight;
+    private Integer createdBy;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Integer getSid() {
         return sid;

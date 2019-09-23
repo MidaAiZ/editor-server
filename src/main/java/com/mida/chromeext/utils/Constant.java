@@ -2,6 +2,7 @@ package com.mida.chromeext.utils;
 
 /**
  * 枚举常量
+ *
  * @Auther hxy
  * @Date 2017/4/27
  */
@@ -9,37 +10,37 @@ public class Constant {
     /**
      * 超级用户
      */
-    public static final String SUPERR_USER="026a564bbfd84861ac4b65393644beef";
+    public static final String SUPERR_USER = "026a564bbfd84861ac4b65393644beef";
 
     /**
      * 系统默认密码
      */
-    public static final String DEF_PASSWORD="a";
+    public static final String DEF_PASSWORD = "a";
 
     /**
      * 分页条数
      */
-    public static final int pageSize=10;
+    public static final int pageSize = 10;
 
     /**
      * 用户缓存
      */
-    public static final String USER_CACHE="userCache";
+    public static final String USER_CACHE = "userCache";
 
     /**
      * 数据字典缓存
      */
-    public static final String CODE_CACHE="codeCache";
+    public static final String CODE_CACHE = "codeCache";
 
     /**
      * 流程会签集合名称
      */
-    public static final String ACT_MUIT_LIST_NAME="users";
+    public static final String ACT_MUIT_LIST_NAME = "users";
 
     /**
      * 流程会签变量名称
      */
-    public static final String ACT_MUIT_VAR_NAME="user";
+    public static final String ACT_MUIT_VAR_NAME = "user";
 
     /**
      * 云存储配置KEY
@@ -51,7 +52,7 @@ public class Constant {
     /**
      * 文章
      */
-    public static final String CORE_ARTICLE ="article";
+    public static final String CORE_ARTICLE = "article";
 
     /*******************************solr Core名称 结束*************************/
 
@@ -60,14 +61,14 @@ public class Constant {
     /**
      * 文章
      */
-    public static final String ARTCLE_TYPE ="artcle_type";
+    public static final String ARTCLE_TYPE = "artcle_type";
 
     /*******************************数据字典mark 结束*************************/
 
     /**
      * 菜单类型
      */
-    public enum MenuType{
+    public enum MenuType {
         /**
          * 菜单
          */
@@ -82,10 +83,11 @@ public class Constant {
         CATALOG("0");
         private String value;
 
-        private MenuType(String value){
-            this.value=value;
+        private MenuType(String value) {
+            this.value = value;
         }
-        public String getValue(){
+
+        public String getValue() {
             return value;
         }
     }
@@ -93,7 +95,7 @@ public class Constant {
     /**
      * 是否类型
      */
-    public enum YESNO{
+    public enum YESNO {
         /**
          * 是
          */
@@ -104,10 +106,11 @@ public class Constant {
         NO("1");
         private String value;
 
-        private YESNO(String value){
-            this.value=value;
+        private YESNO(String value) {
+            this.value = value;
         }
-        public String getValue(){
+
+        public String getValue() {
             return value;
         }
     }
@@ -115,7 +118,7 @@ public class Constant {
     /**
      * 系统用户状态
      */
-    public enum ABLE_STATUS{
+    public enum ABLE_STATUS {
         /**
          * 正常
          */
@@ -126,10 +129,11 @@ public class Constant {
         NO("-1");
         private String value;
 
-        ABLE_STATUS(String value){
-            this.value=value;
+        ABLE_STATUS(String value) {
+            this.value = value;
         }
-        public String getValue(){
+
+        public String getValue() {
             return value;
         }
     }
@@ -534,7 +538,7 @@ public class Constant {
      */
     public enum noticeType {
         /**
-         *普通通知
+         * 普通通知
          */
         UL_NOTICE("1"),
         /**

@@ -3,13 +3,10 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class UserSetting implements Serializable {
-    private Integer sid;
-
-    private Integer uid;
-
-    private byte[] settings;
-
     private static final long serialVersionUID = 1L;
+    private Integer sid;
+    private Integer uid;
+    private byte[] settings;
 
     public Integer getSid() {
         return sid;

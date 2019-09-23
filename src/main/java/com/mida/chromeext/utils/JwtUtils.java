@@ -13,6 +13,7 @@ import java.util.Date;
 /**
  * 类JwtUtils的功能描述:
  * jwt工具类
+ *
  * @auther hxy
  * @date 2017-10-16 14:19:54
  */
@@ -51,7 +52,7 @@ public class JwtUtils {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.debug("token验证错误,请重新登陆 ", e);
             return null;
         }
@@ -59,7 +60,8 @@ public class JwtUtils {
 
     /**
      * token是否过期
-     * @return  true：过期
+     *
+     * @return true：过期
      */
     public boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());

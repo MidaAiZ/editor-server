@@ -3,11 +3,9 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class RolePermission implements Serializable {
-    private Integer roleId;
-
-    private Integer permissionId;
-
     private static final long serialVersionUID = 1L;
+    private Integer roleId;
+    private Integer permissionId;
 
     public Integer getRoleId() {
         return roleId;

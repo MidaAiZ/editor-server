@@ -4,29 +4,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SiteViewHistory implements Serializable {
-    private String hid;
-
-    private String ip;
-
-    private Integer userId;
-
-    private Integer siteId;
-
-    private String siteTitle;
-
-    private String siteUrl;
-
-    private Byte times;
-
-    private String loc;
-
-    private Date createdAt;
-
-    private Date lastViewTime;
-
-    private byte[] browserUa;
-
     private static final long serialVersionUID = 1L;
+    private String hid;
+    private String ip;
+    private Integer userId;
+    private Integer siteId;
+    private String siteTitle;
+    private String siteUrl;
+    private Byte times;
+    private String loc;
+    private Date createdAt;
+    private Date lastViewTime;
+    private byte[] browserUa;
 
     public String getHid() {
         return hid;
