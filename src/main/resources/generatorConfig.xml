@@ -108,9 +108,9 @@
             <generatedKey column="pid" sqlStatement="Mysql" identity="true"/>
         </table>
 
-        <!--        关联表 无主键-->
-        <table tableName="roles_permissions" domainObjectName="RolePermission">
-        </table>
+<!--        &lt;!&ndash;        关联表 无主键&ndash;&gt;-->
+<!--        <table tableName="roles_permissions" domainObjectName="RolePermission">-->
+<!--        </table>-->
 
     </context>
 </generatorConfiguration>
