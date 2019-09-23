@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface BgPictureMapper {
-    int countByExample(BgPictureExample example);
+    long countByExample(BgPictureExample example);
 
     int deleteByExample(BgPictureExample example);
 

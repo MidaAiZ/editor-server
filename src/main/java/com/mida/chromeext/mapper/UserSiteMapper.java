@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserSiteMapper {
-    int countByExample(UserSiteExample example);
+    long countByExample(UserSiteExample example);
 
     int deleteByExample(UserSiteExample example);
 

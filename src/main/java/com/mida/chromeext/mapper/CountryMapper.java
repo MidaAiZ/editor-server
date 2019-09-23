@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CountryMapper {
-    int countByExample(CountryExample example);
+    long countByExample(CountryExample example);
 
     int deleteByExample(CountryExample example);
 

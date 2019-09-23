@@ -21,13 +21,14 @@
         <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
         <property name="beginningDelimiter" value="`" />
         <property name="endingDelimiter" value="`" />
-        <property name="mergeable" value="true"></property>
+        <property name="mergeable" value="false"></property>
         <!-- 格式化java代码 -->
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
         <!-- 格式化XML代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
 
         <!-- 注释 -->
         <commentGenerator >
@@ -57,14 +58,53 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
+        <table tableName="admins" domainObjectName="Admin">
+            <generatedKey column="aid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
+        <table tableName="countries" domainObjectName="Country">
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
+        <!--        关联表 无主键-->
+        <table tableName="countries_sites" domainObjectName="CountriesSite">
+        </table>
 
+        <table tableName="site_view_histories" domainObjectName="SiteViewHistory">
+            <generatedKey column="hid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
+        <table tableName="sites" domainObjectName="Site">
+            <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
+        <table tableName="user_settings" domainObjectName="UserSetting">
+            <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
+        <table tableName="users" domainObjectName="User">
+            <generatedKey column="uid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
-        <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
+        <!--        关联表 无主键-->
+        <table tableName="users_sites" domainObjectName="UserSite">
+        </table>
+
+        <table tableName="bg_pictures" domainObjectName="BgPicture">
+            <generatedKey column="pid" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="site_categories" domainObjectName="SiteCategory">
+            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="roles" domainObjectName="Role">
+            <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="permissions" domainObjectName="Permission">
+            <generatedKey column="pid" sqlStatement="Mysql" identity="true"/>
+        </table>
 
         <!--        关联表 无主键-->
         <table tableName="roles_permissions" domainObjectName="RolePermission">

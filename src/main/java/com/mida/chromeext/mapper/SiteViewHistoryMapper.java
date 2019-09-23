@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SiteViewHistoryMapper {
-    int countByExample(SiteViewHistoryExample example);
+    long countByExample(SiteViewHistoryExample example);
 
     int deleteByExample(SiteViewHistoryExample example);
 

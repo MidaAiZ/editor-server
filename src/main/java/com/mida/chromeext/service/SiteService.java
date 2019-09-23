@@ -122,7 +122,7 @@ public class SiteService {
         }
         SiteExample example = new SiteExample();
         example.createCriteria().andSidIn(sidList);
-        int count = siteDAO.countByExample(example);
+        long count = siteDAO.countByExample(example);
         return count == sidList.size();
     }
 
