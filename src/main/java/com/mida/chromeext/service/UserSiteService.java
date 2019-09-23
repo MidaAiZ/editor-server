@@ -1,7 +1,7 @@
 package com.mida.chromeext.service;
 
-import com.mida.chromeext.pojo.UserSiteExample;
-import com.mida.chromeext.utils.NumConst;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +10,8 @@ import com.mida.chromeext.dao.SiteDAO;
 import com.mida.chromeext.dao.UserSiteDAO;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.UserSite;
-
-import java.util.List;
+import com.mida.chromeext.pojo.UserSiteExample;
+import com.mida.chromeext.utils.NumConst;
 
 /**
  * 用户网站关联服务
@@ -66,6 +66,28 @@ public class UserSiteService {
     }
 
     /**
+     * 用户批量添加网站 网站used_count自增1
+     *
+     * @param userId 用户id
+     * @param siteIds 网站ids
+     * @return boolean 是否成功
+     * @author lihaoyu
+     * @date 2019/9/22 12:57
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public boolean addSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds){
+        boolean exist = siteService.isExist(siteIds);
+        // 被添加的网站有不存在于数据库中的
+        if(!exist){
+            return false;
+        }
+        userSiteDAO.batchInsert(userId, siteIds);
+        // 批量网站被引用数加一
+        siteService.batchIncreaseUsedCount(siteIds);
+        return true;
+    }
+
+    /**
      * 用户删除网站 网站存在时，网站used_count自减1
      *
      * @param userId 用户Id
@@ -89,6 +111,27 @@ public class UserSiteService {
         return affectedRows == NumConst.NUM1;
     }
 
+    /**
+     * 用户批量删除网站 网站used_count自减1
+     *
+     * @param userId 用户id
+     * @param siteIds 网站ids
+     * @return boolean 是否成功
+     * @author lihaoyu
+     * @date 2019/9/22 12:57
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteSitesByUserIdAndSiteIds(Integer userId, List<Integer> siteIds){
+        boolean exist = siteService.isExist(siteIds);
+        // 被删除的网站有不存在于数据库中的
+        if(!exist){
+            return false;
+        }
+        userSiteDAO.batchDelete(userId, siteIds);
+        // 批量网站被引用数减一
+        siteService.batchDecreaseUsedCount(siteIds);
 
+        return true;
+    }
 
 }

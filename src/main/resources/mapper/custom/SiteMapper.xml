@@ -5,12 +5,31 @@
     <update id="increaseUsedCount" parameterType="java.lang.Integer">
     update sites
     set used_count = used_count + 1
-    where here sid = #{sid,jdbcType=INTEGER}
+    where  sid = #{sid,jdbcType=INTEGER}
     </update>
 
     <update id="decreaseUsedCount" parameterType="java.lang.Integer">
     update sites
     set used_count = used_count - 1
-    where here sid = #{sid,jdbcType=INTEGER}
+    where  sid = #{sid,jdbcType=INTEGER}
     </update>
+
+    <update id="batchIncreaseUsedCount" parameterType="java.lang.Integer">
+        update sites
+        set used_count = used_count + 1
+        where sid in
+        <foreach collection="list" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </update>
+
+    <update id="batchDecreaseUsedCount" parameterType="java.lang.Integer">
+        update sites
+        set used_count = used_count - 1
+        where sid in
+        <foreach collection="list" item="sid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
+    </update>
+
 </mapper>

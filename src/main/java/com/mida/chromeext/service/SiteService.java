@@ -1,12 +1,15 @@
 package com.mida.chromeext.service;
 
+import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mida.chromeext.dao.SiteDAO;
 import com.mida.chromeext.pojo.Site;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author lihaoyu
@@ -15,18 +18,18 @@ import java.util.Date;
 @Service
 public class SiteService {
 
+    @Autowired
     private SiteDAO siteDAO;
-
 
     /**
      * 根据 sid 查询网站Po
      *
      * @param id 网站id
-     * @return   网站Po 或者 null
+     * @return 网站Po 或者 null
      * @author lihaoyu
      * @date 2019/9/17 13:06
      */
-    public Site getSiteById(Integer id){
+    public Site getSiteById(Integer id) {
         Site site = siteDAO.selectByPrimaryKey(id);
         return site;
     }
@@ -40,7 +43,7 @@ public class SiteService {
      * @author lihaoyu
      * @date 2019/9/19 14:36
      */
-    public Site addSite(Site site, Integer adminId){
+    public Site addSite(Site site, Integer adminId) {
         Date date = new Date();
         site.setCreatedAt(date);
         site.setUpdatedAt(date);
@@ -61,7 +64,7 @@ public class SiteService {
      * @author lihaoyu
      * @date 2019/9/19 14:58
      */
-    public boolean increaseUsedCount(Integer sid){
+    public boolean increaseUsedCount(Integer sid) {
         int affectedRows = siteDAO.increaseUsedCount(sid);
         return affectedRows == NumConst.NUM1;
     }
@@ -74,11 +77,54 @@ public class SiteService {
      * @author lihaoyu
      * @date 2019/9/19 14:58
      */
-    public boolean decreaseUsedCount(Integer sid){
+    public boolean decreaseUsedCount(Integer sid) {
         int affectedRows = siteDAO.decreaseUsedCount(sid);
         return affectedRows == NumConst.NUM1;
     }
 
+    /**
+     * 批量网站的引用计数增1
+     *
+     * @param sidList
+     * @return boolean 是否成功
+     * @author lihaoyu
+     * @date 2019/9/22 14:14
+     */
+    public boolean batchIncreaseUsedCount(List<Integer> sidList) {
+        int affectedRows = siteDAO.batchIncreaseUsedCount(sidList);
+        return affectedRows == sidList.size();
+    }
+
+    /**
+     * 批量网站的引用计数减1
+     *
+     * @param sidList
+     * @return boolean 是否成功
+     * @author lihaoyu
+     * @date 2019/9/22 14:14
+     */
+    public boolean batchDecreaseUsedCount(List<Integer> sidList) {
+        int affectedRows = siteDAO.batchDecreaseUsedCount(sidList);
+        return affectedRows == sidList.size();
+    }
+
+    /**
+     * 判断网站是否都在数据库中
+     *
+     * @param sidList
+     * @return 是否都存在
+     * @author lihaoyu
+     * @date 2019/9/22 14:22
+     */
+    public boolean isExist(List<Integer> sidList) {
+        if (sidList == null || sidList.size() == NumConst.NUM0) {
+            return false;
+        }
+        SiteExample example = new SiteExample();
+        example.createCriteria().andSidIn(sidList);
+        int count = siteDAO.countByExample(example);
+        return count == sidList.size();
+    }
 
     /**
      * 根据网站id删除
@@ -88,13 +134,9 @@ public class SiteService {
      * @author lihaoyu
      * @date 2019/9/19 14:42
      */
-    public boolean deleteSite(Integer sid){
+    public boolean deleteSite(Integer sid) {
         int affectedRows = siteDAO.deleteByPrimaryKey(sid);
         return affectedRows == NumConst.NUM1;
     }
-
-
-
-
 
 }

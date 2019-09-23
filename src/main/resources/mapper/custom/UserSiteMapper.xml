@@ -2,24 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.dao.UserSiteDAO">
 
-<select id="listSiteByUserId" parameterType="integer" resultType="com.mida.chromeext.pojo.Site">
-    SELECT
-	s.sid,
-	s.title,
-	s.url,
-	s.icon,
-	s.used_count,
-	s.page_views,
-	s.weight,
-	s.created_by,
-	s.created_at,
-	s.updated_at
-FROM
-	sites s
-	JOIN users_sites us ON s.sid = us.site_id
-WHERE
-	us.user_id = #{userId}
+    <select id="listSiteByUserId" parameterType="integer" resultType="com.mida.chromeext.pojo.Site">
+        SELECT s.sid,
+               s.title,
+               s.url,
+               s.icon,
+               s.used_count,
+               s.page_views,
+               s.weight,
+               s.created_by,
+               s.created_at,
+               s.updated_at
+        FROM sites s
+                 JOIN users_sites us ON s.sid = us.site_id
+        WHERE us.user_id = #{userId}
 
-</select>
+    </select>
 
+
+    <insert id="batchInsert" parameterType="map">
+        insert into users_sites(user_id, site_id)
+        values
+        <foreach collection="siteIdList" item="siteId" separator="," index="index">
+            <trim prefix="(" suffix=")">
+                #{userId,jdbcType=INTEGER},
+                #{siteId,jdbcType=INTEGER}
+            </trim>
+        </foreach>
+    </insert>
+
+    <delete id="batchDelete" parameterType="map">
+        delete from users_sites
+        where
+        user_id = #{userId}
+        and
+        site_id in
+        <foreach collection="siteIdList" item="siteId" open="(" close=")" separator=",">
+            #{siteId}
+        </foreach>
+    </delete>
 </mapper>
