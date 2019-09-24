@@ -1,9 +1,13 @@
 package com.mida.chromeext.service;
 
+import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.dao.SiteDAO;
 import com.mida.chromeext.pojo.Site;
+import com.mida.chromeext.pojo.SiteCategory;
 import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.vo.SiteQueryVo;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -138,4 +142,19 @@ public class SiteService {
         return affectedRows == NumConst.NUM1;
     }
 
+
+    public List<Site> listSitesByPage(SiteQueryVo queryVo){
+        SiteExample example = new SiteExample();
+        SiteExample.Criteria criteria = example.createCriteria();
+        if(StringUtils.isNotBlank(queryVo.getKeyWord())){
+            criteria.andTitleLike("%"+queryVo.getKeyWord()+"%");
+        }
+        SiteCategory siteCategory = queryVo.getSiteCategory();
+        if(siteCategory != null && StringUtils.isNotBlank(siteCategory.getTitle())){
+
+        }
+        PageHelper.startPage(queryVo);
+        List<Site> sites = siteDAO.selectByExample(example);
+        return sites;
+    }
 }
