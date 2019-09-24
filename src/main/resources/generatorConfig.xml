@@ -88,10 +88,6 @@
 <!--            <generatedKey column="uid" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        &lt;!&ndash;        关联表 无主键&ndash;&gt;-->
-<!--        <table tableName="users_sites" domainObjectName="UserSite">-->
-<!--        </table>-->
-
 <!--        <table tableName="bg_pictures" domainObjectName="BgPicture">-->
 <!--            <generatedKey column="pid" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
@@ -112,8 +108,10 @@
 <!--        <table tableName="roles_permissions" domainObjectName="RolePermission">-->
 <!--        </table>-->
 
-<!--   以后修改表时，先备份对应Po，生成之后再把Po还原回去。否则Po被覆盖，用Revert还原     -->
+<!--        <table tableName="user_menus" domainObjectName="UserMenu">-->
+<!--            <generatedKey column="mid" sqlStatement="Mysql" identity="true"/>-->
+<!--        </table>-->
 
-
+        <!--   以后修改表时，先备份对应Po，生成之后再把Po还原回去。否则Po被覆盖，用Revert还原     -->
     </context>
 </generatorConfiguration>
