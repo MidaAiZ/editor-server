@@ -9,6 +9,7 @@ import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -30,7 +31,7 @@ public class SessionController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
     })
     @ApiResponse(code = 200, responseContainer = "token", message = "令牌")
-    public Result login(@ApiIgnore User loginUser) {
+    public Result login(@ApiIgnore @RequestBody User loginUser) {
         try {
             loginUser = userService.login(loginUser);
         } catch (MyException e) {

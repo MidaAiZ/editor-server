@@ -13,7 +13,7 @@ import com.mida.chromeext.utils.RegexConst;
  */
 public class UserValidation extends BaseValidation {
 
-    public static User validateUser(User user) throws BaseException {
+    public static User validateRegistration(User user) throws BaseException {
         if (!isGender(user.getGender())) {
             throw new BaseException(ExceptionEnum.USER_GENDER_VALIDATION);
         }

@@ -1,13 +1,14 @@
 package com.mida.chromeext.pojo;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
     private Integer uid;
-
+    @NotBlank
     private String number;
-
+    @NotBlank
     private String password;
 
     private String avatar;

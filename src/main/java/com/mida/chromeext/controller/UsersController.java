@@ -9,10 +9,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
+
 
 @RestController
 @RequestMapping("users")
@@ -28,7 +32,10 @@ public class UsersController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),
     })
-    public Result<User> register(@ApiIgnore User regUser) {
+    public Result<User> register(@ApiIgnore @Validated @RequestBody User regUser, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return Result.error(bindingResult.getFieldError().getDefaultMessage());
+        }
         User user;
         try {
             user = userService.register(regUser);

@@ -95,7 +95,7 @@ public class UserService {
     }
 
     /**
-     * 用户注册，有校验。
+     * 用户注册，有校验。返回的user置空敏感字段
      *
      * @param preValidationUser
      * @return Result对象
@@ -103,7 +103,7 @@ public class UserService {
      * @date 2019/9/17 14:14
      */
     public User register(User preValidationUser) throws BaseException {
-        User user = UserValidation.validateUser(preValidationUser);
+        User user = UserValidation.validateRegistration(preValidationUser);
         user.setSalt(UUID.randomUUID().toString());
         Date date = new Date();
         user.setCreatedAt(date);
@@ -111,6 +111,8 @@ public class UserService {
         user.setPassword(ShiroUtils.EncodeSalt(user.getPassword(), user.getSalt()));
         int number = userDAO.insertSelective(user);
         user.setNumber(String.valueOf(number));
+        user.setPassword(null);
+        user.setSalt(null);
         return user;
     }
 
