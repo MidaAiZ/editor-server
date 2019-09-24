@@ -20,7 +20,7 @@ target/
 *.ipr
 
 ### mac system
-*/.DS_Store
+*.DS_Store
 
 ### NetBeans ###
 /nbproject/private/

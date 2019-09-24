@@ -11,7 +11,7 @@ import java.util.Locale;
  * 自定义国际化语言解析器
  *
  */
-public class MyLocaleResolver implements LocaleResolver{
+public class MyLocaleResolver implements LocaleResolver {
 
     private static final String I18N_LANGUAGE = "i18n_language";
     private static final String I18N_LANGUAGE_SESSION = "i18n_language_session";
