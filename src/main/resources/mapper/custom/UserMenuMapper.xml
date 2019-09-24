@@ -16,7 +16,11 @@
     </select>
 
     <insert id="batchInsert" parameterType="map">
+<<<<<<< HEAD
         insert into user_menus(title, url, icon_src, is_folder, folder_id, user_id, `index`, created_at)
+=======
+        insert into user_menus(title, url, icon_src, is_folder, folder_id, user_id, index, created_at)
+>>>>>>> site search
         values
         <foreach collection="menuList" item="menu" separator="," index="index">
             <trim prefix="(" suffix=")">
@@ -27,7 +31,11 @@
                 #{menu.folderId},
                 #{userId},
                 #{menu.index},
+<<<<<<< HEAD
                 now()
+=======
+                unix_timestamp(now())
+>>>>>>> site search
             </trim>
         </foreach>
     </insert>
