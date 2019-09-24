@@ -3,10 +3,13 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class Permission implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer pid;
+
     private String permision;
+
     private String url;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getPid() {
         return pid;

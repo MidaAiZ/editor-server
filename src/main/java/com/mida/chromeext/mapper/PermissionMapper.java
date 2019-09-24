@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.Permission;
 import com.mida.chromeext.pojo.PermissionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper {
     long countByExample(PermissionExample example);

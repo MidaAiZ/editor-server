@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.Role;
 import com.mida.chromeext.pojo.RoleExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
     long countByExample(RoleExample example);

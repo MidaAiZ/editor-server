@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.SiteViewHistory;
 import com.mida.chromeext.pojo.SiteViewHistoryExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface SiteViewHistoryMapper {
     long countByExample(SiteViewHistoryExample example);

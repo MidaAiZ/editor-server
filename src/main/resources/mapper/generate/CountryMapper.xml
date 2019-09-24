@@ -1,252 +1,250 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.mapper.CountryMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Country">
-        <id column="cid" jdbcType="INTEGER" property="cid"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="code" jdbcType="VARCHAR" property="code"/>
-        <result column="tel_prefix" jdbcType="VARCHAR" property="telPrefix"/>
-        <result column="time_zone" jdbcType="VARCHAR" property="timeZone"/>
-        <result column="users_count" jdbcType="INTEGER" property="usersCount"/>
-        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
-        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Country">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="tel_prefix" jdbcType="VARCHAR" property="telPrefix" />
+    <result column="time_zone" jdbcType="VARCHAR" property="timeZone" />
+    <result column="users_count" jdbcType="INTEGER" property="usersCount" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
     cid, `name`, code, tel_prefix, time_zone, users_count, created_at, updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from countries
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from countries
-        where cid = #{cid,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from countries
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from countries
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from countries
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.CountryExample">
-        delete from countries
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Country">
-        <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into countries (`name`, code, tel_prefix,
-        time_zone, users_count, created_at,
-        updated_at)
-        values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{telPrefix,jdbcType=VARCHAR},
-        #{timeZone,jdbcType=VARCHAR}, #{usersCount,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
-        #{updatedAt,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Country">
-        <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into countries
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="name != null">
-                `name`,
-            </if>
-            <if test="code != null">
-                code,
-            </if>
-            <if test="telPrefix != null">
-                tel_prefix,
-            </if>
-            <if test="timeZone != null">
-                time_zone,
-            </if>
-            <if test="usersCount != null">
-                users_count,
-            </if>
-            <if test="createdAt != null">
-                created_at,
-            </if>
-            <if test="updatedAt != null">
-                updated_at,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="code != null">
-                #{code,jdbcType=VARCHAR},
-            </if>
-            <if test="telPrefix != null">
-                #{telPrefix,jdbcType=VARCHAR},
-            </if>
-            <if test="timeZone != null">
-                #{timeZone,jdbcType=VARCHAR},
-            </if>
-            <if test="usersCount != null">
-                #{usersCount,jdbcType=INTEGER},
-            </if>
-            <if test="createdAt != null">
-                #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultType="java.lang.Long">
-        select count(*) from countries
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update countries
-        <set>
-            <if test="record.cid != null">
-                cid = #{record.cid,jdbcType=INTEGER},
-            </if>
-            <if test="record.name != null">
-                `name` = #{record.name,jdbcType=VARCHAR},
-            </if>
-            <if test="record.code != null">
-                code = #{record.code,jdbcType=VARCHAR},
-            </if>
-            <if test="record.telPrefix != null">
-                tel_prefix = #{record.telPrefix,jdbcType=VARCHAR},
-            </if>
-            <if test="record.timeZone != null">
-                time_zone = #{record.timeZone,jdbcType=VARCHAR},
-            </if>
-            <if test="record.usersCount != null">
-                users_count = #{record.usersCount,jdbcType=INTEGER},
-            </if>
-            <if test="record.createdAt != null">
-                created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.updatedAt != null">
-                updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update countries
-        set cid = #{record.cid,jdbcType=INTEGER},
+  <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.CountryExample">
+    delete from countries
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mida.chromeext.pojo.Country">
+    <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into countries (`name`, code, tel_prefix, 
+      time_zone, users_count, created_at, 
+      updated_at)
+    values (#{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{telPrefix,jdbcType=VARCHAR}, 
+      #{timeZone,jdbcType=VARCHAR}, #{usersCount,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Country">
+    <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into countries
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="telPrefix != null">
+        tel_prefix,
+      </if>
+      <if test="timeZone != null">
+        time_zone,
+      </if>
+      <if test="usersCount != null">
+        users_count,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="telPrefix != null">
+        #{telPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZone != null">
+        #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="usersCount != null">
+        #{usersCount,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultType="java.lang.Long">
+    select count(*) from countries
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update countries
+    <set>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
         `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
         code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telPrefix != null">
         tel_prefix = #{record.telPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeZone != null">
         time_zone = #{record.timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersCount != null">
         users_count = #{record.usersCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Country">
-        update countries
-        <set>
-            <if test="name != null">
-                `name` = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="code != null">
-                code = #{code,jdbcType=VARCHAR},
-            </if>
-            <if test="telPrefix != null">
-                tel_prefix = #{telPrefix,jdbcType=VARCHAR},
-            </if>
-            <if test="timeZone != null">
-                time_zone = #{timeZone,jdbcType=VARCHAR},
-            </if>
-            <if test="usersCount != null">
-                users_count = #{usersCount,jdbcType=INTEGER},
-            </if>
-            <if test="createdAt != null">
-                created_at = #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where cid = #{cid,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Country">
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update countries
+    set cid = #{record.cid,jdbcType=INTEGER},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      tel_prefix = #{record.telPrefix,jdbcType=VARCHAR},
+      time_zone = #{record.timeZone,jdbcType=VARCHAR},
+      users_count = #{record.usersCount,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Country">
+    update countries
+    <set>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="telPrefix != null">
+        tel_prefix = #{telPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="timeZone != null">
+        time_zone = #{timeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="usersCount != null">
+        users_count = #{usersCount,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Country">
     update countries
     set `name` = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},

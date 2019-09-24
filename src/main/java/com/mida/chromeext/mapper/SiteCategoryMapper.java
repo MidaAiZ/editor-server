@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.SiteCategory;
 import com.mida.chromeext.pojo.SiteCategoryExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface SiteCategoryMapper {
     long countByExample(SiteCategoryExample example);

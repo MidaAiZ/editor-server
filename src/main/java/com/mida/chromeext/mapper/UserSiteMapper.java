@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.UserSite;
 import com.mida.chromeext.pojo.UserSiteExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserSiteMapper {
     long countByExample(UserSiteExample example);

@@ -1,266 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.mapper.AdminMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Admin">
-        <id column="aid" jdbcType="INTEGER" property="aid"/>
-        <result column="number" jdbcType="VARCHAR" property="number"/>
-        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
-        <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="tel" jdbcType="INTEGER" property="tel"/>
-        <result column="tel_prefix" jdbcType="TINYINT" property="telPrefix"/>
-        <result column="roles" jdbcType="VARCHAR" property="roles"/>
-        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
-        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Admin">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="tel" jdbcType="INTEGER" property="tel" />
+    <result column="tel_prefix" jdbcType="TINYINT" property="telPrefix" />
+    <result column="roles" jdbcType="VARCHAR" property="roles" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
     aid, `number`, pwd, email, tel, tel_prefix, roles, created_at, updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.AdminExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from admins
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from admins
-        where aid = #{aid,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByExample" parameterType="com.mida.chromeext.pojo.AdminExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admins
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admins
     where aid = #{aid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.AdminExample">
-        delete from admins
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Admin">
-        <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into admins (`number`, pwd, email,
-        tel, tel_prefix, roles,
-        created_at, updated_at)
-        values (#{number,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-        #{tel,jdbcType=INTEGER}, #{telPrefix,jdbcType=TINYINT}, #{roles,jdbcType=VARCHAR},
-        #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Admin">
-        <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into admins
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="number != null">
-                `number`,
-            </if>
-            <if test="pwd != null">
-                pwd,
-            </if>
-            <if test="email != null">
-                email,
-            </if>
-            <if test="tel != null">
-                tel,
-            </if>
-            <if test="telPrefix != null">
-                tel_prefix,
-            </if>
-            <if test="roles != null">
-                roles,
-            </if>
-            <if test="createdAt != null">
-                created_at,
-            </if>
-            <if test="updatedAt != null">
-                updated_at,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="number != null">
-                #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="pwd != null">
-                #{pwd,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="tel != null">
-                #{tel,jdbcType=INTEGER},
-            </if>
-            <if test="telPrefix != null">
-                #{telPrefix,jdbcType=TINYINT},
-            </if>
-            <if test="roles != null">
-                #{roles,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.AdminExample" resultType="java.lang.Long">
-        select count(*) from admins
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update admins
-        <set>
-            <if test="record.aid != null">
-                aid = #{record.aid,jdbcType=INTEGER},
-            </if>
-            <if test="record.number != null">
-                `number` = #{record.number,jdbcType=VARCHAR},
-            </if>
-            <if test="record.pwd != null">
-                pwd = #{record.pwd,jdbcType=VARCHAR},
-            </if>
-            <if test="record.email != null">
-                email = #{record.email,jdbcType=VARCHAR},
-            </if>
-            <if test="record.tel != null">
-                tel = #{record.tel,jdbcType=INTEGER},
-            </if>
-            <if test="record.telPrefix != null">
-                tel_prefix = #{record.telPrefix,jdbcType=TINYINT},
-            </if>
-            <if test="record.roles != null">
-                roles = #{record.roles,jdbcType=VARCHAR},
-            </if>
-            <if test="record.createdAt != null">
-                created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.updatedAt != null">
-                updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update admins
-        set aid = #{record.aid,jdbcType=INTEGER},
+  <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.AdminExample">
+    delete from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mida.chromeext.pojo.Admin">
+    <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into admins (`number`, pwd, email, 
+      tel, tel_prefix, roles, 
+      created_at, updated_at)
+    values (#{number,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=INTEGER}, #{telPrefix,jdbcType=TINYINT}, #{roles,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Admin">
+    <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into admins
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="pwd != null">
+        pwd,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="telPrefix != null">
+        tel_prefix,
+      </if>
+      <if test="roles != null">
+        roles,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="telPrefix != null">
+        #{telPrefix,jdbcType=TINYINT},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mida.chromeext.pojo.AdminExample" resultType="java.lang.Long">
+    select count(*) from admins
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admins
+    <set>
+      <if test="record.aid != null">
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
         `number` = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null">
         pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null">
         tel = #{record.tel,jdbcType=INTEGER},
+      </if>
+      <if test="record.telPrefix != null">
         tel_prefix = #{record.telPrefix,jdbcType=TINYINT},
+      </if>
+      <if test="record.roles != null">
         roles = #{record.roles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Admin">
-        update admins
-        <set>
-            <if test="number != null">
-                `number` = #{number,jdbcType=VARCHAR},
-            </if>
-            <if test="pwd != null">
-                pwd = #{pwd,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="tel != null">
-                tel = #{tel,jdbcType=INTEGER},
-            </if>
-            <if test="telPrefix != null">
-                tel_prefix = #{telPrefix,jdbcType=TINYINT},
-            </if>
-            <if test="roles != null">
-                roles = #{roles,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                created_at = #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updatedAt != null">
-                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where aid = #{aid,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Admin">
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admins
+    set aid = #{record.aid,jdbcType=INTEGER},
+      `number` = #{record.number,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=INTEGER},
+      tel_prefix = #{record.telPrefix,jdbcType=TINYINT},
+      roles = #{record.roles,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Admin">
+    update admins
+    <set>
+      <if test="number != null">
+        `number` = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=INTEGER},
+      </if>
+      <if test="telPrefix != null">
+        tel_prefix = #{telPrefix,jdbcType=TINYINT},
+      </if>
+      <if test="roles != null">
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Admin">
     update admins
     set `number` = #{number,jdbcType=VARCHAR},
       pwd = #{pwd,jdbcType=VARCHAR},

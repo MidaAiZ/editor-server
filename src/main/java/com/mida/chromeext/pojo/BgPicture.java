@@ -4,12 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class BgPicture implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer pid;
+
     private String src;
+
     private String title;
+
     private Integer createdBy;
+
     private Date createdAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getPid() {
         return pid;

@@ -3,9 +3,11 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class CountriesSite implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Byte countryId;
+
     private Integer siteId;
+
+    private static final long serialVersionUID = 1L;
 
     public Byte getCountryId() {
         return countryId;
