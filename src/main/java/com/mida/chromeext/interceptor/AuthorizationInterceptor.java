@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,12 +43,22 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 需要验证，获取用户凭证
-        // 优先通过请求报头获取token
-        String token = request.getHeader(jwtUtils.getHeader());
-        // 通过参数获取token
-        if (StringUtils.isBlank(token)) {
-            token = request.getParameter(jwtUtils.getHeader());
+        String token = "";
+        // 通过cookie获取用户token
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals(jwtUtils.getHeader())) {
+                token = cookie.getValue();
+                break;
+            }
         }
+//        // 通过请求报头获取token
+//        if (StringUtils.isBlank(token)) {
+//            token = request.getHeader(jwtUtils.getHeader());
+//        }
+//        // 通过参数获取token
+//        if (StringUtils.isBlank(token)) {
+//            token = request.getParameter(jwtUtils.getHeader());
+//        }
 
         //凭证为空
         if (StringUtils.isBlank(token)) {

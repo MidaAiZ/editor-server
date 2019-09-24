@@ -5,6 +5,7 @@ import com.mida.chromeext.dao.UserMenuDAO;
 import com.mida.chromeext.pojo.UserMenu;
 import com.mida.chromeext.pojo.UserMenuExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * 用户添加的菜单列表
  */
+@Service
 public class UserMenuService {
     @Autowired
     private UserMenuDAO userMenuDAO;
@@ -30,52 +32,81 @@ public class UserMenuService {
     }
 
     /**
-     * 用户添加网站 校验网站是否存在，网站used_count自增1
+     * 用户添加网站 校验网站是否存在
      *
      * @param userId 用户Id
      * @param menu 用户菜单
-     * @return userSite 用户网站关联po
+     * @return userMenu 用户菜单
      */
     @Transactional(rollbackFor = Exception.class)
     public UserMenu addOneUserMenu(Integer userId, UserMenu menu) {
-        if (menu.getIsFolder()) { menu.setFolderId(0); }
+        if (menu.getIsFolder() != null && menu.getIsFolder()) { menu.setFolderId(0); }
         menu.setUserId(userId);
         menu.setCreatedAt(new Date());
-        // siteService.increaseUsedCount(siteId);
         userMenuDAO.insert(menu);
         return menu;
     }
 
     /**
-     * 用户批量添加网站 网站used_count自增1
+     * 用户批量添加网站
      *
      * @param userId  用户id
      * @param menuList 用户菜单列表
      * @return boolean 是否成功
-     * @author lihaoyu
-     * @date 2019/9/22 12:57
      */
     @Transactional(rollbackFor = Exception.class)
-    public boolean addAndReplaceUserMenuList(Integer userId, List<UserMenu> menuList) {
+    public int addAndReplaceUserMenuList(Integer userId, List<UserMenu> menuList) {
         // 删除用户所有列表后重新生成
         UserMenuExample example = new UserMenuExample();
         example.createCriteria().andUserIdEqualTo(userId);
         userMenuDAO.deleteByExample(example);
         for (UserMenu menu : menuList) {
-            if (menu.getIsFolder()) {
+            if (menu.getIsFolder() != null && menu.getIsFolder()) {
                 menu.setFolderId(0);
             }
             menu.setUserId(userId);
         }
         // 生成新列表
-        userMenuDAO.batchInsert(userId, menuList);
-        return true;
+        return userMenuDAO.batchInsert(userId, menuList);
     }
 
+    /**
+     * 更新一个用户菜单
+     *
+     * @param userId 用户Id
+     * @param menu 用户菜单
+     * @return int
+     */
+    public int updateOneMenu(Integer userId, UserMenu menu) {
+        UserMenuExample example = new UserMenuExample();
+        // 禁止更新用户id
+        menu.setUserId(null);
+        // 文件夹类型禁止内嵌文件夹
+        if (menu.getIsFolder() != null && menu.getIsFolder()) {
+            menu.setFolderId(0);
+        }
+        example.createCriteria().andUserIdEqualTo(userId).andMidEqualTo(menu.getMid());
+        return userMenuDAO.updateByExampleSelective(menu, example);
+    }
+
+    /**
+     * 批量更新用户菜单
+     *
+     * @param userId 用户Id
+     * @param menuList 用户菜单列表
+     * @return int
+     */
     @Transactional(rollbackFor = Exception.class)
-    public boolean deleteUserMenus(Integer userId, List<Long> menuIdList) {
-        userMenuDAO.batchDelete(userId, menuIdList);
-        return true;
+    public int updateMenuList(Integer userId, List<UserMenu> menuList) {
+        int size = 0;
+        for (UserMenu menu : menuList) {
+            size += updateOneMenu(userId, menu);
+        }
+        return size;
     }
 
+
+    public int deleteUserMenus(Integer userId, List<Long> menuIdList) {
+        return userMenuDAO.batchDelete(userId, menuIdList);
+    }
 }

@@ -10,7 +10,7 @@
                m.folder_id,
                m.user_id,
                m.index,
-               m.created_at,
+               m.created_at
         FROM user_menus m
         WHERE m.user_id = #{userId}
     </select>

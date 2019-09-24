@@ -32,14 +32,13 @@ public class UsersController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),
     })
-    public Result<User> register(@ApiIgnore @Validated @RequestBody User regUser, BindingResult bindingResult) {
+    public Result<User> register(@ApiIgnore @Validated User regUser, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             return Result.error(bindingResult.getFieldError().getDefaultMessage());
         }
         User user;
         try {
             user = userService.register(regUser);
-            System.out.println(user);
         } catch (BaseException e) {
             return Result.error(e.getCode(), e.getMessage());
         }
