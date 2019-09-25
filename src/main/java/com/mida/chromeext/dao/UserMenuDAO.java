@@ -1,7 +1,6 @@
 package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.UserMenuMapper;
-import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.UserMenu;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public interface UserMenuDAO extends UserMenuMapper {
      * 用户批量删除菜单
      *
      * @param userId
-     * @param siteIdList
+     * @param menuIdList
      * @return affectedRows
      */
-    int batchDelete(Integer userId, List<Long> siteIdList);
+    int batchDelete(Integer userId, List<Long> menuIdList);
 }

@@ -1,5 +1,8 @@
 package com.mida.chromeext.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
+import springfox.documentation.annotations.ApiIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,10 +19,12 @@ public class UserMenu implements Serializable {
 
     private Integer folderId;
 
+    @ApiModelProperty(hidden = true)
     private Integer userId;
 
     private Short index;
 
+    @ApiModelProperty(hidden = true)
     private Date createdAt;
 
     private static final long serialVersionUID = 1L;

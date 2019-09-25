@@ -7,7 +7,7 @@ public class UserSetting implements Serializable {
 
     private Integer uid;
 
-    private byte[] settings;
+    private String settings;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class UserSetting implements Serializable {
         this.uid = uid;
     }
 
-    public byte[] getSettings() {
+    public String getSettings() {
         return settings;
     }
 
-    public void setSettings(byte[] settings) {
-        this.settings = settings;
+    public void setSettings(String settings) {
+        this.settings = settings == null ? null : settings.trim();
     }
 
     @Override

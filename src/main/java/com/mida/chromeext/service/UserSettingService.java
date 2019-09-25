@@ -5,6 +5,7 @@ import com.mida.chromeext.pojo.UserSetting;
 import com.mida.chromeext.pojo.UserSettingExample;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author lihaoyu
  * @date 2019/9/22 16:05
  */
+@Service
 public class UserSettingService {
     @Autowired
     UserSettingDAO userSettingDAO;
@@ -25,25 +27,25 @@ public class UserSettingService {
      * @date 2019/9/22 16:12
      */
     public UserSetting getUserSettingByUserId(Integer userId) {
-        UserSettingExample example = new UserSettingExample();
-        example.createCriteria().andUidEqualTo(userId);
-        List<UserSetting> userSettings = userSettingDAO.selectByExample(example);
-        return userSettings.isEmpty() ? null : userSettings.get(NumConst.NUM0);
+        UserSetting userSetting = userSettingDAO.selectOneByUserId(userId);
+        return userSetting;
     }
 
     /**
-     * 用户添加配置(校验是否已存在)
+     * 用户添加配置(如果配置已存在则更新)
      *
      * @param setting Po
      * @return boolean 是否成功
      * @author lihaoyu
      * @date 2019/9/22 16:17
      */
-    public boolean addUserSetting(UserSetting setting) {
-        // 如果已存在记录，返回false
-        if (setting == null || getUserSettingByUserId(setting.getUid()) != null) {
-            return false;
+    public boolean addUserSetting(Integer userId, UserSetting setting) {
+        // 如果已存在记录，则执行更新方法
+        if (setting == null || getUserSettingByUserId(userId) != null) {
+            return updateUserSetting(userId, setting);
         }
+        // 设置userId
+        setting.setUid(userId);
         int affectedRows = userSettingDAO.insertSelective(setting);
         if (affectedRows != NumConst.NUM1) {
             return false;
@@ -52,23 +54,23 @@ public class UserSettingService {
     }
 
     /**
-     * 用户修改自定义配置
+     * 用户修改自定义配置，若不存在新建配置
      *
      * @param setting Po
      * @return boolean 是否修改成功
      * @author lihaoyu
      * @date 2019/9/22 16:30
      */
-    public boolean updateUserSetting(UserSetting setting) {
-        if (setting == null || setting.getSid() == null ||
-                setting.getSid() == null || setting.getSettings() == null) {
-            return false;
+    public boolean updateUserSetting(Integer userId, UserSetting setting) {
+        // 如果记录不存在，则插入用户设置
+        UserSetting existSetting = getUserSettingByUserId(userId);
+        if (existSetting == null) {
+            return addUserSetting(userId, setting);
+        } else {
+            setting.setSid(existSetting.getSid());
+            setting.setUid(null);
         }
-        // 如果记录不存在，返回false
-        if (getUserSettingByUserId(setting.getUid()) == null) {
-            return false;
-        }
-        int affectedRows = userSettingDAO.updateByPrimaryKey(setting);
+        int affectedRows = userSettingDAO.updateByPrimaryKeySelective(setting);
         if (affectedRows != NumConst.NUM1) {
             return false;
         }

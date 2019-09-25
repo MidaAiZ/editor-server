@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("user_menus")
 @Api(tags = "用户菜单列表操作接口")
-public class UserMenuController {
+public class UserMenusController {
 
     @Autowired
     private UserMenuService userMenuService;
@@ -44,7 +44,7 @@ public class UserMenuController {
     @LoginRequired
     @PostMapping("list")
     @ApiOperation(value = "替换用户菜单列表", notes = "此接口会覆盖用户原有菜单列表并返回替换后的新的菜单列表")
-    public Result<List<UserMenu>> replaceMenuList(@CurrentUser User user,  @ApiParam("新的菜单列表") @RequestBody List<UserMenu> userMenuList) {
+    public Result<List<UserMenu>> replaceMenuList(@ApiIgnore @CurrentUser User user,  @ApiParam("新的菜单列表") @RequestBody List<UserMenu> userMenuList) {
         userMenuService.addAndReplaceUserMenuList(user.getUid(), userMenuList);
         return Result.ok(userMenuList);
     }
@@ -52,14 +52,14 @@ public class UserMenuController {
     @LoginRequired
     @PutMapping("")
     @ApiOperation(value = "更新指定的用户菜单列表", notes = "返回被更新的菜单数量")
-    public Result<Integer> addMenuList(@ApiIgnore @CurrentUser User user, @ApiParam("需要更新的菜单列表，包含菜单id和更新字段") List<UserMenu> userMenuList) {
+    public Result<Integer> addMenuList(@ApiIgnore @CurrentUser User user, @ApiParam("需要更新的菜单列表，包含菜单id和更新字段") @RequestBody List<UserMenu> userMenuList) {
         return Result.ok(userMenuService.updateMenuList(user.getUid(), userMenuList));
     }
 
     @LoginRequired
     @DeleteMapping("")
     @ApiOperation(value = "删除指定的用户菜单列表", notes = "返回被删除的菜单数量")
-    public Result<Integer> delete(@ApiIgnore @CurrentUser User user, @ApiParam("菜单id数组") List<Long> userMenuIds) {
+    public Result<Integer> delete(@ApiIgnore @CurrentUser User user, @ApiParam("菜单id数组") @RequestBody List<Long> userMenuIds) {
         return Result.ok(userMenuService.deleteUserMenus(user.getUid(), userMenuIds));
     }
 }

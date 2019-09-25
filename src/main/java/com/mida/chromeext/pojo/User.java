@@ -1,18 +1,28 @@
 package com.mida.chromeext.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotBlank;
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel
 public class User implements Serializable {
     private Integer uid;
     @NotBlank
     private String number;
+
     @NotBlank
+    @JsonIgnore
     private String password;
 
     private String avatar;
 
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
     private String salt;
 
     private String email;
@@ -29,8 +39,10 @@ public class User implements Serializable {
 
     private String countryName;
 
+    @ApiModelProperty(hidden = true)
     private Date createdAt;
 
+    @ApiModelProperty(hidden = true)
     private Date updatedAt;
 
     private static final long serialVersionUID = 1L;

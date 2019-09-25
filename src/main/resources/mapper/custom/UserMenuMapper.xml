@@ -16,7 +16,7 @@
     </select>
 
     <insert id="batchInsert" parameterType="map">
-        insert into user_menus(title, url, icon_src, is_folder, folder_id, user_id, index, created_at)
+        insert into user_menus(title, url, icon_src, is_folder, folder_id, user_id, `index`, created_at)
         values
         <foreach collection="menuList" item="menu" separator="," index="index">
             <trim prefix="(" suffix=")">
@@ -27,7 +27,7 @@
                 #{menu.folderId},
                 #{userId},
                 #{menu.index},
-                unix_timestamp(now())
+                now()
             </trim>
         </foreach>
     </insert>
