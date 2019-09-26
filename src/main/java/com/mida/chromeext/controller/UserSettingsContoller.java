@@ -16,8 +16,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
 @Api(tags="用户设置维护类")
 @RequestMapping("user_settings")
@@ -26,35 +24,29 @@ public class UserSettingsContoller {
     @Autowired
     private UserSettingService userSettingService;
 
+    @Autowired
+    private DefaultUserSettingDto defaultUserSettingDto;
+
     @LoginRequired
     @GetMapping("profile")
-    @ApiOperation(value = "获取用户配置，要求用户已登录", notes = "若返回空则表明用户无配置")
-    public Result<DefaultUserSettingDto> show(@ApiIgnore @CurrentUser User user, @ApiIgnore HttpServletResponse response) {
+    @ApiOperation(value = "获取用户配置，要求用户已登录", notes = "用户没有个性化配置的情况下返回默认配置")
+    public Result<DefaultUserSettingDto> show(@ApiIgnore @CurrentUser User user) {
         UserSetting userSetting = userSettingService.getUserSettingByUserId(user.getUid());
-        if (userSetting == null) {
-            try {
-                response.sendRedirect("default");
-            } catch (Exception e) {
-                return Result.error(e.getMessage());
-            }
-        }
-        DefaultUserSettingDto dd = JSONObject.parseObject(userSetting.getSettings(), DefaultUserSettingDto.class);
-        return Result.ok(JSONObject.parseObject(userSetting.getSettings(), DefaultUserSettingDto.class));
+        DefaultUserSettingDto dd = userSetting == null ? defaultUserSettingDto : JSONObject.parseObject(userSetting.getSettings(), DefaultUserSettingDto.class);
+        return Result.ok(dd);
     }
 
     @LoginRequired
     @PostMapping("profile")
-    @ApiOperation(value = "设置或更新用户配置，要求用户已登录", notes = "返回插入的用户配置")
+    @ApiOperation(value = "设置或更新用户配置，要求用户已登录", notes = "上传需要保存的配置字段，如果该字段为复合对象（JSON），请提交完整字段对象，否则缺失的子对象字段会被覆盖丢失。返回插入的用户配置")
     public Result<DefaultUserSettingDto> createOrUpdate(@ApiIgnore @CurrentUser User user, @Validated @RequestBody DefaultUserSettingDto setting, BindingResult bindingResult) {
-        UserSetting userSetting = new UserSetting();
-        userSetting.setSettings(JSONObject.toJSONString(setting));
-        Boolean suc = userSettingService.addUserSetting(user.getUid(), userSetting);
-        return suc ? Result.ok(setting) : Result.error(bindingResult.getFieldError().getDefaultMessage());
+        DefaultUserSettingDto res = userSettingService.addUserSetting(user.getUid(), setting);
+        return res != null ? Result.ok(res) : Result.error(bindingResult.getFieldError().getDefaultMessage());
     }
 
     @GetMapping("default")
     @ApiOperation(value="获取系统默认的用户配置", notes = "不要求用户登录")
     public Result<DefaultUserSettingDto> showDefault() {
-        return Result.ok(new DefaultUserSettingDto());
+        return Result.ok(defaultUserSettingDto);
     }
 }

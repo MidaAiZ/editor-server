@@ -9,10 +9,10 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="gender" jdbcType="TINYINT" property="gender" />
-    <result column="tel" jdbcType="INTEGER" property="tel" />
-    <result column="tel_prefix" jdbcType="TINYINT" property="telPrefix" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="tel_prefix" jdbcType="VARCHAR" property="telPrefix" />
     <result column="occupation" jdbcType="VARCHAR" property="occupation" />
-    <result column="country_code" jdbcType="TINYINT" property="countryCode" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
     <result column="country_name" jdbcType="VARCHAR" property="countryName" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
@@ -120,8 +120,8 @@
       updated_at)
     values (#{number,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
-      #{tel,jdbcType=INTEGER}, #{telPrefix,jdbcType=TINYINT}, #{occupation,jdbcType=VARCHAR}, 
-      #{countryCode,jdbcType=TINYINT}, #{countryName,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{tel,jdbcType=VARCHAR}, #{telPrefix,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
+      #{countryCode,jdbcType=VARCHAR}, #{countryName,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.User">
@@ -190,16 +190,16 @@
         #{gender,jdbcType=TINYINT},
       </if>
       <if test="tel != null">
-        #{tel,jdbcType=INTEGER},
+        #{tel,jdbcType=VARCHAR},
       </if>
       <if test="telPrefix != null">
-        #{telPrefix,jdbcType=TINYINT},
+        #{telPrefix,jdbcType=VARCHAR},
       </if>
       <if test="occupation != null">
         #{occupation,jdbcType=VARCHAR},
       </if>
       <if test="countryCode != null">
-        #{countryCode,jdbcType=TINYINT},
+        #{countryCode,jdbcType=VARCHAR},
       </if>
       <if test="countryName != null">
         #{countryName,jdbcType=VARCHAR},
@@ -243,16 +243,16 @@
         gender = #{record.gender,jdbcType=TINYINT},
       </if>
       <if test="record.tel != null">
-        tel = #{record.tel,jdbcType=INTEGER},
+        tel = #{record.tel,jdbcType=VARCHAR},
       </if>
       <if test="record.telPrefix != null">
-        tel_prefix = #{record.telPrefix,jdbcType=TINYINT},
+        tel_prefix = #{record.telPrefix,jdbcType=VARCHAR},
       </if>
       <if test="record.occupation != null">
         occupation = #{record.occupation,jdbcType=VARCHAR},
       </if>
       <if test="record.countryCode != null">
-        country_code = #{record.countryCode,jdbcType=TINYINT},
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
       </if>
       <if test="record.countryName != null">
         country_name = #{record.countryName,jdbcType=VARCHAR},
@@ -277,10 +277,10 @@
       salt = #{record.salt,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=TINYINT},
-      tel = #{record.tel,jdbcType=INTEGER},
-      tel_prefix = #{record.telPrefix,jdbcType=TINYINT},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      tel_prefix = #{record.telPrefix,jdbcType=VARCHAR},
       occupation = #{record.occupation,jdbcType=VARCHAR},
-      country_code = #{record.countryCode,jdbcType=TINYINT},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
       country_name = #{record.countryName,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
@@ -310,16 +310,16 @@
         gender = #{gender,jdbcType=TINYINT},
       </if>
       <if test="tel != null">
-        tel = #{tel,jdbcType=INTEGER},
+        tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="telPrefix != null">
-        tel_prefix = #{telPrefix,jdbcType=TINYINT},
+        tel_prefix = #{telPrefix,jdbcType=VARCHAR},
       </if>
       <if test="occupation != null">
         occupation = #{occupation,jdbcType=VARCHAR},
       </if>
       <if test="countryCode != null">
-        country_code = #{countryCode,jdbcType=TINYINT},
+        country_code = #{countryCode,jdbcType=VARCHAR},
       </if>
       <if test="countryName != null">
         country_name = #{countryName,jdbcType=VARCHAR},
@@ -341,10 +341,10 @@
       salt = #{salt,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=TINYINT},
-      tel = #{tel,jdbcType=INTEGER},
-      tel_prefix = #{telPrefix,jdbcType=TINYINT},
+      tel = #{tel,jdbcType=VARCHAR},
+      tel_prefix = #{telPrefix,jdbcType=VARCHAR},
       occupation = #{occupation,jdbcType=VARCHAR},
-      country_code = #{countryCode,jdbcType=TINYINT},
+      country_code = #{countryCode,jdbcType=VARCHAR},
       country_name = #{countryName,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}

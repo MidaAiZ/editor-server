@@ -495,6 +495,66 @@ public class SiteExample {
             return (Criteria) this;
         }
 
+        public Criteria andCateIdIsNull() {
+            addCriterion("cate_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdIsNotNull() {
+            addCriterion("cate_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdEqualTo(Integer value) {
+            addCriterion("cate_id =", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdNotEqualTo(Integer value) {
+            addCriterion("cate_id <>", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdGreaterThan(Integer value) {
+            addCriterion("cate_id >", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("cate_id >=", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdLessThan(Integer value) {
+            addCriterion("cate_id <", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdLessThanOrEqualTo(Integer value) {
+            addCriterion("cate_id <=", value, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdIn(List<Integer> values) {
+            addCriterion("cate_id in", values, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdNotIn(List<Integer> values) {
+            addCriterion("cate_id not in", values, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdBetween(Integer value1, Integer value2) {
+            addCriterion("cate_id between", value1, value2, "cateId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCateIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("cate_id not between", value1, value2, "cateId");
+            return (Criteria) this;
+        }
+
         public Criteria andWeightIsNull() {
             addCriterion("weight is null");
             return (Criteria) this;

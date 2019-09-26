@@ -585,52 +585,62 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andTelEqualTo(Integer value) {
+        public Criteria andTelEqualTo(String value) {
             addCriterion("tel =", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotEqualTo(Integer value) {
+        public Criteria andTelNotEqualTo(String value) {
             addCriterion("tel <>", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelGreaterThan(Integer value) {
+        public Criteria andTelGreaterThan(String value) {
             addCriterion("tel >", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTelGreaterThanOrEqualTo(String value) {
             addCriterion("tel >=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelLessThan(Integer value) {
+        public Criteria andTelLessThan(String value) {
             addCriterion("tel <", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelLessThanOrEqualTo(Integer value) {
+        public Criteria andTelLessThanOrEqualTo(String value) {
             addCriterion("tel <=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelIn(List<Integer> values) {
+        public Criteria andTelLike(String value) {
+            addCriterion("tel like", value, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelNotLike(String value) {
+            addCriterion("tel not like", value, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelIn(List<String> values) {
             addCriterion("tel in", values, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotIn(List<Integer> values) {
+        public Criteria andTelNotIn(List<String> values) {
             addCriterion("tel not in", values, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelBetween(Integer value1, Integer value2) {
+        public Criteria andTelBetween(String value1, String value2) {
             addCriterion("tel between", value1, value2, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotBetween(Integer value1, Integer value2) {
+        public Criteria andTelNotBetween(String value1, String value2) {
             addCriterion("tel not between", value1, value2, "tel");
             return (Criteria) this;
         }
@@ -645,52 +655,62 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixEqualTo(Byte value) {
+        public Criteria andTelPrefixEqualTo(String value) {
             addCriterion("tel_prefix =", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotEqualTo(Byte value) {
+        public Criteria andTelPrefixNotEqualTo(String value) {
             addCriterion("tel_prefix <>", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixGreaterThan(Byte value) {
+        public Criteria andTelPrefixGreaterThan(String value) {
             addCriterion("tel_prefix >", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTelPrefixGreaterThanOrEqualTo(String value) {
             addCriterion("tel_prefix >=", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixLessThan(Byte value) {
+        public Criteria andTelPrefixLessThan(String value) {
             addCriterion("tel_prefix <", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixLessThanOrEqualTo(Byte value) {
+        public Criteria andTelPrefixLessThanOrEqualTo(String value) {
             addCriterion("tel_prefix <=", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixIn(List<Byte> values) {
+        public Criteria andTelPrefixLike(String value) {
+            addCriterion("tel_prefix like", value, "telPrefix");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelPrefixNotLike(String value) {
+            addCriterion("tel_prefix not like", value, "telPrefix");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelPrefixIn(List<String> values) {
             addCriterion("tel_prefix in", values, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotIn(List<Byte> values) {
+        public Criteria andTelPrefixNotIn(List<String> values) {
             addCriterion("tel_prefix not in", values, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixBetween(Byte value1, Byte value2) {
+        public Criteria andTelPrefixBetween(String value1, String value2) {
             addCriterion("tel_prefix between", value1, value2, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotBetween(Byte value1, Byte value2) {
+        public Criteria andTelPrefixNotBetween(String value1, String value2) {
             addCriterion("tel_prefix not between", value1, value2, "telPrefix");
             return (Criteria) this;
         }
@@ -775,52 +795,62 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeEqualTo(Byte value) {
+        public Criteria andCountryCodeEqualTo(String value) {
             addCriterion("country_code =", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeNotEqualTo(Byte value) {
+        public Criteria andCountryCodeNotEqualTo(String value) {
             addCriterion("country_code <>", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeGreaterThan(Byte value) {
+        public Criteria andCountryCodeGreaterThan(String value) {
             addCriterion("country_code >", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andCountryCodeGreaterThanOrEqualTo(String value) {
             addCriterion("country_code >=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeLessThan(Byte value) {
+        public Criteria andCountryCodeLessThan(String value) {
             addCriterion("country_code <", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeLessThanOrEqualTo(Byte value) {
+        public Criteria andCountryCodeLessThanOrEqualTo(String value) {
             addCriterion("country_code <=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeIn(List<Byte> values) {
+        public Criteria andCountryCodeLike(String value) {
+            addCriterion("country_code like", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotLike(String value) {
+            addCriterion("country_code not like", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeIn(List<String> values) {
             addCriterion("country_code in", values, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeNotIn(List<Byte> values) {
+        public Criteria andCountryCodeNotIn(List<String> values) {
             addCriterion("country_code not in", values, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeBetween(Byte value1, Byte value2) {
+        public Criteria andCountryCodeBetween(String value1, String value2) {
             addCriterion("country_code between", value1, value2, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryCodeNotBetween(Byte value1, Byte value2) {
+        public Criteria andCountryCodeNotBetween(String value1, String value2) {
             addCriterion("country_code not between", value1, value2, "countryCode");
             return (Criteria) this;
         }

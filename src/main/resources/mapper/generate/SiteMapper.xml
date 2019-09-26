@@ -8,6 +8,7 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="used_count" jdbcType="INTEGER" property="usedCount" />
     <result column="page_views" jdbcType="INTEGER" property="pageViews" />
+    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
     <result column="weight" jdbcType="REAL" property="weight" />
     <result column="created_by" jdbcType="INTEGER" property="createdBy" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    sid, title, url, icon, used_count, page_views, weight, created_by, created_at, updated_at
+    sid, title, url, icon, used_count, page_views, cate_id, weight, created_by, created_at, 
+    updated_at
   </sql>
   <select id="selectByExample" parameterType="com.mida.chromeext.pojo.SiteExample" resultMap="BaseResultMap">
     select
@@ -109,13 +111,13 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into sites (title, url, icon, 
-      used_count, page_views, weight, 
-      created_by, created_at, updated_at
-      )
+      used_count, page_views, cate_id, 
+      weight, created_by, created_at, 
+      updated_at)
     values (#{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{usedCount,jdbcType=INTEGER}, #{pageViews,jdbcType=INTEGER}, #{weight,jdbcType=REAL}, 
-      #{createdBy,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
-      )
+      #{usedCount,jdbcType=INTEGER}, #{pageViews,jdbcType=INTEGER}, #{cateId,jdbcType=INTEGER}, 
+      #{weight,jdbcType=REAL}, #{createdBy,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Site">
     <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
@@ -137,6 +139,9 @@
       </if>
       <if test="pageViews != null">
         page_views,
+      </if>
+      <if test="cateId != null">
+        cate_id,
       </if>
       <if test="weight != null">
         weight,
@@ -166,6 +171,9 @@
       </if>
       <if test="pageViews != null">
         #{pageViews,jdbcType=INTEGER},
+      </if>
+      <if test="cateId != null">
+        #{cateId,jdbcType=INTEGER},
       </if>
       <if test="weight != null">
         #{weight,jdbcType=REAL},
@@ -208,6 +216,9 @@
       <if test="record.pageViews != null">
         page_views = #{record.pageViews,jdbcType=INTEGER},
       </if>
+      <if test="record.cateId != null">
+        cate_id = #{record.cateId,jdbcType=INTEGER},
+      </if>
       <if test="record.weight != null">
         weight = #{record.weight,jdbcType=REAL},
       </if>
@@ -233,6 +244,7 @@
       icon = #{record.icon,jdbcType=VARCHAR},
       used_count = #{record.usedCount,jdbcType=INTEGER},
       page_views = #{record.pageViews,jdbcType=INTEGER},
+      cate_id = #{record.cateId,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=REAL},
       created_by = #{record.createdBy,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -259,6 +271,9 @@
       <if test="pageViews != null">
         page_views = #{pageViews,jdbcType=INTEGER},
       </if>
+      <if test="cateId != null">
+        cate_id = #{cateId,jdbcType=INTEGER},
+      </if>
       <if test="weight != null">
         weight = #{weight,jdbcType=REAL},
       </if>
@@ -281,6 +296,7 @@
       icon = #{icon,jdbcType=VARCHAR},
       used_count = #{usedCount,jdbcType=INTEGER},
       page_views = #{pageViews,jdbcType=INTEGER},
+      cate_id = #{cateId,jdbcType=INTEGER},
       weight = #{weight,jdbcType=REAL},
       created_by = #{createdBy,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},

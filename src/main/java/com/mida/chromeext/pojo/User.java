@@ -1,17 +1,15 @@
 package com.mida.chromeext.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
-import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel
 public class User implements Serializable {
     private Integer uid;
+
     @NotBlank
     private String number;
 
@@ -29,20 +27,18 @@ public class User implements Serializable {
 
     private Byte gender;
 
-    private Integer tel;
+    private String tel;
 
-    private Byte telPrefix;
+    private String telPrefix;
 
     private String occupation;
 
-    private Byte countryCode;
+    private String countryCode;
 
     private String countryName;
 
-    @ApiModelProperty(hidden = true)
     private Date createdAt;
 
-    @ApiModelProperty(hidden = true)
     private Date updatedAt;
 
     private static final long serialVersionUID = 1L;
@@ -103,20 +99,20 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public Integer getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Integer tel) {
-        this.tel = tel;
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
     }
 
-    public Byte getTelPrefix() {
+    public String getTelPrefix() {
         return telPrefix;
     }
 
-    public void setTelPrefix(Byte telPrefix) {
-        this.telPrefix = telPrefix;
+    public void setTelPrefix(String telPrefix) {
+        this.telPrefix = telPrefix == null ? null : telPrefix.trim();
     }
 
     public String getOccupation() {
@@ -127,12 +123,12 @@ public class User implements Serializable {
         this.occupation = occupation == null ? null : occupation.trim();
     }
 
-    public Byte getCountryCode() {
+    public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(Byte countryCode) {
-        this.countryCode = countryCode;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode == null ? null : countryCode.trim();
     }
 
     public String getCountryName() {

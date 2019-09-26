@@ -16,6 +16,8 @@ public class Site implements Serializable {
 
     private Integer pageViews;
 
+    private Integer cateId;
+
     private Float weight;
 
     private Integer createdBy;
@@ -74,6 +76,14 @@ public class Site implements Serializable {
         this.pageViews = pageViews;
     }
 
+    public Integer getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(Integer cateId) {
+        this.cateId = cateId;
+    }
+
     public Float getWeight() {
         return weight;
     }
@@ -118,6 +128,7 @@ public class Site implements Serializable {
         sb.append(", icon=").append(icon);
         sb.append(", usedCount=").append(usedCount);
         sb.append(", pageViews=").append(pageViews);
+        sb.append(", cateId=").append(cateId);
         sb.append(", weight=").append(weight);
         sb.append(", createdBy=").append(createdBy);
         sb.append(", createdAt=").append(createdAt);
