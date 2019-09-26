@@ -6,7 +6,7 @@ import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.SiteCategory;
 import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
-import com.mida.chromeext.vo.SiteQueryVo;
+import com.mida.chromeext.vo.SiteListQueryVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -143,7 +143,7 @@ public class SiteService {
     }
 
 
-    public List<Site> listSitesByPage(SiteQueryVo queryVo){
+    public List<Site> listSitesByPage(SiteListQueryVo queryVo){
         SiteExample example = new SiteExample();
         SiteExample.Criteria criteria = example.createCriteria();
         if(StringUtils.isNotBlank(queryVo.getKeyWord())){
@@ -151,7 +151,7 @@ public class SiteService {
         }
         SiteCategory siteCategory = queryVo.getSiteCategory();
         if(siteCategory != null && StringUtils.isNotBlank(siteCategory.getTitle())){
-
+            // 表中没有 category
         }
         PageHelper.startPage(queryVo);
         List<Site> sites = siteDAO.selectByExample(example);
