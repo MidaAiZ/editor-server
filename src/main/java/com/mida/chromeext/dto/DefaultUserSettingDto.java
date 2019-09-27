@@ -37,10 +37,6 @@ public class DefaultUserSettingDto implements Serializable {
     private String fontColorValue;
     private LayoutSetting iconLayout;
 
-    public DefaultUserSettingDto() {
-        System.out.println("哈哈哈哈");
-    }
-
     public String getBgSrc() {
         return bgSrc;
     }
