@@ -11,6 +11,7 @@ import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +26,14 @@ public class UserSettingsContoller {
     private UserSettingService userSettingService;
 
     @Autowired
-    private DefaultUserSettingDto defaultUserSettingDto;
+    private ApplicationContext applicationContext;
 
     @LoginRequired
     @GetMapping("profile")
     @ApiOperation(value = "获取用户配置，要求用户已登录", notes = "用户没有个性化配置的情况下返回默认配置")
     public Result<DefaultUserSettingDto> show(@ApiIgnore @CurrentUser User user) {
         UserSetting userSetting = userSettingService.getUserSettingByUserId(user.getUid());
-        DefaultUserSettingDto dd = userSetting == null ? defaultUserSettingDto : JSONObject.parseObject(userSetting.getSettings(), DefaultUserSettingDto.class);
+        DefaultUserSettingDto dd = userSetting == null ? applicationContext.getBean(DefaultUserSettingDto.class) : JSONObject.parseObject(userSetting.getSettings(), DefaultUserSettingDto.class);
         return Result.ok(dd);
     }
 
@@ -47,6 +48,6 @@ public class UserSettingsContoller {
     @GetMapping("default")
     @ApiOperation(value="获取系统默认的用户配置", notes = "不要求用户登录")
     public Result<DefaultUserSettingDto> showDefault() {
-        return Result.ok(defaultUserSettingDto);
+        return Result.ok(applicationContext.getBean(DefaultUserSettingDto.class));
     }
 }

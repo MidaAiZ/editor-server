@@ -1,12 +1,16 @@
 package com.mida.chromeext.dto;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Component
+@Lazy
+@Scope("prototype")
 @ConfigurationProperties(prefix = "user-setting")
 @PropertySource(value = "classpath:user-setting-default.properties")
 public class DefaultUserSettingDto implements Serializable {
@@ -32,6 +36,10 @@ public class DefaultUserSettingDto implements Serializable {
     private String fontSizeValue;
     private String fontColorValue;
     private LayoutSetting iconLayout;
+
+    public DefaultUserSettingDto() {
+        System.out.println("哈哈哈哈");
+    }
 
     public String getBgSrc() {
         return bgSrc;
@@ -210,6 +218,7 @@ public class DefaultUserSettingDto implements Serializable {
     }
 
     @Component
+    @Scope("prototype")
     @ConfigurationProperties(prefix = "user-setting.icon-layout")
     @PropertySource(value = "classpath:user-setting-default.properties")
     static class LayoutSetting implements Serializable {

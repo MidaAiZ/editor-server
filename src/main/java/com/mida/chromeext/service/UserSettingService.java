@@ -8,6 +8,7 @@ import com.mida.chromeext.pojo.UserSettingExample;
 import com.mida.chromeext.utils.MergeObject;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class UserSettingService {
     UserSettingDAO userSettingDAO;
 
     @Autowired
-    private DefaultUserSettingDto defaultUserSettingDto;
+    private ApplicationContext applicationContext;
 
     /**
      * 根据用户Id查询其用户设置
@@ -53,7 +54,7 @@ public class UserSettingService {
         // 设置userId
         UserSetting setting = new UserSetting();
         try {
-            dd = MergeObject.merge(defaultUserSettingDto, dd);
+            dd =  MergeObject.merge(applicationContext.getBean(DefaultUserSettingDto.class), dd);
             setting.setSettings(JSONObject.toJSONString(dd));
         } catch (Exception e) {
             System.out.println(e);
