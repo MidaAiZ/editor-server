@@ -3,15 +3,15 @@
 <mapper namespace="com.mida.chromeext.dao.SiteDAO">
 
     <update id="increaseUsedCount" parameterType="java.lang.Integer">
-    update sites
-    set used_count = used_count + 1
-    where  sid = #{sid,jdbcType=INTEGER}
+        update sites
+        set used_count = used_count + 1
+        where sid = #{sid,jdbcType=INTEGER}
     </update>
 
     <update id="decreaseUsedCount" parameterType="java.lang.Integer">
-    update sites
-    set used_count = used_count - 1
-    where  sid = #{sid,jdbcType=INTEGER}
+        update sites
+        set used_count = used_count - 1
+        where sid = #{sid,jdbcType=INTEGER}
     </update>
 
     <update id="batchIncreaseUsedCount" parameterType="java.lang.Integer">
@@ -33,7 +33,28 @@
     </update>
 
     <select id="listAllSiteURL" resultType="map">
-        select url from sites;
+        select url
+        from sites;
     </select>
 
+    <select id="listSitesByPage" resultType="com.mida.chromeext.pojo.Site">
+        select s.sid,s.title,s.url,s.icon,s.cate_id
+        from sites s
+        join countries_sites cs
+        on s.sid = cs.site_id
+        where cs.country_id = #{queryVo.countryId}
+        <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
+            and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
+
+        </if>
+        <if test="queryVo.siteCategory != null and queryVo.siteCategory.cid !=null">
+            and s.cate_id = #{queryVo.siteCategory.cid}
+        </if>
+        order by s.weight desc
+    </select>
+
+    <select id="listAllTitle" resultType="string">
+        select title
+        from sites
+    </select>
 </mapper>

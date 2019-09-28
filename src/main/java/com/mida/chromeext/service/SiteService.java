@@ -1,18 +1,18 @@
 package com.mida.chromeext.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.dao.SiteDAO;
 import com.mida.chromeext.pojo.Site;
-import com.mida.chromeext.pojo.SiteCategory;
 import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.vo.SiteAddVo;
 import com.mida.chromeext.vo.SiteListQueryVo;
 
 
@@ -40,29 +40,44 @@ public class SiteService {
     }
 
     /**
-     * 管理员添加网站 未做校验
+     * 管理员添加网站
      *
-     * @param siteList  被添加的site
-     * @param adminId 添加者id
-     * @return site 添加的网站po
+     * @param SiteAddVos
+     * @param adminId
+     * @return List<Site>
      * @author lihaoyu
-     * @date 2019/9/19 14:36
+     * @date 2019/9/28 21:30 
      */
-    public List<Site> addSites(List<Site> siteList, Integer adminId) {
+    public List<Site> addSites(List<SiteAddVo> SiteAddVos, Integer adminId) {
 
+        // 1. 通过网站名确定不重复添加
+        Set<String> titleSet = siteDAO.listAllTitle();
+        for (SiteAddVo siteAddVo : SiteAddVos) {
+            if(titleSet.contains(siteAddVo.getTitle())){
+                return null;
+            }
+        }
 
-        Site site = new Site();
+        // 2. 插入 site 表
+        List<Site> addSiteList = new ArrayList<>();
         Date date = new Date();
-        site.setCreatedAt(date);
-        site.setUpdatedAt(date);
-        site.setUsedCount(NumConst.NUM0);
-        site.setCreatedBy(adminId);
-        // 网站初始权重
-        site.setWeight(50f);
-        int siteId = siteDAO.insertSelective(site);
-        site.setSid(siteId);
+        for (SiteAddVo siteAddVo : SiteAddVos) {
+            Site site = new Site();
+            site.setCreatedAt(date);
+            site.setUpdatedAt(date);
+            site.setUsedCount(NumConst.NUM0);
+            site.setCreatedBy(adminId);
+            // 网站初始权重
+            site.setWeight(50f);
+        }
+
+
+
+
         return null;
     }
+
+
 
     /**
      * 当用户添加网站时，此网站的UsedCount要自增1
@@ -150,22 +165,19 @@ public class SiteService {
 
 
     public List<Site> listSitesByPage(SiteListQueryVo queryVo){
+//        SiteExample example = new SiteExample();
+//        SiteExample.Criteria criteria = example.createCriteria();
+//        if(StringUtils.isNotBlank(queryVo.getKeyWord())){
+//            criteria.andTitleLike("%"+queryVo.getKeyWord()+"%");
+//        }
+//        SiteCategory siteCategory = queryVo.getSiteCategory();
+//        if(siteCategory != null && StringUtils.isNotBlank(siteCategory.getTitle())){
+//            criteria.andCateIdEqualTo(siteCategory.getCid());
+//        }
+//        PageHelper.startPage(queryVo);
+//        List<Site> sites = siteDAO.selectByExample(example);
 
-
-
-        SiteExample example = new SiteExample();
-        SiteExample.Criteria criteria = example.createCriteria();
-        if(StringUtils.isNotBlank(queryVo.getKeyWord())){
-            criteria.andTitleLike("%"+queryVo.getKeyWord()+"%");
-        }
-        SiteCategory siteCategory = queryVo.getSiteCategory();
-        if(siteCategory != null && StringUtils.isNotBlank(siteCategory.getTitle())){
-
-            // 表中没有 category
-
-        }
-        PageHelper.startPage(queryVo);
-        List<Site> sites = siteDAO.selectByExample(example);
+        List<Site> sites = siteDAO.listSitesByPage(queryVo);
         return sites;
     }
 }

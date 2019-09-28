@@ -1,6 +1,7 @@
 package com.mida.chromeext.vo;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author lihaoyu
@@ -8,10 +9,12 @@ import javax.validation.constraints.Min;
  */
 public class ListQueryVo {
 
-    @Min(0)
+    @NotNull
+    @Min(1)
     private Integer pageNum;
 
-    @Min(1)
+    @NotNull
+    @Min(0)
     private Integer pageSize;
 
     public Integer getPageNum() {

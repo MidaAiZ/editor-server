@@ -1,11 +1,13 @@
 package com.mida.chromeext.pojo;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 public class SiteCategory implements Serializable {
     private Integer cid;
 
+    @NotBlank
     private String title;
 
     private Integer sitesCount;

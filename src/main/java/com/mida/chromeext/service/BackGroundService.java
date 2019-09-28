@@ -4,6 +4,7 @@ import com.mida.chromeext.dao.BgPictureDAO;
 import com.mida.chromeext.pojo.BgPicture;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -11,11 +12,10 @@ import java.util.Date;
  * @author lihaoyu
  * @date 2019/9/22 16:33
  */
+@Service
 public class BackGroundService {
     @Autowired
     BgPictureDAO bgPictureDAO;
-
-    private String pwd;
 
     /**
      * 添加背景图片

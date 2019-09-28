@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mida.chromeext.dao.SiteCategoryDAO">
+
+    <select id="listAllCategories" resultType="com.mida.chromeext.pojo.SiteCategory">
+        select cid,title,created_at,updated_at
+        from site_categories;
+    </select>
+
+    <select id="listAllCategoriesTitle" resultType="string">
+        select title from site_categories;
+    </select>
+</mapper>

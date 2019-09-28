@@ -1,10 +1,14 @@
 package com.mida.chromeext.dao;
 
-import com.mida.chromeext.mapper.SiteMapper;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.mida.chromeext.mapper.SiteMapper;
+import com.mida.chromeext.pojo.Site;
+import com.mida.chromeext.vo.SiteListQueryVo;
 
 /**
  * @author lihaoyu
@@ -55,4 +59,22 @@ public interface SiteDAO extends SiteMapper {
      */
     int batchDecreaseUsedCount(List<Integer> sidList);
 
+    /**
+     * 分页分类分国家按序查找 site
+     *
+     * @param queryVo 查询条件
+     * @return List<Site>
+     * @author lihaoyu
+     * @date 2019/9/28 21:36
+     */
+    List<Site> listSitesByPage(@Param("queryVo") SiteListQueryVo queryVo);
+
+    /**
+     * 列出所有网站的名字
+     *
+     * @return 所有名字
+     * @author lihaoyu
+     * @date 2019/9/28 21:37
+     */
+    Set<String> listAllTitle();
 }
