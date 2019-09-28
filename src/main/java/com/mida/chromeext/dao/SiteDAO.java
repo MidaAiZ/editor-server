@@ -3,12 +3,16 @@ package com.mida.chromeext.dao;
 import com.mida.chromeext.mapper.SiteMapper;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lihaoyu
  * @date 2019/9/15 20:49
  */
 public interface SiteDAO extends SiteMapper {
+
+    Map<String,String> listAllSiteURL();
 
     /**
      * 网站被引用数自增1

@@ -1,15 +1,16 @@
 package com.mida.chromeext.pojo;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Site implements Serializable {
     private Integer sid;
-
+    @NotBlank
     private String title;
-
+    @NotBlank
     private String url;
-
+    @NotBlank
     private String icon;
 
     private Integer usedCount;

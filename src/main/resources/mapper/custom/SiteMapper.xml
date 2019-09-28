@@ -32,4 +32,8 @@
         </foreach>
     </update>
 
+    <select id="listAllSiteURL" resultType="map">
+        select url from sites;
+    </select>
+
 </mapper>

@@ -42,13 +42,16 @@ public class SiteService {
     /**
      * 管理员添加网站 未做校验
      *
-     * @param site    被添加的site
+     * @param siteList  被添加的site
      * @param adminId 添加者id
      * @return site 添加的网站po
      * @author lihaoyu
      * @date 2019/9/19 14:36
      */
-    public Site addSite(Site site, Integer adminId) {
+    public List<Site> addSites(List<Site> siteList, Integer adminId) {
+
+
+        Site site = new Site();
         Date date = new Date();
         site.setCreatedAt(date);
         site.setUpdatedAt(date);
@@ -58,7 +61,7 @@ public class SiteService {
         site.setWeight(50f);
         int siteId = siteDAO.insertSelective(site);
         site.setSid(siteId);
-        return site;
+        return null;
     }
 
     /**
@@ -147,6 +150,8 @@ public class SiteService {
 
 
     public List<Site> listSitesByPage(SiteListQueryVo queryVo){
+
+
 
         SiteExample example = new SiteExample();
         SiteExample.Criteria criteria = example.createCriteria();
