@@ -39,7 +39,7 @@ public class SiteController {
     @Autowired
     SiteService siteService;
 
-    @GetMapping("")
+    @PostMapping("list")
     @ApiOperation(value = "网站获取接口", notes = "分页方式获取网站，也可以全部获取")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "keyWord", value = "网站名称关键字", dataType = "String", paramType = "query"),
@@ -66,7 +66,7 @@ public class SiteController {
         List<Site> sites;
         try {
             sites = siteService.addSites(siteAddVos, 0);
-//            sites = siteService.addSites(siteAddVos, user.getUid());
+            // sites = siteService.addSites(siteAddVos, user.getUid());
         }catch (Exception ex){
             return Result.error("");
         }
