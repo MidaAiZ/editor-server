@@ -43,7 +43,7 @@ public class SiteCatoriesController {
     private SiteCategoryService siteCategoryService;
 
     @GetMapping("")
-    @ApiOperation("获取网站分类列表，屏蔽敏感字段")
+    @ApiOperation("获取网站分类列表")
     public Result<List<SiteCategory>> listAllCategories() {
         List<SiteCategory> siteCategories = siteCategoryService.listAllCategories();
         return Result.ok(siteCategories);

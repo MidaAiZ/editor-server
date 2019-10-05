@@ -1,30 +1,48 @@
 package com.mida.chromeext.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import springfox.documentation.annotations.ApiIgnore;
+
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel
 public class SiteViewHistory implements Serializable {
+    @ApiModelProperty(hidden = true)
     private String hid;
 
+    @ApiModelProperty(hidden = true)
     private String ip;
 
+    @ApiModelProperty(hidden = true)
     private Integer userId;
 
+    @ApiModelProperty("被浏览网站的id，如果有的话上传")
     private Integer siteId;
 
+    @ApiModelProperty("被浏览网站的title，如果有的话上传")
     private String siteTitle;
 
+    @ApiModelProperty(value = "被浏览网站的URL，必填", required = true)
+    @NotBlank
     private String siteUrl;
 
-    private Byte times;
+    @ApiModelProperty(hidden = true)
+    private String browserUa;
 
+    @ApiModelProperty(hidden = true)
+    private Integer times;
+
+    @ApiModelProperty(hidden = true)
     private String loc;
 
+    @ApiModelProperty(hidden = true)
     private Date createdAt;
 
+    @ApiModelProperty(hidden = true)
     private Date lastViewTime;
-
-    private byte[] browserUa;
 
     private static final long serialVersionUID = 1L;
 
@@ -76,11 +94,19 @@ public class SiteViewHistory implements Serializable {
         this.siteUrl = siteUrl == null ? null : siteUrl.trim();
     }
 
-    public Byte getTimes() {
+    public String getBrowserUa() {
+        return browserUa;
+    }
+
+    public void setBrowserUa(String browserUa) {
+        this.browserUa = browserUa == null ? null : browserUa.trim();
+    }
+
+    public Integer getTimes() {
         return times;
     }
 
-    public void setTimes(Byte times) {
+    public void setTimes(Integer times) {
         this.times = times;
     }
 
@@ -108,14 +134,6 @@ public class SiteViewHistory implements Serializable {
         this.lastViewTime = lastViewTime;
     }
 
-    public byte[] getBrowserUa() {
-        return browserUa;
-    }
-
-    public void setBrowserUa(byte[] browserUa) {
-        this.browserUa = browserUa;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -128,11 +146,11 @@ public class SiteViewHistory implements Serializable {
         sb.append(", siteId=").append(siteId);
         sb.append(", siteTitle=").append(siteTitle);
         sb.append(", siteUrl=").append(siteUrl);
+        sb.append(", browserUa=").append(browserUa);
         sb.append(", times=").append(times);
         sb.append(", loc=").append(loc);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", lastViewTime=").append(lastViewTime);
-        sb.append(", browserUa=").append(browserUa);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

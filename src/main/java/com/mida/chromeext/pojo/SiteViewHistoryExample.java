@@ -505,6 +505,76 @@ public class SiteViewHistoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andBrowserUaIsNull() {
+            addCriterion("browser_ua is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaIsNotNull() {
+            addCriterion("browser_ua is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaEqualTo(String value) {
+            addCriterion("browser_ua =", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaNotEqualTo(String value) {
+            addCriterion("browser_ua <>", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaGreaterThan(String value) {
+            addCriterion("browser_ua >", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaGreaterThanOrEqualTo(String value) {
+            addCriterion("browser_ua >=", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaLessThan(String value) {
+            addCriterion("browser_ua <", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaLessThanOrEqualTo(String value) {
+            addCriterion("browser_ua <=", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaLike(String value) {
+            addCriterion("browser_ua like", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaNotLike(String value) {
+            addCriterion("browser_ua not like", value, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaIn(List<String> values) {
+            addCriterion("browser_ua in", values, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaNotIn(List<String> values) {
+            addCriterion("browser_ua not in", values, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaBetween(String value1, String value2) {
+            addCriterion("browser_ua between", value1, value2, "browserUa");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrowserUaNotBetween(String value1, String value2) {
+            addCriterion("browser_ua not between", value1, value2, "browserUa");
+            return (Criteria) this;
+        }
+
         public Criteria andTimesIsNull() {
             addCriterion("times is null");
             return (Criteria) this;
@@ -515,52 +585,52 @@ public class SiteViewHistoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andTimesEqualTo(Byte value) {
+        public Criteria andTimesEqualTo(Integer value) {
             addCriterion("times =", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotEqualTo(Byte value) {
+        public Criteria andTimesNotEqualTo(Integer value) {
             addCriterion("times <>", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesGreaterThan(Byte value) {
+        public Criteria andTimesGreaterThan(Integer value) {
             addCriterion("times >", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTimesGreaterThanOrEqualTo(Integer value) {
             addCriterion("times >=", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesLessThan(Byte value) {
+        public Criteria andTimesLessThan(Integer value) {
             addCriterion("times <", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesLessThanOrEqualTo(Byte value) {
+        public Criteria andTimesLessThanOrEqualTo(Integer value) {
             addCriterion("times <=", value, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesIn(List<Byte> values) {
+        public Criteria andTimesIn(List<Integer> values) {
             addCriterion("times in", values, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotIn(List<Byte> values) {
+        public Criteria andTimesNotIn(List<Integer> values) {
             addCriterion("times not in", values, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesBetween(Byte value1, Byte value2) {
+        public Criteria andTimesBetween(Integer value1, Integer value2) {
             addCriterion("times between", value1, value2, "times");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotBetween(Byte value1, Byte value2) {
+        public Criteria andTimesNotBetween(Integer value1, Integer value2) {
             addCriterion("times not between", value1, value2, "times");
             return (Criteria) this;
         }

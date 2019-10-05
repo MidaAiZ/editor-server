@@ -2,9 +2,12 @@ package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.UserMenuMapper;
 import com.mida.chromeext.pojo.UserMenu;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMenuDAO extends UserMenuMapper {
     /**
      * 展示用户添加的菜单

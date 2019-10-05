@@ -5,11 +5,14 @@ import java.util.Set;
 
 import com.mida.chromeext.mapper.SiteCategoryMapper;
 import com.mida.chromeext.pojo.SiteCategory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author lihaoyu
  * @date 2019/9/15 20:49
  */
+@Repository
 public interface SiteCategoryDAO extends SiteCategoryMapper {
 
     /**

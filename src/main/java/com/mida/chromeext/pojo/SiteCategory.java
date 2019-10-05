@@ -10,6 +10,8 @@ public class SiteCategory implements Serializable {
     @NotBlank
     private String title;
 
+    private Integer index;
+
     private Integer sitesCount;
 
     private Date createdAt;
@@ -32,6 +34,14 @@ public class SiteCategory implements Serializable {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public Integer getSitesCount() {
@@ -66,6 +76,7 @@ public class SiteCategory implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", cid=").append(cid);
         sb.append(", title=").append(title);
+        sb.append(", index=").append(index);
         sb.append(", sitesCount=").append(sitesCount);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);

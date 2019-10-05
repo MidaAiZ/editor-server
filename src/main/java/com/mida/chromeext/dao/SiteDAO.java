@@ -9,11 +9,14 @@ import org.apache.ibatis.annotations.Param;
 import com.mida.chromeext.mapper.SiteMapper;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.vo.SiteListQueryVo;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author lihaoyu
  * @date 2019/9/15 20:49
  */
+@Repository
 public interface SiteDAO extends SiteMapper {
 
     Map<String,String> listAllSiteURL();
