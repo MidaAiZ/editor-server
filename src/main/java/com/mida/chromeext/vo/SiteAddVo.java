@@ -3,9 +3,11 @@ package com.mida.chromeext.vo;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * 管理员添加网站 Vo
  * @author lihaoyu
  * @date 2019/9/28 21:17
  */
@@ -20,8 +22,11 @@ public class SiteAddVo {
     @NotBlank
     private String icon;
 
+    @NotNull
+    private Integer cateId;
+
     @Size(min = 1)
-    private List<Integer> countryIds;
+    private List<String> countryCodes;
 
     public String getTitle() {
         return title;
@@ -47,11 +52,19 @@ public class SiteAddVo {
         this.icon = icon;
     }
 
-    public List<Integer> getCountryIds() {
-        return countryIds;
+    public List<String> getCountryCodes() {
+        return countryCodes;
     }
 
-    public void setCountryIds(List<Integer> countryIds) {
-        this.countryIds = countryIds;
+    public void setCountryCodes(List<String> countryCodes) {
+        this.countryCodes = countryCodes;
+    }
+
+    public Integer getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(Integer cateId) {
+        this.cateId = cateId;
     }
 }

@@ -42,10 +42,9 @@
         from sites s
         join countries_sites cs
         on s.sid = cs.site_id
-        where cs.country_id = #{queryVo.countryId}
+        where cs.country_code = #{queryVo.countryCode}
         <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
             and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
-
         </if>
         <if test="queryVo.siteCategory != null and queryVo.siteCategory.cid !=null">
             and s.cate_id = #{queryVo.siteCategory.cid}

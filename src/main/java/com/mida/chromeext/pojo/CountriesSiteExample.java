@@ -104,63 +104,73 @@ public class CountriesSiteExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCountryIdIsNull() {
-            addCriterion("country_id is null");
+        public Criteria andCountryCodeIsNull() {
+            addCriterion("country_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdIsNotNull() {
-            addCriterion("country_id is not null");
+        public Criteria andCountryCodeIsNotNull() {
+            addCriterion("country_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdEqualTo(Byte value) {
-            addCriterion("country_id =", value, "countryId");
+        public Criteria andCountryCodeEqualTo(String value) {
+            addCriterion("country_code =", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdNotEqualTo(Byte value) {
-            addCriterion("country_id <>", value, "countryId");
+        public Criteria andCountryCodeNotEqualTo(String value) {
+            addCriterion("country_code <>", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdGreaterThan(Byte value) {
-            addCriterion("country_id >", value, "countryId");
+        public Criteria andCountryCodeGreaterThan(String value) {
+            addCriterion("country_code >", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdGreaterThanOrEqualTo(Byte value) {
-            addCriterion("country_id >=", value, "countryId");
+        public Criteria andCountryCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("country_code >=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdLessThan(Byte value) {
-            addCriterion("country_id <", value, "countryId");
+        public Criteria andCountryCodeLessThan(String value) {
+            addCriterion("country_code <", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdLessThanOrEqualTo(Byte value) {
-            addCriterion("country_id <=", value, "countryId");
+        public Criteria andCountryCodeLessThanOrEqualTo(String value) {
+            addCriterion("country_code <=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdIn(List<Byte> values) {
-            addCriterion("country_id in", values, "countryId");
+        public Criteria andCountryCodeLike(String value) {
+            addCriterion("country_code like", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdNotIn(List<Byte> values) {
-            addCriterion("country_id not in", values, "countryId");
+        public Criteria andCountryCodeNotLike(String value) {
+            addCriterion("country_code not like", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdBetween(Byte value1, Byte value2) {
-            addCriterion("country_id between", value1, value2, "countryId");
+        public Criteria andCountryCodeIn(List<String> values) {
+            addCriterion("country_code in", values, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andCountryIdNotBetween(Byte value1, Byte value2) {
-            addCriterion("country_id not between", value1, value2, "countryId");
+        public Criteria andCountryCodeNotIn(List<String> values) {
+            addCriterion("country_code not in", values, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeBetween(String value1, String value2) {
+            addCriterion("country_code between", value1, value2, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotBetween(String value1, String value2) {
+            addCriterion("country_code not between", value1, value2, "countryCode");
             return (Criteria) this;
         }
 

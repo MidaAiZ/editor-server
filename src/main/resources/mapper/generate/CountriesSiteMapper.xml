@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.mapper.CountriesSiteMapper">
   <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.CountriesSite">
-    <result column="country_id" jdbcType="TINYINT" property="countryId" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
     <result column="site_id" jdbcType="INTEGER" property="siteId" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    country_id, site_id
+    country_code, site_id
   </sql>
   <select id="selectByExample" parameterType="com.mida.chromeext.pojo.CountriesSiteExample" resultMap="BaseResultMap">
     select
@@ -87,22 +87,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mida.chromeext.pojo.CountriesSite">
-    insert into countries_sites (country_id, site_id)
-    values (#{countryId,jdbcType=TINYINT}, #{siteId,jdbcType=INTEGER})
+    insert into countries_sites (country_code, site_id)
+    values (#{countryCode,jdbcType=VARCHAR}, #{siteId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.CountriesSite">
     insert into countries_sites
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="countryId != null">
-        country_id,
+      <if test="countryCode != null">
+        country_code,
       </if>
       <if test="siteId != null">
         site_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="countryId != null">
-        #{countryId,jdbcType=TINYINT},
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
       </if>
       <if test="siteId != null">
         #{siteId,jdbcType=INTEGER},
@@ -118,8 +118,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update countries_sites
     <set>
-      <if test="record.countryId != null">
-        country_id = #{record.countryId,jdbcType=TINYINT},
+      <if test="record.countryCode != null">
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
       </if>
       <if test="record.siteId != null">
         site_id = #{record.siteId,jdbcType=INTEGER},
@@ -131,7 +131,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update countries_sites
-    set country_id = #{record.countryId,jdbcType=TINYINT},
+    set country_code = #{record.countryCode,jdbcType=VARCHAR},
       site_id = #{record.siteId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />

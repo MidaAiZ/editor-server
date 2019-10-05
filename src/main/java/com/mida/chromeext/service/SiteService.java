@@ -3,18 +3,19 @@ package com.mida.chromeext.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.mida.chromeext.dao.CountriesSiteDAO;
 import com.mida.chromeext.dao.SiteDAO;
+import com.mida.chromeext.pojo.CountriesSite;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.SiteExample;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.vo.SiteAddVo;
 import com.mida.chromeext.vo.SiteListQueryVo;
-
 
 /**
  * @author lihaoyu
@@ -25,6 +26,9 @@ public class SiteService {
 
     @Autowired
     private SiteDAO siteDAO;
+
+    @Autowired
+    private CountriesSiteDAO countriesSiteDAO;
 
     /**
      * 根据 sid 查询网站Po
@@ -40,44 +44,35 @@ public class SiteService {
     }
 
     /**
-     * 管理员添加网站
+     * 管理员添加网站   同时添加 site 和 country 关联
      *
      * @param SiteAddVos
      * @param adminId
      * @return List<Site>
      * @author lihaoyu
-     * @date 2019/9/28 21:30 
+     * @date 2019/9/28 21:30
      */
     public List<Site> addSites(List<SiteAddVo> SiteAddVos, Integer adminId) {
-
-        // 1. 通过网站名确定不重复添加
-        Set<String> titleSet = siteDAO.listAllTitle();
-        for (SiteAddVo siteAddVo : SiteAddVos) {
-            if(titleSet.contains(siteAddVo.getTitle())){
-                return null;
-            }
-        }
-
-        // 2. 插入 site 表
         List<Site> addSiteList = new ArrayList<>();
         Date date = new Date();
         for (SiteAddVo siteAddVo : SiteAddVos) {
-            Site site = new Site();
-            site.setCreatedAt(date);
-            site.setUpdatedAt(date);
-            site.setUsedCount(NumConst.NUM0);
-            site.setCreatedBy(adminId);
-            // 网站初始权重
-            site.setWeight(50f);
+            Site site = Site.builder().createdBy(adminId).weight(50f).createdAt(date).updatedAt(date)
+                    .icon(siteAddVo.getIcon()).title(siteAddVo.getTitle()).cateId(siteAddVo.getCateId())
+                    .url(siteAddVo.getUrl()).build();
+            siteDAO.insertSelective(site);
+            addSiteList.add(site);
+
+            // 添加国家网站关联表
+            List<String> countryCodeList = siteAddVo.getCountryCodes();
+            for (String countryCode : countryCodeList) {
+                CountriesSite countriesSite = new CountriesSite();
+                countriesSite.setSiteId(site.getSid());
+                countriesSite.setCountryCode(countryCode);
+                countriesSiteDAO.insert(countriesSite);
+            }
         }
-
-
-
-
-        return null;
+        return addSiteList;
     }
-
-
 
     /**
      * 当用户添加网站时，此网站的UsedCount要自增1
@@ -162,21 +157,8 @@ public class SiteService {
         return affectedRows == NumConst.NUM1;
     }
 
-
-
-    public List<Site> listSitesByPage(SiteListQueryVo queryVo){
-//        SiteExample example = new SiteExample();
-//        SiteExample.Criteria criteria = example.createCriteria();
-//        if(StringUtils.isNotBlank(queryVo.getKeyWord())){
-//            criteria.andTitleLike("%"+queryVo.getKeyWord()+"%");
-//        }
-//        SiteCategory siteCategory = queryVo.getSiteCategory();
-//        if(siteCategory != null && StringUtils.isNotBlank(siteCategory.getTitle())){
-//            criteria.andCateIdEqualTo(siteCategory.getCid());
-//        }
-//        PageHelper.startPage(queryVo);
-//        List<Site> sites = siteDAO.selectByExample(example);
-
+    public List<Site> listSitesByPage(SiteListQueryVo queryVo) {
+        PageHelper.startPage(queryVo);
         List<Site> sites = siteDAO.listSitesByPage(queryVo);
         return sites;
     }

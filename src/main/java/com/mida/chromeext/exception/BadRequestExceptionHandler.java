@@ -63,7 +63,7 @@ public class BadRequestExceptionHandler {
      */
     @ExceptionHandler(HttpMessageConversionException.class)
     public Result parameterTypeException(HttpMessageConversionException exception){
-        logger.error(exception.getCause().getLocalizedMessage());
+        //logger.error(exception.getCause().getLocalizedMessage());
         return Result.error("类型转换错误");
 
     }

@@ -2,8 +2,6 @@ package com.mida.chromeext.vo;
 
 import com.mida.chromeext.pojo.SiteCategory;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author lihaoyu
@@ -15,9 +13,7 @@ public class SiteListQueryVo extends ListQueryVo{
 
     private SiteCategory siteCategory;
 
-    @NotNull
-    @Min(0)
-    private Integer countryId;
+    private String countryCode = "ALL";
 
     public String getKeyWord() {
         return keyWord;
@@ -35,11 +31,11 @@ public class SiteListQueryVo extends ListQueryVo{
         this.siteCategory = siteCategory;
     }
 
-    public Integer getCountryId() {
-        return countryId;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 }

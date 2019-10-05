@@ -3,18 +3,18 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class CountriesSite implements Serializable {
-    private Byte countryId;
+    private String countryCode;
 
     private Integer siteId;
 
     private static final long serialVersionUID = 1L;
 
-    public Byte getCountryId() {
-        return countryId;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCountryId(Byte countryId) {
-        this.countryId = countryId;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode == null ? null : countryCode.trim();
     }
 
     public Integer getSiteId() {
@@ -31,7 +31,7 @@ public class CountriesSite implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", countryId=").append(countryId);
+        sb.append(", countryCode=").append(countryCode);
         sb.append(", siteId=").append(siteId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
