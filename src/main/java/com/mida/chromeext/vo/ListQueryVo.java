@@ -24,6 +24,14 @@ public class ListQueryVo {
     @ApiModelProperty(value = "每页数量，必填，最小值为1，最大值为100", required = true)
     private Integer pageSize = 10;
 
+    public ListQueryVo() {
+    }
+
+    public ListQueryVo(@NotNull @Min(1) Integer pageNum, @NotNull @Min(0) @Max(100) Integer pageSize) {
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+    }
+
     public Integer getPageNum() {
         return pageNum;
     }

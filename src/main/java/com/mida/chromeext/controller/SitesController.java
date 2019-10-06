@@ -34,7 +34,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("sites")
 @Api(tags = "网站相关接口", description = "提供网站site相关的 Rest API")
 @Validated
-public class SiteController {
+public class SitesController {
 
     @Autowired
     SiteService siteService;
