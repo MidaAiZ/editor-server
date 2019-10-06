@@ -35,8 +35,6 @@ public class UserMenusController {
     @PostMapping("")
     @ApiOperation("添加1个用户菜单")
     public Result<UserMenu> addMenu(@ApiIgnore @CurrentUser User user, @RequestBody UserMenu userMenu) {
-        System.out.println("哈哈啊哈");
-        System.out.println(userMenu);
         userMenu = userMenuService.addOneUserMenu(user.getUid(), userMenu);
         return Result.ok(userMenu);
     }

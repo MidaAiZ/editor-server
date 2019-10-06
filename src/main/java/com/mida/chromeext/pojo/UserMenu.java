@@ -1,13 +1,13 @@
 package com.mida.chromeext.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
 
 public class UserMenu implements Serializable {
-    private Integer mid;
+    private String mid;
 
     private String title;
 
@@ -20,6 +20,7 @@ public class UserMenu implements Serializable {
     private Integer folderId;
 
     @ApiModelProperty(hidden = true)
+    @JsonIgnore
     private Integer userId;
 
     private Short index;
@@ -29,12 +30,12 @@ public class UserMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getMid() {
+    public String getMid() {
         return mid;
     }
 
-    public void setMid(Integer mid) {
-        this.mid = mid;
+    public void setMid(String mid) {
+        this.mid = mid == null ? null : mid.trim();
     }
 
     public String getTitle() {

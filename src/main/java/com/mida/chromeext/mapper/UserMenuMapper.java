@@ -10,7 +10,7 @@ public interface UserMenuMapper {
 
     int deleteByExample(UserMenuExample example);
 
-    int deleteByPrimaryKey(Integer mid);
+    int deleteByPrimaryKey(String mid);
 
     int insert(UserMenu record);
 
@@ -18,7 +18,7 @@ public interface UserMenuMapper {
 
     List<UserMenu> selectByExample(UserMenuExample example);
 
-    UserMenu selectByPrimaryKey(Integer mid);
+    UserMenu selectByPrimaryKey(String mid);
 
     int updateByExampleSelective(@Param("record") UserMenu record, @Param("example") UserMenuExample example);
 

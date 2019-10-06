@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 用户添加的菜单列表
@@ -43,7 +44,8 @@ public class UserMenuService {
         if (menu.getIsFolder() != null && menu.getIsFolder()) { menu.setFolderId(0); }
         menu.setUserId(userId);
         menu.setCreatedAt(new Date());
-        userMenuDAO.insert(menu);
+        menu.setMid(UUID.randomUUID().toString().replaceAll("-", ""));
+        userMenuDAO.insertWithUUID(menu);
         return menu;
     }
 
@@ -65,6 +67,7 @@ public class UserMenuService {
                 menu.setFolderId(0);
             }
             menu.setUserId(userId);
+            menu.setMid(UUID.randomUUID().toString().replaceAll("-", ""));
         }
         // 生成新列表
         return userMenuDAO.batchInsert(userId, menuList);

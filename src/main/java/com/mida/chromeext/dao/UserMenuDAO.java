@@ -18,6 +18,14 @@ public interface UserMenuDAO extends UserMenuMapper {
     List<UserMenu> listMenuByUserId(Integer userId);
 
     /**
+     * 插入单条记录
+     *
+     * @param userMenu
+     * @return affectedRows
+     */
+    int insertWithUUID(UserMenu userMenu);
+
+    /**
      * 用户批量添加菜单
      *
      * @param userId
