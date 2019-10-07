@@ -66,7 +66,14 @@ public class BadRequestExceptionHandler {
         //logger.error(exception.getCause().getLocalizedMessage());
         return Result.error("类型转换错误");
 
+
+
     }
 
+    @ExceptionHandler(java.lang.Exception.class)
+    public Result handleException(java.lang.Exception e){
+        logger.error(e.getMessage(), e);
+        return Result.error("未知错误");
+    }
 }
 
