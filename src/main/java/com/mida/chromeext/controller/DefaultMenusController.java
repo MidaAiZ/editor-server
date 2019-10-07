@@ -43,6 +43,12 @@ public class DefaultMenusController {
         return Result.ok(menu);
     }
 
+    @PostMapping("default")
+    @ApiOperation(value = "设置系统的默认菜单列表")
+    public Result<Boolean> setDefault(@ApiParam("默认菜单配置主键") @RequestParam Integer did,@ApiParam("是否默认") @RequestParam Boolean isDefault) {
+        return defaultMenuService.setDefault(did, isDefault) ? Result.ok(true) : Result.error();
+    }
+
     @PostMapping("list")
     @ApiOperation("批量新建默认菜单列表，返回新建成功的列表，需要管理员权限")
     public Result<List<DefaultMenu>> createList(@RequestBody @ApiParam("新建的默认菜单配置数组") List<DefaultMenu> menuList) {
