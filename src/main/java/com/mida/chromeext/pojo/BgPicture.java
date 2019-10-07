@@ -1,8 +1,16 @@
 package com.mida.chromeext.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class BgPicture implements Serializable {
     private Integer pid;
 
@@ -10,8 +18,10 @@ public class BgPicture implements Serializable {
 
     private String title;
 
+    @JsonIgnore
     private Integer createdBy;
 
+    @JsonIgnore
     private Date createdAt;
 
     private static final long serialVersionUID = 1L;

@@ -5,11 +5,15 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import com.mida.chromeext.quartz.factory.MyJobFactory;
+import org.springframework.stereotype.Component;
+
+import javax.naming.Name;
 
 /**
  * @author lihaoyu
@@ -21,8 +25,12 @@ public class QuartzConfig {
     @Autowired
     private MyJobFactory myJobFactory;
 
+    @Autowired
+    @Qualifier("schedulerFactoryBean2")
+    private SchedulerFactoryBean schedulerFactoryBean;
+
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(){
+    public SchedulerFactoryBean schedulerFactoryBean2(){
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setOverwriteExistingJobs(true);
         schedulerFactoryBean.setJobFactory(myJobFactory);
@@ -33,9 +41,8 @@ public class QuartzConfig {
      * 初始注入scheduler
      */
     @Bean
-    public Scheduler scheduler() throws SchedulerException {
-        SchedulerFactory schedulerFactoryBean = new StdSchedulerFactory();
-        return schedulerFactoryBean.getScheduler();
+    public Scheduler scheduler(){
+        return  schedulerFactoryBean.getScheduler();
     }
 
 }

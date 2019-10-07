@@ -25,9 +25,10 @@ public class QuartzManager {
     public static final String JOB1 = "job1";
     public static final String GROUP1 = "group1";
     //默认每个星期凌晨一点执行
+    // 每五秒 */5 * * * * ?     每天10点触发一次  0 0 10 * * ?
     //public static final String DEFAULT_CRON="0 0 1 ? * L";
-    /**默认5秒执行一次**/
-    public static final String DEFAULT_CRON = "*/9 * * * * ?";
+    /**每天10点触发一次**/
+    public static final String DEFAULT_CRON = "0 5 15 * * ?";
 
     /**
      * 任务调度
@@ -63,7 +64,7 @@ public class QuartzManager {
      * @param name 名字
      * @param group 组
      */
-    public String getjobInfo(String name, String group) throws SchedulerException {
+    public String getJobInfo(String name, String group) throws SchedulerException {
         TriggerKey triggerKey = new TriggerKey(name, group);
         CronTrigger cronTrigger = (CronTrigger) scheduler.getTrigger(triggerKey);
         return String.format("time:%s,state:%s", cronTrigger.getCronExpression(),

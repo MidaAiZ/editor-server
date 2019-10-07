@@ -32,4 +32,10 @@ public class QuartzController {
         quartzManager.resumeJob(QuartzManager.JOB1,QuartzManager.GROUP1);
         return Result.ok("resume success");
     }
+
+    @GetMapping("info")
+    public Result getJobInfo() throws SchedulerException {
+        String data = quartzManager.getJobInfo(QuartzManager.JOB1, QuartzManager.GROUP1);
+        return Result.ok("",data);
+    }
 }
