@@ -7,6 +7,8 @@ package com.mida.chromeext.utils;
  * @Date 2017/4/27
  */
 public class Constant {
+    public static final String THE_WORLD = "ALL";
+
     /**
      * 超级用户
      */

@@ -35,7 +35,7 @@ public class BgPictureJobService {
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        for(int i = 1; i < 30; i++){
+        for(int i = 60; i < 90; i++){
             String url =
                     "https://api.unsplash.com/photos/?client_id=13eb1a55029048fe62b7f870a010909cf4df45b971ee460df55ab50d21307671&per_page=30&query=wallpapers&page="+i;
 
