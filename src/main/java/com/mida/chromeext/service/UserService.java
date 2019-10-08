@@ -109,8 +109,7 @@ public class UserService {
         user.setCreatedAt(date);
         user.setUpdatedAt(date);
         user.setPassword(ShiroUtils.EncodeSalt(user.getPassword(), user.getSalt()));
-        int number = userDAO.insertSelective(user);
-        user.setNumber(String.valueOf(number));
+        user.setUid(userDAO.insertSelective(user));
         user.setPassword(null);
         user.setSalt(null);
         return user;
