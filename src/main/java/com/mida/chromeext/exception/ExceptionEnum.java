@@ -5,6 +5,11 @@ package com.mida.chromeext.exception;
  * @date 2019/9/19 14:02
  */
 public enum ExceptionEnum {
+
+    USER_REGISTER_EXIST_EMAIL("1006","邮箱已存在"),
+
+    USER_REGISTER_EXIST_NUMBER("1005","账号已存在"),
+
     USER_REGISTER_PASSWORD("1004", "密码格式不正确"),
 
     USER_REGISTER_NUMBER("1003", "账号格式不正确"),

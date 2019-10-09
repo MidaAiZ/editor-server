@@ -95,6 +95,22 @@ public class UserService {
     }
 
     /**
+     * 验证用户邮箱是否已存在（数据库默认字段内容不区分大小写）
+     *
+     * @param email 邮箱
+     * @return true 已存在
+     * @author lihaoyu
+     * @date 2019/10/8 19:00
+     */
+    public boolean existUserEmail(String email) {
+        UserExample example = new UserExample();
+        example.createCriteria().andEmailEqualTo(email);
+        List<User> users = userDAO.selectByExample(example);
+        return !users.isEmpty();
+    }
+
+
+    /**
      * 用户注册，有校验。返回的user置空敏感字段
      *
      * @param preValidationUser
@@ -104,6 +120,12 @@ public class UserService {
      */
     public User register(User preValidationUser) throws BaseException {
         User user = UserValidation.validateRegistration(preValidationUser);
+        if(existUserNumber(user.getNumber())){
+            throw new BaseException(ExceptionEnum.USER_REGISTER_EXIST_NUMBER);
+        }
+        if(existUserEmail(user.getEmail())){
+            throw new BaseException(ExceptionEnum.USER_REGISTER_EXIST_EMAIL);
+        }
         user.setSalt(UUID.randomUUID().toString());
         Date date = new Date();
         user.setCreatedAt(date);
