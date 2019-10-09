@@ -28,7 +28,7 @@ public class QuartzManager {
     // 每五秒 */5 * * * * ?     每天10点触发一次  0 0 10 * * ?
     //public static final String DEFAULT_CRON="0 0 1 ? * L";
     /**每天10点触发一次**/
-    public static final String DEFAULT_CRON = "0 5 15 * * ?";
+    public static final String DEFAULT_CRON = "0 0 1 * * ?";
 
     /**
      * 任务调度
@@ -48,9 +48,11 @@ public class QuartzManager {
      * 启动定时任务
      *
      * @param scheduler 调度器
+     * @author lihaoyu
+     * @date 2019/10/6 16:46
      */
     private void startJobTask(Scheduler scheduler) throws SchedulerException {
-        JobDetail jobDetail = JobBuilder.newJob(BgPictureJob.class).withIdentity(JOB1, GROUP1).build();
+        JobDetail jobDetail = JobBuilder.newJob(BgPictureJob.class).withIdentity(JOB1, GROUP1).usingJobData("myFloatValue", 1f).usingJobData("myStringValue", "gg").build();
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(DEFAULT_CRON);
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(JOB1, GROUP1)
                 .withSchedule(cronScheduleBuilder).build();
