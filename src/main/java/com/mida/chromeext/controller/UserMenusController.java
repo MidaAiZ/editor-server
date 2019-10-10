@@ -42,7 +42,7 @@ public class UserMenusController {
     @LoginRequired
     @PostMapping("list")
     @ApiOperation(value = "替换用户菜单列表", notes = "此接口会覆盖用户原有菜单列表并返回替换后的新的菜单列表")
-    public Result<List<UserMenu>> replaceMenuList(@ApiIgnore @CurrentUser User user,  @ApiParam("新的菜单列表") @RequestBody List<UserMenu> userMenuList) {
+    public Result<List<UserMenu>> replaceMenuList(@ApiIgnore @CurrentUser User user, @ApiParam("新的菜单列表") @RequestBody List<UserMenu> userMenuList) {
         userMenuService.addAndReplaceUserMenuList(user.getUid(), userMenuList);
         return Result.ok(userMenuList);
     }

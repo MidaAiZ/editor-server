@@ -1,15 +1,7 @@
 package com.mida.chromeext.quartz.manager;
 
 import com.mida.chromeext.quartz.job.BgPictureJob;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,7 +19,9 @@ public class QuartzManager {
     //默认每个星期凌晨一点执行
     // 每五秒 */5 * * * * ?     每天10点触发一次  0 0 10 * * ?
     //public static final String DEFAULT_CRON="0 0 1 ? * L";
-    /**每天10点触发一次**/
+    /**
+     * 每天10点触发一次
+     **/
     public static final String DEFAULT_CRON = "0 0 1 * * ?";
 
     /**
@@ -63,7 +57,7 @@ public class QuartzManager {
     /**
      * 获取Job信息
      *
-     * @param name 名字
+     * @param name  名字
      * @param group 组
      */
     public String getJobInfo(String name, String group) throws SchedulerException {
@@ -76,7 +70,7 @@ public class QuartzManager {
     /**
      * 修改任务的执行时间
      *
-     * @param name 名字
+     * @param name  名字
      * @param group 组
      * @param cron  cron表达式
      * @return boolean
@@ -108,7 +102,7 @@ public class QuartzManager {
     /**
      * 暂停某个任务
      *
-     * @param name 名字
+     * @param name  名字
      * @param group 组
      * @throws SchedulerException 异常
      */
@@ -145,7 +139,7 @@ public class QuartzManager {
     /**
      * 删除某个任务
      *
-     * @param name 名字
+     * @param name  名字
      * @param group 组
      * @throws SchedulerException 异常
      */

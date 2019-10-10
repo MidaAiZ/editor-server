@@ -5,20 +5,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SiteCategory implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer cid;
-
     @NotBlank
     private String title;
-
     private Integer index;
-
     private Integer sitesCount;
-
     private Date createdAt;
-
     private Date updatedAt;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getCid() {
         return cid;

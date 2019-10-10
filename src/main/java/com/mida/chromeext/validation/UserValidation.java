@@ -30,14 +30,12 @@ public class UserValidation extends BaseValidation {
     }
 
     /**
-     *
-     *
      * @param
      * @return
      * @author lihaoyu
      * @date 2019/10/10 20:33
      */
-    public static User validateUpdate(User user) throws BaseException{
+    public static User validateUpdate(User user) throws BaseException {
         if (!isGender(user.getGender())) {
             throw new BaseException(ExceptionEnum.USER_GENDER_VALIDATION);
         }

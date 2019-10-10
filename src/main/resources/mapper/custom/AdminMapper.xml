@@ -1,38 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.dao.AdminDAO">
-    <resultMap type="com.mida.chromeext.pojo.Admin" id="adminMap">
-        <id column="aid" property="aid" ></id>
-        <result column="number" property="number"/>
-        <result column="email" property="email"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="tel" property="tel" />
-        <result column="tel_prefix" property="telPrefix" />
-        <result column="updated_at" property="updatedAt"/>
-        <collection property="adminRoles" column="admin_id" ofType="com.mida.chromeext.pojo.AdminRole">
-            <association column="role_id" property="roleId" javaType="com.mida.chromeext.pojo.Role">
-                <id column="rid" property="rid"></id>
-                <result column="name" property="nane"/>
-                <result column="description" property="description"/>
-            </association>
-        </collection>
-    </resultMap>
-
-
-    <delete id="deleteRoleByAid" parameterType="Integer">
-    	delete from admins_roles where admin_id=#{aid} and role_id=#{rid}
-    </delete>
-
-    <insert id="addRoleByAid" parameterType="Integer">
-    	 insert into admin_roles (admin_id,role_id)
-	  	 values (#{aid},#{rid})
-    </insert>
-
-    <delete id="deleteAllRolesByAid" parameterType="Integer">
-    	delete from admins_roles where admin_id=#{aid}
-    </delete>
-
-    <select id="getRolesByAid" resultMap="adminMap">
-    	select * from admins left join admins_roles on admins.aid=admins_roles.admin_id left join roles on admins_roles.role_id=roles.rid
-    </select>
 </mapper>

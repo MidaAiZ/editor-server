@@ -1,13 +1,12 @@
 package com.mida.chromeext.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.mida.chromeext.dao.BgPictureDAO;
 import com.mida.chromeext.pojo.BgPicture;
 import com.mida.chromeext.utils.NumConst;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author lihaoyu
@@ -19,7 +18,7 @@ public class BgPictureService {
     @Autowired
     BgPictureDAO bgPictureDAO;
 
-    public BgPicture getRandomBgPicture(){
+    public BgPicture getRandomBgPicture() {
         List<BgPicture> list = bgPictureDAO.listRandomBgPicture(NumConst.NUM1);
         return list.get(NumConst.NUM0);
     }

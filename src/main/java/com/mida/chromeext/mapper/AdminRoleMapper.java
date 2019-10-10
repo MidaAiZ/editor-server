@@ -2,8 +2,9 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.AdminRole;
 import com.mida.chromeext.pojo.AdminRoleExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AdminRoleMapper {
     long countByExample(AdminRoleExample example);

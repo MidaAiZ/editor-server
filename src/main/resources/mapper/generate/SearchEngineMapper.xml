@@ -1,254 +1,257 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.mapper.SearchEngineMapper">
-  <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.SearchEngine">
-    <id column="eid" jdbcType="INTEGER" property="eid" />
-    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
-    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.pojo.SearchEngine">
-    <result column="engines" jdbcType="LONGVARCHAR" property="engines" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.SearchEngine">
+        <id column="eid" jdbcType="INTEGER" property="eid"/>
+        <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
+        <result column="created_by" jdbcType="INTEGER" property="createdBy"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.pojo.SearchEngine">
+        <result column="engines" jdbcType="LONGVARCHAR" property="engines"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     eid, country_code, created_at, updated_at, created_by
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     engines
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from search_engines
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from search_engines
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from search_engines
-    where eid = #{eid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngineExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from search_engines
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from search_engines
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from search_engines
+        where eid = #{eid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from search_engines
     where eid = #{eid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample">
-    delete from search_engines
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.mida.chromeext.pojo.SearchEngine">
-    <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into search_engines (country_code, created_at, updated_at, 
-      created_by, engines)
-    values (#{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
-      #{createdBy,jdbcType=INTEGER}, #{engines,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
-    <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into search_engines
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="countryCode != null">
-        country_code,
-      </if>
-      <if test="createdAt != null">
-        created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
-      </if>
-      <if test="createdBy != null">
-        created_by,
-      </if>
-      <if test="engines != null">
-        engines,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="countryCode != null">
-        #{countryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdBy != null">
-        #{createdBy,jdbcType=INTEGER},
-      </if>
-      <if test="engines != null">
-        #{engines,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultType="java.lang.Long">
-    select count(*) from search_engines
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update search_engines
-    <set>
-      <if test="record.eid != null">
-        eid = #{record.eid,jdbcType=INTEGER},
-      </if>
-      <if test="record.countryCode != null">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample">
+        delete from search_engines
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.mida.chromeext.pojo.SearchEngine">
+        <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into search_engines (country_code, created_at, updated_at,
+        created_by, engines)
+        values (#{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP},
+        #{createdBy,jdbcType=INTEGER}, #{engines,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
+        <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into search_engines
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="countryCode != null">
+                country_code,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="engines != null">
+                engines,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="countryCode != null">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="engines != null">
+                #{engines,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultType="java.lang.Long">
+        select count(*) from search_engines
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update search_engines
+        <set>
+            <if test="record.eid != null">
+                eid = #{record.eid,jdbcType=INTEGER},
+            </if>
+            <if test="record.countryCode != null">
+                country_code = #{record.countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createdAt != null">
+                created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updatedAt != null">
+                updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createdBy != null">
+                created_by = #{record.createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="record.engines != null">
+                engines = #{record.engines,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update search_engines
+        set eid = #{record.eid,jdbcType=INTEGER},
         country_code = #{record.countryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updatedAt != null">
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.createdBy != null">
         created_by = #{record.createdBy,jdbcType=INTEGER},
-      </if>
-      <if test="record.engines != null">
-        engines = #{record.engines,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update search_engines
-    set eid = #{record.eid,jdbcType=INTEGER},
-      country_code = #{record.countryCode,jdbcType=VARCHAR},
-      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      created_by = #{record.createdBy,jdbcType=INTEGER},
-      engines = #{record.engines,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update search_engines
-    set eid = #{record.eid,jdbcType=INTEGER},
-      country_code = #{record.countryCode,jdbcType=VARCHAR},
-      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      created_by = #{record.createdBy,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
-    update search_engines
-    <set>
-      <if test="countryCode != null">
-        country_code = #{countryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createdBy != null">
-        created_by = #{createdBy,jdbcType=INTEGER},
-      </if>
-      <if test="engines != null">
-        engines = #{engines,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where eid = #{eid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngine">
+        engines = #{record.engines,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update search_engines
+        set eid = #{record.eid,jdbcType=INTEGER},
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+        created_by = #{record.createdBy,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
+        update search_engines
+        <set>
+            <if test="countryCode != null">
+                country_code = #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="engines != null">
+                engines = #{engines,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where eid = #{eid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngine">
     update search_engines
     set country_code = #{countryCode,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -257,7 +260,7 @@
       engines = #{engines,jdbcType=LONGVARCHAR}
     where eid = #{eid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.SearchEngine">
     update search_engines
     set country_code = #{countryCode,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},

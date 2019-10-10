@@ -2,7 +2,6 @@ package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.SiteViewHistoryMapper;
 import com.mida.chromeext.pojo.SiteViewHistory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**

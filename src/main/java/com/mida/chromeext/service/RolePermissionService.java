@@ -15,6 +15,7 @@ public class RolePermissionService {
 
     /**
      * 绑定角色-权限关系
+     *
      * @param roleId
      * @param permissionId
      * @return Boolean
@@ -28,6 +29,7 @@ public class RolePermissionService {
 
     /**
      * 根据角色id和权限id列表解除关系
+     *
      * @param roleId
      * @param permissionIds
      * @return Boolean
@@ -40,17 +42,19 @@ public class RolePermissionService {
 
     /**
      * 通过角色ID列表删除所有关联记录
+     *
      * @param roleIds
      * @return Boolean
      */
     public Boolean removeRelationsByRoleIds(List<Integer> roleIds) {
-       RolePermissionExample rpExample = new RolePermissionExample();
-       rpExample.createCriteria().andRoleIdIn(roleIds);
-       return rolePermissionDAO.deleteByExample(rpExample) > 0;
+        RolePermissionExample rpExample = new RolePermissionExample();
+        rpExample.createCriteria().andRoleIdIn(roleIds);
+        return rolePermissionDAO.deleteByExample(rpExample) > 0;
     }
 
     /**
      * 通过权限ID列表删除所有关联字段
+     *
      * @param permissionIds
      * @return Boolean
      */

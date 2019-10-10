@@ -1,12 +1,11 @@
 package com.mida.chromeext.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mida.chromeext.pojo.BgPicture;
 import com.mida.chromeext.service.BgPictureService;
 import com.mida.chromeext.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
@@ -28,10 +27,10 @@ public class BgPictureController {
      * @date 2019/10/7 15:14
      */
     @RequestMapping("random-one")
-    public Result<String> getBgPicture(){
+    public Result<String> getBgPicture() {
         BgPicture randomBgPicture = bgPictureService.getRandomBgPicture();
         String src = randomBgPicture.getSrc();
-        return Result.ok("",src);
+        return Result.ok("", src);
     }
 
 }

@@ -55,16 +55,16 @@ public class UserService {
     public User getUserById(int id) {
         return userDAO.selectByPrimaryKey(id);
     }
-    
+
     /**
      * 通过邮箱获取User，用于登录，可能会改
      *
      * @param email 邮箱
      * @return User 对象
      * @author lihaoyu
-     * @date 2019/10/10 19:09 
+     * @date 2019/10/10 19:09
      */
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         UserExample example = new UserExample();
         example.createCriteria().andEmailEqualTo(email);
         List<User> users = userDAO.selectByExample(example);
@@ -140,10 +140,10 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public User register(User preValidationUser) throws BaseException {
         User user = UserValidation.validateRegistration(preValidationUser);
-        if(existUserNumber(user.getNumber())){
+        if (existUserNumber(user.getNumber())) {
             throw new BaseException(ExceptionEnum.USER_REGISTER_EXIST_NUMBER);
         }
-        if(existUserEmail(user.getEmail())){
+        if (existUserEmail(user.getEmail())) {
             throw new BaseException(ExceptionEnum.USER_REGISTER_EXIST_EMAIL);
         }
         user.setSalt(UUID.randomUUID().toString());
@@ -158,11 +158,11 @@ public class UserService {
     }
 
 
-    public boolean changePwd(String srcPwd, String newPwd, User user){
-        if(!user.getPassword().equals(ShiroUtils.EncodeSalt(srcPwd, user.getSalt()))){
+    public boolean changePwd(String srcPwd, String newPwd, User user) {
+        if (!user.getPassword().equals(ShiroUtils.EncodeSalt(srcPwd, user.getSalt()))) {
             throw new BaseException(ExceptionEnum.USER_PASSWORD_INVALID);
         }
-        if(!UserValidation.isPassWord(newPwd)){
+        if (!UserValidation.isPassWord(newPwd)) {
             throw new BaseException(ExceptionEnum.USER_REGISTER_PASSWORD);
         }
         user.setPassword(ShiroUtils.EncodeSalt(newPwd, user.getSalt()));
@@ -171,7 +171,7 @@ public class UserService {
         return true;
     }
 
-    public boolean updateUserInfo(User preValidate){
+    public boolean updateUserInfo(User preValidate) {
         User user = UserValidation.validateUpdate(preValidate);
         user.setUpdatedAt(new Date());
         userDAO.updateByPrimaryKeySelective(user);

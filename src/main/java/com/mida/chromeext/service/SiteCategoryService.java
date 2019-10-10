@@ -1,16 +1,15 @@
 package com.mida.chromeext.service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
+import com.mida.chromeext.dao.SiteCategoryDAO;
+import com.mida.chromeext.pojo.SiteCategory;
+import com.mida.chromeext.pojo.SiteCategoryExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mida.chromeext.dao.SiteCategoryDAO;
-import com.mida.chromeext.pojo.SiteCategory;
-import com.mida.chromeext.pojo.SiteCategoryExample;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -27,7 +26,7 @@ public class SiteCategoryService {
     /**
      * 获取网站分类列表，屏蔽敏感字段
      *
-     * @return  SiteCategory List
+     * @return SiteCategory List
      * @author lihaoyu
      * @date 2019/9/28 16:33
      */
@@ -39,15 +38,15 @@ public class SiteCategoryService {
      * 添加种类，若已有Title重复，返回null
      *
      * @param categories List<SiteCategory>
-     * @return   List<SiteCategory> maybe null
+     * @return List<SiteCategory> maybe null
      * @author lihaoyu
      * @date 2019/9/28 16:47
      */
     @Transactional(rollbackFor = Exception.class)
-    public List<SiteCategory> addCategories(List<SiteCategory> categories){
+    public List<SiteCategory> addCategories(List<SiteCategory> categories) {
         Set<String> titles = siteCategoryDAO.listAllCategoriesTitle();
         for (SiteCategory category : categories) {
-            if(titles.contains(category.getTitle())){
+            if (titles.contains(category.getTitle())) {
                 return null;
             }
             Date date = new Date();
@@ -60,7 +59,7 @@ public class SiteCategoryService {
         return categories;
     }
 
-    public int batchDelete(List<Integer> Ids){
+    public int batchDelete(List<Integer> Ids) {
         SiteCategoryExample example = new SiteCategoryExample();
         example.createCriteria().andCidIn(Ids);
         int affectedRows = siteCategoryDAO.deleteByExample(example);

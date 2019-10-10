@@ -3,15 +3,12 @@ package com.mida.chromeext.service;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.dao.SiteViewHistoryDAO;
 import com.mida.chromeext.interceptor.AuthorizationInterceptor;
-import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.SiteViewHistory;
 import com.mida.chromeext.pojo.SiteViewHistoryExample;
-import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.vo.SiteViewHistoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -34,28 +31,52 @@ public class SiteViewHistoryService {
         history.setBrowserUa(request.getHeader("user-agent"));
         // 设置用户ID
         Object uid = request.getAttribute(AuthorizationInterceptor.CURRENT_USER);
-        if (uid != null) { history.setUserId(Integer.valueOf((String) uid)); }
+        if (uid != null) {
+            history.setUserId(Integer.valueOf((String) uid));
+        }
         // 设置浏览记录主键
         history.setHid(UUID.randomUUID().toString().replace("-", ""));
         siteViewHistoryDAO.insertWithUUID(history);
         return history;
     }
 
-    public List<SiteViewHistory> getList(SiteViewHistoryVo queryVo){
+    public List<SiteViewHistory> getList(SiteViewHistoryVo queryVo) {
         SiteViewHistoryExample example = new SiteViewHistoryExample();
         SiteViewHistoryExample.Criteria criteria = example.createCriteria();
 
-        if (queryVo.getUserIdList() != null) { criteria.andUserIdIn(queryVo.getUserIdList()); }
-        if (queryVo.getIpList() != null) { criteria.andIpIn(queryVo.getIpList()); }
-        if (queryVo.getSiteUrlList() != null) { criteria.andIpIn(queryVo.getSiteUrlList()); }
-        if (queryVo.getSiteIdList() != null) { criteria.andIpIn(queryVo.getSiteIdList()); }
-        if (queryVo.getSiteTitleList() != null) { criteria.andIpIn(queryVo.getSiteTitleList()); }
-        if (!StringUtils.isEmpty(queryVo.getSiteTitle())) { criteria.andSiteTitleLike(queryVo.getSiteTitle()); }
-        if (!StringUtils.isEmpty(queryVo.getSiteUrl())) { criteria.andSiteUrlLike(queryVo.getSiteUrl()); }
-        if (queryVo.getCreatedBefore() != null) { criteria.andCreatedAtLessThanOrEqualTo(queryVo.getCreatedBefore()); }
-        if (queryVo.getCreatedAfter() != null) { criteria.andCreatedAtGreaterThanOrEqualTo(queryVo.getCreatedAfter()); }
-        if (queryVo.getLastViewTimeBefore() != null) { criteria.andLastViewTimeLessThanOrEqualTo(queryVo.getLastViewTimeBefore()); }
-        if (queryVo.getLastViewTimeAfter() != null) { criteria.andLastViewTimeGreaterThanOrEqualTo(queryVo.getLastViewTimeAfter()); }
+        if (queryVo.getUserIdList() != null) {
+            criteria.andUserIdIn(queryVo.getUserIdList());
+        }
+        if (queryVo.getIpList() != null) {
+            criteria.andIpIn(queryVo.getIpList());
+        }
+        if (queryVo.getSiteUrlList() != null) {
+            criteria.andIpIn(queryVo.getSiteUrlList());
+        }
+        if (queryVo.getSiteIdList() != null) {
+            criteria.andIpIn(queryVo.getSiteIdList());
+        }
+        if (queryVo.getSiteTitleList() != null) {
+            criteria.andIpIn(queryVo.getSiteTitleList());
+        }
+        if (!StringUtils.isEmpty(queryVo.getSiteTitle())) {
+            criteria.andSiteTitleLike(queryVo.getSiteTitle());
+        }
+        if (!StringUtils.isEmpty(queryVo.getSiteUrl())) {
+            criteria.andSiteUrlLike(queryVo.getSiteUrl());
+        }
+        if (queryVo.getCreatedBefore() != null) {
+            criteria.andCreatedAtLessThanOrEqualTo(queryVo.getCreatedBefore());
+        }
+        if (queryVo.getCreatedAfter() != null) {
+            criteria.andCreatedAtGreaterThanOrEqualTo(queryVo.getCreatedAfter());
+        }
+        if (queryVo.getLastViewTimeBefore() != null) {
+            criteria.andLastViewTimeLessThanOrEqualTo(queryVo.getLastViewTimeBefore());
+        }
+        if (queryVo.getLastViewTimeAfter() != null) {
+            criteria.andLastViewTimeGreaterThanOrEqualTo(queryVo.getLastViewTimeAfter());
+        }
 
         PageHelper.startPage(queryVo);
         List<SiteViewHistory> histories = siteViewHistoryDAO.selectByExample(example);

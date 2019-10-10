@@ -20,8 +20,12 @@ public class RoleService {
     @Autowired
     private RolePermissionService rolePermissionService;
 
+    @Autowired
+    private AdminRoleService adminRoleService;
+
     /**
      * 创建角色
+     *
      * @param role
      * @return Boolean
      */
@@ -31,42 +35,89 @@ public class RoleService {
 
     /**
      * 创建一堆角色 哼
+     *
+     * @param roles
+     * @return
      */
     public int createRoleList(List<Role> roles) {
         int count = 0;
         for (Role role : roles) {
-            if (createRole(role)) { count++; }
+            if (createRole(role)) {
+                count++;
+            }
         }
         return count;
     }
 
     /**
-     * 将权限添加到role
+     * 通过管理员id获取角色和权限
+     *
+     * @param adminId
+     * @return
+     */
+    public List<Role> getRolesByAdminId(Integer adminId) {
+        return roleDAO.getRolesWithPermissionsByAdminId(adminId);
+    }
+
+    /**
+     * 添加角色给管理员
+     *
+     * @param adminId
+     * @param roleIds
+     * @return
+     */
+    public int addRolesToAdmin(Integer adminId, List<Integer> roleIds) {
+        int count = 0;
+        for (Integer rid : roleIds) {
+            if (adminRoleService.addRelation(adminId, rid)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 移除管理员角色
+     *
+     * @param adminId
+     * @param roleIds
+     * @return
+     */
+    public Boolean removeRolesOfAdmin(Integer adminId, List<Integer> roleIds) {
+        return rolePermissionService.removeRelations(adminId, roleIds);
+    }
+
+    /**
+     * 将权限添加到角色
+     *
      * @param roleId
      * @param permissionIds
      * @return
      */
-    public int bindPermissionsToRole(Integer roleId, List<Integer> permissionIds) {
+    public int addPermissionsToRole(Integer roleId, List<Integer> permissionIds) {
         int count = 0;
-        for(Integer pid:permissionIds) {
+        for (Integer pid : permissionIds) {
             if (rolePermissionService.addRelation(roleId, pid)) {
                 count++;
-            };
+            }
+            ;
         }
         return count;
     }
 
     /**
-     * 将权限从role上解绑
+     * 将权限从角色上移除
+     *
      * @param roleId
      * @param permissionIds
      */
-    public Boolean unbindPermissionsOfRole(Integer roleId, List<Integer> permissionIds) {
+    public Boolean removePermissionsOfRole(Integer roleId, List<Integer> permissionIds) {
         return rolePermissionService.removeRelations(roleId, permissionIds);
     }
 
     /**
      * 获取角色列表，包含权限信息
+     *
      * @param queryVo
      * @return
      */
@@ -77,6 +128,7 @@ public class RoleService {
 
     /**
      * 获取角色列表，不包含权限信息
+     *
      * @param queryVo
      * @return
      */
@@ -89,6 +141,7 @@ public class RoleService {
 
     /**
      * 删除一个角色，同时删除关联表记录
+     *
      * @param roleId
      */
     @Transactional(rollbackFor = Exception.class)
@@ -101,6 +154,7 @@ public class RoleService {
 
     /**
      * 删除角色列表，同时删除关联表记录
+     *
      * @param roleIds
      */
     @Transactional(rollbackFor = Exception.class)
@@ -112,7 +166,8 @@ public class RoleService {
     }
 
     /**
-     * 通过id获取角色
+     * 通过rid获取角色
+     *
      * @param rid
      * @return
      */
@@ -121,7 +176,8 @@ public class RoleService {
     }
 
     /**
-     * 更新角色
+     * 通过主键更新角色
+     *
      * @param role
      * @return
      */

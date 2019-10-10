@@ -1,17 +1,5 @@
 package com.mida.chromeext.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.pojo.User;
@@ -19,12 +7,16 @@ import com.mida.chromeext.service.SiteService;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.vo.SiteAddVo;
 import com.mida.chromeext.vo.SiteListQueryVo;
+import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author lihaoyu
@@ -62,12 +54,12 @@ public class SitesController {
      */
     //@LoginRequired
     @PostMapping("")
-    public Result<List<Site>> addSites(@Valid @RequestBody List<SiteAddVo> siteAddVos, @CurrentUser User user){
+    public Result<List<Site>> addSites(@Valid @RequestBody List<SiteAddVo> siteAddVos, @CurrentUser User user) {
         List<Site> sites;
         try {
             sites = siteService.addSites(siteAddVos, 0);
             // sites = siteService.addSites(siteAddVos, user.getUid());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return Result.error("");
         }
         return Result.ok(sites);

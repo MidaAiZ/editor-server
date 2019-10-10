@@ -1,7 +1,6 @@
 package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.UserMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**

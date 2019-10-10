@@ -6,16 +6,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Role implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer rid;
-
     private String name;
-
     private String description;
-
     @ApiModelProperty(hidden = true)
     private List<Permission> permissions;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getRid() {
         return rid;

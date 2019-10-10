@@ -1,16 +1,14 @@
 package com.mida.chromeext.dao;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.mida.chromeext.mapper.SiteMapper;
 import com.mida.chromeext.pojo.Site;
 import com.mida.chromeext.vo.SiteListQueryVo;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lihaoyu
@@ -19,7 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SiteDAO extends SiteMapper {
 
-    Map<String,String> listAllSiteURL();
+    Map<String, String> listAllSiteURL();
 
     /**
      * 网站被引用数自增1

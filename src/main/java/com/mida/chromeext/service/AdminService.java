@@ -40,4 +40,14 @@ public class AdminService {
     }
 
 
+    /**
+     * 通过主键获取admin
+     *
+     * @param aid
+     * @return
+     */
+    public Admin getAdminById(Integer aid) {
+        return adminDAO.selectByPrimaryKey(aid);
+    }
+
 }

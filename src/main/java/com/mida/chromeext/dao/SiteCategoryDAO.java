@@ -1,12 +1,11 @@
 package com.mida.chromeext.dao;
 
-import java.util.List;
-import java.util.Set;
-
 import com.mida.chromeext.mapper.SiteCategoryMapper;
 import com.mida.chromeext.pojo.SiteCategory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author lihaoyu
@@ -16,13 +15,13 @@ import org.springframework.stereotype.Repository;
 public interface SiteCategoryDAO extends SiteCategoryMapper {
 
     /**
-     *  查询所有site种类，屏蔽 site计数字段
+     * 查询所有site种类，屏蔽 site计数字段
      *
      * @return Po list
      * @author lihaoyu
      * @date 2019/9/28 15:12
      */
-    List<SiteCategory>  listAllCategories();
+    List<SiteCategory> listAllCategories();
 
     Set<String> listAllCategoriesTitle();
 

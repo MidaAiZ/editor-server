@@ -3,15 +3,11 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class AdminRole implements Serializable {
-    private Integer adminId;
-
-    private Integer roleId;
-
-    private Admin admin;
-
-    private Role role;
-
     private static final long serialVersionUID = 1L;
+    private Integer adminId;
+    private Integer roleId;
+    private Admin admin;
+    private Role role;
 
     public Integer getAdminId() {
         return adminId;

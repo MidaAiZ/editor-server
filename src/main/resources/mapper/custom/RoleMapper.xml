@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
- PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.dao.RoleDAO">
-<!-- 多对多关系映射，使用1对多和多对1嵌套实现，注意映射关系的三张表的主键名称要不相同（rid,pid,rpid），否则只能查到1条记录 -->
-	<resultMap type="com.mida.chromeext.pojo.Role" id="roleMap">
-        <id column="rid" property="rid" ></id>
+    <!-- 多对多关系映射，使用1对多和多对1嵌套实现，注意映射关系的三张表的主键名称要不相同（rid,pid,rpid），否则只能查到1条记录 -->
+    <resultMap type="com.mida.chromeext.pojo.Role" id="roleMap">
+        <id column="rid" property="rid"></id>
         <result column="name" property="name"/>
         <result column="desc_r" property="description"/>
-        <collection property="permissions" resultMap="com.mida.chromeext.mapper.PermissionMapper.BaseResultMap" notNullColumn="pid">
+        <collection property="permissions" resultMap="com.mida.chromeext.mapper.PermissionMapper.BaseResultMap"
+                    notNullColumn="pid">
         </collection>
     </resultMap>
 
-	<select id="getRolesWithPermissions" resultMap="roleMap">
+    <select id="getRolesWithPermissions" resultMap="roleMap">
 		select r.rid, r.name, r.description desc_r, p.*
 		from roles r
 		left join roles_permissions rp on rp.role_id = r.rid
 		left join permissions p on p.pid = rp.permission_id
+	</select>
+
+    <select id="getRolesWithPermissionsByAdminId" resultMap="roleMap">
+		select r.rid, r.name, r.description desc_r, p.*
+		from roles r
+		left join roles_permissions rp on rp.role_id = r.rid
+		left join permissions p on p.pid = rp.permission_id
+		where r.rid in ( select ar.role_id from admins_roles ar where ar.admin_id = #{adminId})
 	</select>
 </mapper>

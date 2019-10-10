@@ -1,20 +1,17 @@
 package com.mida.chromeext.service;
 
 import com.alibaba.fastjson.JSON;
+import com.mida.chromeext.dao.SearchEngineDAO;
 import com.mida.chromeext.dto.EngineDto;
 import com.mida.chromeext.dto.SearchEngineAddDto;
+import com.mida.chromeext.pojo.SearchEngine;
 import com.mida.chromeext.pojo.SearchEngineExample;
+import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.NumConst;
-import com.mida.chromeext.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
-import com.mida.chromeext.dao.SearchEngineDAO;
-import com.mida.chromeext.pojo.SearchEngine;
-import com.mida.chromeext.utils.Constant;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.Date;
 import java.util.List;
@@ -37,13 +34,13 @@ public class SearchEngineService {
      * @author lihaoyu
      * @date 2019/10/7 19:42
      */
-    public SearchEngine getSearchEngine(String countryCode){
+    public SearchEngine getSearchEngine(String countryCode) {
         SearchEngine searchEngine = null;
-        if(!StringUtils.isEmpty(countryCode)){
+        if (!StringUtils.isEmpty(countryCode)) {
             searchEngine = searchEngineDAO.getByCountryCode(countryCode);
         }
         // 该国家没有默认值，则使用ALL的默认值
-        if(searchEngine == null){
+        if (searchEngine == null) {
             searchEngine = searchEngineDAO.getByCountryCode(Constant.THE_WORLD);
         }
         return searchEngine;
@@ -52,11 +49,11 @@ public class SearchEngineService {
     /**
      * 获取所有国家的搜索引擎
      *
-     * @return  List<SearchEngine>
+     * @return List<SearchEngine>
      * @author lihaoyu
      * @date 2019/10/7 20:02
      */
-    public List<SearchEngine> listAllSearchEngine(){
+    public List<SearchEngine> listAllSearchEngine() {
         return searchEngineDAO.listAllSearchEngine();
     }
 
@@ -69,10 +66,10 @@ public class SearchEngineService {
      * @date 2019/10/7 20:47
      */
     @Transactional(rollbackFor = Exception.class)
-    public SearchEngine addSearchEngine(SearchEngineAddDto dto){
+    public SearchEngine addSearchEngine(SearchEngineAddDto dto) {
         SearchEngine searchEngine = searchEngineDAO.getByCountryCode(dto.getCountryCode());
         // 已经存在，不能添加
-        if(searchEngine != null){
+        if (searchEngine != null) {
             return null;
         }
         List<EngineDto> engineDtoList = dto.getEngineDtoList();
@@ -92,7 +89,7 @@ public class SearchEngineService {
      * @date 2019/10/8 16:37
      */
     @Transactional(rollbackFor = Exception.class)
-    public int deleteSearchEngine(String code){
+    public int deleteSearchEngine(String code) {
         SearchEngineExample example = new SearchEngineExample();
         example.createCriteria().andCountryCodeEqualTo(code);
         int affectRow = searchEngineDAO.deleteByExample(example);

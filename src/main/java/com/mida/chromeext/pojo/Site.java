@@ -1,7 +1,6 @@
 package com.mida.chromeext.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -15,38 +14,27 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class Site implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer sid;
-
     @NotBlank
     private String title;
-
     @NotBlank
     private String url;
-
     @NotBlank
     private String icon;
-
     @JsonIgnore
     private Integer usedCount;
-
     @JsonIgnore
     private Integer pageViews;
-
     private Integer cateId;
-
     @JsonIgnore
     private Float weight;
-
     @JsonIgnore
     private Integer createdBy;
-
     @JsonIgnore
     private Date createdAt;
-
     @JsonIgnore
     private Date updatedAt;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getSid() {
         return sid;

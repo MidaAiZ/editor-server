@@ -2,8 +2,9 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.SearchEngine;
 import com.mida.chromeext.pojo.SearchEngineExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SearchEngineMapper {
     long countByExample(SearchEngineExample example);

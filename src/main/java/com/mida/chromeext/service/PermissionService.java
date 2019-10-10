@@ -20,6 +20,7 @@ public class PermissionService {
 
     /**
      * 创建permission
+     *
      * @param permission
      * @return
      */
@@ -29,19 +30,23 @@ public class PermissionService {
 
     /**
      * 创建权限列表
+     *
      * @param permissions
      * @return
      */
     public int createPermissionList(List<Permission> permissions) {
         int count = 0;
-        for(Permission p : permissions) {
-            if (createPermission(p)) { count++; }
+        for (Permission p : permissions) {
+            if (createPermission(p)) {
+                count++;
+            }
         }
         return count;
     }
 
     /**
      * 获取权限列表
+     *
      * @param queryVo
      * @return
      */
@@ -52,6 +57,7 @@ public class PermissionService {
 
     /**
      * 通过权限id获取权限
+     *
      * @param pid
      * @return
      */
@@ -61,6 +67,7 @@ public class PermissionService {
 
     /**
      * 更新权限
+     *
      * @param permission
      * @return
      */
@@ -71,6 +78,7 @@ public class PermissionService {
 
     /**
      * 删除权限列表及其关联
+     *
      * @param pids
      * @return
      */
@@ -83,6 +91,7 @@ public class PermissionService {
 
     /**
      * 删除一个权限及其关联
+     *
      * @param permissionId
      */
     public Boolean deletePermission(Integer permissionId) {

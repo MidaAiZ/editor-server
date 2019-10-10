@@ -7,7 +7,7 @@ import com.mida.chromeext.pojo.SiteCategory;
  * @author lihaoyu
  * @date 2019/9/24 18:52
  */
-public class SiteListQueryVo extends ListQueryVo{
+public class SiteListQueryVo extends ListQueryVo {
 
     private String keyWord;
 

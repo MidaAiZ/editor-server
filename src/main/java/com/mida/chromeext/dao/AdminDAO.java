@@ -13,7 +13,10 @@ import java.util.List;
 @Repository
 public interface AdminDAO extends AdminMapper {
     int deleteRoleByAid(int aid, int rid);
+
     int deleteAllRolesByAid(int aid);
+
     int addRoleByAid(int aid, int rid);
+
     List<Role> getRolesByAid(int aid);
 }

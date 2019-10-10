@@ -2,7 +2,6 @@ package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.RoleMapper;
 import com.mida.chromeext.pojo.Role;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +13,6 @@ import java.util.List;
 @Repository
 public interface RoleDAO extends RoleMapper {
     List<Role> getRolesWithPermissions();
+
+    List<Role> getRolesWithPermissionsByAdminId(Integer adminId);
 }

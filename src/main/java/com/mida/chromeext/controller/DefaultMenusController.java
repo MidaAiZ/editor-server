@@ -45,7 +45,7 @@ public class DefaultMenusController {
 
     @PostMapping("default")
     @ApiOperation(value = "设置系统的默认菜单列表")
-    public Result<Boolean> setDefault(@ApiParam("默认菜单配置主键") @RequestParam Integer did,@ApiParam("是否默认") @RequestParam Boolean isDefault) {
+    public Result<Boolean> setDefault(@ApiParam("默认菜单配置主键") @RequestParam Integer did, @ApiParam("是否默认") @RequestParam Boolean isDefault) {
         return defaultMenuService.setDefault(did, isDefault) ? Result.ok(true) : Result.error();
     }
 

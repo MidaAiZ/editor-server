@@ -12,19 +12,14 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class BgPicture implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer pid;
-
     private String src;
-
     private String title;
-
     @JsonIgnore
     private Integer createdBy;
-
     @JsonIgnore
     private Date createdAt;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getPid() {
         return pid;

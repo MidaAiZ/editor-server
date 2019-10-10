@@ -6,11 +6,11 @@ package com.mida.chromeext.exception;
  */
 public enum ExceptionEnum {
 
-    USER_PASSWORD_INVALID("10007","密码不正确"),
+    USER_PASSWORD_INVALID("10007", "密码不正确"),
 
-    USER_REGISTER_EXIST_EMAIL("1006","邮箱已存在"),
+    USER_REGISTER_EXIST_EMAIL("1006", "邮箱已存在"),
 
-    USER_REGISTER_EXIST_NUMBER("1005","账号已存在"),
+    USER_REGISTER_EXIST_NUMBER("1005", "账号已存在"),
 
     USER_REGISTER_PASSWORD("1004", "密码格式不正确"),
 

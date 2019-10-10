@@ -4,15 +4,8 @@ import com.mida.chromeext.resolver.MyLocaleResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
 
 @Configuration
 public class LocaleConfig extends WebMvcConfigurerAdapter {
@@ -53,6 +46,6 @@ public class LocaleConfig extends WebMvcConfigurerAdapter {
 //        };
 //        localeResolver.setDefaultLocale(Locale.ENGLISH);
 //        return localeResolver;
-          return new MyLocaleResolver();
+        return new MyLocaleResolver();
     }
 }

@@ -1,13 +1,12 @@
 package com.mida.chromeext.quartz.config;
 
+import com.mida.chromeext.quartz.factory.MyJobFactory;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
-
-import com.mida.chromeext.quartz.factory.MyJobFactory;
 
 /**
  * @author lihaoyu
@@ -24,7 +23,7 @@ public class QuartzConfig {
     private SchedulerFactoryBean schedulerFactoryBean;
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean2(){
+    public SchedulerFactoryBean schedulerFactoryBean2() {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setOverwriteExistingJobs(true);
         schedulerFactoryBean.setJobFactory(myJobFactory);
@@ -35,8 +34,8 @@ public class QuartzConfig {
      * 初始注入scheduler
      */
     @Bean
-    public Scheduler scheduler(){
-        return  schedulerFactoryBean.getScheduler();
+    public Scheduler scheduler() {
+        return schedulerFactoryBean.getScheduler();
     }
 
 }

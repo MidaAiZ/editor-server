@@ -2,7 +2,6 @@ package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.BgPictureMapper;
 import com.mida.chromeext.pojo.BgPicture;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -18,9 +18,9 @@ public class CountryService {
     CountryDAO countryDAO;
 
     /**
-     *  查询所有国家，屏蔽敏感字段
+     * 查询所有国家，屏蔽敏感字段
      *
-     * @return  Country List
+     * @return Country List
      * @author lihaoyu
      * @date 2019/9/28 19:18
      */

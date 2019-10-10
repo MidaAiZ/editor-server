@@ -2,11 +2,7 @@ package com.mida.chromeext.quartz.job;
 
 import com.mida.chromeext.quartz.service.BgPictureJobService;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.DisallowConcurrentExecution;
-import org.quartz.Job;
-import org.quartz.JobDataMap;
-import org.quartz.JobExecutionContext;
-import org.quartz.PersistJobDataAfterExecution;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,13 +30,13 @@ public class BgPictureJob implements Job, Serializable {
         JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
         float myFloatValue = jobDataMap.getFloatValue("myFloatValue");
         String myStringValue = jobDataMap.getString("myStringValue");
-        jobDataMap.put("myFloatValue",myFloatValue+1f);
-        System.out.println(myStringValue + "    "+ myFloatValue);
+        jobDataMap.put("myFloatValue", myFloatValue + 1f);
+        System.out.println(myStringValue + "    " + myFloatValue);
         executeTask();
         log.info("壁纸获取任务执行结束");
     }
 
-    public void executeTask(){
+    public void executeTask() {
 //        bgPictureJobService.addBgPictures();
         System.out.println("定时任务" + new Date());
     }

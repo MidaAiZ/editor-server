@@ -4,23 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Country implements Serializable {
-    private Integer cid;
-
-    private String name;
-
-    private String code;
-
-    private String telPrefix;
-
-    private String timeZone;
-
-    private Integer usersCount;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
     private static final long serialVersionUID = 1L;
+    private Integer cid;
+    private String name;
+    private String code;
+    private String telPrefix;
+    private String timeZone;
+    private Integer usersCount;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Integer getCid() {
         return cid;

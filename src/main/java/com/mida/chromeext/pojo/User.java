@@ -8,40 +8,26 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer uid;
-
     @NotBlank
     private String number;
-
     @NotBlank
     @JsonIgnore
     private String password;
-
     private String avatar;
-
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     private String salt;
-
     private String email;
-
     private Byte gender;
-
     private String tel;
-
     private String telPrefix;
-
     private String occupation;
-
     private String countryCode;
-
     private String countryName;
-
     private Date createdAt;
-
     private Date updatedAt;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getUid() {
         return uid;

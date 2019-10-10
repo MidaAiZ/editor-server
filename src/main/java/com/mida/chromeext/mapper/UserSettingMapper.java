@@ -2,8 +2,9 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.UserSetting;
 import com.mida.chromeext.pojo.UserSettingExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserSettingMapper {
     long countByExample(UserSettingExample example);

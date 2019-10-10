@@ -3,15 +3,11 @@ package com.mida.chromeext.pojo;
 import java.io.Serializable;
 
 public class DefaultMenu implements Serializable {
-    private Integer did;
-
-    private String countryCode;
-
-    private Boolean isDefault;
-
-    private String menus;
-
     private static final long serialVersionUID = 1L;
+    private Integer did;
+    private String countryCode;
+    private Boolean isDefault;
+    private String menus;
 
     public Integer getDid() {
         return did;

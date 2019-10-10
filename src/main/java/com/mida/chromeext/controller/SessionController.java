@@ -48,7 +48,7 @@ public class SessionController {
         map.put("user", loginUser);
         Cookie cookie = new Cookie(jwtUtils.getHeader(), token);
         cookie.setHttpOnly(true);
-        cookie.setMaxAge((int)jwtUtils.getExpire());
+        cookie.setMaxAge((int) jwtUtils.getExpire());
         response.addCookie(cookie);
 
         return Result.ok(map);

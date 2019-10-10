@@ -1,14 +1,5 @@
 package com.mida.chromeext.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.exception.BaseException;
@@ -16,11 +7,14 @@ import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.service.UserService;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -43,8 +37,7 @@ public class UsersController {
         User user;
         try {
             user = userService.register(regUser);
-        }
-        catch (BaseException e) {
+        } catch (BaseException e) {
             return Result.error(e.getCode(), e.getMessage());
         }
         return Result.ok(user);
@@ -64,7 +57,7 @@ public class UsersController {
             @ApiImplicitParam(name = "oldPwd", value = "旧密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "newPwd", value = "新密码", required = true, dataType = "String", paramType = "query"),})
     public Result changePwd(@RequestParam("oldPwd") String srcPwd, @RequestParam String newPwd,
-            @CurrentUser User user) {
+                            @CurrentUser User user) {
         boolean flag = userService.changePwd(srcPwd, newPwd, user);
         if (flag == false) {
             return Result.error("旧密码错误");
@@ -77,13 +70,13 @@ public class UsersController {
     @ApiOperation("修改用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "gender", value = "性别", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "tel", value = "手机",  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "prefix", value = "手机前缀",  dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "tel", value = "手机", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "prefix", value = "手机前缀", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "occupation", value = "职业", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "国家码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "countryName", value = "国家名", required = true, dataType = "String", paramType = "query"),})
     public Result updateUserInfo(Byte gender, String tel, String prefix, String occupation, String code,
-            String countryName,@CurrentUser User user) throws BaseException{
+                                 String countryName, @CurrentUser User user) throws BaseException {
         User preValidation = new User();
         preValidation.setCountryCode(code);
         preValidation.setCountryName(countryName);
@@ -94,7 +87,7 @@ public class UsersController {
         preValidation.setUid(user.getUid());
         try {
             userService.updateUserInfo(preValidation);
-        }catch (BaseException e){
+        } catch (BaseException e) {
             return Result.error(e.getMessage());
         }
         return Result.ok();

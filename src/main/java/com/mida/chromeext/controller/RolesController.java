@@ -70,7 +70,7 @@ public class RolesController {
     @ApiOperation("通过角色id和权限id列表绑定权限到角色")
     public Result<Boolean> bindPermissionsToRoles(@PathVariable Integer roleId, @RequestBody List<Integer> permissionIds) {
         try {
-            roleService.bindPermissionsToRole(roleId, permissionIds);
+            roleService.addPermissionsToRole(roleId, permissionIds);
             return Result.ok(true);
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -82,7 +82,7 @@ public class RolesController {
     @ApiOperation("通过角色rid和权限pid列表接触权限绑定")
     public Result<Boolean> unbindPermissionsOffRoles(@PathVariable Integer roleId, @RequestBody List<Integer> permissionIds) {
         try {
-            roleService.unbindPermissionsOfRole(roleId, permissionIds);
+            roleService.removePermissionsOfRole(roleId, permissionIds);
             return Result.ok(true);
         } catch (Exception e) {
             log.error(e.getMessage());

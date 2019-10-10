@@ -1,6 +1,5 @@
 package com.mida.chromeext.quartz.service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.dao.BgPictureDAO;
@@ -35,16 +34,16 @@ public class BgPictureJobService {
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        for(int i = 60; i < 90; i++){
+        for (int i = 60; i < 90; i++) {
             String url =
-                    "https://api.unsplash.com/photos/?client_id=13eb1a55029048fe62b7f870a010909cf4df45b971ee460df55ab50d21307671&per_page=30&query=wallpapers&page="+i;
+                    "https://api.unsplash.com/photos/?client_id=13eb1a55029048fe62b7f870a010909cf4df45b971ee460df55ab50d21307671&per_page=30&query=wallpapers&page=" + i;
 
             String strBody = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
             JSONArray jsonArray = JSONObject.parseArray(strBody);
             Date date = new Date();
             List<BgPicture> list = new ArrayList<>();
             for (Object o : jsonArray) {
-                JSONObject jsonObject = (JSONObject)o;
+                JSONObject jsonObject = (JSONObject) o;
                 JSONObject urls = (JSONObject) (jsonObject.get("urls"));
                 String wallPaperUrl = urls.get("regular").toString();
                 String title = jsonObject.get("id").toString();
@@ -57,7 +56,6 @@ public class BgPictureJobService {
         System.out.println("结束");
 
     }
-
 
 
 }

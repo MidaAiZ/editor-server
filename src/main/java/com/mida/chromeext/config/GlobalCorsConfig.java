@@ -9,7 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class GlobalCorsConfig {
     @Bean
-    public CorsFilter corsFilter(){
+    public CorsFilter corsFilter() {
         //1.添加CORS配置信息
         CorsConfiguration config = new CorsConfiguration();
         //放行哪些原始域
@@ -23,10 +23,10 @@ public class GlobalCorsConfig {
         //暴露哪些头部信息（因为跨域访问默认不能获取全部头部信息）
         //  config.addExposedHeader("*");
         config.addExposedHeader("Content-Type");
-        config.addExposedHeader( "X-Requested-With");
+        config.addExposedHeader("X-Requested-With");
         config.addExposedHeader("accept");
         config.addExposedHeader("Origin");
-        config.addExposedHeader( "Access-Control-Request-Method");
+        config.addExposedHeader("Access-Control-Request-Method");
         config.addExposedHeader("Access-Control-Request-Headers");
 
         //2.添加映射路径

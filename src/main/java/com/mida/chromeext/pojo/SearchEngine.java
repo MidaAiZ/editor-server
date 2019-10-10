@@ -11,19 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class SearchEngine implements Serializable {
-    private Integer eid;
-
-    private String countryCode;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
-    private Integer createdBy;
-
-    private String engines;
-
     private static final long serialVersionUID = 1L;
+    private Integer eid;
+    private String countryCode;
+    private Date createdAt;
+    private Date updatedAt;
+    private Integer createdBy;
+    private String engines;
 
     public Integer getEid() {
         return eid;

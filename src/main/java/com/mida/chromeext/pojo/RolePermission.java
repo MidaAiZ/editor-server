@@ -1,22 +1,17 @@
 package com.mida.chromeext.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
 public class RolePermission implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer roleId;
-
     private Integer permissionId;
-
     @ApiModelProperty(hidden = true)
     private Role role;
-
     @ApiModelProperty(hidden = true)
     private Permission permission;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getRoleId() {
         return roleId;

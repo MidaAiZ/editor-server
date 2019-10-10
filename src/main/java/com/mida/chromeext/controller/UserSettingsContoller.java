@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@Api(tags="用户设置维护类")
+@Api(tags = "用户设置维护类")
 @RequestMapping("user_settings")
 public class UserSettingsContoller {
 
@@ -46,7 +46,7 @@ public class UserSettingsContoller {
     }
 
     @GetMapping("default")
-    @ApiOperation(value="获取系统默认的用户配置", notes = "不要求用户登录")
+    @ApiOperation(value = "获取系统默认的用户配置", notes = "不要求用户登录")
     public Result<DefaultUserSettingDto> showDefault() {
         return Result.ok(applicationContext.getBean(DefaultUserSettingDto.class));
     }

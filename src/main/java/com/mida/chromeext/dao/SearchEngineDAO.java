@@ -1,9 +1,8 @@
 package com.mida.chromeext.dao;
 
+import com.mida.chromeext.mapper.SearchEngineMapper;
 import com.mida.chromeext.pojo.SearchEngine;
 import org.springframework.stereotype.Repository;
-
-import com.mida.chromeext.mapper.SearchEngineMapper;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public interface SearchEngineDAO extends SearchEngineMapper {
     /**
      * 获取所有国家的搜索引擎
      *
-     * @return  List<SearchEngine>
+     * @return List<SearchEngine>
      * @author lihaoyu
      * @date 2019/10/7 20:02
      */

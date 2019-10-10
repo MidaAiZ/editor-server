@@ -18,6 +18,7 @@ public class DefaultMenuService {
 
     /**
      * 获取默认菜单配置列表
+     *
      * @param queryVo
      * @return List<DefaultMenu>
      */
@@ -30,6 +31,7 @@ public class DefaultMenuService {
 
     /**
      * 根据国家码获取默认菜单配置
+     *
      * @param countryCode
      * @return DefaultMenu
      */
@@ -39,6 +41,7 @@ public class DefaultMenuService {
 
     /**
      * 获取默认的默认菜单配置
+     *
      * @return DefaultMenu
      */
     public DefaultMenu getDefaultMenu() {
@@ -53,6 +56,7 @@ public class DefaultMenuService {
 
     /**
      * 设置系统默认的默认菜单列表配置
+     *
      * @param did
      * @param isDefault
      * @return Boolean
@@ -70,6 +74,7 @@ public class DefaultMenuService {
 
     /**
      * 创建一个默认菜单配置
+     *
      * @param menu
      * @return Boolean
      */
@@ -79,6 +84,7 @@ public class DefaultMenuService {
 
     /**
      * 更新一个默认菜单配置
+     *
      * @param menu
      * @return Boolean
      */
@@ -88,6 +94,7 @@ public class DefaultMenuService {
 
     /**
      * 删除吧一个默认菜单配置
+     *
      * @param did
      * @return Boolean
      */
@@ -97,6 +104,7 @@ public class DefaultMenuService {
 
     /**
      * 批量创建默认菜单配置
+     *
      * @param menuList
      * @return count
      */
@@ -104,13 +112,16 @@ public class DefaultMenuService {
     public int createList(List<DefaultMenu> menuList) {
         int count = 0;
         for (DefaultMenu menu : menuList) {
-            if (create(menu)) { count++; }
+            if (create(menu)) {
+                count++;
+            }
         }
         return count;
     }
 
     /**
      * 批量创建默认菜单配置
+     *
      * @param menuList
      * @return count
      */
@@ -118,13 +129,16 @@ public class DefaultMenuService {
     public int updateList(List<DefaultMenu> menuList) {
         int count = 0;
         for (DefaultMenu menu : menuList) {
-            if (update(menu)) { count++; }
+            if (update(menu)) {
+                count++;
+            }
         }
         return count;
     }
 
     /**
      * 批量删除默认菜单配置
+     *
      * @param idList
      * @return count
      */
@@ -132,7 +146,9 @@ public class DefaultMenuService {
     public int deleteList(List<Integer> idList) {
         int count = 0;
         for (Integer id : idList) {
-            if (delete(id)) { count++; }
+            if (delete(id)) {
+                count++;
+            }
         }
         return count;
     }

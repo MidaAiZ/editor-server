@@ -1,13 +1,13 @@
 package com.mida.chromeext.vo;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 /**
  * 管理员添加网站 Vo
+ *
  * @author lihaoyu
  * @date 2019/9/28 21:17
  */

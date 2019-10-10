@@ -36,12 +36,14 @@ public class UserMenuService {
      * 用户添加网站 校验网站是否存在
      *
      * @param userId 用户Id
-     * @param menu 用户菜单
+     * @param menu   用户菜单
      * @return userMenu 用户菜单
      */
     @Transactional(rollbackFor = Exception.class)
     public UserMenu addOneUserMenu(Integer userId, UserMenu menu) {
-        if (menu.getIsFolder() != null && menu.getIsFolder()) { menu.setFolderId(0); }
+        if (menu.getIsFolder() != null && menu.getIsFolder()) {
+            menu.setFolderId(0);
+        }
         menu.setUserId(userId);
         menu.setCreatedAt(new Date());
         menu.setMid(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -52,7 +54,7 @@ public class UserMenuService {
     /**
      * 用户批量添加网站
      *
-     * @param userId  用户id
+     * @param userId   用户id
      * @param menuList 用户菜单列表
      * @return boolean 是否成功
      */
@@ -77,7 +79,7 @@ public class UserMenuService {
      * 更新一个用户菜单
      *
      * @param userId 用户Id
-     * @param menu 用户菜单
+     * @param menu   用户菜单
      * @return int
      */
     public int updateOneMenu(Integer userId, UserMenu menu) {
@@ -95,7 +97,7 @@ public class UserMenuService {
     /**
      * 批量更新用户菜单
      *
-     * @param userId 用户Id
+     * @param userId   用户Id
      * @param menuList 用户菜单列表
      * @return int
      */

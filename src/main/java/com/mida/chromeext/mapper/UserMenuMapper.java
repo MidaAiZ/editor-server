@@ -2,8 +2,9 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.UserMenu;
 import com.mida.chromeext.pojo.UserMenuExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMenuMapper {
     long countByExample(UserMenuExample example);

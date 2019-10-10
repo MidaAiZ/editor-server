@@ -7,28 +7,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserMenu implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String mid;
-
     private String title;
-
     private String url;
-
     private String iconSrc;
-
     private Boolean isFolder;
-
     private Integer folderId;
-
     @ApiModelProperty(hidden = true)
     @JsonIgnore
     private Integer userId;
-
     private Short index;
-
     @ApiModelProperty(hidden = true)
     private Date createdAt;
-
-    private static final long serialVersionUID = 1L;
 
     public String getMid() {
         return mid;

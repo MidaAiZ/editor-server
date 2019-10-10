@@ -2,6 +2,7 @@ package com.mida.chromeext.resolver;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Locale;
@@ -15,6 +16,7 @@ public class MyLocaleResolver implements LocaleResolver {
     /**
      * 处理逻辑
      * 接口核心方法，获取Locale，并返回
+     *
      * @param request 请求
      * @return Locale区域信息
      */

@@ -2,7 +2,6 @@ package com.mida.chromeext.pojo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -10,41 +9,30 @@ import java.util.Date;
 
 @ApiModel
 public class SiteViewHistory implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(hidden = true)
     private String hid;
-
     @ApiModelProperty(hidden = true)
     private String ip;
-
     @ApiModelProperty(hidden = true)
     private Integer userId;
-
     @ApiModelProperty("被浏览网站的id，如果有的话上传")
     private Integer siteId;
-
     @ApiModelProperty("被浏览网站的title，如果有的话上传")
     private String siteTitle;
-
     @ApiModelProperty(value = "被浏览网站的URL，必填", required = true)
     @NotBlank
     private String siteUrl;
-
     @ApiModelProperty(hidden = true)
     private String browserUa;
-
     @ApiModelProperty(hidden = true)
     private Integer times;
-
     @ApiModelProperty(hidden = true)
     private String loc;
-
     @ApiModelProperty(hidden = true)
     private Date createdAt;
-
     @ApiModelProperty(hidden = true)
     private Date lastViewTime;
-
-    private static final long serialVersionUID = 1L;
 
     public String getHid() {
         return hid;
