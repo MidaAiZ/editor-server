@@ -6,7 +6,7 @@ import com.mida.chromeext.pojo.User;
 import com.mida.chromeext.utils.RegexConst;
 
 /**
- * 用户注册校验类
+ * 用户校验类
  *
  * @author lihaoyu
  * @date 2019/9/17 14:56
@@ -28,6 +28,22 @@ public class UserValidation extends BaseValidation {
         }
         return user;
     }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     * @author lihaoyu
+     * @date 2019/10/10 20:33
+     */
+    public static User validateUpdate(User user) throws BaseException{
+        if (!isGender(user.getGender())) {
+            throw new BaseException(ExceptionEnum.USER_GENDER_VALIDATION);
+        }
+        return user;
+    }
+
 
     /**
      * 验证性别 0:男 1:女

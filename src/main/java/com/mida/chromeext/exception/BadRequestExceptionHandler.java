@@ -70,10 +70,22 @@ public class BadRequestExceptionHandler {
 
     }
 
-    @ExceptionHandler(java.lang.Exception.class)
-    public Result handleException(java.lang.Exception e){
+//    @ExceptionHandler(java.lang.Exception.class)
+//    public Result handleException(java.lang.Exception e){
+//        logger.error(e.getMessage(), e);
+//        return Result.error("未知错误");
+//    }
+
+    @ExceptionHandler(BaseException.class)
+    public Result handleException(BaseException e){
         logger.error(e.getMessage(), e);
-        return Result.error("未知错误");
+        return Result.error(e.getMessage());
+    }
+
+    @ExceptionHandler(MyException.class)
+    public Result handleException(MyException e){
+        logger.error(e.getMessage(), e);
+        return Result.error(e.getMessage());
     }
 }
 

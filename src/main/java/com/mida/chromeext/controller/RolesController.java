@@ -28,7 +28,7 @@ public class RolesController {
     }
 
     @PostMapping("{roleId}/permissions")
-    public Result<Boolean> bindRolesAndPermissions(@PathVariable Integer roleId, @RequestBody List<Integer> permissionIds) {
-        return Result.ok(roleService.correlationPermissions(roleId, permissionIds));
+    public Result<Integer> bindRolesAndPermissions(@PathVariable Integer roleId, @RequestBody List<Integer> permissionIds) {
+        return Result.ok(roleService.bindPermissionsToRole(roleId, permissionIds));
     }
 }

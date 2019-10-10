@@ -28,7 +28,7 @@ public class SessionController {
     @PostMapping("login")
     @ApiOperation(value = "用户登录接口", notes = "若登入成功，返回的data中包含令牌token、令牌过期时间expire、用户对象user，在下一次请求时需要将token加入请求头中（请求头中key为token，value为返回的token值）以实现登录状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "number", value = "账号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "email", value = "账号", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
     })
     @ApiResponse(code = 200, responseContainer = "token", message = "令牌")
