@@ -1,22 +1,25 @@
 package com.mida.chromeext.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 
-public class RolePermission implements Serializable {
+public class AdminRole implements Serializable {
+    private Integer adminId;
+
     private Integer roleId;
 
-    private Integer permissionId;
+    private Admin admin;
 
-    @ApiModelProperty(hidden = true)
     private Role role;
 
-    @ApiModelProperty(hidden = true)
-    private Permission permission;
-
     private static final long serialVersionUID = 1L;
+
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
 
     public Integer getRoleId() {
         return roleId;
@@ -26,12 +29,13 @@ public class RolePermission implements Serializable {
         this.roleId = roleId;
     }
 
-    public Integer getPermissionId() {
-        return permissionId;
+
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     public Role getRole() {
@@ -42,22 +46,14 @@ public class RolePermission implements Serializable {
         this.role = role;
     }
 
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
+        sb.append(", adminId=").append(adminId);
         sb.append(", roleId=").append(roleId);
-        sb.append(", permissionId=").append(permissionId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

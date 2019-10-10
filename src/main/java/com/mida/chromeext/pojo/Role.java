@@ -1,6 +1,9 @@
 package com.mida.chromeext.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Role implements Serializable {
     private Integer rid;
@@ -8,6 +11,9 @@ public class Role implements Serializable {
     private String name;
 
     private String description;
+
+    @ApiModelProperty(hidden = true)
+    private List<Permission> permissions;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,6 +39,14 @@ public class Role implements Serializable {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override
