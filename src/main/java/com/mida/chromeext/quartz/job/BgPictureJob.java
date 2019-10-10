@@ -36,16 +36,13 @@ public class BgPictureJob implements Job, Serializable {
         String myStringValue = jobDataMap.getString("myStringValue");
         jobDataMap.put("myFloatValue",myFloatValue+1f);
         System.out.println(myStringValue + "    "+ myFloatValue);
-
-//      BgPictureJobService bgPictureJobService = (BgPictureJobService) SpringContextUtils.getBean("bgPictureJobService");
         executeTask();
         log.info("壁纸获取任务执行结束");
     }
 
     public void executeTask(){
 //        bgPictureJobService.addBgPictures();
-        Date date = new Date();
-        System.out.println("定时任务" + date);
+        System.out.println("定时任务" + new Date());
     }
 
 }

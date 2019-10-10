@@ -11,6 +11,7 @@ import com.mida.chromeext.utils.ShiroUtils;
 import com.mida.chromeext.validation.UserValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -118,6 +119,7 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/9/17 14:14
      */
+    @Transactional(rollbackFor = Exception.class)
     public User register(User preValidationUser) throws BaseException {
         User user = UserValidation.validateRegistration(preValidationUser);
         if(existUserNumber(user.getNumber())){
