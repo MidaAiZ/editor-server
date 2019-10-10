@@ -37,7 +37,7 @@ public class RolesController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping("list")
     @ApiOperation("新建角色列表")
     public Result<List<Role>> create(@ApiParam("角色对象") @RequestBody List<Role> roles) {
         if (roleService.createRoleList(roles) > 0) {
