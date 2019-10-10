@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface RolePermissionDAO extends RolePermissionMapper {
-    List<Permission> getPermissionsByRoleId(Integer role_id);
-    List<Role> getRolesByPermissionId(Integer permission_id);
 }

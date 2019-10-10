@@ -3,27 +3,4 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.dao.PermissionDAO">
-    <select id="getPermissions" resultType="com.mida.chromeext.pojo.Permission">
-    	select * from permissions
-    </select>
-    
-    <insert id="addpermission">
-    	insert into permissions (permission,description) values(#{permission},#{description})
-    </insert>
-    
-    <delete id="deletepermission">
-    	delete from permissions where pid=#{pid}
-    </delete>
-    
-    <select id="getPermissionByid" parameterType="long" resultType="com.mida.chromeext.pojo.Permission">
-    	select * from permissions where pid=#{pid}
-    </select>
-    
-    <update id="updatePermission" parameterType="com.mida.chromeext.pojo.Permission">
-    	update permissions set permission=#{permission},description=#{description} where pid=#{pid}
-    </update>
-    
-    <delete id="deletePermissionsByid" parameterType="long">
-    	delete from roles_permissions where permission_id=#{pid}
-    </delete>
 </mapper>

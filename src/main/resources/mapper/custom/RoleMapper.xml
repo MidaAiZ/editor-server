@@ -12,40 +12,10 @@
         </collection>
     </resultMap>
 
-	<select id="getRoles" resultMap="roleMap">
+	<select id="getRolesWithPermissions" resultMap="roleMap">
 		select r.rid, r.name, r.description desc_r, p.*
 		from roles r
 		left join roles_permissions rp on rp.role_id = r.rid
 		left join permissions p on p.pid = rp.permission_id
 	</select>
-
-    <insert id="addRole" useGeneratedKeys="true" keyProperty="rid" parameterType="com.mida.chromeext.pojo.Role">
-    	insert into roles (name, description) values(#{name},#{description})
-    </insert>
-
-    <insert id="addRolePermission" useGeneratedKeys="true"  parameterType="com.mida.chromeext.pojo.RolePermission">
-    	insert into roles_permissions(role_id,permission_id)
-    	values (#{roleId},#{permissionId})
-    </insert>
-
-    <delete id="deleteById" parameterType="com.mida.chromeext.pojo.Role">
-    	delete from roles where rid=#{rid}
-    </delete>
-    
-    <delete id="deleteRolePermission" parameterType="long">
-    	delete from roles_permissions where role_id=#{roleId} and permission_id=#{permissionId}
-    </delete> 
-    
-    <delete id="deleteroles" parameterType="long">
-    	delete from roles_permissions where role_id=#{0}
-    </delete>
-    
-    <select id="getRoleById" parameterType="int" resultMap="roleMap">
-    	select * from roles where roles.rid=#{rid}
-    </select>
-    
-    <update id="updateRole" parameterType="com.mida.chromeext.pojo.Role">
-    	update roles set name=#{name} ,description=#{description} where rid=#{rid}
-    </update>
-    
 </mapper>
