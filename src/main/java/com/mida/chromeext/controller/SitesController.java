@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("sites")
-@Api(tags = "网站相关接口", description = "提供网站site相关的 Rest API")
+@Api(value = "网站相关接口", tags = "提供网站site相关的 Rest API")
 @Validated
 public class SitesController {
 

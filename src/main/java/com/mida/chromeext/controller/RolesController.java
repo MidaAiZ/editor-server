@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("后台管理角色操作")
+@Api(value = "后台管理角色操作", tags = "{}")
 @RequestMapping("manage/roles")
 @RestController
 @Slf4j
@@ -22,9 +22,9 @@ public class RolesController {
     private RoleService roleService;
 
     @GetMapping("")
-    @ApiOperation("获取角色列表，包含权限信息")
-    public Result<List<Role>> getList(@ApiParam("分页参数") ListQueryVo queryVo) {
-        return Result.ok(roleService.getRoles(queryVo));
+    @ApiOperation(value = "获取角色列表，包含权限信息")
+    public Result<List<Role>> getList(@RequestParam("当前页数") Integer pageNum, @RequestParam("每页数据量") Integer pageSize) {
+        return Result.ok(roleService.getRoles(new ListQueryVo(pageNum, pageSize)));
     }
 
     @PostMapping("")

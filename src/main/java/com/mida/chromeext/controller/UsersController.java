@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("users")
-@Api(tags = "前台用户操作接口", description = "提供用户相关的 Rest API")
+@Api(value = "前台用户操作接口", tags = "提供用户相关的 Rest API")
 public class UsersController {
     @Autowired
     UserService userService;

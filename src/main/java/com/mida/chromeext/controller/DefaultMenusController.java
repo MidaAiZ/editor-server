@@ -18,7 +18,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("default_menus")
-@Api(tags = "不同国家的默认配置菜单列表配置")
+@Api(value = "不同国家的默认配置菜单列表配置", tags = "{}")
 public class DefaultMenusController {
     @Autowired
     private DefaultMenuService defaultMenuService;

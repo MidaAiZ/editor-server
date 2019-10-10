@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("countries")
-@Api(tags = "国家相关接口", description = "提供国家相关的 Rest API")
+@Api(value = "国家相关接口", tags = "{}")
 public class CountryController {
 
     @Autowired

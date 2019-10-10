@@ -6,6 +6,7 @@ import com.mida.chromeext.service.AdminService;
 import com.mida.chromeext.service.RoleService;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("manage/admin")
+@Api(value = "管理员操作类", tags = "{}")
 @Slf4j
-public class AdminController {
+public class AdminsController {
     @Autowired
     private AdminService adminService;
 

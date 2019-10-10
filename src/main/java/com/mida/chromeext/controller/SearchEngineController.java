@@ -5,6 +5,7 @@ import com.mida.chromeext.pojo.SearchEngine;
 import com.mida.chromeext.service.SearchEngineService;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.util.Locale;
  */
 @RestController
 @RequestMapping("search-engine")
+@Api(value = "默认搜索引擎配置操作", tags = "{}")
 public class SearchEngineController {
 
     @Autowired

@@ -3,6 +3,7 @@ package com.mida.chromeext.controller;
 import com.mida.chromeext.pojo.BgPicture;
 import com.mida.chromeext.service.BgPictureService;
 import com.mida.chromeext.utils.Result;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("background")
+@Api(value = "背景图片维护", tags = "{}")
 public class BgPictureController {
 
     @Autowired

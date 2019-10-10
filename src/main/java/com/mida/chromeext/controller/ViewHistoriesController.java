@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("view_histories")
-@Api(tags = "网站浏览历史记录")
+@Api(value = "网站浏览历史记录", tags = "{}")
 @Validated
 public class ViewHistoriesController {
     @Autowired

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@Api(tags = "用户设置维护类")
+@Api(value = "用户设置维护类", tags = "{}")
 @RequestMapping("user_settings")
 public class UserSettingsContoller {
 

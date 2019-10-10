@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "demo")
-@Api(tags = "Demo")
+@Api(value = "Demo", tags = "{}")
 public class DemoController {
     @GetMapping("")
     @ApiOperation("demo接口，可以通过lang参数测试本地化")

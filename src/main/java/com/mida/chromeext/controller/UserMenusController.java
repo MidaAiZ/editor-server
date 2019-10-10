@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("user_menus")
-@Api(tags = "用户菜单列表操作接口")
+@Api(value = "用户菜单列表操作接口", tags = "{}")
 public class UserMenusController {
 
     @Autowired

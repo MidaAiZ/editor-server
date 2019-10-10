@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("后台管理权限操作")
+@Api(value = "后台管理权限操作", tags = "{}")
 @RequestMapping("manage/permissions")
 @RestController
 @Slf4j

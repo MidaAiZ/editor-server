@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("site_categories")
-@Api(tags = "网站分类操作接口")
+@Api(value = "网站分类操作接口", tags = "{}")
 @Validated
 public class SiteCatoriesController {
 

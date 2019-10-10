@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Api(tags = "登录注册接口")
+@Api(value = "用户登录注册接口", tags = "{}")
 public class SessionController {
     @Autowired
     private UserService userService;
