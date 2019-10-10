@@ -2,6 +2,7 @@ package com.mida.chromeext.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Admin implements Serializable {
     private Integer aid;
@@ -21,6 +22,8 @@ public class Admin implements Serializable {
     private Date createdAt;
 
     private Date updatedAt;
+
+    List<AdminRole> adminRoles;
 
     private static final long serialVersionUID = 1L;
 
@@ -94,6 +97,14 @@ public class Admin implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<AdminRole> getAdminRoles() {
+        return adminRoles;
+    }
+
+    public void setAdminRoles(List<AdminRole> adminRoles) {
+        this.adminRoles = adminRoles;
     }
 
     @Override

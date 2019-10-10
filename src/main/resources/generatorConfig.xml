@@ -96,6 +96,9 @@
 <!--            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
 
+<!--        <table tableName="admins_roles" domainObjectName="AdminRole">-->
+<!--        </table>-->
+
 <!--        <table tableName="roles" domainObjectName="Role">-->
 <!--            <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>-->
 <!--        </table>-->
