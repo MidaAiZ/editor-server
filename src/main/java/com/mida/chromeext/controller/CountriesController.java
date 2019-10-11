@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("countries")
 @Api(value = "国家相关接口", tags = "{}")
-public class CountryController {
+public class CountriesController {
 
     @Autowired
     CountryService countryService;

@@ -24,7 +24,7 @@ import java.util.Locale;
 @RestController
 @RequestMapping("search-engine")
 @Api(value = "默认搜索引擎配置操作", tags = "{}")
-public class SearchEngineController {
+public class SearchEnginesController {
 
     @Autowired
     SearchEngineService searchEngineService;

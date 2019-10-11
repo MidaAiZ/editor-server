@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @Api(value = "用户登录注册接口", tags = "{}")
-public class SessionController {
+public class UserSessionController {
     @Autowired
     private UserService userService;
     @Autowired
