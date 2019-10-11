@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Admin implements Serializable {
+    @ApiModelProperty(hidden = true)
     private Integer aid;
 
     private String number;
@@ -25,10 +26,13 @@ public class Admin implements Serializable {
 
     private String telPrefix;
 
+    @ApiModelProperty(hidden = true)
     private String roles;
 
+    @ApiModelProperty(hidden = true)
     private Date createdAt;
 
+    @ApiModelProperty(hidden = true)
     private Date updatedAt;
 
     private static final long serialVersionUID = 1L;

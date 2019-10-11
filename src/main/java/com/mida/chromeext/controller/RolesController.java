@@ -7,6 +7,7 @@ import com.mida.chromeext.vo.ListQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,15 @@ public class RolesController {
     private RoleService roleService;
 
     @GetMapping("")
-    @ApiOperation(value = "获取角色列表，包含权限信息")
+    @ApiOperation(value = "获取角色列表，不包含权限信息")
     public Result<List<Role>> getList(@RequestParam("当前页数") Integer pageNum, @RequestParam("每页数据量") Integer pageSize) {
         return Result.ok(roleService.getRoles(new ListQueryVo(pageNum, pageSize)));
+    }
+
+    @GetMapping("{roleId}")
+    @ApiOperation(value = "获取角色id，包含角色信息，包含权限信息")
+    public Result<Role> show(@PathVariable Integer roleId) {
+        return Result.ok(roleService.getRoleById(roleId));
     }
 
     @PostMapping("")

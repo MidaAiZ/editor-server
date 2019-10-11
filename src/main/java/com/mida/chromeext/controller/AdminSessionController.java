@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,8 @@ public class AdminSessionController {
         token.setRememberMe(true);
         try {
             SecurityUtils.getSubject().login(token);
+            Subject subject = SecurityUtils.getSubject();
+
             return Result.ok();
         } catch ( AuthenticationException uae ) {
             return Result.error(ResultCode.FAIL.code(), "error number or password");

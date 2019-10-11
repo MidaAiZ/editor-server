@@ -17,12 +17,14 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,10 +48,12 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Admin admin = (Admin) principals.getPrimaryPrincipal();
-        if (admin != null) {
+
+        Integer adminId = (Integer) principals.getPrimaryPrincipal();
+
+        if (adminId != null) {
             //根据用户id查询该用户所有的角色,并加入到shiro的SimpleAuthorizationInfo
-            List<Role> roles = roleService.getRolesByAdminId(admin.getAid());
+            List<Role> roles = roleService.getRolesByAdminId(adminId);
             Set<String> permissions = new HashSet<>();
             for (Role role : roles) {
                 info.addRole(role.getName());
@@ -72,7 +76,7 @@ public class MyRealm extends AuthorizingRealm {
         if (admin == null) {
             throw new AuthenticationException("帐号密码错误");
         }
-        SimpleAuthenticationInfo saInfo = new SimpleAuthenticationInfo(admin, admin.getPassword(), ByteSource.Util.bytes(admin.getSalt()), getName());
+        SimpleAuthenticationInfo saInfo = new SimpleAuthenticationInfo(admin.getAid(), admin.getPassword(), ByteSource.Util.bytes(admin.getSalt()), getName());
         return saInfo;
     }
 

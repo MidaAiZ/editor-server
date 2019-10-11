@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("site_categories")
 @Api(value = "网站分类操作接口", tags = "{}")
 @Validated
-public class SiteCatoriesController {
+public class SiteCategoriesController {
 
     @Autowired
     private SiteCategoryService siteCategoryService;

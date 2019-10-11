@@ -65,6 +65,10 @@ public class PermissionService {
         return permissionDAO.selectByPrimaryKey(pid);
     }
 
+    public List<Permission> getPermissionsByRoleId(Integer roleId) {
+        return permissionDAO.selectPermissionsByRoleId(roleId);
+    }
+
     /**
      * 更新权限
      *

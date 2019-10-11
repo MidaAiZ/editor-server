@@ -20,6 +20,8 @@ public class RoleService {
     @Autowired
     private RolePermissionService rolePermissionService;
 
+    @Autowired PermissionService permissionService;
+
     @Autowired
     private AdminRoleService adminRoleService;
 
@@ -136,7 +138,6 @@ public class RoleService {
         PageHelper.startPage(queryVo);
         RoleExample example = new RoleExample();
         return roleDAO.selectByExample(example);
-
     }
 
     /**
@@ -172,7 +173,11 @@ public class RoleService {
      * @return
      */
     public Role getRoleById(Integer rid) {
-        return roleDAO.selectByPrimaryKey(rid);
+        Role role = roleDAO.selectByPrimaryKey(rid);
+        if (role != null) {
+            role.setPermissions(permissionService.getPermissionsByRoleId(rid));
+        }
+        return role;
     }
 
     /**

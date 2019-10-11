@@ -1,6 +1,7 @@
 package com.mida.chromeext.service;
 
 import com.mida.chromeext.dao.AdminDAO;
+import com.mida.chromeext.dto.NewAdminDto;
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.AdminExample;
 import com.mida.chromeext.pojo.Role;
@@ -29,18 +30,23 @@ public class AdminService {
 
     /**
      * 创建管理员，同时指定其所拥有的角色
-     * @param admin
-     * @param roleIds
+     * @param newAdmin
      * @return
      */
-    public Admin createAdmin(Admin admin, List<Integer> roleIds) {
+    public Admin createAdmin(NewAdminDto newAdmin) {
+        Admin admin = new Admin();
         admin.setSalt(UUID.randomUUID().toString());
         Date date = new Date();
         admin.setCreatedAt(date);
         admin.setUpdatedAt(date);
+        admin.setPassword(newAdmin.getPassword());
+        admin.setNumber(newAdmin.getNumber());
+        admin.setEmail(newAdmin.getEmail());
+        admin.setTel(newAdmin.getTel());
+        admin.setTelPrefix(newAdmin.getTelPrefix());
         admin.setPassword(ShiroUtils.EncodeSalt(admin.getPassword(), admin.getSalt()));
         if (adminDAO.insertSelective(admin) > 0) {
-            roleService.addRolesToAdmin(admin.getAid(), roleIds);
+            roleService.addRolesToAdmin(admin.getAid(), newAdmin.getRoleIds());
             admin.setSalt(null);
             admin.setPassword(null);
             return admin;

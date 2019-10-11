@@ -2,6 +2,7 @@ package com.mida.chromeext.dao;
 
 import com.mida.chromeext.mapper.RoleMapper;
 import com.mida.chromeext.pojo.Role;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

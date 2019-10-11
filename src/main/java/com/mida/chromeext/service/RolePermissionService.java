@@ -1,6 +1,7 @@
 package com.mida.chromeext.service;
 
 import com.mida.chromeext.dao.RolePermissionDAO;
+import com.mida.chromeext.pojo.Permission;
 import com.mida.chromeext.pojo.RolePermission;
 import com.mida.chromeext.pojo.RolePermissionExample;
 import org.springframework.beans.factory.annotation.Autowired;
