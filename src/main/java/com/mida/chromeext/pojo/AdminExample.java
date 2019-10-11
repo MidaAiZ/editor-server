@@ -15,20 +15,20 @@ public class AdminExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -235,73 +235,143 @@ public class AdminExample {
             return (Criteria) this;
         }
 
-        public Criteria andPwdIsNull() {
-            addCriterion("pwd is null");
+        public Criteria andPasswordIsNull() {
+            addCriterion("`password` is null");
             return (Criteria) this;
         }
 
-        public Criteria andPwdIsNotNull() {
-            addCriterion("pwd is not null");
+        public Criteria andPasswordIsNotNull() {
+            addCriterion("`password` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPwdEqualTo(String value) {
-            addCriterion("pwd =", value, "pwd");
+        public Criteria andPasswordEqualTo(String value) {
+            addCriterion("`password` =", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdNotEqualTo(String value) {
-            addCriterion("pwd <>", value, "pwd");
+        public Criteria andPasswordNotEqualTo(String value) {
+            addCriterion("`password` <>", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdGreaterThan(String value) {
-            addCriterion("pwd >", value, "pwd");
+        public Criteria andPasswordGreaterThan(String value) {
+            addCriterion("`password` >", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdGreaterThanOrEqualTo(String value) {
-            addCriterion("pwd >=", value, "pwd");
+        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
+            addCriterion("`password` >=", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdLessThan(String value) {
-            addCriterion("pwd <", value, "pwd");
+        public Criteria andPasswordLessThan(String value) {
+            addCriterion("`password` <", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdLessThanOrEqualTo(String value) {
-            addCriterion("pwd <=", value, "pwd");
+        public Criteria andPasswordLessThanOrEqualTo(String value) {
+            addCriterion("`password` <=", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdLike(String value) {
-            addCriterion("pwd like", value, "pwd");
+        public Criteria andPasswordLike(String value) {
+            addCriterion("`password` like", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdNotLike(String value) {
-            addCriterion("pwd not like", value, "pwd");
+        public Criteria andPasswordNotLike(String value) {
+            addCriterion("`password` not like", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdIn(List<String> values) {
-            addCriterion("pwd in", values, "pwd");
+        public Criteria andPasswordIn(List<String> values) {
+            addCriterion("`password` in", values, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdNotIn(List<String> values) {
-            addCriterion("pwd not in", values, "pwd");
+        public Criteria andPasswordNotIn(List<String> values) {
+            addCriterion("`password` not in", values, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdBetween(String value1, String value2) {
-            addCriterion("pwd between", value1, value2, "pwd");
+        public Criteria andPasswordBetween(String value1, String value2) {
+            addCriterion("`password` between", value1, value2, "password");
             return (Criteria) this;
         }
 
-        public Criteria andPwdNotBetween(String value1, String value2) {
-            addCriterion("pwd not between", value1, value2, "pwd");
+        public Criteria andPasswordNotBetween(String value1, String value2) {
+            addCriterion("`password` not between", value1, value2, "password");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIsNull() {
+            addCriterion("salt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIsNotNull() {
+            addCriterion("salt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltEqualTo(String value) {
+            addCriterion("salt =", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotEqualTo(String value) {
+            addCriterion("salt <>", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltGreaterThan(String value) {
+            addCriterion("salt >", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltGreaterThanOrEqualTo(String value) {
+            addCriterion("salt >=", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLessThan(String value) {
+            addCriterion("salt <", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLessThanOrEqualTo(String value) {
+            addCriterion("salt <=", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltLike(String value) {
+            addCriterion("salt like", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotLike(String value) {
+            addCriterion("salt not like", value, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltIn(List<String> values) {
+            addCriterion("salt in", values, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotIn(List<String> values) {
+            addCriterion("salt not in", values, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltBetween(String value1, String value2) {
+            addCriterion("salt between", value1, value2, "salt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSaltNotBetween(String value1, String value2) {
+            addCriterion("salt not between", value1, value2, "salt");
             return (Criteria) this;
         }
 
@@ -385,52 +455,62 @@ public class AdminExample {
             return (Criteria) this;
         }
 
-        public Criteria andTelEqualTo(Integer value) {
+        public Criteria andTelEqualTo(String value) {
             addCriterion("tel =", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotEqualTo(Integer value) {
+        public Criteria andTelNotEqualTo(String value) {
             addCriterion("tel <>", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelGreaterThan(Integer value) {
+        public Criteria andTelGreaterThan(String value) {
             addCriterion("tel >", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTelGreaterThanOrEqualTo(String value) {
             addCriterion("tel >=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelLessThan(Integer value) {
+        public Criteria andTelLessThan(String value) {
             addCriterion("tel <", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelLessThanOrEqualTo(Integer value) {
+        public Criteria andTelLessThanOrEqualTo(String value) {
             addCriterion("tel <=", value, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelIn(List<Integer> values) {
+        public Criteria andTelLike(String value) {
+            addCriterion("tel like", value, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelNotLike(String value) {
+            addCriterion("tel not like", value, "tel");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelIn(List<String> values) {
             addCriterion("tel in", values, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotIn(List<Integer> values) {
+        public Criteria andTelNotIn(List<String> values) {
             addCriterion("tel not in", values, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelBetween(Integer value1, Integer value2) {
+        public Criteria andTelBetween(String value1, String value2) {
             addCriterion("tel between", value1, value2, "tel");
             return (Criteria) this;
         }
 
-        public Criteria andTelNotBetween(Integer value1, Integer value2) {
+        public Criteria andTelNotBetween(String value1, String value2) {
             addCriterion("tel not between", value1, value2, "tel");
             return (Criteria) this;
         }
@@ -445,52 +525,62 @@ public class AdminExample {
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixEqualTo(Byte value) {
+        public Criteria andTelPrefixEqualTo(String value) {
             addCriterion("tel_prefix =", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotEqualTo(Byte value) {
+        public Criteria andTelPrefixNotEqualTo(String value) {
             addCriterion("tel_prefix <>", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixGreaterThan(Byte value) {
+        public Criteria andTelPrefixGreaterThan(String value) {
             addCriterion("tel_prefix >", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixGreaterThanOrEqualTo(Byte value) {
+        public Criteria andTelPrefixGreaterThanOrEqualTo(String value) {
             addCriterion("tel_prefix >=", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixLessThan(Byte value) {
+        public Criteria andTelPrefixLessThan(String value) {
             addCriterion("tel_prefix <", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixLessThanOrEqualTo(Byte value) {
+        public Criteria andTelPrefixLessThanOrEqualTo(String value) {
             addCriterion("tel_prefix <=", value, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixIn(List<Byte> values) {
+        public Criteria andTelPrefixLike(String value) {
+            addCriterion("tel_prefix like", value, "telPrefix");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelPrefixNotLike(String value) {
+            addCriterion("tel_prefix not like", value, "telPrefix");
+            return (Criteria) this;
+        }
+
+        public Criteria andTelPrefixIn(List<String> values) {
             addCriterion("tel_prefix in", values, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotIn(List<Byte> values) {
+        public Criteria andTelPrefixNotIn(List<String> values) {
             addCriterion("tel_prefix not in", values, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixBetween(Byte value1, Byte value2) {
+        public Criteria andTelPrefixBetween(String value1, String value2) {
             addCriterion("tel_prefix between", value1, value2, "telPrefix");
             return (Criteria) this;
         }
 
-        public Criteria andTelPrefixNotBetween(Byte value1, Byte value2) {
+        public Criteria andTelPrefixNotBetween(String value1, String value2) {
             addCriterion("tel_prefix not between", value1, value2, "telPrefix");
             return (Criteria) this;
         }
@@ -710,6 +800,38 @@ public class AdminExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -744,38 +866,6 @@ public class AdminExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

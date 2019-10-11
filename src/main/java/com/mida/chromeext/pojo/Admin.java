@@ -1,21 +1,37 @@
 package com.mida.chromeext.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
+
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class Admin implements Serializable {
-    private static final long serialVersionUID = 1L;
-    List<AdminRole> adminRoles;
     private Integer aid;
+
     private String number;
-    private String pwd;
+
+    @JsonIgnore
+    private String password;
+
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private String salt;
+
     private String email;
-    private Integer tel;
-    private Byte telPrefix;
+
+    private String tel;
+
+    private String telPrefix;
+
     private String roles;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getAid() {
         return aid;
@@ -33,12 +49,20 @@ public class Admin implements Serializable {
         this.number = number == null ? null : number.trim();
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd == null ? null : pwd.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
     }
 
     public String getEmail() {
@@ -49,20 +73,20 @@ public class Admin implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public Integer getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(Integer tel) {
-        this.tel = tel;
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
     }
 
-    public Byte getTelPrefix() {
+    public String getTelPrefix() {
         return telPrefix;
     }
 
-    public void setTelPrefix(Byte telPrefix) {
-        this.telPrefix = telPrefix;
+    public void setTelPrefix(String telPrefix) {
+        this.telPrefix = telPrefix == null ? null : telPrefix.trim();
     }
 
     public String getRoles() {
@@ -89,14 +113,6 @@ public class Admin implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public List<AdminRole> getAdminRoles() {
-        return adminRoles;
-    }
-
-    public void setAdminRoles(List<AdminRole> adminRoles) {
-        this.adminRoles = adminRoles;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -105,7 +121,8 @@ public class Admin implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", aid=").append(aid);
         sb.append(", number=").append(number);
-        sb.append(", pwd=").append(pwd);
+        sb.append(", password=").append(password);
+        sb.append(", salt=").append(salt);
         sb.append(", email=").append(email);
         sb.append(", tel=").append(tel);
         sb.append(", telPrefix=").append(telPrefix);

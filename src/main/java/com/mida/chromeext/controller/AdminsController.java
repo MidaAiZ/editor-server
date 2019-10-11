@@ -13,10 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("manage/admin")
+@RequestMapping("manage/admins")
 @Api(value = "管理员操作类", tags = "{}")
 @Slf4j
 public class AdminsController {
@@ -26,6 +27,12 @@ public class AdminsController {
     @Autowired
     private RoleService roleService;
 
+    @PostMapping("")
+    public Result<Admin> createAdmin(@ApiParam("管理员对象") @RequestBody Admin admin) {
+//        , @ApiParam("赋予的角色rid列表") @RequestBody(required = false) List<Integer> roleIds
+        List<Integer> roleIds = new ArrayList<>();
+        return Result.ok(adminService.createAdmin(admin, roleIds));
+    }
 
     @GetMapping("profile")
     @ApiOperation("获取当前登录管理员的信息")

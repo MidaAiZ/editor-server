@@ -3,11 +3,15 @@ package com.mida.chromeext.service;
 import com.mida.chromeext.dao.AdminDAO;
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.AdminExample;
+import com.mida.chromeext.pojo.Role;
 import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -20,6 +24,29 @@ public class AdminService {
 
     @Autowired
     private AdminDAO adminDAO;
+
+    @Autowired RoleService roleService;
+
+    /**
+     * 创建管理员，同时指定其所拥有的角色
+     * @param admin
+     * @param roleIds
+     * @return
+     */
+    public Admin createAdmin(Admin admin, List<Integer> roleIds) {
+        admin.setSalt(UUID.randomUUID().toString());
+        Date date = new Date();
+        admin.setCreatedAt(date);
+        admin.setUpdatedAt(date);
+        admin.setPassword(ShiroUtils.EncodeSalt(admin.getPassword(), admin.getSalt()));
+        if (adminDAO.insertSelective(admin) > 0) {
+            roleService.addRolesToAdmin(admin.getAid(), roleIds);
+            admin.setSalt(null);
+            admin.setPassword(null);
+            return admin;
+        }
+        return null;
+    }
 
     /**
      * 根据用户名查询管理员
@@ -39,7 +66,6 @@ public class AdminService {
         return admins.get(NumConst.NUM0);
     }
 
-
     /**
      * 通过主键获取admin
      *
@@ -50,4 +76,12 @@ public class AdminService {
         return adminDAO.selectByPrimaryKey(aid);
     }
 
+    /**
+     * 根据number获取管理员
+     * @param number
+     * @return
+     */
+    public Admin getAdminByNumber(String number) {
+        return adminDAO.selectAdminByNumber(number);
+    }
 }

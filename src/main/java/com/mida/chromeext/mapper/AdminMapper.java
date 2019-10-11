@@ -2,9 +2,8 @@ package com.mida.chromeext.mapper;
 
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.AdminExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
     long countByExample(AdminExample example);
