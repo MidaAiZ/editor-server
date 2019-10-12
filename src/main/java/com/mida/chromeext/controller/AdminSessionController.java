@@ -12,6 +12,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @Api(value = "管理员登录操作接口", tags ="{}")
@@ -44,5 +45,11 @@ public class AdminSessionController {
             subject.logout();
         }
         return Result.ok();
+    }
+
+    @ApiIgnore
+    @GetMapping("403")
+    public Result authFail() {
+        return Result.error(ResultCode.FORBIDDEN.code());
     }
 }

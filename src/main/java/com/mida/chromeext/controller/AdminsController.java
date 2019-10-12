@@ -50,7 +50,7 @@ public class AdminsController {
 
     @GetMapping("{adminId}")
     @ApiOperation("获取指定管理员的信息")
-    @RequiresPermissions(PermisConstant.SHOW_ADMIN)
+    @RequiresPermissions("dd")
     public Result<Admin> getAdminById(@PathVariable Integer adminId) {
         Admin admin = adminService.getAdminById(adminId);
         if (admin != null) {
@@ -78,12 +78,5 @@ public class AdminsController {
     @RequiresPermissions(PermisConstant.REMOVE_ROLE_OFF_ADMIN)
     public Result<Boolean> removeRolesOfAdmin(@PathVariable Integer adminId, @ApiParam("角色主键列表") @RequestBody List<Integer> roleIds) {
         return roleService.removeRolesOfAdmin(adminId, roleIds) ? Result.ok(true) : Result.error();
-    }
-
-    @GetMapping("{adminId}/roles")
-    @ApiOperation("通过管理员aid获取管理员角色和权限")
-    @RequiresPermissions(PermisConstant.SHOW_ADMIN)
-    public Result<List<Role>> getRolesByAdmin(@PathVariable Integer adminId) {
-        return Result.ok(roleService.getRolesByAdminId(adminId));
     }
 }

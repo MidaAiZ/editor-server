@@ -78,7 +78,6 @@ public class AdminRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String number = (String) token.getPrincipal();
         Admin admin = adminService.getAdminByNumber(number);
-        System.out.println(admin);
         if (admin == null) {
             throw new AuthenticationException("Error number or password");
         }

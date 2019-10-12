@@ -1,6 +1,7 @@
 package com.mida.chromeext.config;
 
 import com.mida.chromeext.shiro.AdminRealm;
+import com.mida.chromeext.shiro.ShiroLoginFilter;
 import com.mida.chromeext.shiro.ShiroRedisCacheManage;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.servlet.Filter;
 
 /**
  * 类ShiroConfig的功能描述:
@@ -53,6 +55,9 @@ public class ShiroConfig {
         //Shiro的核心安全接口,这个属性是必须的
         shiroFilter.setSecurityManager(securityManager);
         shiroFilter.setLoginUrl("manage/login");
+        Map<String, Filter> filter = new LinkedHashMap<>();
+        filter.put("authc",new ShiroLoginFilter());
+        shiroFilter.setFilters(filter);
         // shiroFilter.setSuccessUrl("/index.html");
         // shiro不拦截资源
         Map<String, String> filterMap = new LinkedHashMap<>();
