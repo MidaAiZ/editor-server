@@ -146,6 +146,7 @@ public class UserService {
         if (existUserEmail(user.getEmail())) {
             throw new BaseException(ExceptionEnum.USER_REGISTER_EXIST_EMAIL);
         }
+        user.setCountryCode(preValidationUser.getCountryCode());
         user.setSalt(UUID.randomUUID().toString());
         Date date = new Date();
         user.setCreatedAt(date);

@@ -17,7 +17,17 @@
 
 
     <select id="listRandomBgPicture" parameterType="map" resultType="com.mida.chromeext.pojo.BgPicture">
-        SELECT * FROM bg_pictures WHERE pid >= ((SELECT MAX(pid) FROM bg_pictures)-(SELECT MIN(pid) FROM bg_pictures)) * RAND() + (SELECT MIN(pid) FROM bg_pictures) limit #{number};
+        SELECT *
+        FROM `bg_pictures` AS t1
+                 JOIN (
+            SELECT ROUND(RAND() * ((SELECT MAX(pid) FROM `bg_pictures`) - (SELECT MIN(pid) FROM `bg_pictures`)) +
+                         (SELECT MIN(pid) FROM `bg_pictures`)
+                       ) AS pid
+        ) AS t2
+        WHERE t1.pid >= t2.pid
+        ORDER BY t1.pid
+        LIMIT #{number};
+
     </select>
 
 </mapper>

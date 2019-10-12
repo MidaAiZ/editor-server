@@ -1,5 +1,6 @@
 package com.mida.chromeext.resolver;
 
+import com.mida.chromeext.utils.Constant;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -29,7 +30,7 @@ public class MyLocaleResolver implements LocaleResolver {
         } else {
             String[] split = l.split("_");
             //语言、国家构造器
-            return split.length == 2 ? new Locale(split[0], split[1]) : new Locale(split[0], "");
+            return split.length == 2 ? new Locale(split[0], split[1]) : new Locale(split[0], Constant.THE_WORLD);
         }
     }
 

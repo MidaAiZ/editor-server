@@ -1,5 +1,7 @@
 package com.mida.chromeext.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,8 +12,11 @@ public class Country implements Serializable {
     private String code;
     private String telPrefix;
     private String timeZone;
+    @JsonIgnore
     private Integer usersCount;
+    @JsonIgnore
     private Date createdAt;
+    @JsonIgnore
     private Date updatedAt;
 
     public Integer getCid() {

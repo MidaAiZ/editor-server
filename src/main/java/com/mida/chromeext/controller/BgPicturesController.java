@@ -5,6 +5,7 @@ import com.mida.chromeext.service.BgPictureService;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class BgPicturesController {
      * @author lihaoyu
      * @date 2019/10/7 15:14
      */
-    @RequestMapping("random-one")
+    @GetMapping(value = "random-one")
     public Result<String> getBgPicture() {
         BgPicture randomBgPicture = bgPictureService.getRandomBgPicture();
         String src = randomBgPicture.getSrc();
