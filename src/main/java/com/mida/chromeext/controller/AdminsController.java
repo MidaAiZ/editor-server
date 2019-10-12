@@ -1,5 +1,6 @@
 package com.mida.chromeext.controller;
 
+import com.mida.chromeext.annotation.CurrentAdmin;
 import com.mida.chromeext.dto.NewAdminDto;
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.Role;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -36,8 +38,14 @@ public class AdminsController {
 
     @GetMapping("profile")
     @ApiOperation("获取当前登录管理员的信息")
-    public Result<Admin> profile() {
-        return Result.ok(adminService.getAdminById(1));
+    public Result<Admin> profile(@ApiIgnore @CurrentAdmin Admin admin) {
+        return Result.ok(admin);
+    }
+
+    @GetMapping("profile/roles")
+    @ApiOperation("获取当前管理员角色和权限")
+    public Result<List<Role>> getAdminRolesById(@ApiIgnore @CurrentAdmin Admin admin) {
+       return Result.ok(roleService.getRolesByAdminId(admin.getAid()));
     }
 
     @GetMapping("{adminId}")

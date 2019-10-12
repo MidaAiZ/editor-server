@@ -1,6 +1,7 @@
 package com.mida.chromeext.config;
 
-import com.mida.chromeext.interceptor.AuthorizationInterceptor;
+import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
+import com.mida.chromeext.resolver.LoginAdminHandlerMethodArgumentResolver;
 import com.mida.chromeext.resolver.LoginUserHandlerMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,17 +18,22 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Autowired
-    private AuthorizationInterceptor authorizationInterceptor;
+    private UserAuthorizationInterceptor userAuthorizationInterceptor;
     @Autowired
     private LoginUserHandlerMethodArgumentResolver loginUserHandlerMethodArgumentResolver;
+    @Autowired
+    private LoginAdminHandlerMethodArgumentResolver loginAdminHandlerMethodArgumentResolver;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authorizationInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(userAuthorizationInterceptor).addPathPatterns("/**");
     }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        // 获取当前登录的用户
         argumentResolvers.add(loginUserHandlerMethodArgumentResolver);
+        // 获取当前登录的管理员
+        argumentResolvers.add(loginAdminHandlerMethodArgumentResolver);
     }
 }

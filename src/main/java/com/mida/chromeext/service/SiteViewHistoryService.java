@@ -2,7 +2,7 @@ package com.mida.chromeext.service;
 
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.dao.SiteViewHistoryDAO;
-import com.mida.chromeext.interceptor.AuthorizationInterceptor;
+import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
 import com.mida.chromeext.pojo.SiteViewHistory;
 import com.mida.chromeext.pojo.SiteViewHistoryExample;
 import com.mida.chromeext.vo.SiteViewHistoryVo;
@@ -30,7 +30,7 @@ public class SiteViewHistoryService {
         // 设置请求浏览器信息
         history.setBrowserUa(request.getHeader("user-agent"));
         // 设置用户ID
-        Object uid = request.getAttribute(AuthorizationInterceptor.CURRENT_USER);
+        Object uid = request.getAttribute(UserAuthorizationInterceptor.CURRENT_USER);
         if (uid != null) {
             history.setUserId(Integer.valueOf((String) uid));
         }

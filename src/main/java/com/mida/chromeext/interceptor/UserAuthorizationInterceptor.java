@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * 权限(Token)验证
  */
 @Component
-public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
     public static final String CURRENT_USER = "userId";
     @Autowired
     private JwtUtils jwtUtils;

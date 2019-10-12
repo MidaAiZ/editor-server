@@ -1,5 +1,6 @@
 package com.mida.chromeext.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.service.AdminService;
 import com.mida.chromeext.utils.Result;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Api("管理员登录操作接口")
+@Api(value = "管理员登录操作接口", tags ="{}")
 @RequestMapping("manage")
 public class AdminSessionController {
     @Autowired
@@ -27,8 +28,7 @@ public class AdminSessionController {
         try {
             SecurityUtils.getSubject().login(token);
             Subject subject = SecurityUtils.getSubject();
-
-            return Result.ok();
+            return Result.ok(JSON.parseObject(JSON.toJSON(subject.getPrincipal()).toString(), Admin.class));
         } catch ( AuthenticationException uae ) {
             return Result.error(ResultCode.FAIL.code(), "error number or password");
         } catch ( Exception e) {
@@ -36,4 +36,13 @@ public class AdminSessionController {
         }
     }
 
+    @PostMapping(value = "logout")
+    @ApiOperation("退出登录")
+    public Result logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
+        }
+        return Result.ok();
+    }
 }

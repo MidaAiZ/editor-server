@@ -1,10 +1,10 @@
 package com.mida.chromeext.shiro;
 
+import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.Permission;
 import com.mida.chromeext.pojo.Role;
 import com.mida.chromeext.service.AdminService;
-import com.mida.chromeext.service.PermissionService;
 import com.mida.chromeext.service.RoleService;
 import com.mida.chromeext.utils.ShiroUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,16 +15,15 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,23 +36,30 @@ import java.util.Set;
  * @Date 2017/4/27
  */
 @Component
-public class MyRealm extends AuthorizingRealm {
+public class AdminRealm extends AuthorizingRealm {
+    // 缓存键
+    private static final String AUTHORIZATION_CACHE_NAME="chrome-ext-admin-authorization";
 
-    private static final Logger logger = LoggerFactory.getLogger(MyRealm.class);
+    private static final Logger logger = LoggerFactory.getLogger(AdminRealm.class);
+
     @Autowired
     private AdminService adminService;
     @Autowired
     private RoleService roleService;
 
+    public AdminRealm() {
+        super.setAuthorizationCacheName(AUTHORIZATION_CACHE_NAME);
+    }
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-
-        Integer adminId = (Integer) principals.getPrimaryPrincipal();
-
-        if (adminId != null) {
+        Object o = principals.getPrimaryPrincipal();
+        if (o != null) {
+            Admin admin;
+            admin = (o instanceof Admin) ? (Admin)o : JSON.parseObject(JSON.toJSON(o).toString(), Admin.class);
             //根据用户id查询该用户所有的角色,并加入到shiro的SimpleAuthorizationInfo
-            List<Role> roles = roleService.getRolesByAdminId(adminId);
+            List<Role> roles = roleService.getRolesByAdminId(admin.getAid());
             Set<String> permissions = new HashSet<>();
             for (Role role : roles) {
                 info.addRole(role.getName());
@@ -74,9 +80,9 @@ public class MyRealm extends AuthorizingRealm {
         Admin admin = adminService.getAdminByNumber(number);
         System.out.println(admin);
         if (admin == null) {
-            throw new AuthenticationException("帐号密码错误");
+            throw new AuthenticationException("Error number or password");
         }
-        SimpleAuthenticationInfo saInfo = new SimpleAuthenticationInfo(admin.getAid(), admin.getPassword(), ByteSource.Util.bytes(admin.getSalt()), getName());
+        SimpleAuthenticationInfo saInfo = new SimpleAuthenticationInfo(admin, admin.getPassword(), ByteSource.Util.bytes(admin.getSalt()), getName());
         return saInfo;
     }
 
@@ -88,4 +94,22 @@ public class MyRealm extends AuthorizingRealm {
         super.setCredentialsMatcher(shaCredentialsMatcher);
     }
 
+    /**
+     * 清除所有用户的缓存
+     */
+    public void clearAuthorizationInfoCache() {
+        Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+        if(cache!=null) {
+            cache.clear();
+        }
+    }
+
+    /**
+     * 清除指定用户的缓存
+     * @param admin
+     */
+    private void clearAuthorizationInfoCache(Admin admin) {
+        Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+        cache.remove(admin.getAid());
+    }
 }

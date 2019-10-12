@@ -1,15 +1,17 @@
 package com.mida.chromeext.resolver;
 
-import com.mida.chromeext.annotation.CurrentUser;
-import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
+import com.alibaba.fastjson.JSON;
+import com.mida.chromeext.annotation.CurrentAdmin;
+import com.mida.chromeext.pojo.Admin;
 import com.mida.chromeext.pojo.User;
-import com.mida.chromeext.service.UserService;
+import com.mida.chromeext.service.AdminService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
@@ -18,25 +20,25 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * 要想 @loginUser 起作用，需要编写一个配套解析器，做法是实现 spring 提供的 HandlerMethodArgumentResolver 接口。
  */
 @Component
-public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class LoginAdminHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Autowired
-    private UserService userService;
+    private AdminService adminService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(User.class) && parameter.hasParameterAnnotation(CurrentUser.class);
+        return parameter.getParameterType().isAssignableFrom(Admin.class) && parameter.hasParameterAnnotation(CurrentAdmin.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer container,
                                   NativeWebRequest webRequest, WebDataBinderFactory factory) throws Exception {
-        //这一句是从 request 作用域中取出名为 userId 的属性
-        Object object = webRequest.getAttribute(UserAuthorizationInterceptor.CURRENT_USER, RequestAttributes.SCOPE_REQUEST);
-        if (object == null) {
-            return null;
+        Admin admin;
+        Object subject = SecurityUtils.getSubject().getPrincipal();
+        if (subject instanceof Admin) {
+            admin = (Admin) subject;
+        } else {
+            admin = JSON.parseObject(JSON.toJSON(subject).toString(), Admin.class);
         }
-        //获取用户信息
-        User user = userService.getUserById(Integer.valueOf((String) object));
-        return user;
+        return admin;
     }
 }
