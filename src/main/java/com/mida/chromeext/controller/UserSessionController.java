@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Api(value = "用户登录注册接口", tags = "{}")
+@Api(value = "用户登录注销接口", tags = "{}")
 public class UserSessionController {
     @Autowired
     private UserService userService;
@@ -60,8 +61,10 @@ public class UserSessionController {
      * @return
      */
     @PostMapping("logout")
-    public Result logout() {
-        // 接口写着玩，前端删除token即可
+    public Result logout(@ApiIgnore HttpServletResponse response) {
+        Cookie cookie = new Cookie(jwtUtils.getHeader(), null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return Result.ok();
     }
 }

@@ -51,7 +51,7 @@ public class UsersController {
     }
 
     @LoginRequired
-    @PostMapping("pwd-reset")
+    @PutMapping("password")
     @ApiOperation("修改密码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "oldPwd", value = "旧密码", required = true, dataType = "String", paramType = "query"),
@@ -66,7 +66,7 @@ public class UsersController {
     }
 
     @LoginRequired
-    @PostMapping("change-info")
+    @PutMapping("profile")
     @ApiOperation("修改用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "gender", value = "性别", required = true, dataType = "Integer", paramType = "query"),
@@ -92,5 +92,4 @@ public class UsersController {
         }
         return Result.ok();
     }
-
 }
