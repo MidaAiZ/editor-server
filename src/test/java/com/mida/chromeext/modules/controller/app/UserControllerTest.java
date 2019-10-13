@@ -2,15 +2,14 @@ package com.mida.chromeext.modules.controller.app;
 
 import javax.servlet.http.Cookie;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -23,8 +22,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.mida.chromeext.ChromeExtApplication;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * @author lihaoyu
@@ -52,28 +49,35 @@ public class UserControllerTest {
     public void userTest() throws Exception {
         Cookie token = userLogin();
 
-        MvcResult mvcResult1 = mockMvc.perform(MockMvcRequestBuilders.get("/users/profile").cookie(token)).andReturn();
-        System.out.println(mvcResult1.getResponse().getContentAsString());
-        System.out.println("————————");
+        profileTest(token);
 
+        changePwdTest(token);
 
-        String oldPwd = env.getProperty("user.oldPwd");
-        String newPwd = env.getProperty("user.newPwd");
-        MvcResult mvcResult2 = mockMvc.perform(MockMvcRequestBuilders.post("/users/pwd-reset").cookie(token)
-        .param("oldPwd",oldPwd).param("newPwd",newPwd)).andReturn();
-        System.out.println(mvcResult2.getResponse().getContentAsString());
-        System.out.println("————————");
+        updateInfoTest(token);
+    }
 
+    public void updateInfoTest(Cookie token) throws Exception{
         String tel = env.getProperty("user.tel");
         String gender = env.getProperty("user.gender");
         String occupation = env.getProperty("user.occupation");
-        MvcResult mvcResult3 = mockMvc.perform(MockMvcRequestBuilders.post("/users/change-info").cookie(token)
+        MvcResult mvcResult3 = mockMvc.perform(MockMvcRequestBuilders.put("/users/profile").cookie(token)
                 .param("tel",tel).param("gender",gender).param("occupation",occupation)).andReturn();
-        System.out.println(mvcResult3.getResponse().getContentAsString());
-        System.out.println("————————");
-
-
+        Assert.assertEquals(mvcResult3.getResponse().getStatus(),200);
     }
+
+    public void changePwdTest(Cookie token) throws Exception{
+        String oldPwd = env.getProperty("user.oldPwd");
+        String newPwd = env.getProperty("user.newPwd");
+        MvcResult mvcResult2 = mockMvc.perform(MockMvcRequestBuilders.put("/users/password").cookie(token)
+                .param("oldPwd",oldPwd).param("newPwd",newPwd)).andReturn();
+        Assert.assertEquals(mvcResult2.getResponse().getStatus(),200);
+    }
+
+    public void profileTest(Cookie token) throws Exception{
+        MvcResult mvcResult1 = mockMvc.perform(MockMvcRequestBuilders.get("/users/profile").cookie(token)).andReturn();
+        Assert.assertEquals(mvcResult1.getResponse().getStatus(),200);
+    }
+
 
     public Cookie userLogin() throws Exception {
         String email = env.getProperty("user.email");
