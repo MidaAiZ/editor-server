@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.SearchEngineMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.SearchEngine">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.SearchEngineMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.SearchEngine">
         <id column="eid" jdbcType="INTEGER" property="eid"/>
         <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
         <result column="created_by" jdbcType="INTEGER" property="createdBy"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.pojo.SearchEngine">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.SearchEngine">
         <result column="engines" jdbcType="LONGVARCHAR" property="engines"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -77,7 +77,7 @@
     <sql id="Blob_Column_List">
     engines
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngineExample"
+    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.SearchEngineExample"
             resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
@@ -94,7 +94,7 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SearchEngineExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -120,13 +120,13 @@
     delete from search_engines
     where eid = #{eid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SearchEngineExample">
         delete from search_engines
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.SearchEngine">
         <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -135,7 +135,7 @@
         values (#{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP},
         #{createdBy,jdbcType=INTEGER}, #{engines,jdbcType=LONGVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.SearchEngine">
         <selectKey keyProperty="eid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -175,7 +175,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.SearchEngineExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SearchEngineExample" resultType="java.lang.Long">
         select count(*) from search_engines
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -230,7 +230,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.SearchEngine">
         update search_engines
         <set>
             <if test="countryCode != null">
@@ -251,7 +251,7 @@
         </set>
         where eid = #{eid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.SearchEngine">
     update search_engines
     set country_code = #{countryCode,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -260,7 +260,7 @@
       engines = #{engines,jdbcType=LONGVARCHAR}
     where eid = #{eid,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.SearchEngine">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.SearchEngine">
     update search_engines
     set country_code = #{countryCode,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},

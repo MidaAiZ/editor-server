@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.UserMenuMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.UserMenu">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.UserMenuMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.UserMenu">
         <id column="mid" jdbcType="VARCHAR" property="mid"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -75,7 +75,7 @@
     <sql id="Base_Column_List">
     mid, title, url, icon_src, is_folder, folder_id, user_id, `index`, created_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.UserMenuExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -99,13 +99,13 @@
     delete from user_menus
     where mid = #{mid,jdbcType=VARCHAR}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.UserMenuExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample">
         delete from user_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.UserMenu">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
         <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.String">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -116,7 +116,7 @@
         #{isFolder,jdbcType=BIT}, #{folderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
         #{index,jdbcType=SMALLINT}, #{createdAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.UserMenu">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
         <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.String">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -174,7 +174,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.UserMenuExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample" resultType="java.lang.Long">
         select count(*) from user_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -230,7 +230,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.UserMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
         update user_menus
         <set>
             <if test="title != null">
@@ -260,7 +260,7 @@
         </set>
         where mid = #{mid,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.UserMenu">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
     update user_menus
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

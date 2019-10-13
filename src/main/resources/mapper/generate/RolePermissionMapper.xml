@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.RolePermissionMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.RolePermission">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.RolePermissionMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.RolePermission">
         <result column="role_id" jdbcType="INTEGER" property="roleId"/>
         <result column="permission_id" jdbcType="INTEGER" property="permissionId"/>
     </resultMap>
@@ -68,7 +68,7 @@
     <sql id="Base_Column_List">
     role_id, permission_id
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.RolePermissionExample"
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.RolePermissionExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -83,17 +83,17 @@
             order by ${orderByClause}
         </if>
     </select>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.RolePermissionExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.RolePermissionExample">
         delete from roles_permissions
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.RolePermission">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.RolePermission">
     insert into roles_permissions (role_id, permission_id)
     values (#{roleId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.RolePermission">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.RolePermission">
         insert into roles_permissions
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="roleId != null">
@@ -112,7 +112,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.RolePermissionExample"
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.RolePermissionExample"
             resultType="java.lang.Long">
         select count(*) from roles_permissions
         <if test="_parameter != null">

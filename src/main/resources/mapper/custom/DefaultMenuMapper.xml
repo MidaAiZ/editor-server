@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.dao.DefaultMenuDAO">
-    <select id="selectByCountryCode" resultType="com.mida.chromeext.pojo.DefaultMenu">
+<mapper namespace="com.mida.chromeext.modules.dao.DefaultMenuDAO">
+    <select id="selectByCountryCode" resultType="com.mida.chromeext.modules.pojo.DefaultMenu">
         select did, country_code, is_default, menus from default_menus where country_code = #{code} limit 1
     </select>
 
-    <select id="selectDefaultMenu" resultType="com.mida.chromeext.pojo.DefaultMenu">
+    <select id="selectDefaultMenu" resultType="com.mida.chromeext.modules.pojo.DefaultMenu">
         select did, country_code, is_default, menus from default_menus where is_default = true limit 1
     </select>
 </mapper>

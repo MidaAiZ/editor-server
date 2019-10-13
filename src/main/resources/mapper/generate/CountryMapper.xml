@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.CountryMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Country">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.CountryMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Country">
         <id column="cid" jdbcType="INTEGER" property="cid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
@@ -74,7 +74,7 @@
     <sql id="Base_Column_List">
     cid, `name`, code, tel_prefix, time_zone, users_count, created_at, updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.CountryExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -98,13 +98,13 @@
     delete from countries
     where cid = #{cid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.CountryExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.CountryExample">
         delete from countries
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Country">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Country">
         <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -115,7 +115,7 @@
         #{timeZone,jdbcType=VARCHAR}, #{usersCount,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
         #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Country">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Country">
         <selectKey keyProperty="cid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -167,7 +167,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.CountryExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.CountryExample" resultType="java.lang.Long">
         select count(*) from countries
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -219,7 +219,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Country">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Country">
         update countries
         <set>
             <if test="name != null">
@@ -246,7 +246,7 @@
         </set>
         where cid = #{cid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Country">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Country">
     update countries
     set `name` = #{name,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},

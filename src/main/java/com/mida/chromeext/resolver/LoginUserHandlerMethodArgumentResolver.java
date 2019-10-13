@@ -2,8 +2,8 @@ package com.mida.chromeext.resolver;
 
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
-import com.mida.chromeext.pojo.User;
-import com.mida.chromeext.service.UserService;
+import com.mida.chromeext.modules.pojo.User;
+import com.mida.chromeext.modules.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

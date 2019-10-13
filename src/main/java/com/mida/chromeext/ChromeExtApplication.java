@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-@MapperScan({"com.mida.chromeext.mapper", "com.mida.chromeext.dao"})
+@MapperScan({"com.mida.chromeext.modules.dao.mapper", "com.mida.chromeext.modules.dao"})
 @Configuration
 public class ChromeExtApplication {
     public static void main(String[] args) {

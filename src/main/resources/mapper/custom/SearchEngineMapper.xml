@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.dao.SearchEngineDAO">
+<mapper namespace="com.mida.chromeext.modules.dao.SearchEngineDAO">
 
-    <select id="getByCountryCode" resultType="com.mida.chromeext.pojo.SearchEngine">
+    <select id="getByCountryCode" resultType="com.mida.chromeext.modules.pojo.SearchEngine">
     select country_code, engines from search_engines where country_code = #{countryCode}
 </select>
 
-    <select id="listAllSearchEngine" resultType="com.mida.chromeext.pojo.SearchEngine">
+    <select id="listAllSearchEngine" resultType="com.mida.chromeext.modules.pojo.SearchEngine">
     select * from search_engines;
 </select>
 

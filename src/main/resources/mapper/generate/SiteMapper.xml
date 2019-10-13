@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.SiteMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Site">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.SiteMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Site">
         <id column="sid" jdbcType="INTEGER" property="sid"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -78,7 +78,7 @@
     sid, title, url, icon, used_count, page_views, cate_id, weight, created_by, created_at, 
     updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.SiteExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -102,13 +102,13 @@
     delete from sites
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.SiteExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample">
         delete from sites
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Site">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Site">
         <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -121,7 +121,7 @@
         #{weight,jdbcType=REAL}, #{createdBy,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
         #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Site">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Site">
         <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -191,7 +191,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.SiteExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultType="java.lang.Long">
         select count(*) from sites
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -255,7 +255,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Site">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Site">
         update sites
         <set>
             <if test="title != null">
@@ -291,7 +291,7 @@
         </set>
         where sid = #{sid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Site">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Site">
     update sites
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

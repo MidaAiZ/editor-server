@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.dao.UserMenuDAO">
-    <insert id="insertWithUUID" parameterType="com.mida.chromeext.pojo.UserMenu">
+<mapper namespace="com.mida.chromeext.modules.dao.UserMenuDAO">
+    <insert id="insertWithUUID" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
         insert into user_menus (mid, title, url, icon_src, is_folder, folder_id, user_id, `index`, created_at)
         values (#{mid, jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{iconSrc,jdbcType=VARCHAR},
         #{isFolder,jdbcType=BIT}, #{folderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
         #{index,jdbcType=SMALLINT}, #{createdAt,jdbcType=TIMESTAMP})
     </insert>
 
-    <select id="listMenuByUserId" parameterType="integer" resultType="com.mida.chromeext.pojo.UserMenu">
+    <select id="listMenuByUserId" parameterType="integer" resultType="com.mida.chromeext.modules.pojo.UserMenu">
         SELECT m.mid,
                m.title,
                m.url,

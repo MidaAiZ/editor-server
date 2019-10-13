@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.dao.AdminDAO">
-    <select id="selectAdminByNumber" parameterType="String" resultType="com.mida.chromeext.pojo.Admin">
+<mapper namespace="com.mida.chromeext.modules.dao.AdminDAO">
+    <select id="selectAdminByNumber" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
         SELECT admins.*
         FROM admins
         WHERE admins.number = #{number} limit 1

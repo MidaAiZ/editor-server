@@ -3,7 +3,7 @@ package com.mida.chromeext.interceptor;
 
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.exception.MyException;
-import com.mida.chromeext.service.UserService;
+import com.mida.chromeext.modules.service.UserService;
 import com.mida.chromeext.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
@@ -45,10 +45,12 @@ public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
         // 需要验证，获取用户凭证
         String token = "";
         // 通过cookie获取用户token
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals(jwtUtils.getHeader())) {
-                token = cookie.getValue();
-                break;
+        if (request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals(jwtUtils.getHeader())) {
+                    token = cookie.getValue();
+                    break;
+                }
             }
         }
 //        // 通过请求报头获取token

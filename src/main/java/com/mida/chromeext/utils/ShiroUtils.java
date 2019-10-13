@@ -1,6 +1,6 @@
 package com.mida.chromeext.utils;
 
-import com.mida.chromeext.pojo.User;
+import com.mida.chromeext.modules.pojo.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;

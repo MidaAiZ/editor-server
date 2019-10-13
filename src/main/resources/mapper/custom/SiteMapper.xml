@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.dao.SiteDAO">
+<mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
 
     <update id="increaseUsedCount" parameterType="java.lang.Integer">
         update sites
@@ -37,7 +37,7 @@
         from sites;
     </select>
 
-    <select id="listSitesByPage" resultType="com.mida.chromeext.pojo.Site">
+    <select id="listSitesByPage" resultType="com.mida.chromeext.modules.pojo.Site">
         select s.sid,s.title,s.url,s.icon,s.cate_id
         from sites s
         join countries_sites cs

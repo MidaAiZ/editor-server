@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.PermissionMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Permission">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Permission">
         <id column="pid" jdbcType="INTEGER" property="pid"/>
         <result column="permision" jdbcType="VARCHAR" property="permision"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -70,7 +70,7 @@
     <sql id="Base_Column_List">
     pid, permision, url, description
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.PermissionExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -94,13 +94,13 @@
     delete from permissions
     where pid = #{pid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.PermissionExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample">
         delete from permissions
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Permission">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Permission">
         <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -109,7 +109,7 @@
         values (#{permision,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Permission">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Permission">
         <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -137,7 +137,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.PermissionExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample" resultType="java.lang.Long">
         select count(*) from permissions
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -173,7 +173,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Permission">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Permission">
         update permissions
         <set>
             <if test="permision != null">
@@ -188,7 +188,7 @@
         </set>
         where pid = #{pid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Permission">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Permission">
     update permissions
     set permision = #{permision,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

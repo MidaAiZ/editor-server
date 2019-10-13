@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.RoleMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.Role">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Role">
         <id column="rid" jdbcType="INTEGER" property="rid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -69,7 +69,7 @@
     <sql id="Base_Column_List">
     rid, `name`, description
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.RoleExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.RoleExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -93,20 +93,20 @@
     delete from roles
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.RoleExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.RoleExample">
         delete from roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.Role">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Role">
         <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into roles (`name`, description)
         values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.Role">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Role">
         <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -128,7 +128,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.RoleExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.RoleExample" resultType="java.lang.Long">
         select count(*) from roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -160,7 +160,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.Role">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Role">
         update roles
         <set>
             <if test="name != null">
@@ -172,7 +172,7 @@
         </set>
         where rid = #{rid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.Role">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Role">
     update roles
     set `name` = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}

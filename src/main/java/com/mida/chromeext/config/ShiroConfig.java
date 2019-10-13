@@ -1,15 +1,13 @@
 package com.mida.chromeext.config;
 
-import com.mida.chromeext.shiro.AdminRealm;
-import com.mida.chromeext.shiro.ShiroLoginFilter;
-import com.mida.chromeext.shiro.ShiroRedisCacheManage;
+import com.mida.chromeext.components.shiro.AdminRealm;
+import com.mida.chromeext.components.shiro.ShiroLoginFilter;
+import com.mida.chromeext.components.shiro.ShiroRedisCacheManage;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.crazycake.shiro.RedisCacheManager;
-import org.crazycake.shiro.RedisManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

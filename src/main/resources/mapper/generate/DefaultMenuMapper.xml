@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.mapper.DefaultMenuMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.pojo.DefaultMenu">
+<mapper namespace="com.mida.chromeext.modules.dao.mapper.DefaultMenuMapper">
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.DefaultMenu">
         <id column="did" jdbcType="INTEGER" property="did"/>
         <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
         <result column="is_default" jdbcType="BIT" property="isDefault"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.pojo.DefaultMenu">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.DefaultMenu">
         <result column="menus" jdbcType="LONGVARCHAR" property="menus"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -75,7 +75,7 @@
     <sql id="Blob_Column_List">
     menus
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.pojo.DefaultMenuExample"
+    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample"
             resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
@@ -92,7 +92,7 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.mida.chromeext.pojo.DefaultMenuExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -118,13 +118,13 @@
     delete from default_menus
     where did = #{did,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.pojo.DefaultMenuExample">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample">
         delete from default_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.pojo.DefaultMenu">
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
         <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -133,7 +133,7 @@
         values (#{countryCode,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{menus,jdbcType=LONGVARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.pojo.DefaultMenu">
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
         <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -161,7 +161,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.pojo.DefaultMenuExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample" resultType="java.lang.Long">
         select count(*) from default_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
@@ -206,7 +206,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.pojo.DefaultMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
         update default_menus
         <set>
             <if test="countryCode != null">
@@ -221,14 +221,14 @@
         </set>
         where did = #{did,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.pojo.DefaultMenu">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
     update default_menus
     set country_code = #{countryCode,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=BIT},
       menus = #{menus,jdbcType=LONGVARCHAR}
     where did = #{did,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.pojo.DefaultMenu">
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
     update default_menus
     set country_code = #{countryCode,jdbcType=VARCHAR},
       is_default = #{isDefault,jdbcType=BIT}

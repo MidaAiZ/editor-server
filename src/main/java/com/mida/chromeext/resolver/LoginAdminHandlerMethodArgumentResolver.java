@@ -2,11 +2,9 @@ package com.mida.chromeext.resolver;
 
 import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.annotation.CurrentAdmin;
-import com.mida.chromeext.pojo.Admin;
-import com.mida.chromeext.pojo.User;
-import com.mida.chromeext.service.AdminService;
+import com.mida.chromeext.modules.pojo.Admin;
+import com.mida.chromeext.modules.service.AdminService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
