@@ -1,11 +1,7 @@
 package com.mida.chromeext.modules.controller.app;
 
-import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.modules.pojo.Site;
-import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.SiteService;
-import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -24,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("sites")
-@Api(value = "网站相关接口", tags = "提供网站site相关的 Rest API")
+@Api(value = "前台网站相关接口", tags = "提供网站site相关的 Rest API")
 @Validated
 public class SitesController {
     @Autowired

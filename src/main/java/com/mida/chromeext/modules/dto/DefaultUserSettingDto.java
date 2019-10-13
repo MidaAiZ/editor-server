@@ -15,26 +15,27 @@ import java.io.Serializable;
 @PropertySource(value = "classpath:user-setting-default.properties")
 public class DefaultUserSettingDto implements Serializable {
     private String bgSrc;
-    private String maskOpacityValue;
-    private String bgBlurValue;
-    private String newSiteNewTabValue;
-    private String searchResultNewTabValue;
-    private String openMarkNewTabValue;
-    private String historyNewTabValue;
-    private String randomBgBtn;
-    private String showOftenUsedBar;
-    private String showEmailBtn;
-    private String showBookMarkBar;
-    private String hideAllIcons;
-    private String iconRadiusValue;
-    private String iconSizeValue;
-    private String hideSearchBarValue;
-    private String hideSearchTypeValue;
-    private String searchBarRadiusValue;
-    private String searchBarSizeValue;
-    private String searchBarOpacityValue;
-    private String fontSizeValue;
+    private Float maskOpacityValue;
+    private Float bgBlurValue;
+    private Boolean newSiteNewTabValue;
+    private Boolean searchResultNewTabValue;
+    private Boolean openMarkNewTabValue;
+    private Boolean historyNewTabValue;
+    private Boolean randomBgBtn;
+    private Boolean showOftenUsedBar;
+    private Boolean showEmailBtn;
+    private Boolean showBookMarkBar;
+    private Boolean hideAllIcons;
+    private Float iconRadiusValue;
+    private Float iconSizeValue;
+    private Boolean hideSearchBarValue;
+    private Boolean hideSearchTypeValue;
+    private Float searchBarRadiusValue;
+    private Float searchBarSizeValue;
+    private Float searchBarOpacityValue;
+    private Float fontSizeValue;
     private String fontColorValue;
+    private Boolean cloudSave;
     private LayoutSetting iconLayout;
 
     public String getBgSrc() {
@@ -45,155 +46,155 @@ public class DefaultUserSettingDto implements Serializable {
         this.bgSrc = bgSrc;
     }
 
-    public String getMaskOpacityValue() {
+    public Float getMaskOpacityValue() {
         return maskOpacityValue;
     }
 
-    public void setMaskOpacityValue(String maskOpacityValue) {
+    public void setMaskOpacityValue(Float maskOpacityValue) {
         this.maskOpacityValue = maskOpacityValue;
     }
 
-    public String getBgBlurValue() {
+    public Float getBgBlurValue() {
         return bgBlurValue;
     }
 
-    public void setBgBlurValue(String bgBlurValue) {
+    public void setBgBlurValue(Float bgBlurValue) {
         this.bgBlurValue = bgBlurValue;
     }
 
-    public String getNewSiteNewTabValue() {
+    public Boolean getNewSiteNewTabValue() {
         return newSiteNewTabValue;
     }
 
-    public void setNewSiteNewTabValue(String newSiteNewTabValue) {
+    public void setNewSiteNewTabValue(Boolean newSiteNewTabValue) {
         this.newSiteNewTabValue = newSiteNewTabValue;
     }
 
-    public String getSearchResultNewTabValue() {
+    public Boolean getSearchResultNewTabValue() {
         return searchResultNewTabValue;
     }
 
-    public void setSearchResultNewTabValue(String searchResultNewTabValue) {
+    public void setSearchResultNewTabValue(Boolean searchResultNewTabValue) {
         this.searchResultNewTabValue = searchResultNewTabValue;
     }
 
-    public String getOpenMarkNewTabValue() {
+    public Boolean getOpenMarkNewTabValue() {
         return openMarkNewTabValue;
     }
 
-    public void setOpenMarkNewTabValue(String openMarkNewTabValue) {
+    public void setOpenMarkNewTabValue(Boolean openMarkNewTabValue) {
         this.openMarkNewTabValue = openMarkNewTabValue;
     }
 
-    public String getHistoryNewTabValue() {
+    public Boolean getHistoryNewTabValue() {
         return historyNewTabValue;
     }
 
-    public void setHistoryNewTabValue(String historyNewTabValue) {
+    public void setHistoryNewTabValue(Boolean historyNewTabValue) {
         this.historyNewTabValue = historyNewTabValue;
     }
 
-    public String getRandomBgBtn() {
+    public Boolean getRandomBgBtn() {
         return randomBgBtn;
     }
 
-    public void setRandomBgBtn(String randomBgBtn) {
+    public void setRandomBgBtn(Boolean randomBgBtn) {
         this.randomBgBtn = randomBgBtn;
     }
 
-    public String getShowOftenUsedBar() {
+    public Boolean getShowOftenUsedBar() {
         return showOftenUsedBar;
     }
 
-    public void setShowOftenUsedBar(String showOftenUsedBar) {
+    public void setShowOftenUsedBar(Boolean showOftenUsedBar) {
         this.showOftenUsedBar = showOftenUsedBar;
     }
 
-    public String getShowEmailBtn() {
+    public Boolean getShowEmailBtn() {
         return showEmailBtn;
     }
 
-    public void setShowEmailBtn(String showEmailBtn) {
+    public void setShowEmailBtn(Boolean showEmailBtn) {
         this.showEmailBtn = showEmailBtn;
     }
 
-    public String getShowBookMarkBar() {
+    public Boolean getShowBookMarkBar() {
         return showBookMarkBar;
     }
 
-    public void setShowBookMarkBar(String showBookMarkBar) {
+    public void setShowBookMarkBar(Boolean showBookMarkBar) {
         this.showBookMarkBar = showBookMarkBar;
     }
 
-    public String getHideAllIcons() {
+    public Boolean getHideAllIcons() {
         return hideAllIcons;
     }
 
-    public void setHideAllIcons(String hideAllIcons) {
+    public void setHideAllIcons(Boolean hideAllIcons) {
         this.hideAllIcons = hideAllIcons;
     }
 
-    public String getIconRadiusValue() {
+    public Float getIconRadiusValue() {
         return iconRadiusValue;
     }
 
-    public void setIconRadiusValue(String iconRadiusValue) {
+    public void setIconRadiusValue(Float iconRadiusValue) {
         this.iconRadiusValue = iconRadiusValue;
     }
 
-    public String getIconSizeValue() {
+    public Float getIconSizeValue() {
         return iconSizeValue;
     }
 
-    public void setIconSizeValue(String iconSizeValue) {
+    public void setIconSizeValue(Float iconSizeValue) {
         this.iconSizeValue = iconSizeValue;
     }
 
-    public String getHideSearchBarValue() {
+    public Boolean getHideSearchBarValue() {
         return hideSearchBarValue;
     }
 
-    public void setHideSearchBarValue(String hideSearchBarValue) {
+    public void setHideSearchBarValue(Boolean hideSearchBarValue) {
         this.hideSearchBarValue = hideSearchBarValue;
     }
 
-    public String getHideSearchTypeValue() {
+    public Boolean getHideSearchTypeValue() {
         return hideSearchTypeValue;
     }
 
-    public void setHideSearchTypeValue(String hideSearchTypeValue) {
+    public void setHideSearchTypeValue(Boolean hideSearchTypeValue) {
         this.hideSearchTypeValue = hideSearchTypeValue;
     }
 
-    public String getSearchBarRadiusValue() {
+    public Float getSearchBarRadiusValue() {
         return searchBarRadiusValue;
     }
 
-    public void setSearchBarRadiusValue(String searchBarRadiusValue) {
+    public void setSearchBarRadiusValue(Float searchBarRadiusValue) {
         this.searchBarRadiusValue = searchBarRadiusValue;
     }
 
-    public String getSearchBarSizeValue() {
+    public Float getSearchBarSizeValue() {
         return searchBarSizeValue;
     }
 
-    public void setSearchBarSizeValue(String searchBarSizeValue) {
+    public void setSearchBarSizeValue(Float searchBarSizeValue) {
         this.searchBarSizeValue = searchBarSizeValue;
     }
 
-    public String getSearchBarOpacityValue() {
+    public Float getSearchBarOpacityValue() {
         return searchBarOpacityValue;
     }
 
-    public void setSearchBarOpacityValue(String searchBarOpacityValue) {
+    public void setSearchBarOpacityValue(Float searchBarOpacityValue) {
         this.searchBarOpacityValue = searchBarOpacityValue;
     }
 
-    public String getFontSizeValue() {
+    public Float getFontSizeValue() {
         return fontSizeValue;
     }
 
-    public void setFontSizeValue(String fontSizeValue) {
+    public void setFontSizeValue(Float fontSizeValue) {
         this.fontSizeValue = fontSizeValue;
     }
 
@@ -203,6 +204,14 @@ public class DefaultUserSettingDto implements Serializable {
 
     public void setFontColorValue(String fontColorValue) {
         this.fontColorValue = fontColorValue;
+    }
+
+    public Boolean getCloudSave() {
+        return cloudSave;
+    }
+
+    public void setCloudSave(Boolean cloudSave) {
+        this.cloudSave = cloudSave;
     }
 
     public LayoutSetting getIconLayout() {

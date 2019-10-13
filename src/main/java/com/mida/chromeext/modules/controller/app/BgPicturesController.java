@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("bg_pictures")
-@Api(value = "背景图片维护", tags = "{}")
+@Api(value = "前台背景图片获取", tags = "{}")
 public class BgPicturesController {
     @Autowired
     BgPictureService bgPictureService;
