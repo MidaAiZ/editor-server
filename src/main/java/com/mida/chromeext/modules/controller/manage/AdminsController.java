@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +35,14 @@ public class AdminsController {
 
     @GetMapping("profile")
     @ApiOperation("获取当前登录管理员的信息")
+    @RequiresAuthentication
     public Result<Admin> profile(@ApiIgnore @CurrentAdmin Admin admin) {
         return Result.ok(admin);
     }
 
     @GetMapping("profile/roles")
     @ApiOperation("获取当前管理员角色和权限")
+    @RequiresAuthentication
     public Result<List<Role>> getAdminRolesById(@ApiIgnore @CurrentAdmin Admin admin) {
        return Result.ok(roleService.getRolesByAdminId(admin.getAid()));
     }

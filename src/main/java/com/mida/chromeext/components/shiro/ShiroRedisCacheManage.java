@@ -16,7 +16,7 @@ import java.util.Set;
 @Component
 public class ShiroRedisCacheManage implements CacheManager {
 
-    private String cacheKeyPrefix = "chrome-ext-shiro:";
+    private String cacheKeyPrefix = "shiro:";
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;

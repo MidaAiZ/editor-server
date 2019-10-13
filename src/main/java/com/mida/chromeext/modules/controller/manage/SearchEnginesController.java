@@ -21,7 +21,7 @@ import java.util.Locale;
 
 @RestController("mngSearchEnginesController")
 @RequestMapping("manage/search-engines")
-@Api(value = "默认搜索引擎配置操作", tags = "{}")
+@Api(value = "后台默认搜索引擎配置操作", tags = "{}")
 public class SearchEnginesController {
 
     @Autowired
