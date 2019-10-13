@@ -100,4 +100,12 @@ public class AdminService {
         AdminExample ex = new AdminExample();
         return adminDAO.selectByExample(ex);
     }
+
+    /**
+     * 根据角色获取管理员
+     */
+    public List<Admin> getAdminListByRoleNames(ListQueryVo queryVo, List<String> roleNames) {
+        PageHelper.startPage(queryVo);
+        return adminDAO.selectAdminByRoleNames(roleNames);
+    }
 }

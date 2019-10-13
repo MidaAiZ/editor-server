@@ -56,6 +56,14 @@ public class PermissionService {
     }
 
     /**
+     * 获取系统内所有权限列表
+      * @return
+     */
+    public List<Permission> getAllPermissions() {
+        return permissionDAO.selectByExample(new PermissionExample());
+    }
+
+    /**
      * 通过权限id获取权限
      *
      * @param pid
@@ -65,8 +73,22 @@ public class PermissionService {
         return permissionDAO.selectByPrimaryKey(pid);
     }
 
+    /**
+     * 通过角色id获取角色所有的权限
+     * @param roleId
+     * @return
+     */
     public List<Permission> getPermissionsByRoleId(Integer roleId) {
         return permissionDAO.selectPermissionsByRoleId(roleId);
+    }
+
+    /**
+     * 根据角色id获取不具有的权限列表
+     * @param roleId
+     * @return
+     */
+    public List<Permission> getMissingPermissionsByRoleId(Integer roleId) {
+        return permissionDAO.selectMissingPermissionsByRoleId(roleId);
     }
 
     /**

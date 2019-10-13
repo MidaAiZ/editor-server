@@ -5,6 +5,7 @@ import com.mida.chromeext.modules.dao.RoleDAO;
 import com.mida.chromeext.modules.pojo.Role;
 import com.mida.chromeext.modules.pojo.RoleExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,6 +63,19 @@ public class RoleService {
     }
 
     /**
+     * 通过角色名查询角色
+     *
+     * @param roleNames
+     * @return
+     */
+    public List<Role> getRolesByNames(List<String> roleNames) {
+        RoleExample ex = new RoleExample();
+        ex.createCriteria().andNameIn(roleNames);
+        ex.setOrderByClause("rid ASC");
+        return roleDAO.selectByExample(ex);
+    }
+
+    /**
      * 添加角色给管理员
      *
      * @param adminId
@@ -76,6 +90,13 @@ public class RoleService {
             }
         }
         return count;
+    }
+
+    /**
+     * 通过角色id判断是否有某个角色
+     */
+    public boolean hasRoleOfAdminByRId(Integer adminId, Integer roleId) {
+        return adminRoleService.hasRelation(adminId, roleId);
     }
 
     /**

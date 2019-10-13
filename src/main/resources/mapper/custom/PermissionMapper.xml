@@ -9,4 +9,14 @@
 		left join roles_permissions rp on rp.permission_id = p.pid
 		where rp.role_id = #{roldId}
 	</select>
+
+	<select id="selectMissingPermissionsByRoleId" resultMap="com.mida.chromeext.modules.dao.mapper.PermissionMapper.BaseResultMap">
+		select p.*
+		from permissions p
+		where not p.pid in (
+			select p.pid from permissions p
+			left join roles_permissions rp on rp.permission_id = p.pid
+			where rp.role_id = #{roldId}
+		)
+	</select>
 </mapper>

@@ -1,8 +1,10 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.AdminRoleDAO;
 import com.mida.chromeext.modules.pojo.AdminRole;
 import com.mida.chromeext.modules.pojo.AdminRoleExample;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +64,14 @@ public class AdminRoleService {
         AdminRoleExample arExample = new AdminRoleExample();
         arExample.createCriteria().andRoleIdIn(roleIds);
         return adminRoleDAO.deleteByExample(arExample) > 0;
+    }
+
+    /**
+     * 判断是否拥有某个管理员-角色搭配组合
+     */
+    public Boolean hasRelation(Integer adminId, Integer roleId) {
+        AdminRoleExample ex = new AdminRoleExample();
+        ex.createCriteria().andAdminIdEqualTo(adminId).andRoleIdEqualTo(roleId);
+        return adminRoleDAO.countByExample(ex) > 0;
     }
 }
