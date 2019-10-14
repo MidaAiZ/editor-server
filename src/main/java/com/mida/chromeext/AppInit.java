@@ -1,6 +1,9 @@
 package com.mida.chromeext;
 
+import com.mida.chromeext.annotation.SysPermission;
+import com.mida.chromeext.annotation.SysRole;
 import com.mida.chromeext.components.shiro.PermisConstant;
+import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.dto.NewAdminDto;
 import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.Permission;
@@ -14,9 +17,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class AppInit {
@@ -35,7 +36,7 @@ public class AppInit {
          * 先创创建权限，再创建角色，最后创建超级管理员
          */
         initPermissions();
-        initSuperRole();
+        initRoles();
         initSuperAdmin();
     }
 
@@ -56,15 +57,15 @@ public class AppInit {
         Class claszInner = PermisConstant.class.getClass();
         Field[] fields = PermisConstant.class.getFields();
         try {
-            for( Field field : fields ){
+            for (Field field : fields) {
                 if (!allSysPermissions.contains(field.get(claszInner))) {
                     Permission p = new Permission();
                     p.setPermision((String) field.get(claszInner));
-                    p.setDescription((String) field.get(claszInner));
-                    p.setUrl("manage");
+                    p.setDescription(field.getAnnotation(SysPermission.class).desc());
+                    p.setUrl(field.getAnnotation(SysPermission.class).url());
                     missingPermissions.add(p);
                 }
-                System.out.println( field.getName() + " " + field.get(claszInner) );
+                System.out.println(field.getName() + " " + field.get(claszInner));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -76,30 +77,58 @@ public class AppInit {
     /**
      * 初始化角色，创建超级管理员角色
      */
-    private void initSuperRole() {
-        List<String> roleNames = new ArrayList<>(1);
-        roleNames.add(PermisConstant.SUPER_ROLE);
-        List<Role> roles = roleService.getRolesByNames(roleNames);
-        // 超级管理员角色
-        Role superRole;
-        if (roles == null || roles.isEmpty()) {
-            superRole = new Role();
-            superRole.setName(PermisConstant.SUPER_ROLE);
-            superRole.setDescription("超级管理员爸爸，很厉害的那种");
-            roleService.createRole(superRole);
-            Iterator<Permission> it = permissionService.getAllPermissions().iterator();
-            List<Integer> psIds = new ArrayList<>();
-            while (it.hasNext()) {
-                psIds.add(it.next().getPid());
+    private void initRoles() {
+        try {
+            // 系统默认角色
+            Map<String, Field> roleNameMap = new HashMap();
+
+            // 获取权限所有变量的值
+            Class claszInner = RoleConstant.class.getClass();
+            Field[] fields = RoleConstant.class.getFields();
+            for (Field field : fields) { roleNameMap.put((String) field.get(claszInner), field); }
+
+            // 从数据库中检索已存在角色
+            List<String> roleNames = new ArrayList();
+            roleNames.addAll(roleNameMap.keySet());
+            List<Role> roles = roleService.getRolesByNames(roleNames);
+            List<String> existRoleNames = new ArrayList();
+            for (Role role : roles) {
+                existRoleNames.add(role.getName());
             }
-            roleService.addRolesToAdmin(superRole.getRid(), psIds);
-        } else {
-            // 检查系统第一个超级管理员是否拥有所有权限，没有则补上
-            superRole = roles.get(0);
-            List<Integer> psIds = new ArrayList();
-            Iterator<Permission> missingPermisionsIt = permissionService.getMissingPermissionsByRoleId(superRole.getRid()).iterator();
-            while (missingPermisionsIt.hasNext()) { psIds.add(missingPermisionsIt.next().getPid()); }
-            roleService.addPermissionsToRole(superRole.getRid(), psIds);
+
+            for (Map.Entry<String, Field> entry : roleNameMap.entrySet()) {
+                System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                // 数据库中不存在这个角色
+                if (!existRoleNames.contains(entry.getKey())) {
+                    // 创建角色
+                    Role role = new Role();
+                    Field field = entry.getValue();
+                    role.setName((entry.getKey()));
+                    role.setDescription(field.getAnnotation(SysRole.class).desc());
+                    roleService.createRole(role);
+
+                    // 获取这个角色所拥有的所有权限
+                    List<String> rolePermissions = new ArrayList<>();
+                    Class pClaszInner = PermisConstant.class.getClass();
+                    Field[] pFields = PermisConstant.class.getFields();
+                    for (Field pField : pFields) {
+                        if (Arrays.asList(pField.getAnnotation(SysPermission.class).roles()).contains(entry.getKey())) {
+                            rolePermissions.add((String) pField.get(pClaszInner));
+                        }
+                    }
+
+                    // 赋予权限
+                    List<Permission> existPs = permissionService.getPermissionsByPermiss(rolePermissions);
+                    List<Integer> psIds = new ArrayList<>();
+                    for (Permission p : existPs) {
+                        psIds.add(p.getPid());
+                    }
+                    roleService.addPermissionsToRole(role.getRid(), psIds);
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -108,10 +137,10 @@ public class AppInit {
      */
     private void initSuperAdmin() {
         List<String> roleNames = new ArrayList<>(1);
-        roleNames.add(PermisConstant.SUPER_ROLE);
+        roleNames.add(RoleConstant.SUPER_ROLE);
         NewAdminDto superAdmin;
         List<Admin> superAdmins = adminService.getAdminListByRoleNames(new ListQueryVo(1, 1), roleNames);
-        Role superRole = roleService.getRolesByNames(roleNames).get(0);
+        Role superRole = roleService.getRoleByName(RoleConstant.SUPER_ROLE);
 
         if (superAdmins == null || superAdmins.isEmpty()) {
             superAdmin = new NewAdminDto();
@@ -121,8 +150,7 @@ public class AppInit {
 
             List<Integer> roleIds = new ArrayList<>();
             roleIds.add(superRole.getRid());
-            superAdmin.setRoleIds(roleIds);;
-
+            superAdmin.setRoleIds(roleIds);
             adminService.createAdmin(superAdmin);
         } else {
             if (!roleService.hasRoleOfAdminByRId(superAdmins.get(0).getAid(), superRole.getRid())) {

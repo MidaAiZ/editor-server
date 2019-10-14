@@ -90,6 +90,7 @@ public class AdminsController {
     @ApiOperation("删除管理员的角色列表")
     @RequiresPermissions(PermisConstant.REMOVE_ROLE_OFF_ADMIN)
     public Result<Boolean> removeRolesOfAdmin(@PathVariable Integer adminId, @ApiParam("角色主键列表") @RequestBody List<Integer> roleIds) {
+
         return roleService.removeRolesOfAdmin(adminId, roleIds) ? Result.ok(true) : Result.error();
     }
 }

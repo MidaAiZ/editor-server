@@ -2,6 +2,7 @@ package com.mida.chromeext.modules.service;
 
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.RoleDAO;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.Role;
 import com.mida.chromeext.modules.pojo.RoleExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
@@ -63,7 +64,20 @@ public class RoleService {
     }
 
     /**
-     * 通过角色名查询角色
+     * 通过角色名获取角色
+     * @param name
+     * @return
+     */
+    public Role getRoleByName(String name) {
+        RoleExample ex = new RoleExample();
+        ex.createCriteria().andNameEqualTo(name);
+        List<Role> roles= roleDAO.selectByExample(ex);
+        if (roles == null || roles.isEmpty()) { return null; }
+        return roles.get(0);
+    }
+
+    /**
+     * 通过角色名列表查询角色
      *
      * @param roleNames
      * @return
@@ -123,7 +137,6 @@ public class RoleService {
             if (rolePermissionService.addRelation(roleId, pid)) {
                 count++;
             }
-            ;
         }
         return count;
     }

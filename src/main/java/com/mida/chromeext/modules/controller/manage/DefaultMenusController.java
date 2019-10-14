@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.controller.manage;
 
 import com.mida.chromeext.components.shiro.PermisConstant;
+import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
 import com.mida.chromeext.modules.vo.ListQueryVo;
@@ -24,7 +25,7 @@ public class DefaultMenusController {
 
     @PostMapping("default")
     @ApiOperation(value = "设置系统的默认菜单列表")
-    @RequiresRoles(PermisConstant.SUPER_ROLE)
+    @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.MODIFY_DEFAULT_MENU)
     public Result<Boolean> setDefault(@ApiParam("默认菜单配置主键") @RequestParam Integer did, @ApiParam("是否默认") @RequestParam Boolean isDefault) {
         return defaultMenuService.setDefault(did, isDefault) ? Result.ok(true) : Result.error();

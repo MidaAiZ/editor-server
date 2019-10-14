@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.controller.manage;
 
 import com.mida.chromeext.components.shiro.PermisConstant;
+import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.pojo.Permission;
 import com.mida.chromeext.modules.service.PermissionService;
 import com.mida.chromeext.utils.Result;
@@ -33,7 +34,7 @@ public class PermissionsController {
 
     @PostMapping("")
     @ApiOperation("新建权限")
-    @RequiresRoles(PermisConstant.SUPER_ROLE)
+    @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.ADD_SYS_ROLE)
     public Result<Permission> create(@RequestBody Permission permission) {
         if (permissionService.createPermission(permission)) {
@@ -45,7 +46,7 @@ public class PermissionsController {
 
     @PostMapping("list")
     @ApiOperation("新建多条权限")
-    @RequiresRoles(PermisConstant.SUPER_ROLE)
+    @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.ADD_SYS_ROLE)
     public Result<List<Permission>> createList(@ApiParam("权限对象列表") @RequestBody List<Permission> permissions) {
         if (permissionService.createPermissionList(permissions) > 0) {
@@ -57,7 +58,7 @@ public class PermissionsController {
 
     @PutMapping("{pid}")
     @ApiOperation("更新权限")
-    @RequiresRoles(PermisConstant.SUPER_ROLE)
+    @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.MODIFY_SYS_ROLE)
     public Result<Permission> update(@PathVariable Integer pid, @ApiParam("permission对象") @RequestBody Permission permission) {
         permission.setPid(pid);
@@ -70,7 +71,7 @@ public class PermissionsController {
 
     @DeleteMapping("")
     @ApiParam("通过权限rid列表删除权限")
-    @RequiresRoles(PermisConstant.SUPER_ROLE)
+    @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.DELETE_SYS_ROLE)
     public Result<Boolean> deleteList(@RequestBody List<Integer> pIds) {
         try {

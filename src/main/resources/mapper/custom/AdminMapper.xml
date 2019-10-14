@@ -10,8 +10,8 @@
     <select id="selectAdminByRoleNames" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
         SELECT admins.*
         FROM admins
-        LEFT JOIN admins_roles ar ON ar.admin_id = admins.aid
-        LEFT JOIN roles ON roles.rid = ar.role_id AND roles.name in
+        JOIN admins_roles ar ON ar.admin_id = admins.aid
+        JOIN roles ON roles.rid = ar.role_id AND roles.name in
         <foreach collection="list" item="roleName" open="(" close=")" separator=",">
             #{roleName}
         </foreach>

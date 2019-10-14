@@ -74,6 +74,17 @@ public class PermissionService {
     }
 
     /**
+     * 通过权限字符串列表查询权限
+     * @param permissions
+     * @return
+     */
+    public List<Permission> getPermissionsByPermiss(List<String> permissions) {
+        PermissionExample ex = new PermissionExample();
+        ex.createCriteria().andPermisionIn(permissions);
+        return permissionDAO.selectByExample(ex);
+    }
+
+    /**
      * 通过角色id获取角色所有的权限
      * @param roleId
      * @return
