@@ -28,7 +28,7 @@ public class PermissionsController {
     @GetMapping("")
     @ApiOperation("获取权限列表")
     @RequiresPermissions(PermisConstant.SHOW_SYS_ROLE)
-    public Result<List<Permission>> getList(@ApiParam("分页参数") ListQueryVo queryVo) {
+    public Result<List<Permission>> getList(@ApiParam("分页参数") @RequestParam ListQueryVo queryVo) {
         return Result.ok(permissionService.getPermissions(queryVo));
     }
 

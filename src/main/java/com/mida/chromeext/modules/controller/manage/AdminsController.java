@@ -61,7 +61,7 @@ public class AdminsController {
     @GetMapping("")
     @ApiOperation("获取管理员列表，需要相关权限")
     @RequiresPermissions(PermisConstant.SHOW_ADMIN)
-    public Result<List<Admin>> getAdmins(@ApiParam("当前页数") Integer pageNum, @ApiParam("分页大小") Integer pageSize) {
+    public Result<List<Admin>> getAdmins(@ApiParam("当前页数") @RequestParam Integer pageNum, @ApiParam("分页大小") @RequestParam  Integer pageSize) {
         return Result.ok(adminService.getAdminList(new ListQueryVo(pageNum, pageSize)));
     }
 
