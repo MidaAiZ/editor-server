@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.service;
 
 import com.github.pagehelper.PageHelper;
+import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.dao.AdminDAO;
 import com.mida.chromeext.modules.dto.NewAdminDto;
 import com.mida.chromeext.modules.pojo.Admin;
@@ -11,6 +12,7 @@ import com.mida.chromeext.utils.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -102,10 +104,31 @@ public class AdminService {
     }
 
     /**
-     * 根据角色获取管理员
+     * 根据角色列表获取管理员
      */
     public List<Admin> getAdminListByRoleNames(ListQueryVo queryVo, List<String> roleNames) {
         PageHelper.startPage(queryVo);
         return adminDAO.selectAdminByRoleNames(roleNames);
+    }
+
+    /**
+     * 根据角色获取管理员
+     */
+    public Admin getAdminByRoleName(String roleName) {
+       return adminDAO.selectAdminByRoleName(roleName);
+    }
+
+    /**
+     * 获取系统的第一个超级管理员
+     * 该管理员理论上不可删除，不可变更
+     * @return
+     */
+    public Admin getFirstSuperAdmin() {
+        PageHelper.startPage(1, 1);
+        List<String> superName = new ArrayList<>(1);
+        superName.add(RoleConstant.SUPER_ROLE);
+        List<Admin> list = adminDAO.selectAdminByRoleNames(superName);
+        if (list == null || list.isEmpty()) { return null; }
+        return list.get(0);
     }
 }

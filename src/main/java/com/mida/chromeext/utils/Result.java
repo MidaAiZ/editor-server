@@ -26,7 +26,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> error() {
-        return error(ResultCode.FAIL.code(), "未知异常，请联系管理员");
+        return error(ResultCode.FAIL.code(), "System error or illegal request");
     }
 
     public static <T> Result<T> error(String message) {

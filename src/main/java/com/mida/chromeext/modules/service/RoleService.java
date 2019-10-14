@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.service;
 
 import com.github.pagehelper.PageHelper;
+import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.dao.RoleDAO;
 import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.Role;
@@ -26,6 +27,12 @@ public class RoleService {
 
     @Autowired
     private AdminRoleService adminRoleService;
+
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 创建角色
@@ -121,7 +128,15 @@ public class RoleService {
      * @return
      */
     public Boolean removeRolesOfAdmin(Integer adminId, List<Integer> roleIds) {
-        return rolePermissionService.removeRelations(adminId, roleIds);
+        Role superRole = roleService.getRoleByName(RoleConstant.SUPER_ROLE);
+        // 禁止移除系统默认超级管理员角色
+        if (roleIds.contains(superRole.getRid())) {
+            Admin superAdmin = adminService.getFirstSuperAdmin();
+            if (superAdmin != null && superAdmin.getAid().equals(adminId)) {
+                return false;
+            }
+        }
+        return adminRoleService.removeRelations(adminId, roleIds);
     }
 
     /**
@@ -212,6 +227,18 @@ public class RoleService {
             role.setPermissions(permissionService.getPermissionsByRoleId(rid));
         }
         return role;
+    }
+
+    /**
+     * 通过rid列表获取角色
+     *
+     * @param rids
+     * @return
+     */
+    public List<Role> getRolesByIds(List<Integer> rids) {
+        RoleExample rx = new RoleExample();
+        rx.createCriteria().andRidIn(rids);
+        return roleDAO.selectByExample(rx);
     }
 
     /**

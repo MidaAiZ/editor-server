@@ -13,5 +13,6 @@ import java.util.List;
 @Repository
 public interface AdminDAO extends AdminMapper {
    Admin selectAdminByNumber(String number);
+   Admin selectAdminByRoleName(String roleName);
    List<Admin> selectAdminByRoleNames(List<String> roleNames);
 }

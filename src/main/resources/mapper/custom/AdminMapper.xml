@@ -15,5 +15,14 @@
         <foreach collection="list" item="roleName" open="(" close=")" separator=",">
             #{roleName}
         </foreach>
+        ORDER BY admins.aid ASC
+    </select>
+
+    <select id="selectAdminByRoleName" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
+        SELECT admins.*
+        FROM admins
+        JOIN admins_roles ar ON ar.admin_id = admins.aid
+        JOIN roles ON roles.rid = ar.role_id AND roles.name = #{roleName}
+        ORDER BY admins.aid ASC LIMIT 1
     </select>
 </mapper>
