@@ -3,6 +3,7 @@ package com.mida.chromeext.modules.controller.app;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.service.SiteService;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
+import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
