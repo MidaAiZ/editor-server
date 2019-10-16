@@ -13,6 +13,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -42,19 +43,19 @@ public class SitesController {
     /**
      * 管理员添加网站  同时添加 site 和 country 关联
      *
-     * @param siteAddVos
+     * @param sites
      * @return List<Site>
      */
     @PostMapping("")
     @ApiOperation("添加网站")
     @RequiresPermissions(PermisConstant.ADD_SITE)
-    public Result<List<Site>> addSites(@Valid @RequestBody List<SiteAddVo> siteAddVos, @CurrentAdmin Admin admin) {
-        List<Site> sites;
+    public Result<List<Site>> addSites(@Valid @RequestBody List<SiteAddVo> sites, @ApiIgnore @CurrentAdmin Admin admin) {
+        List<Site> insertedSiteList;
         try {
-            sites = siteService.addSites(siteAddVos, admin.getAid());
+            insertedSiteList = siteService.addSites(sites, admin.getAid());
         } catch (Exception ex) {
             return Result.error("");
         }
-        return Result.ok(sites);
+        return Result.ok(insertedSiteList);
     }
 }
