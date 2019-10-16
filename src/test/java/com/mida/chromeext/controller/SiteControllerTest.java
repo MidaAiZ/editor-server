@@ -74,7 +74,8 @@ public class SiteControllerTest {
         category.setCid(Integer.parseInt(env.getProperty("siteCategoryId")));
         }
         queryVo.setSiteCategory(category);
-            MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/sites/list").contentType(MediaType.APPLICATION_JSON)
+            MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/sites").
+                    param("queryVo",JSON.toJSONString(queryVo))
                 .content(JSON.toJSONString(queryVo))).andReturn();
         assertFun(mvcResult);
     }
