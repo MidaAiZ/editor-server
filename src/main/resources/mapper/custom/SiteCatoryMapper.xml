@@ -3,7 +3,7 @@
 <mapper namespace="com.mida.chromeext.modules.dao.SiteCategoryDAO">
 
     <select id="listAllCategories" resultType="com.mida.chromeext.modules.pojo.SiteCategory">
-        select cid,title,created_at,updated_at
+        select cid,title,created_at,updated_at,`index`
         from site_categories;
     </select>
 

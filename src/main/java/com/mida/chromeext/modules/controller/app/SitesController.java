@@ -33,9 +33,9 @@ public class SitesController {
             @ApiImplicitParam(name = "siteCategory", value = "网站类型对象", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pageNum", value = "查询第几页，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页多少条，为0时查询全部数据", required = true, dataType = "Integer", paramType = "query"),})
-    public List<Site> listSitesByPage(@RequestBody @ApiParam("分页查询参数") SiteListQueryVo queryVo) {
+    public Result<List<Site>> listSitesByPage(@RequestBody @ApiParam("分页查询参数") SiteListQueryVo queryVo) {
         List<Site> sites = siteService.listSitesByPage(queryVo);
-        return sites;
+        return Result.ok(sites);
     }
 }
 
