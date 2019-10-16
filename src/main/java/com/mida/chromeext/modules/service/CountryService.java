@@ -1,7 +1,9 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.CountryDAO;
 import com.mida.chromeext.modules.pojo.Country;
+import com.mida.chromeext.modules.pojo.CountryExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +30,38 @@ public class CountryService {
         List<Country> countries = countryDAO.listAllCountry();
         return countries;
     }
+
+    /**
+     * 插入一条新数据
+     */
+    public Boolean create(Country country) {
+        return countryDAO.insertSelective(country) > 0;
+    }
+
+    /**
+     * 更新一条数据
+     */
+    public Boolean updateById(Country country) {
+        return countryDAO.updateByPrimaryKeySelective(country) > 0;
+    }
+
+    /**
+     * 删除一条数据
+     */
+    public Boolean deleteById(Integer cid) {
+        return countryDAO.deleteByPrimaryKey(cid) > 0;
+    }
+
+    /**
+     * 获取一条数据
+     */
+    public Country getOneByCode(String code) {
+        CountryExample ex = new CountryExample();
+        ex.createCriteria().andCodeEqualTo(code);
+        PageHelper.startPage(1, 1);
+        List<Country> cs = countryDAO.selectByExample(ex);
+        if (cs == null || cs.isEmpty()) { return null; }
+        return cs.get(0);
+    }
+
 }

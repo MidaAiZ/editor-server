@@ -73,6 +73,16 @@ public class SiteService {
         return addSiteList;
     }
 
+
+    /**
+     * 更新一条网站数据
+     * @param site
+     * @return
+     */
+    public Boolean update(Site site) {
+        return siteDAO.updateByPrimaryKeySelective(site) > 0;
+    }
+
     /**
      * 当用户添加网站时，此网站的UsedCount要自增1
      *

@@ -16,11 +16,11 @@ import java.util.Date;
 public class Site implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer sid;
-    @NotBlank
+    @NotBlank(message = "Title can not be null")
     private String title;
-    @NotBlank
+    @NotBlank(message = "Url can not be null")
     private String url;
-    @NotBlank
+    @NotBlank(message = "Icon can not be null")
     private String icon;
     @JsonIgnore
     private Integer usedCount;

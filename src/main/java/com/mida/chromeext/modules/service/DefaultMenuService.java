@@ -19,11 +19,9 @@ public class DefaultMenuService {
     /**
      * 获取默认菜单配置列表
      *
-     * @param queryVo
      * @return List<DefaultMenu>
      */
-    public List<DefaultMenu> getList(ListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
+    public List<DefaultMenu> getAllList() {
         DefaultMenuExample example = new DefaultMenuExample();
         example.setOrderByClause("did desc");
         return defaultMenuDAO.selectByExample(example);
@@ -47,8 +45,8 @@ public class DefaultMenuService {
     public DefaultMenu getDefaultMenu() {
         DefaultMenu menu = defaultMenuDAO.selectDefaultMenu();
         if (menu == null) {
-
-            List<DefaultMenu> menuList = getList(new ListQueryVo(1, 1));
+            PageHelper.startPage(1, 1);
+            List<DefaultMenu> menuList = getAllList();
             menu = menuList.size() > 0 ? menuList.get(0) : null;
         }
         return menu;

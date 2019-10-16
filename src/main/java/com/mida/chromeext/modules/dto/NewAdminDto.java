@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewAdminDto {
-    @NotNull
+    @NotNull(message = "Number can not be null")
     @ApiModelProperty("账号名")
     private String number;
 
-    @NotNull
+    @NotNull(message = "Password can not be null")
     @ApiModelProperty("密码")
     private String password;
 
-    @Email
+    @Email(message = "Email is not correct")
     @ApiModelProperty("邮箱")
     private String email;
 

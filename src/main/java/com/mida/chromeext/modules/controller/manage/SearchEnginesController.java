@@ -57,7 +57,7 @@ public class SearchEnginesController {
         return Result.ok(searchEngine);
     }
 
-    @DeleteMapping
+    @DeleteMapping("")
     @ApiOperation(value = "删除某个国家的搜索引擎,需要管理员权限")
     @RequiresPermissions(PermisConstant.DELETE_SEARCH_ENGINE)
     public Result addSearchEngine(@ApiParam("国家码") String code) {
@@ -68,7 +68,7 @@ public class SearchEnginesController {
         return Result.error("不存在，删除失败");
     }
 
-    @PutMapping
+    @PutMapping("")
     @ApiOperation(value = "修改某个国家的搜索引擎,需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SEARCH_ENGINE)
     public Result<SearchEngine> updateSearchEngine(@ApiParam("必须包含所有字段") @RequestBody SearchEngineAddDto dto) {

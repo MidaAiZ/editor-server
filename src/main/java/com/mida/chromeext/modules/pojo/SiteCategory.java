@@ -7,7 +7,7 @@ import java.util.Date;
 public class SiteCategory implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer cid;
-    @NotBlank
+    @NotBlank(message = "Title can not be null")
     private String title;
     private Integer index;
     private Integer sitesCount;

@@ -20,6 +20,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -54,7 +55,7 @@ public class AdminsController {
     @PostMapping("")
     @ApiOperation("创建管理员，需要相关权限")
     @RequiresPermissions(PermisConstant.ADD_ADMIN)
-    public Result<Admin> createAdmin(@ApiParam("管理员对象") @RequestBody NewAdminDto adminDto) {
+    public Result<Admin> createAdmin(@ApiParam("管理员对象") @RequestBody @Validated NewAdminDto adminDto) {
         return Result.ok(adminService.createAdmin(adminDto));
     }
 

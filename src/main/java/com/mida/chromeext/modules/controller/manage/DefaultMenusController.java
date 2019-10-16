@@ -34,8 +34,8 @@ public class DefaultMenusController {
     @GetMapping("")
     @ApiOperation("后台获取默认菜单配置列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.SHOW_DEFAULT_MENU)
-    public Result<List<DefaultMenu>> getList(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
-        return Result.ok(defaultMenuService.getList(new ListQueryVo(pageNum, pageSize)));
+    public Result<List<DefaultMenu>> getList() {
+        return Result.ok(defaultMenuService.getAllList());
     }
 
     @PostMapping("list")

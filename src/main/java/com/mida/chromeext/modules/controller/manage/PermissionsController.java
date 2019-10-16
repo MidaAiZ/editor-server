@@ -70,7 +70,7 @@ public class PermissionsController {
     }
 
     @DeleteMapping("")
-    @ApiParam("通过权限rid列表删除权限")
+    @ApiOperation("通过权限rid列表删除权限")
     @RequiresRoles(RoleConstant.SUPER_ROLE)
     @RequiresPermissions(PermisConstant.DELETE_SYS_ROLE)
     public Result<Boolean> deleteList(@RequestBody List<Integer> pIds) {

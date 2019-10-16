@@ -58,4 +58,13 @@ public class SitesController {
         }
         return Result.ok(insertedSiteList);
     }
+
+    @PutMapping("{sid}")
+    @ApiOperation("更新一条网站数据")
+    @RequiresPermissions(PermisConstant.MODIFY_SITE)
+    public Result<Boolean> update(@PathVariable Integer sid, @ApiParam("待更新的网站记录") @RequestBody Site site) {
+        site.setSid(sid);
+        return siteService.update(site) ? Result.ok(true) : Result.error();
+    }
+
 }

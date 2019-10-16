@@ -118,5 +118,15 @@ public class PermisConstant {
     public static final String MODIFY_USER = "app:users:modify";
     @SysPermission(desc = "用户数据统计分析", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String STATISTICS_USER = "app:users:statistics";
+
+    /**
+     * 国家地区操作
+     */
+    @SysPermission(desc = "添加国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String ADD_COUNTRY = "sys:countries:add";
+    @SysPermission(desc = "更新国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String MODIFY_COUNTRY = "sys:countries:modify";
+    @SysPermission(desc = "删除国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String DELETE_COUNTRY = "sys:countries:delete";
 }
 

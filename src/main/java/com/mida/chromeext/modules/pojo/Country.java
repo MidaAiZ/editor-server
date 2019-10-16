@@ -1,21 +1,39 @@
 package com.mida.chromeext.modules.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Country implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "国家(地区)主键", hidden = true)
     private Integer cid;
+
+    @NotNull(message = "Name can not be null")
+    @ApiModelProperty("国家(地区)名字")
     private String name;
+
+    @NotNull(message = "Code can not be null")
+    @ApiModelProperty("唯一国家(地区)码")
     private String code;
+
+    @ApiModelProperty("区域电话前缀,如中国大陆是86")
     private String telPrefix;
+
+    @ApiModelProperty("区域时区")
     private String timeZone;
+
     @JsonIgnore
     private Integer usersCount;
+
     @JsonIgnore
     private Date createdAt;
+
     @JsonIgnore
     private Date updatedAt;
 
