@@ -1,12 +1,14 @@
-package com.mida.chromeext.modules.controller.app;
+package com.mida.chromeext.controller;
 
 import javax.servlet.http.Cookie;
 
+import com.alibaba.fastjson.JSON;
+import com.mida.chromeext.utils.Result;
+import com.mida.chromeext.utils.ResultCode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +25,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.mida.chromeext.ChromeExtApplication;
 
+import java.util.Random;
+
 /**
  * @author lihaoyu
  * @date 2019/10/12 13:54
@@ -30,7 +34,7 @@ import com.mida.chromeext.ChromeExtApplication;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ChromeExtApplication.class})
 @AutoConfigureMockMvc
-@TestPropertySource(locations = {"classpath:test-params.properties"})
+@TestPropertySource(locations = {"classpath:test/test-params-user.properties"})
 public class UserControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -47,51 +51,67 @@ public class UserControllerTest {
 
     @Test
     public void userTest() throws Exception {
+        // 用户注册
+        registerTest();
+
+        // 用户登录
         Cookie token = userLogin();
 
+        // 获取用户信息
         profileTest(token);
 
+        // 改密码
         changePwdTest(token);
 
+        // 更新用户信息
         updateInfoTest(token);
     }
 
     public void updateInfoTest(Cookie token) throws Exception{
-        String tel = env.getProperty("user.tel");
-        String gender = env.getProperty("user.gender");
-        String occupation = env.getProperty("user.occupation");
-        MvcResult mvcResult3 = mockMvc.perform(MockMvcRequestBuilders.put("/users/profile").cookie(token)
+        String tel = env.getProperty("tel");
+        String gender = env.getProperty("gender");
+        String occupation = env.getProperty("occupation");
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/users/profile").cookie(token)
                 .param("tel",tel).param("gender",gender).param("occupation",occupation)).andReturn();
-        Assert.assertEquals(mvcResult3.getResponse().getStatus(),200);
+        assertFun(mvcResult);
     }
 
     public void changePwdTest(Cookie token) throws Exception{
-        String oldPwd = env.getProperty("user.oldPwd");
-        String newPwd = env.getProperty("user.newPwd");
-        MvcResult mvcResult2 = mockMvc.perform(MockMvcRequestBuilders.put("/users/password").cookie(token)
+        String oldPwd = env.getProperty("oldPwd");
+        String newPwd = env.getProperty("newPwd");
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/users/password").cookie(token)
                 .param("oldPwd",oldPwd).param("newPwd",newPwd)).andReturn();
-        Assert.assertEquals(mvcResult2.getResponse().getStatus(),200);
+        assertFun(mvcResult);
     }
 
     public void profileTest(Cookie token) throws Exception{
-        MvcResult mvcResult1 = mockMvc.perform(MockMvcRequestBuilders.get("/users/profile").cookie(token)).andReturn();
-        Assert.assertEquals(mvcResult1.getResponse().getStatus(),200);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/users/profile").cookie(token)).andReturn();
+        assertFun(mvcResult);
     }
 
+    public void registerTest() throws Exception{
+        String random = String.valueOf((int)(Math.random()*10000));
+        String email = random + "@qq.com";
+        String password = random + "Francis";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/users/register")
+                .param("number",random).param("email",email).param("password",password)).andReturn();
+        assertFun(mvcResult);
+    }
 
     public Cookie userLogin() throws Exception {
-        String email = env.getProperty("user.email");
-        String password = env.getProperty("user.password");
+        String email = env.getProperty("email");
+        String password = env.getProperty("password");
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login").
                 contentType(MediaType.APPLICATION_FORM_URLENCODED).param("password",password)
                 .param("email",email)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         Cookie token = response.getCookie("token");
-//        String content = response.getContentAsString();
-////        System.out.println(content);
-////        System.out.println("————————");
         return token;
     }
 
+    private void assertFun(MvcResult mvcResult) throws Exception{
+        Assert.assertEquals(mvcResult.getResponse().getStatus(),200);
+        Assert.assertEquals(JSON.parseObject(mvcResult.getResponse().getContentAsString(), Result.class).getCode(), ResultCode.SUCCESS.code());
+    }
 
 }

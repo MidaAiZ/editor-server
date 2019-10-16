@@ -1,10 +1,5 @@
 package com.mida.chromeext.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.mida.chromeext.modules.pojo.SiteCategory;
-import com.mida.chromeext.modules.vo.SiteListQueryVo;
-import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.utils.ResultCode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +20,10 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.ChromeExtApplication;
+import com.mida.chromeext.modules.pojo.SiteCategory;
+import com.mida.chromeext.modules.vo.SiteListQueryVo;
+import com.mida.chromeext.utils.Result;
+import com.mida.chromeext.utils.ResultCode;
 
 
 /**
@@ -34,8 +33,8 @@ import com.mida.chromeext.ChromeExtApplication;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {ChromeExtApplication.class})
 @AutoConfigureMockMvc
-@TestPropertySource(locations = {"classpath:test/test-params-site.properties"})
-public class SiteControllerTest {
+@TestPropertySource(locations = {"classpath:test/test-params-engine.properties"})
+public class EngineControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -53,29 +52,12 @@ public class SiteControllerTest {
 
     @Test
     public void siteTest() throws Exception {
-        listTest();
-
+        defaultTest();
     }
 
-
-    public SiteListQueryVo queryVo(){
-        return new SiteListQueryVo();
-    }
-
-
-    public void listTest() throws Exception{
-        SiteListQueryVo queryVo = new SiteListQueryVo();
-        queryVo.setCountryCode(env.getProperty("countryCode"));
-        queryVo.setKeyWord(env.getProperty("keyWord"));
-        queryVo.setPageNum(Integer.parseInt(env.getProperty("test_pageNum")));
-        queryVo.setPageSize(Integer.parseInt(env.getProperty("test_pageSize")));
-        SiteCategory category = new SiteCategory();
-        if(!StringUtils.isEmpty(env.getProperty("siteCategoryId"))){
-        category.setCid(Integer.parseInt(env.getProperty("siteCategoryId")));
-        }
-        queryVo.setSiteCategory(category);
-            MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/sites/list").contentType(MediaType.APPLICATION_JSON)
-                .content(JSON.toJSONString(queryVo))).andReturn();
+    public void defaultTest() throws Exception{
+            MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/search-engines/default")
+                .param("code",env.getProperty("code"))).andReturn();
         assertFun(mvcResult);
     }
 

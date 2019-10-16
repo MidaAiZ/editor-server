@@ -34,9 +34,9 @@ public class BgPictureJobService {
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 
-        for (int i = 60; i < 90; i++) {
+        for (int i = 30; i <= 60; i++) {
             String url =
-                    "https://api.unsplash.com/photos/?client_id=13eb1a55029048fe62b7f870a010909cf4df45b971ee460df55ab50d21307671&per_page=30&query=wallpapers&page=" + i;
+                    "https://api.unsplash.com/photos?client_id=13eb1a55029048fe62b7f870a010909cf4df45b971ee460df55ab50d21307671&per_page=30&query=wallpapers&page=" + i;
 
             String strBody = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
             JSONArray jsonArray = JSONObject.parseArray(strBody);
