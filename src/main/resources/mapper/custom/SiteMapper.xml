@@ -40,19 +40,23 @@
     <select id="listSitesByPage" resultType="com.mida.chromeext.modules.pojo.Site">
         select s.sid,s.title,s.url,s.icon,s.cate_id
         from sites s
-        join countries_sites cs
-        on s.sid = cs.site_id
-        where cs.country_code in
-        <foreach collection="queryVo.countryCodeList" item="codeList" open="(" close=")" separator=",">
-            #{codeList}
-        </foreach>
-        <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
-            and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
-        </if>
-        <if test="queryVo.categoryIdList != null">
-            and s.cate_id in
-            <foreach collection="queryVo.categoryIdList" item="idList" open="(" close=")" separator=",">
-                #{idList}
+        <where>
+            <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
+                and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
+            </if>
+            <if test="queryVo.categoryIdList != null and !queryVo.categoryIdList.isEmpty()">
+                and s.cate_id in
+                <foreach collection="queryVo.categoryIdList" item="idList" open="(" close=")" separator=",">
+                    #{idList}
+                </foreach>
+            </if>
+        </where>
+        <if test="queryVo.countryCodeList != null and !queryVo.countryCodeList.isEmpty()">
+            join countries_sites cs
+            on s.sid = cs.site_id
+            where cs.country_code in
+            <foreach collection="queryVo.countryCodeList" item="codeList" open="(" close=")" separator=",">
+                #{codeList}
             </foreach>
         </if>
         order by s.weight desc

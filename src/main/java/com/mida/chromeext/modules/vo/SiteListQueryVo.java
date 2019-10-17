@@ -17,7 +17,7 @@ public class SiteListQueryVo extends ListQueryVo {
 
     private List<Integer> categoryIdList;
 
-    private ArrayList<String> countryCodeList = Lists.newArrayList(Constant.THE_WORLD);
+    private ArrayList<String> countryCodeList; // = Lists.newArrayList(Constant.THE_WORLD);
 
     public String getKeyWord() {
         return keyWord;

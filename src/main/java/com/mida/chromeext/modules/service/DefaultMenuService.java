@@ -77,7 +77,7 @@ public class DefaultMenuService {
      * @return Boolean
      */
     public boolean create(DefaultMenu menu) {
-        return defaultMenuDAO.insert(menu) > 0;
+        return defaultMenuDAO.insertSelective(menu) > 0;
     }
 
     /**
