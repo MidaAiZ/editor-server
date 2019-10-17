@@ -14,13 +14,13 @@ import javax.validation.constraints.NotNull;
 @ApiModel(value = "分页查询对象")
 public class ListQueryVo {
     @NotNull
-    @Min(1)
+    @Min(value = 1,message = "必填，最小值为1")
     @ApiModelProperty(value = "当前页数，必填，最小值为1", required = true)
     private Integer pageNum = 1;
 
     @NotNull
-    @Min(0)
-    @Max(100)
+    @Min(value = 0,message = "必填，最小值为0")
+    @Max(value = 100,message = "必填，最大值为100")
     @ApiModelProperty(value = "每页数量，必填，最小值为1，最大值为100", required = true)
     private Integer pageSize = 10;
 

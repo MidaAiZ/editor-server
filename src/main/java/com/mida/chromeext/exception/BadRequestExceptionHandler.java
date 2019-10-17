@@ -4,6 +4,7 @@ import com.mida.chromeext.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -53,6 +54,10 @@ public class BadRequestExceptionHandler {
         return Result.error(result);
     }
 
+    @ExceptionHandler(BindException.class)
+    public Result validationParameterException(BindException exception) {
+        return Result.error(exception.getFieldError().getDefaultMessage());
+    }
     /**
      * 参数类型转换错误
      *
@@ -63,9 +68,8 @@ public class BadRequestExceptionHandler {
     public Result parameterTypeException(HttpMessageConversionException exception) {
         //logger.error(exception.getCause().getLocalizedMessage());
         return Result.error("类型转换错误");
-
-
     }
+
 
 //    @ExceptionHandler(java.lang.Exception.class)
 //    public Result handleException(java.lang.Exception e){
