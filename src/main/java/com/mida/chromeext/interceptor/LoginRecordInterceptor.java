@@ -1,22 +1,18 @@
 package com.mida.chromeext.interceptor;
 
 
-import java.awt.*;
-import java.util.Date;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mida.chromeext.modules.pojo.LoginRecord;
-import com.mida.chromeext.modules.service.LoginRecordService;
-import com.mida.chromeext.utils.Constant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.mida.chromeext.modules.service.UserService;
+import com.mida.chromeext.modules.pojo.LoginRecord;
+import com.mida.chromeext.modules.service.LoginRecordService;
+import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.JwtUtils;
 
 import io.jsonwebtoken.Claims;
