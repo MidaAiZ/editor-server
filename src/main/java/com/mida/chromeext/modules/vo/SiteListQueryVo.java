@@ -1,21 +1,23 @@
 package com.mida.chromeext.modules.vo;
 
-import com.mida.chromeext.modules.pojo.SiteCategory;
-import io.swagger.annotations.ApiModel;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.mida.chromeext.utils.Constant;
 
 
 /**
  * @author lihaoyu
  * @date 2019/9/24 18:52
  */
-@ApiModel(value = "网站站点列表查询对象")
 public class SiteListQueryVo extends ListQueryVo {
 
     private String keyWord;
 
-    private SiteCategory siteCategory;
+    private List<Integer> categoryIdList;
 
-    private String countryCode = "ALL";
+    private ArrayList<String> countryCodeList = Lists.newArrayList(Constant.THE_WORLD);
 
     public String getKeyWord() {
         return keyWord;
@@ -25,19 +27,19 @@ public class SiteListQueryVo extends ListQueryVo {
         this.keyWord = keyWord;
     }
 
-    public SiteCategory getSiteCategory() {
-        return siteCategory;
+    public List<Integer> getCategoryIdList() {
+        return categoryIdList;
     }
 
-    public void setSiteCategory(SiteCategory siteCategory) {
-        this.siteCategory = siteCategory;
+    public void setCategoryIdList(List<Integer> categoryIdList) {
+        this.categoryIdList = categoryIdList;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public ArrayList<String> getCountryCodeList() {
+        return countryCodeList;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountryCodeList(ArrayList<String> countryCodeList) {
+        this.countryCodeList = countryCodeList;
     }
 }

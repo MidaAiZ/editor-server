@@ -42,12 +42,18 @@
         from sites s
         join countries_sites cs
         on s.sid = cs.site_id
-        where cs.country_code = #{queryVo.countryCode}
+        where cs.country_code in
+        <foreach collection="queryVo.countryCodeList" item="codeList" open="(" close=")" separator=",">
+            #{codeList}
+        </foreach>
         <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
             and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
         </if>
-        <if test="queryVo.siteCategory != null and queryVo.siteCategory.cid !=null">
-            and s.cate_id = #{queryVo.siteCategory.cid}
+        <if test="queryVo.categoryIdList != null">
+            and s.cate_id in
+            <foreach collection="queryVo.categoryIdList" item="idList" open="(" close=")" separator=",">
+                #{idList}
+            </foreach>
         </if>
         order by s.weight desc
     </select>
