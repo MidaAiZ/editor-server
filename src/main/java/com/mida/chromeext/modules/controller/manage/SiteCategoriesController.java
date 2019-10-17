@@ -24,7 +24,7 @@ public class SiteCategoriesController {
     @Autowired
     private SiteCategoryService siteCategoryService;
 
-    @GetMapping("")
+    @GetMapping
     @ApiOperation("获取网站分类列表")
     @RequiresPermissions(PermisConstant.SHOW_SITE_CATEGORY)
     public Result<List<SiteCategory>> listAllCategories() {
@@ -32,12 +32,11 @@ public class SiteCategoriesController {
         return Result.ok(siteCategories);
     }
 
-    @PostMapping("")
+    @PostMapping
     @ApiOperation("添加网站分类，需要管理员操作")
     @RequiresPermissions(PermisConstant.ADD_SITE_CATEGORY)
     public Result<List<SiteCategory>> addCategories(@Valid @RequestBody List<SiteCategory> categories) {
         // 搭配类上的@Validated才能做List嵌套验证
-        // todo 管理员权限
         List<SiteCategory> siteCategories = siteCategoryService.addCategories(categories);
         if (siteCategories == null) {
             return Result.error("添加的种类已存在");

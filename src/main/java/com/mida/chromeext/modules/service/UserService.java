@@ -1,22 +1,26 @@
 package com.mida.chromeext.modules.service;
 
-import com.mida.chromeext.modules.dao.UserDAO;
-import com.mida.chromeext.exception.BaseException;
-import com.mida.chromeext.exception.ExceptionEnum;
-import com.mida.chromeext.exception.MyException;
-import com.mida.chromeext.modules.pojo.User;
-import com.mida.chromeext.modules.pojo.UserExample;
-import com.mida.chromeext.utils.NumConst;
-import com.mida.chromeext.utils.ShiroUtils;
-import com.mida.chromeext.modules.validation.UserValidation;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import com.github.pagehelper.PageHelper;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import com.mida.chromeext.exception.BaseException;
+import com.mida.chromeext.exception.ExceptionEnum;
+import com.mida.chromeext.exception.MyException;
+import com.mida.chromeext.modules.dao.UserDAO;
+import com.mida.chromeext.modules.pojo.User;
+import com.mida.chromeext.modules.pojo.UserExample;
+import com.mida.chromeext.modules.validation.UserValidation;
+import com.mida.chromeext.modules.vo.MngUserListQueryVo;
+import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.utils.ShiroUtils;
 
 /**
  * @author lihaoyu
@@ -177,6 +181,45 @@ public class UserService {
         user.setUpdatedAt(new Date());
         userDAO.updateByPrimaryKeySelective(user);
         return true;
+    }
+
+    /**
+     * 管理员查询用户
+     *
+     * @param queryVo 复合查询条件
+     * @return List<User>
+     * @author lihaoyu
+     * @date 2019/10/17 15:40
+     */
+    public List<User> listUserByMng(MngUserListQueryVo queryVo){
+        UserExample example = new UserExample();
+        UserExample.Criteria criteria = example.createCriteria();
+        if(!CollectionUtils.isEmpty(queryVo.getUserIdList())){
+            criteria.andUidIn(queryVo.getUserIdList());
+        }
+        if(!CollectionUtils.isEmpty(queryVo.getEmailList())){
+            criteria.andEmailIn(queryVo.getEmailList());
+        }
+        if(!CollectionUtils.isEmpty(queryVo.getCountryCodeList())){
+            criteria.andCountryCodeIn(queryVo.getCountryCodeList());
+        }
+        if(queryVo.getBeginTime() != null){
+            criteria.andCreatedAtGreaterThan(queryVo.getBeginTime());
+        }
+        if(queryVo.getEndTime() != null){
+            criteria.andCreatedAtLessThan(queryVo.getEndTime());
+        }
+        PageHelper.startPage(queryVo);
+        List<User> users = userDAO.selectByExample(example);
+        return users;
+    }
+
+    public void changePwdByMng(Integer userId, String pwd){
+        User user = new User();
+        String salt = userDAO.selectByPrimaryKey(userId).getSalt();
+        user.setPassword(ShiroUtils.EncodeSalt(pwd, salt));
+        user.setUid(userId);
+        userDAO.updateByPrimaryKeySelective(user);
     }
 
 }

@@ -9,6 +9,11 @@ package com.mida.chromeext.utils;
 public class Constant {
     public static final String THE_WORLD = "ALL";
 
+    // todo 要改成一小时 这里是12秒用于测试
+    public static final int LOGIN_RECORD_GAP_TIME = 6 * 2 * 1000;
+
+    public static final String LOGIN_RECORD_TOKEN_NAME = "loginRecord";
+
     /**
      * 超级用户
      */
