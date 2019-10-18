@@ -36,6 +36,10 @@ public class Site implements Serializable {
     @JsonIgnore
     private Date updatedAt;
 
+    private Admin createdAdmin;
+
+    private SiteCategory category;
+
     public Integer getSid() {
         return sid;
     }
@@ -122,6 +126,22 @@ public class Site implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Admin getCreatedAdmin() {
+        return createdAdmin;
+    }
+
+    public void setCreatedAdmin(Admin createdAdmin) {
+        this.createdAdmin = createdAdmin;
+    }
+
+    public SiteCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(SiteCategory category) {
+        this.category = category;
     }
 
     @Override

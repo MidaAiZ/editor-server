@@ -166,9 +166,26 @@ public class SiteService {
         return affectedRows == NumConst.NUM1;
     }
 
-    public List<Site> listSitesByPage(SiteListQueryVo queryVo) {
+    /**
+     * 查询网站列表
+     * @param queryVo
+     * @return
+     */
+    public List<Site> queryList(SiteListQueryVo queryVo) {
         PageHelper.startPage(queryVo);
-        List<Site> sites = siteDAO.listSitesByPage(queryVo);
+        List<Site> sites = siteDAO.queryList(queryVo);
         return sites;
     }
+
+    /**
+     * 查询网站列表，获取关联对象
+     * @param queryVo
+     * @return
+     */
+    public List<Site> queryListWithRelations(SiteListQueryVo queryVo) {
+        PageHelper.startPage(queryVo);
+        List<Site> sites = siteDAO.queryListWithRelations(queryVo);
+        return sites;
+    }
+
 }

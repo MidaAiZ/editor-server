@@ -13,33 +13,33 @@ import com.mida.chromeext.utils.Constant;
  */
 public class SiteListQueryVo extends ListQueryVo {
 
-    private String keyWord;
+    private String keyword;
 
-    private List<Integer> categoryIdList;
+    private List<Integer> categoryIds;
 
-    private ArrayList<String> countryCodeList; // = Lists.newArrayList(Constant.THE_WORLD);
+    private ArrayList<String> countryCodes; // = Lists.newArrayList(Constant.THE_WORLD);
 
-    public String getKeyWord() {
-        return keyWord;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setKeyWord(String keyWord) {
-        this.keyWord = keyWord;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
-    public List<Integer> getCategoryIdList() {
-        return categoryIdList;
+    public List<Integer> getCategoryIds() {
+        return categoryIds;
     }
 
-    public void setCategoryIdList(List<Integer> categoryIdList) {
-        this.categoryIdList = categoryIdList;
+    public void setCategoryIds(List<Integer> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 
-    public ArrayList<String> getCountryCodeList() {
-        return countryCodeList;
+    public ArrayList<String> getCountryCodes() {
+        return countryCodes;
     }
 
-    public void setCountryCodeList(ArrayList<String> countryCodeList) {
-        this.countryCodeList = countryCodeList;
+    public void setCountryCodes(ArrayList<String> countryCodes) {
+        this.countryCodes = countryCodes;
     }
 }

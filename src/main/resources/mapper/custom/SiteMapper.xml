@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
+    <resultMap type="com.mida.chromeext.modules.pojo.Site" id="siteRelMap">
+        <id column="sid" property="sid"></id>
+        <result column="title" property="title"/>
+        <result column="url" property="url"/>
+        <result column="icon" property="icon"/>
+        <result column="used_count" property="usedCount"/>
+        <result column="page_views" property="pageViews"/>
+        <result column="cate_id" property="cateId"/>
+        <result column="weight" property="weight"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="created_by" property="createdBy"/>
+        <association property="createdAdmin" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
+                    notNullColumn="aid">
+        </association>
+        <association property="category" resultMap="com.mida.chromeext.modules.dao.mapper.SiteCategoryMapper.BaseResultMap"
+                     notNullColumn="cid">
+        </association>
+    </resultMap>
 
     <update id="increaseUsedCount" parameterType="java.lang.Integer">
         update sites
@@ -37,28 +56,53 @@
         from sites;
     </select>
 
-    <select id="listSitesByPage" resultType="com.mida.chromeext.modules.pojo.Site">
+    <select id="queryList" resultType="com.mida.chromeext.modules.pojo.Site">
         select s.sid,s.title,s.url,s.icon,s.cate_id
         from sites s
+        <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
+            join countries_sites cs
+            on s.sid = cs.site_id and cs.country_code in
+            <foreach collection="queryVo.countryCodes" item="code" open="(" close=")" separator=",">
+                #{code}
+            </foreach>
+        </if>
         <where>
-            <if test="queryVo.keyWord != null and queryVo.keyWord !=''">
-                and s.title like CONCAT(CONCAT('%',#{queryVo.keyWord}), '%')
+            <if test="queryVo.keyword != null and queryVo.keyword !=''">
+                and s.title like CONCAT(CONCAT('%',#{queryVo.keyword}), '%')
             </if>
-            <if test="queryVo.categoryIdList != null and !queryVo.categoryIdList.isEmpty()">
+            <if test="queryVo.categoryIds != null and !queryVo.categoryIds.isEmpty()">
                 and s.cate_id in
-                <foreach collection="queryVo.categoryIdList" item="idList" open="(" close=")" separator=",">
-                    #{idList}
+                <foreach collection="queryVo.categoryIds" item="cid" open="(" close=")" separator=",">
+                    #{cid}
                 </foreach>
             </if>
         </where>
-        <if test="queryVo.countryCodeList != null and !queryVo.countryCodeList.isEmpty()">
+        order by s.weight desc
+    </select>
+
+    <select id="queryListWithRelations" resultMap="siteRelMap">
+        select s.sid, s.title, s.url, s.icon, s.cate_id, c.cid, c.title, a.aid, a.number
+        from sites s
+        left join admins a on a.aid = s.created_by
+        left join site_categories c on c.cid = s.cate_id
+        <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
             join countries_sites cs
-            on s.sid = cs.site_id
-            where cs.country_code in
-            <foreach collection="queryVo.countryCodeList" item="codeList" open="(" close=")" separator=",">
-                #{codeList}
+            on s.sid = cs.site_id and cs.country_code in
+            <foreach collection="queryVo.countryCodes" item="code" open="(" close=")" separator=",">
+                #{code}
             </foreach>
         </if>
+        <where>
+            <if test="queryVo.keyword != null and queryVo.keyword !=''">
+                s.title like CONCAT(CONCAT('%',#{queryVo.keyword}), '%')
+            </if>
+            <if test="queryVo.categoryIds != null and !queryVo.categoryIds.isEmpty()">
+                and s.cate_id in
+                <foreach collection="queryVo.categoryIds" item="cid" open="(" close=")" separator=",">
+                    #{cid}
+                </foreach>
+            </if>
+        </where>
         order by s.weight desc
     </select>
 

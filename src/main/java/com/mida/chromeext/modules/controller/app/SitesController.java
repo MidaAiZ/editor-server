@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.google.common.collect.Lists;
+import com.mida.chromeext.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,15 +36,22 @@ public class SitesController {
     SiteService siteService;
 
     @GetMapping
-    @ApiOperation(value = "网站获取接口", notes = "分页方式获取网站，也可以全部获取")
+    @ApiOperation(value = "网站获取接口", notes = "根据条件查询站点列表，为防止爬虫，前台站点接口需要传入国家(地区)码列表和网站分类ID列表，并限制单次访问最高返回100条数据量")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyWord", value = "网站名称关键字", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "countryCodeList", value = "国家id", dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "categoryIdList", value = "网站类型Id", dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "keyword", value = "网站名称关键字", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "countryCodes", value = "国家(地区)码数组，默认为['ALL']", dataType = "String", allowMultiple = true, paramType = "query"),
+            @ApiImplicitParam(name = "categoryIds", value = "网站分类cid数组，默认为[0]", dataType = "Integer", allowMultiple = true, paramType = "query"),
             @ApiImplicitParam(name = "pageNum", value = "查询第几页，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页多少条，为0时查询全部数据", required = true, dataType = "Integer", paramType = "query"),})
     public Result<List<Site>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
-        List<Site> sites = siteService.listSitesByPage(queryVo);
+        if (queryVo.getCountryCodes() == null || queryVo.getCountryCodes().isEmpty()) {
+            queryVo.setCountryCodes(Lists.newArrayList(Constant.THE_WORLD));
+        }
+        if (queryVo.getCategoryIds() == null || queryVo.getCategoryIds().isEmpty()) {
+            queryVo.setCategoryIds(Lists.newArrayList(0));
+        }
+
+        List<Site> sites = siteService.queryList(queryVo);
         return Result.ok(sites);
     }
 }

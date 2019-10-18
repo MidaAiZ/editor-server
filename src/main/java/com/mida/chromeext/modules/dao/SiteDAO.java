@@ -68,7 +68,14 @@ public interface SiteDAO extends SiteMapper {
      * @author lihaoyu
      * @date 2019/9/28 21:36
      */
-    List<Site> listSitesByPage(@Param("queryVo") SiteListQueryVo queryVo);
+    List<Site> queryList(@Param("queryVo") SiteListQueryVo queryVo);
+
+    /**
+     * 查询网站列表，并获取相关关联
+     * @param queryVo
+     * @return
+     */
+    List<Site> queryListWithRelations(@Param("queryVo") SiteListQueryVo queryVo);
 
     /**
      * 列出所有网站的名字
