@@ -1,22 +1,21 @@
 package com.mida.chromeext.modules.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Country implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(value = "国家(地区)主键", hidden = true)
     private Integer cid;
 
     @NotNull(message = "Name can not be null")
-    @ApiModelProperty("国家(地区)名字")
+    @ApiModelProperty("国家(地区)的英文名字")
     private String name;
+
+    @ApiModelProperty("国家(地区)的本地语言名字")
+    private String localeName;
 
     @NotNull(message = "Code can not be null")
     @ApiModelProperty("唯一国家(地区)码")
@@ -28,14 +27,16 @@ public class Country implements Serializable {
     @ApiModelProperty("区域时区")
     private String timeZone;
 
-    @JsonIgnore
+    @ApiModelProperty("用来标识该记录是国家还是区域，0表示国家，1表示区域，默认0")
+    private Short type;
+
     private Integer usersCount;
 
-    @JsonIgnore
     private Date createdAt;
 
-    @JsonIgnore
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getCid() {
         return cid;
@@ -53,12 +54,28 @@ public class Country implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getLocaleName() {
+        return localeName;
+    }
+
+    public void setLocaleName(String localeName) {
+        this.localeName = localeName == null ? null : localeName.trim();
+    }
+
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public Short getType() {
+        return type;
+    }
+
+    public void setType(Short type) {
+        this.type = type;
     }
 
     public String getTelPrefix() {
@@ -109,7 +126,9 @@ public class Country implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", cid=").append(cid);
         sb.append(", name=").append(name);
+        sb.append(", localeName=").append(localeName);
         sb.append(", code=").append(code);
+        sb.append(", type=").append(type);
         sb.append(", telPrefix=").append(telPrefix);
         sb.append(", timeZone=").append(timeZone);
         sb.append(", usersCount=").append(usersCount);

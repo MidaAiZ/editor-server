@@ -26,8 +26,19 @@ public class CountryService {
      * @author lihaoyu
      * @date 2019/9/28 19:18
      */
-    public List<Country> listAllCountry() {
-        List<Country> countries = countryDAO.listAllCountry();
+    public List<Country> listAllCountries() {
+        List<Country> countries = countryDAO.selectAll();
+        return countries;
+    }
+
+
+    /**
+     * 通过站点ID获取关联的国家(地区)列表
+     * @param siteId
+     * @return
+     */
+    public List<Country> listCountriesBySiteId(Integer siteId) {
+        List<Country> countries = countryDAO.selectBySiteId(siteId);
         return countries;
     }
 

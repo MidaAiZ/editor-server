@@ -12,6 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface CountryDAO extends CountryMapper {
-
-    List<Country> listAllCountry();
+    List<Country> selectAll();
+    List<Country> selectBySiteId(Integer siteId);
 }

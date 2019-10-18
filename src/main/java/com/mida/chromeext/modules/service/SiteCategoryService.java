@@ -35,6 +35,15 @@ public class SiteCategoryService {
     }
 
     /**
+     * 根据cateId获取一条记录
+     * @param id
+     * @return
+     */
+    public SiteCategory getCateById(Integer id) {
+        return siteCategoryDAO.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加种类，若已有Title重复，返回null
      *
      * @param categories List<SiteCategory>

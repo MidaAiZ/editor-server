@@ -2,9 +2,8 @@ package com.mida.chromeext.modules.dao.mapper;
 
 import com.mida.chromeext.modules.pojo.Country;
 import com.mida.chromeext.modules.pojo.CountryExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CountryMapper {
     long countByExample(CountryExample example);

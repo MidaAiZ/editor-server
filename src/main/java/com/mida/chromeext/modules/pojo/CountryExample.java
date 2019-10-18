@@ -15,20 +15,20 @@ public class CountryExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -235,6 +235,76 @@ public class CountryExample {
             return (Criteria) this;
         }
 
+        public Criteria andLocaleNameIsNull() {
+            addCriterion("locale_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameIsNotNull() {
+            addCriterion("locale_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameEqualTo(String value) {
+            addCriterion("locale_name =", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameNotEqualTo(String value) {
+            addCriterion("locale_name <>", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameGreaterThan(String value) {
+            addCriterion("locale_name >", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameGreaterThanOrEqualTo(String value) {
+            addCriterion("locale_name >=", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameLessThan(String value) {
+            addCriterion("locale_name <", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameLessThanOrEqualTo(String value) {
+            addCriterion("locale_name <=", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameLike(String value) {
+            addCriterion("locale_name like", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameNotLike(String value) {
+            addCriterion("locale_name not like", value, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameIn(List<String> values) {
+            addCriterion("locale_name in", values, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameNotIn(List<String> values) {
+            addCriterion("locale_name not in", values, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameBetween(String value1, String value2) {
+            addCriterion("locale_name between", value1, value2, "localeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLocaleNameNotBetween(String value1, String value2) {
+            addCriterion("locale_name not between", value1, value2, "localeName");
+            return (Criteria) this;
+        }
+
         public Criteria andCodeIsNull() {
             addCriterion("code is null");
             return (Criteria) this;
@@ -302,6 +372,66 @@ public class CountryExample {
 
         public Criteria andCodeNotBetween(String value1, String value2) {
             addCriterion("code not between", value1, value2, "code");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNull() {
+            addCriterion("`type` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("`type` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Short value) {
+            addCriterion("`type` =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Short value) {
+            addCriterion("`type` <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Short value) {
+            addCriterion("`type` >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Short value) {
+            addCriterion("`type` >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Short value) {
+            addCriterion("`type` <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Short value) {
+            addCriterion("`type` <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Short> values) {
+            addCriterion("`type` in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Short> values) {
+            addCriterion("`type` not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Short value1, Short value2) {
+            addCriterion("`type` between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Short value1, Short value2) {
+            addCriterion("`type` not between", value1, value2, "type");
             return (Criteria) this;
         }
 
@@ -650,6 +780,38 @@ public class CountryExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -684,38 +846,6 @@ public class CountryExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

@@ -36,7 +36,7 @@ public class CountriesController {
     @GetMapping
     @ApiOperation("获取国家(地区)列表")
     public Result<List<Country>> listAllCountry() {
-        List<Country> countries = countryService.listAllCountry();
+        List<Country> countries = countryService.listAllCountries();
         return Result.ok(countries);
     }
 

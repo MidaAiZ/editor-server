@@ -3,6 +3,7 @@ package com.mida.chromeext.modules.service;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.CountriesSiteDAO;
 import com.mida.chromeext.modules.dao.SiteDAO;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.CountriesSite;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteExample;
@@ -29,6 +30,15 @@ public class SiteService {
     @Autowired
     private CountriesSiteDAO countriesSiteDAO;
 
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private SiteCategoryService siteCategoryService;
+
+    @Autowired
+    private CountryService countryService;
+
     /**
      * 根据 sid 查询网站Po
      *
@@ -39,6 +49,19 @@ public class SiteService {
      */
     public Site getSiteById(Integer id) {
         Site site = siteDAO.selectByPrimaryKey(id);
+        return site;
+    }
+
+    /**
+     * 根据sid查询网站，包含关联信息
+     */
+    public Site getSiteByIdWithRelations(Integer id) {
+        Site site = getSiteById(id);
+        if (site != null) {
+            site.setCreatedAdmin(adminService.getAdminById(site.getCreatedBy()));
+            site.setCategory(siteCategoryService.getCateById(site.getCateId()));
+            site.setCountryList(countryService.listCountriesBySiteId(site.getSid()));
+        }
         return site;
     }
 

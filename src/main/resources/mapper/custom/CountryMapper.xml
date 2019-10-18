@@ -2,8 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.CountryDAO">
 
-    <select id="listAllCountry" resultType="com.mida.chromeext.modules.pojo.Country">
-    select cid,name,code,tel_prefix,time_zone from countries
-</select>
+    <select id="selectAll" resultType="com.mida.chromeext.modules.pojo.Country">
+        select * from countries
+    </select>
+
+    <select id="selectBySiteId" resultType="com.mida.chromeext.modules.pojo.Country">
+        select * from countries
+        join countries_sites on countries.code = countries_sites.country_code
+        join sites on sites.sid = countries_sites.site_id and sites.sid = #{siteId}
+    </select>
 
 </mapper>

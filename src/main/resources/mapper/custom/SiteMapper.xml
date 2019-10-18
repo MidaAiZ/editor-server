@@ -3,7 +3,7 @@
 <mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
     <resultMap type="com.mida.chromeext.modules.pojo.Site" id="siteRelMap">
         <id column="sid" property="sid"></id>
-        <result column="title" property="title"/>
+        <result column="site_title" property="title"/>
         <result column="url" property="url"/>
         <result column="icon" property="icon"/>
         <result column="used_count" property="usedCount"/>
@@ -81,7 +81,7 @@
     </select>
 
     <select id="queryListWithRelations" resultMap="siteRelMap">
-        select s.sid, s.title, s.url, s.icon, s.cate_id, c.cid, c.title, a.aid, a.number
+        select s.sid, s.title as site_title, s.url, s.icon, s.cate_id, c.cid, c.title, a.aid, a.number
         from sites s
         left join admins a on a.aid = s.created_by
         left join site_categories c on c.cid = s.cate_id
@@ -101,6 +101,8 @@
                 <foreach collection="queryVo.categoryIds" item="cid" open="(" close=")" separator=",">
                     #{cid}
                 </foreach>
+            </if>
+            <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
             </if>
         </where>
         order by s.weight desc

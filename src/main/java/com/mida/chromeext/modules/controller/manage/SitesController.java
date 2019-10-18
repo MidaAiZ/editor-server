@@ -8,6 +8,7 @@ import com.mida.chromeext.modules.service.SiteService;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.utils.Result;
+import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,24 @@ public class SitesController {
     SiteService siteService;
 
     @GetMapping
-    @ApiOperation(value = "网站获取接口", notes = "分页方式获取网站，也可以全部获取")
+    @ApiOperation(value = "网站获取接口", notes = "分页方式查询获取网站，包含网站关联分类和创建网站的管理员信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "keyword", value = "网站名称关键字", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "countryCodes", value = "国家(地区)码数组", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "categoryIds", value = "网站分类cid数组", dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "pageNum", value = "查询第几页，最小为1", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页多少条，为0时查询全部数据", required = true, dataType = "Integer", paramType = "query"),})
+            @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     @RequiresPermissions(PermisConstant.SHOW_SITE)
     public List<Site> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
         List<Site> sites = siteService.queryListWithRelations(queryVo);
         return sites;
+    }
+
+    @GetMapping("{sid}")
+    @ApiModelProperty(value = "通过网站id获取网站详细信息", notes = "包括关联对象，管理员、国家(地区)、分类等信息")
+    public Result<Site> showSite(@PathVariable Integer sid) {
+        Site site = siteService.getSiteByIdWithRelations(sid);
+        return site != null ? Result.ok(site) : Result.error(ResultCode.NOT_FOUND.code(), "No suc site with sid = " + sid.toString());
     }
 
     /**

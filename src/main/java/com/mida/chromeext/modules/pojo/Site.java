@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -36,9 +38,14 @@ public class Site implements Serializable {
     @JsonIgnore
     private Date updatedAt;
 
+    @ApiModelProperty(hidden = true)
     private Admin createdAdmin;
 
+    @ApiModelProperty(hidden = true)
     private SiteCategory category;
+
+    @ApiModelProperty(hidden = true)
+    private List<Country> countryList;
 
     public Integer getSid() {
         return sid;
@@ -142,6 +149,14 @@ public class Site implements Serializable {
 
     public void setCategory(SiteCategory category) {
         this.category = category;
+    }
+
+    public List<Country> getCountryList() {
+        return countryList;
+    }
+
+    public void setCountryList(List<Country> countryList) {
+        this.countryList = countryList;
     }
 
     @Override

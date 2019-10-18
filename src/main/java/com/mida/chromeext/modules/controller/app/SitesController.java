@@ -41,8 +41,8 @@ public class SitesController {
             @ApiImplicitParam(name = "keyword", value = "网站名称关键字", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "countryCodes", value = "国家(地区)码数组，默认为['ALL']", dataType = "String", allowMultiple = true, paramType = "query"),
             @ApiImplicitParam(name = "categoryIds", value = "网站分类cid数组，默认为[0]", dataType = "Integer", allowMultiple = true, paramType = "query"),
-            @ApiImplicitParam(name = "pageNum", value = "查询第几页，最小为1", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页多少条，为0时查询全部数据", required = true, dataType = "Integer", paramType = "query"),})
+            @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     public Result<List<Site>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
         if (queryVo.getCountryCodes() == null || queryVo.getCountryCodes().isEmpty()) {
             queryVo.setCountryCodes(Lists.newArrayList(Constant.THE_WORLD));
