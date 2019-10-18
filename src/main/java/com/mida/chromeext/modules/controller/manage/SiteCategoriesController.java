@@ -33,7 +33,7 @@ public class SiteCategoriesController {
     }
 
     @PostMapping
-    @ApiOperation("添加网站分类，需要管理员操作")
+    @ApiOperation("添加网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.ADD_SITE_CATEGORY)
     public Result<List<SiteCategory>> addCategories(@Valid @RequestBody List<SiteCategory> categories) {
         // 搭配类上的@Validated才能做List嵌套验证
@@ -45,7 +45,7 @@ public class SiteCategoriesController {
     }
 
     @DeleteMapping("")
-    @ApiOperation("删除网站分类，需要管理员操作")
+    @ApiOperation("删除网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.DELETE_SITE_CATEGORY)
     public Result<Integer> delete(@ApiParam("种类id数组") @RequestBody List<Integer> ids) {
         // todo 管理员权限          关联太多，应该禁止删除
@@ -54,11 +54,21 @@ public class SiteCategoriesController {
     }
 
     @PutMapping("")
-    @ApiOperation("单个修改网站分类，需要管理员操作")
+    @ApiOperation("修改多个网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SITE_CATEGORY)
-    public Result<SiteCategory> update(@Valid @RequestBody SiteCategory categories) {
+    public Result<List<SiteCategory>> updateList(@Valid @RequestBody List<SiteCategory> categories) {
         // todo 管理员权限
         siteCategoryService.updateCategories(categories);
         return Result.ok(categories);
     }
+
+    @PutMapping("cid")
+    @ApiOperation("修改1个网站分类，需要管理员权限")
+    @RequiresPermissions(PermisConstant.MODIFY_SITE_CATEGORY)
+    public Result<Boolean> updateOne(@PathVariable Integer cid, @Valid @RequestBody SiteCategory category) {
+        // todo 管理员权限
+        category.setCid(cid);
+        return siteCategoryService.updateOneCategory(category) ? Result.ok(true) : Result.error();
+    }
+
 }

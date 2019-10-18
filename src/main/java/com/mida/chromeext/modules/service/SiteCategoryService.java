@@ -75,9 +75,25 @@ public class SiteCategoryService {
         return affectedRows;
     }
 
-    public SiteCategory updateCategories(SiteCategory categories) {
-        categories.setUpdatedAt(new Date());
-        siteCategoryDAO.updateByPrimaryKey(categories);
+    /**
+     * 批量更新站点分类
+     * @param categories
+     * @return
+     */
+    public List<SiteCategory> updateCategories(List<SiteCategory> categories) {
+        for (SiteCategory category : categories) {
+            category.setUpdatedAt(new Date());
+            siteCategoryDAO.updateByPrimaryKey(category);
+        }
         return categories;
     }
+
+    /**
+     * 更新1个站点分类
+     */
+    public Boolean updateOneCategory(SiteCategory category) {
+        category.setUpdatedAt(new Date());
+        return siteCategoryDAO.updateByPrimaryKey(category) > 0;
+    }
+
 }
