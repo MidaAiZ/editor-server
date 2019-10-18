@@ -48,7 +48,6 @@ public class SiteCategoriesController {
     @ApiOperation("删除网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.DELETE_SITE_CATEGORY)
     public Result<Integer> delete(@ApiParam("种类id数组") @RequestBody List<Integer> ids) {
-        // todo 管理员权限          关联太多，应该禁止删除
         int affectedRows = siteCategoryService.batchDelete(ids);
         return Result.ok(affectedRows);
     }
@@ -57,7 +56,6 @@ public class SiteCategoriesController {
     @ApiOperation("修改多个网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SITE_CATEGORY)
     public Result<List<SiteCategory>> updateList(@Valid @RequestBody List<SiteCategory> categories) {
-        // todo 管理员权限
         siteCategoryService.updateCategories(categories);
         return Result.ok(categories);
     }
@@ -66,7 +64,6 @@ public class SiteCategoriesController {
     @ApiOperation("修改1个网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SITE_CATEGORY)
     public Result<Boolean> updateOne(@PathVariable Integer cid, @Valid @RequestBody SiteCategory category) {
-        // todo 管理员权限
         category.setCid(cid);
         return siteCategoryService.updateOneCategory(category) ? Result.ok(true) : Result.error();
     }
