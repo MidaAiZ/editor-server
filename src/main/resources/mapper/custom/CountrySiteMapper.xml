@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mida.chromeext.modules.dao.CountriesSiteDAO">
+
+    <select id="listCountByCountry" resultType="com.mida.chromeext.modules.vo.statistic.StatisticSiteByCountry">
+        SELECT ifnull(cs.`count`, 0) as `count`,
+               cid, c.code, name, locale_name, type, tel_prefix, time_zone, users_count, created_at, updated_at
+        FROM countries AS c
+                 left JOIN (SELECT country_code as `code`, count(1) count
+                            FROM countries_sites
+                            GROUP BY country_code) AS cs ON c.`code` = cs.`code` </select>
+
+
+</mapper>
