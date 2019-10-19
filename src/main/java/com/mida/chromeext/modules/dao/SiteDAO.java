@@ -3,6 +3,7 @@ package com.mida.chromeext.modules.dao;
 import com.mida.chromeext.modules.dao.mapper.SiteMapper;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
+import com.mida.chromeext.modules.vo.statistic.StatisticSiteByCategory;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -85,4 +86,14 @@ public interface SiteDAO extends SiteMapper {
      * @date 2019/9/28 21:37
      */
     Set<String> listAllTitle();
+
+    /**
+     * 统计所有种类下的网站个数
+     *
+     * @return
+     * @author lihaoyu
+     * @date 2019/10/19 21:17
+     */
+    List<StatisticSiteByCategory> listCountByCategory();
+
 }

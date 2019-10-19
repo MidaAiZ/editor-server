@@ -12,4 +12,6 @@ public interface NumConst {
 
     int NUM16 = 16;
 
+    int NUM256 = 256;
+
 }

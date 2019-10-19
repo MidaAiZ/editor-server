@@ -20,7 +20,7 @@ public class CountryService {
     CountryDAO countryDAO;
 
     /**
-     * 查询所有国家，屏蔽敏感字段
+     * 查询所有国家
      *
      * @return Country List
      * @author lihaoyu

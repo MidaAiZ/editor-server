@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.LoginRecord">
     <id column="rid" jdbcType="BIGINT" property="rid" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="ua" jdbcType="VARCHAR" property="ua" />
     <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    rid, `uid`, ip, ua, login_time
+    rid, `uid`, client_id, ip, ua, login_time
   </sql>
   <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.LoginRecordExample" resultMap="BaseResultMap">
     select
@@ -103,10 +104,10 @@
     <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into login_records (`uid`, ip, ua, 
-      login_time)
-    values (#{uid,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, 
-      #{loginTime,jdbcType=TIMESTAMP})
+    insert into login_records (`uid`, client_id, ip, 
+      ua, login_time)
+    values (#{uid,jdbcType=INTEGER}, #{clientId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{ua,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
     <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
@@ -116,6 +117,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         `uid`,
+      </if>
+      <if test="clientId != null">
+        client_id,
       </if>
       <if test="ip != null">
         ip,
@@ -130,6 +134,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
       </if>
       <if test="ip != null">
         #{ip,jdbcType=VARCHAR},
@@ -157,6 +164,9 @@
       <if test="record.uid != null">
         `uid` = #{record.uid,jdbcType=INTEGER},
       </if>
+      <if test="record.clientId != null">
+        client_id = #{record.clientId,jdbcType=VARCHAR},
+      </if>
       <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
@@ -175,6 +185,7 @@
     update login_records
     set rid = #{record.rid,jdbcType=BIGINT},
       `uid` = #{record.uid,jdbcType=INTEGER},
+      client_id = #{record.clientId,jdbcType=VARCHAR},
       ip = #{record.ip,jdbcType=VARCHAR},
       ua = #{record.ua,jdbcType=VARCHAR},
       login_time = #{record.loginTime,jdbcType=TIMESTAMP}
@@ -187,6 +198,9 @@
     <set>
       <if test="uid != null">
         `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
       </if>
       <if test="ip != null">
         ip = #{ip,jdbcType=VARCHAR},
@@ -203,6 +217,7 @@
   <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
     update login_records
     set `uid` = #{uid,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
       ua = #{ua,jdbcType=VARCHAR},
       login_time = #{loginTime,jdbcType=TIMESTAMP}

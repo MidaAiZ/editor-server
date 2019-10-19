@@ -1,20 +1,24 @@
 package com.mida.chromeext.interceptor;
 
 
-import com.mida.chromeext.modules.pojo.LoginRecord;
-import com.mida.chromeext.modules.service.LoginRecordService;
-import com.mida.chromeext.utils.Constant;
-import com.mida.chromeext.utils.JwtUtils;
-import io.jsonwebtoken.Claims;
+import java.util.UUID;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.mida.chromeext.modules.pojo.LoginRecord;
+import com.mida.chromeext.modules.service.LoginRecordService;
+import com.mida.chromeext.utils.Constant;
+import com.mida.chromeext.utils.JwtUtils;
+
+import io.jsonwebtoken.Claims;
 
 /**
  * @author lihaoyu
@@ -35,6 +39,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         // 获取 登录记录 cookie
         String loginToken = "";
         String userToken = "";
+        String clientToken = "";
         Integer userId = null;
         // 通过cookie获取用户token
         if (request.getCookies() != null) {
@@ -44,12 +49,26 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
                 }
                 if (cookie.getName().equals(jwtUtils.getHeader())) {
                     userToken = cookie.getValue();
+                    continue;
                 }
                 if (cookie.getName().equals(Constant.LOGIN_RECORD_TOKEN_NAME)) {
                     loginToken = cookie.getValue();
+                    continue;
+                }
+                if (cookie.getName().equals(Constant.TOEKN_CLIENT)) {
+                    clientToken = cookie.getValue();
+                    continue;
                 }
             }
         }
+
+        // 如果没有 Client Token  是第一次
+        if(StringUtils.isBlank(clientToken)){
+            Cookie clientCookie = new Cookie(Constant.TOEKN_CLIENT, UUID.randomUUID().toString());
+            response.addCookie(clientCookie);
+            return true;
+        }
+
         // 如果用户登录了 记录其id
         if (StringUtils.isNotBlank(userToken)) {
             Claims claims = jwtUtils.getClaimByToken(userToken);
@@ -61,13 +80,13 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.isBlank(loginToken) ||
                 System.currentTimeMillis() - Long.parseLong(loginToken) > Constant.LOGIN_RECORD_GAP_TIME) {
             // 更新 cookie
-            createCookie(Constant.LOGIN_RECORD_TOKEN_NAME, userId, request, response);
+            createCookie(Constant.LOGIN_RECORD_TOKEN_NAME, userId, clientToken, request, response);
         }
         // 否则什么也不做
         return true;
     }
 
-    private Cookie createCookie(String header, Integer userId, HttpServletRequest request, HttpServletResponse response) {
+    private Cookie createCookie(String header, Integer userId, String clientToken, HttpServletRequest request, HttpServletResponse response) {
         String token = String.valueOf(System.currentTimeMillis());
         Cookie cookie = new Cookie(header, token);
         cookie.setHttpOnly(true);
@@ -78,6 +97,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         if (userId != null) {
             record.setUid(userId);
         }
+        record.setClientId(clientToken);
         record.setIp(request.getRemoteAddr());
         record.setUa(request.getHeader("user-agent"));
         loginRecordService.addRecord(record);

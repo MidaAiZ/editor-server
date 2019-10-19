@@ -1,10 +1,15 @@
 package com.mida.chromeext.modules.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
+import com.mida.chromeext.modules.vo.statistic.StatisticUserByCountry;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -222,4 +227,62 @@ public class UserService {
         userDAO.updateByPrimaryKeySelective(user);
     }
 
+    /**
+     * 从登录记录中查询某段时间的登录人数
+     *
+     * @param beginDate 开始时间必填
+     * @param  endDate  可以为空
+     * @return 统计结果map    key是某天，value是人数
+     * @author lihaoyu
+     * @date 2019/10/19 16:12
+     */
+    public Map<String,Long> listDailyCounts(Date beginDate, Date endDate){
+        // mybatis 返回的Map是每一行中多个列组成的map
+        List<StatisticCountVo> voList = userDAO.dailyCounts(beginDate, endDate);
+        Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
+        for (StatisticCountVo vo : voList) {
+            resMap.put(vo.getName(), vo.getCount());
+        }
+        return resMap;
+    }
+
+    /**
+     * 同上 月统计
+     *
+     * @param beginDate
+     * @param endDate
+     * @return   同上
+     * @author lihaoyu
+     * @date 2019/10/19 16:23
+     */
+    public Map<String,Long> listMonthlyCounts(Date beginDate, Date endDate){
+        // mybatis 返回的Map是每一行中多个列组成的map
+        List<StatisticCountVo> voList = userDAO.monthlyCounts(beginDate, endDate);
+        Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
+        voList.forEach(vo -> resMap.put(vo.getName(), vo.getCount()));
+        return resMap;
+    }
+
+    /**
+     * 统计所有国家的用户数
+     *
+     * @return 统计结果map    key是某国，value是人数
+     * @author lihaoyu
+     * @date 2019/10/19 17:40
+     */
+    public List<StatisticUserByCountry> listCountsByCountry(){
+        return userDAO.listCountsByCountry();
+
+    }
+
+    /**
+     * 统计所有用户量
+     *
+     * @return 总数
+     * @author lihaoyu
+     * @date 2019/10/19 21:39
+     */
+    public Long countAll(){
+        return userDAO.countByExample(new UserExample());
+    }
 }

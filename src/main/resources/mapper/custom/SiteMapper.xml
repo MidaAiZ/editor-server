@@ -112,4 +112,20 @@
         select title
         from sites
     </select>
+
+<select id="listCountByCategory" resultType="com.mida.chromeext.modules.vo.statistic.StatisticSiteByCategory">
+    SELECT
+        ifnull( s.`count`, 0 ) AS `count`,
+        cid,
+        title,
+        `index`,
+        sites_count,
+        created_at,
+        updated_at
+    FROM
+        site_categories AS c
+            LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
+
+</select>
+
 </mapper>

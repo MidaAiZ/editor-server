@@ -7,6 +7,7 @@ import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.CountriesSite;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteExample;
+import com.mida.chromeext.modules.vo.statistic.StatisticSiteByCategory;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
@@ -209,6 +210,29 @@ public class SiteService {
         PageHelper.startPage(queryVo);
         List<Site> sites = siteDAO.queryListWithRelations(queryVo);
         return sites;
+    }
+
+    /**
+     * 统计所有种类下的网站个数
+     *
+     * @param
+     * @author lihaoyu
+     * @date 2019/10/19 21:17
+     */
+    public List<StatisticSiteByCategory> listCountByCategory(){
+        return siteDAO.listCountByCategory();
+    }
+
+    /**
+     * 统计网站总数
+     *
+     * @return 总数
+     * @author lihaoyu
+     * @date 2019/10/19 21:36
+     */
+    public Long countAll(){
+        long count = siteDAO.countByExample(new SiteExample());
+        return count;
     }
 
 }
