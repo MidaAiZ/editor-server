@@ -9,8 +9,8 @@ import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserExample;
 import com.mida.chromeext.modules.validation.UserValidation;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
-import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
 import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
+import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.ShiroUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -202,23 +202,23 @@ public class UserService {
         if (!CollectionUtils.isEmpty(queryVo.getCountryCodeList())) {
             criteria.andCountryCodeIn(queryVo.getCountryCodeList());
         }
-        if (queryVo.getBeginTime() != null) {
-            criteria.andCreatedAtGreaterThan(queryVo.getBeginTime());
+        if(queryVo.getCreatedAfter() != null){
+            criteria.andCreatedAtGreaterThan(queryVo.getCreatedAfter());
         }
-        if (queryVo.getEndTime() != null) {
-            criteria.andCreatedAtLessThan(queryVo.getEndTime());
+        if(queryVo.getCreatedBefore() != null){
+            criteria.andCreatedAtLessThan(queryVo.getCreatedBefore());
         }
         PageHelper.startPage(queryVo);
         List<User> users = userDAO.selectByExample(example);
         return users;
     }
 
-    public void changePwdByMng(Integer userId, String pwd) {
+    public Boolean changePwdByMng(Integer userId, String pwd){
         User user = new User();
         String salt = userDAO.selectByPrimaryKey(userId).getSalt();
         user.setPassword(ShiroUtils.EncodeSalt(pwd, salt));
         user.setUid(userId);
-        userDAO.updateByPrimaryKeySelective(user);
+        return userDAO.updateByPrimaryKeySelective(user) > 0;
     }
 
     /**

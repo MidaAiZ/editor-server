@@ -23,26 +23,26 @@ public class MngUserListQueryVo extends ListQueryVo {
     /***
      * 注册的开始和结束时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date beginTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date createdBefore;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date endTime;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date createdAfter;
 
-    public Date getBeginTime() {
-        return beginTime;
+    public Date getCreatedBefore() {
+        return createdBefore;
     }
 
-    public void setBeginTime(Date beginTime) {
-        this.beginTime = beginTime;
+    public void setCreatedBefore(Date createdBefore) {
+        this.createdBefore = createdBefore;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public Date getCreatedAfter() {
+        return createdAfter;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setCreatedAfter(Date createdAfter) {
+        this.createdAfter = createdAfter;
     }
 
     public List<String> getEmailList() {

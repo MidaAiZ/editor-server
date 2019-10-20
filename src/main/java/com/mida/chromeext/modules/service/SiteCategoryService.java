@@ -65,7 +65,7 @@ public class SiteCategoryService {
             category.setUpdatedAt(date);
         }
         // 少量批添加
-        categories.forEach(s -> siteCategoryDAO.insert(s));
+        categories.forEach(s -> siteCategoryDAO.insertSelective(s));
         return categories;
     }
 
