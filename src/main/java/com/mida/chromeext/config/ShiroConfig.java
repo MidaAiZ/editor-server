@@ -11,13 +11,14 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import javax.servlet.Filter;
 
 /**
  * 类ShiroConfig的功能描述:
  * Shiro配置
+ *
  * @auther hxy
  * @date 2017-11-15 21:50:12
  */
@@ -54,7 +55,7 @@ public class ShiroConfig {
         shiroFilter.setSecurityManager(securityManager);
         shiroFilter.setLoginUrl("manage/login");
         Map<String, Filter> filter = new LinkedHashMap<>();
-        filter.put("authc",new ShiroLoginFilter());
+        filter.put("authc", new ShiroLoginFilter());
         shiroFilter.setFilters(filter);
         // shiroFilter.setSuccessUrl("/index.html");
         // shiro不拦截资源
@@ -79,6 +80,7 @@ public class ShiroConfig {
 
     /**
      * 保证实现了Shiro内部lifecycle函数的bean执行
+     *
      * @return
      */
     @Bean("lifecycleBeanPostProcessor")
@@ -88,6 +90,7 @@ public class ShiroConfig {
 
     /**
      * AOP式方法级权限检查
+     *
      * @return
      */
 //    注释，避免多次查询权限
@@ -97,7 +100,6 @@ public class ShiroConfig {
 //        proxyCreator.setProxyTargetClass(true);
 //        return proxyCreator;
 //    }
-
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();

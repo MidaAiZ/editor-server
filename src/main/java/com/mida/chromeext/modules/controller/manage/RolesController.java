@@ -74,6 +74,7 @@ public class RolesController {
     /**
      * 删除系统角色
      * 系统默认的超级管理员和管理员角色禁止删除
+     *
      * @param roleIds
      * @return
      */
@@ -81,7 +82,7 @@ public class RolesController {
     @ApiOperation("删除角色列表")
     @RequiresPermissions(PermisConstant.DELETE_SYS_ROLE)
     public Result<Boolean> deleteList(@ApiParam("角色id列表") @RequestBody List<Integer> roleIds) {
-        List<Role>  roles = roleService.getRolesByIds(roleIds);
+        List<Role> roles = roleService.getRolesByIds(roleIds);
         for (Role role : roles) {
             if (role.getName().equals(RoleConstant.SUPER_ROLE) || role.getName().equals(RoleConstant.ADMIN_ROLE)) {
                 return Result.error(ResultCode.FORBIDDEN.code(), "Illegal Operation");

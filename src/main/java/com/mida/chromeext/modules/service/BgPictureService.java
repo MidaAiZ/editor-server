@@ -6,8 +6,6 @@ import com.mida.chromeext.modules.pojo.BgPicture;
 import com.mida.chromeext.modules.pojo.BgPictureExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.utils.NumConst;
-import io.swagger.models.auth.In;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +24,7 @@ public class BgPictureService {
 
     /**
      * 随机获取一条数据
+     *
      * @return
      */
     public BgPicture getRandomBgPicture() {
@@ -42,6 +41,7 @@ public class BgPictureService {
 
     /**
      * 获取多条数据
+     *
      * @param queryVo
      * @return
      */
@@ -53,6 +53,7 @@ public class BgPictureService {
 
     /**
      * 插入一条数据
+     *
      * @param picture
      * @return
      */
@@ -65,6 +66,7 @@ public class BgPictureService {
 
     /**
      * 通过主键更新一条数据
+     *
      * @param picture
      * @return
      */
@@ -74,10 +76,11 @@ public class BgPictureService {
 
     /**
      * 通过主键删除一条记录
+     *
      * @param pid
      * @return
      */
     public Boolean deleteById(Integer pid) {
-        return  bgPictureDAO.deleteByPrimaryKey(pid) > 0;
+        return bgPictureDAO.deleteByPrimaryKey(pid) > 0;
     }
 }

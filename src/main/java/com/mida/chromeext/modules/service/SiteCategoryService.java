@@ -36,6 +36,7 @@ public class SiteCategoryService {
 
     /**
      * 根据cateId获取一条记录
+     *
      * @param id
      * @return
      */
@@ -77,6 +78,7 @@ public class SiteCategoryService {
 
     /**
      * 批量更新站点分类
+     *
      * @param categories
      * @return
      */

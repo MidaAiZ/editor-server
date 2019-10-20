@@ -1,5 +1,6 @@
 package com.mida.chromeext.modules.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SiteViewHistory implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(hidden = true)

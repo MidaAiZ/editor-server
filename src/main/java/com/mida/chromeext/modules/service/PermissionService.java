@@ -57,7 +57,8 @@ public class PermissionService {
 
     /**
      * 获取系统内所有权限列表
-      * @return
+     *
+     * @return
      */
     public List<Permission> getAllPermissions() {
         return permissionDAO.selectByExample(new PermissionExample());
@@ -75,6 +76,7 @@ public class PermissionService {
 
     /**
      * 通过权限字符串列表查询权限
+     *
      * @param permissions
      * @return
      */
@@ -86,6 +88,7 @@ public class PermissionService {
 
     /**
      * 通过角色id获取角色所有的权限
+     *
      * @param roleId
      * @return
      */
@@ -95,6 +98,7 @@ public class PermissionService {
 
     /**
      * 根据角色id获取不具有的权限列表
+     *
      * @param roleId
      * @return
      */

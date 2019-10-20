@@ -29,6 +29,8 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
 
     // 设置会话的过期时间
     private int seconds = 0;
+    @Autowired
+    private RedisUtil redisUtil;
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
@@ -37,9 +39,6 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
-
-    @Autowired
-    private RedisUtil redisUtil;
 
     /**
      * 重写CachingSessionDAO中readSession方法，如果Session中没有登陆信息就调用doReadSession方法从Redis中重读
@@ -92,7 +91,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
         try {
             // session由Redis缓存失效决定，这里只是简单标识
             session.setTimeout(seconds);
-            redisUtil.setObject(prefix + sessionId,session,seconds);
+            redisUtil.setObject(prefix + sessionId, session, seconds);
             logger.info("sessionId {} name {} 被创建", sessionId, session.getClass().getName());
         } catch (Exception e) {
             logger.warn("创建Session失败", e);
@@ -115,7 +114,7 @@ public class CachingShiroSessionDao extends CachingSessionDAO {
         }
         try {
             try {
-                redisUtil.setObject(prefix+session.getId(),session,seconds);
+                redisUtil.setObject(prefix + session.getId(), session, seconds);
                 logger.info("sessionId {} name {} 被更新", session.getId(), session.getClass().getName());
             } catch (Exception e) {
                 logger.info("sessionId {} name {} 更新异常", session.getId(), session.getClass().getName());

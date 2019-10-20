@@ -72,7 +72,8 @@
     <sql id="Base_Column_List">
     cid, title, `index`, sites_count, created_at, updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteCategoryExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteCategoryExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -151,7 +152,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteCategoryExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteCategoryExample"
+            resultType="java.lang.Long">
         select count(*) from site_categories
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>

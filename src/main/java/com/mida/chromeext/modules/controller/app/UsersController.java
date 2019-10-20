@@ -1,15 +1,5 @@
 package com.mida.chromeext.modules.controller.app;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.RequestContextUtils;
-
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.exception.BaseException;
@@ -18,12 +8,19 @@ import com.mida.chromeext.modules.service.UserService;
 import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import springfox.documentation.annotations.ApiIgnore;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("users")
@@ -37,18 +34,18 @@ public class UsersController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "number", value = "账号", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "countryCode", value = "国家码",defaultValue ="CN" ,  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "tel", value = "电话",  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "telPrefix", value = "电话前缀",  dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "gender",defaultValue ="0" ,value = "性别",  dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "occupation", value = "职业",  dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "countryCode", value = "国家码", defaultValue = "CN", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "tel", value = "电话", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "telPrefix", value = "电话前缀", dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "gender", defaultValue = "0", value = "性别", dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "occupation", value = "职业", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),})
     public Result<User> register(@ApiIgnore @Validated User regUser, HttpServletRequest request) {
         // 如果没填国家码
-        if(StringUtils.isEmpty(regUser.getCountryCode())){
+        if (StringUtils.isEmpty(regUser.getCountryCode())) {
             Locale locale = RequestContextUtils.getLocaleResolver(request).resolveLocale(request);
             String country = locale.getCountry();
-            if(StringUtils.isEmpty(country)){
+            if (StringUtils.isEmpty(country)) {
                 country = Constant.THE_WORLD;
             }
             regUser.setCountryCode(country);
@@ -88,14 +85,14 @@ public class UsersController {
     @PutMapping("profile")
     @ApiOperation("修改用户信息,前端先填充好，让用户修改")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "gender", value = "性别",  dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "gender", value = "性别", dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "tel", value = "手机", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "prefix", value = "手机前缀", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "occupation", value = "职业", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "国家码", dataType = "String", paramType = "query"),
-             })
+    })
     public Result updateUserInfo(Byte gender, String tel, String prefix, String occupation, String code,
-                                  @ApiIgnore @CurrentUser User user) throws BaseException {
+                                 @ApiIgnore @CurrentUser User user) throws BaseException {
         User preValidation = new User();
         preValidation.setCountryCode(code);
         preValidation.setTel(tel);

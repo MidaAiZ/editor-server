@@ -75,7 +75,8 @@
     <sql id="Base_Column_List">
     mid, title, url, icon_src, is_folder, folder_id, user_id, `index`, created_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -174,7 +175,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample"
+            resultType="java.lang.Long">
         select count(*) from user_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>

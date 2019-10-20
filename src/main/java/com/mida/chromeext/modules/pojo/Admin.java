@@ -1,40 +1,32 @@
 package com.mida.chromeext.modules.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Admin implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(hidden = true)
     private Integer aid;
-
     private String number;
-
     @JsonIgnore
     private String password;
-
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     private String salt;
-
     private String email;
-
     private String tel;
-
     private String telPrefix;
-
     @ApiModelProperty(hidden = true)
     private String roles;
-
     @ApiModelProperty(hidden = true)
     private Date createdAt;
-
     @ApiModelProperty(hidden = true)
     private Date updatedAt;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getAid() {
         return aid;

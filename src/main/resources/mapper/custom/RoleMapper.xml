@@ -8,7 +8,8 @@
         <id column="rid" property="rid"></id>
         <result column="name" property="name"/>
         <result column="desc_r" property="description"/>
-        <collection property="permissions" resultMap="com.mida.chromeext.modules.dao.mapper.PermissionMapper.BaseResultMap"
+        <collection property="permissions"
+                    resultMap="com.mida.chromeext.modules.dao.mapper.PermissionMapper.BaseResultMap"
                     notNullColumn="pid">
         </collection>
     </resultMap>

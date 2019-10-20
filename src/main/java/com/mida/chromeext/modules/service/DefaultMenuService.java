@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.DefaultMenuDAO;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
-import com.mida.chromeext.modules.vo.ListQueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

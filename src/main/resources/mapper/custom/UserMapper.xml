@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mida.chromeext.modules.dao.UserDAO">
+
+    <select id="listDailyAliveUsersCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+        SELECT date(login_time) as `name` , count(DISTINCT(client_id)) as count FROM `login_records`
+        where
+        <![CDATA[ login_time >= #{beginTime,jdbcType=DATE}]]>
+        <if test="endTime != null">
+            and <![CDATA[ login_time <= #{endTime,jdbcType=DATE} ]]>
+        </if>
+        GROUP BY date(login_time)
+    </select>
+
+    <select id="listMonthlyAliveUsersCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+        SELECT DATE_FORMAT(login_time,'%Y-%m') as `name` , count(DISTINCT(client_id)) as count FROM `login_records`
+        where
+        <![CDATA[ login_time >= #{beginTime,jdbcType=DATE}]]>
+        <if test="endTime != null">
+            and <![CDATA[ login_time <= #{endTime,jdbcType=DATE} ]]>
+        </if>
+        GROUP BY DATE_FORMAT(login_time,'%Y-%m')
+    </select>
+
+    <select id="listUsersCountByCountry" resultType="com.mida.chromeext.modules.vo.statistic.CountryUsersCount">
+        SELECT
+            c.cid, c.name, c.code, c.locale_name, ifnull(u.`count`, 0) as `users_count`
+        FROM
+            countries AS c
+                left JOIN ( SELECT country_code as `code`, count(1) count FROM users GROUP BY country_code ) AS u ON c.`code` = u.`code`
+    </select>
+</mapper>

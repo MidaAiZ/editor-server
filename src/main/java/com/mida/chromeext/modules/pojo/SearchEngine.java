@@ -1,5 +1,6 @@
 package com.mida.chromeext.modules.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SearchEngine implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer eid;

@@ -38,7 +38,7 @@ import java.util.Set;
 @Component
 public class AdminRealm extends AuthorizingRealm {
     // 缓存键
-    private static final String AUTHORIZATION_CACHE_NAME="chrome-ext-admin-authorization";
+    private static final String AUTHORIZATION_CACHE_NAME = "chrome-ext-admin-authorization";
 
     private static final Logger logger = LoggerFactory.getLogger(AdminRealm.class);
 
@@ -57,7 +57,7 @@ public class AdminRealm extends AuthorizingRealm {
         Object o = principals.getPrimaryPrincipal();
         if (o != null) {
             Admin admin;
-            admin = (o instanceof Admin) ? (Admin)o : JSON.parseObject(JSON.toJSON(o).toString(), Admin.class);
+            admin = (o instanceof Admin) ? (Admin) o : JSON.parseObject(JSON.toJSON(o).toString(), Admin.class);
             //根据用户id查询该用户所有的角色,并加入到shiro的SimpleAuthorizationInfo
             List<Role> roles = roleService.getRolesByAdminId(admin.getAid());
             Set<String> permissions = new HashSet<>();
@@ -98,13 +98,14 @@ public class AdminRealm extends AuthorizingRealm {
      */
     public void clearAuthorizationInfoCache() {
         Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
-        if(cache!=null) {
+        if (cache != null) {
             cache.clear();
         }
     }
 
     /**
      * 清除指定用户的缓存
+     *
      * @param admin
      */
     private void clearAuthorizationInfoCache(Admin admin) {

@@ -10,16 +10,16 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 @Component
 public class RedisUtil {
 
-    private  Logger log = Logger.getLogger(RedisUtil.class);
+    private Logger log = Logger.getLogger(RedisUtil.class);
 
     @Autowired
     private JedisPool jedisPool;
 
-    private Jedis getJedis()  {
+    private Jedis getJedis() {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
-            return  jedis;
+            return jedis;
         } catch (JedisConnectionException e) {
             log.error("获取Redis 异常", e);
             throw e;
@@ -53,15 +53,15 @@ public class RedisUtil {
         try {
             //为-1时不设置超时时间
             if (timeout != -1) {
-                setString(key,value,timeout);
+                setString(key, value, timeout);
             } else {
-                setString(key,value);
+                setString(key, value);
             }
             result = false;
         } catch (Exception e) {
             throw e;
         }
-        return  result;
+        return result;
     }
 
     /**
@@ -70,7 +70,7 @@ public class RedisUtil {
      * @param key 待获取数据的key
      * @return 返回key对应的对象
      */
-    public  Object getObject(String key) throws Exception {
+    public Object getObject(String key) throws Exception {
         Object object = null;
         try {
             String serializeObj = getString(key);
@@ -79,7 +79,7 @@ public class RedisUtil {
             } else {
                 object = SerializeUtil.deserialize(serializeObj);
             }
-        }  catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
         return object;
@@ -116,10 +116,10 @@ public class RedisUtil {
             if ("OK".equals(result)) {
                 return true;
             } else {
-                return  false;
+                return false;
             }
-        } catch (Exception e){
-            throw  e;
+        } catch (Exception e) {
+            throw e;
         } finally {
             releaseRedis(jedis);
         }
@@ -132,7 +132,7 @@ public class RedisUtil {
      * @return 返回key对应的数据
      */
     @SuppressWarnings("deprecation")
-    public  String getString(String key) throws Exception {
+    public String getString(String key) throws Exception {
         Jedis jedis = null;
         try {
             jedis = getJedis();
@@ -146,6 +146,7 @@ public class RedisUtil {
 
     /**
      * Jedis 对象释放
+     *
      * @param jedis
      */
     public void releaseRedis(Jedis jedis) {
@@ -172,7 +173,7 @@ public class RedisUtil {
                 result = true;
             }
         } catch (Exception e) {
-            throw  e;
+            throw e;
         } finally {
             releaseRedis(jedis);
         }

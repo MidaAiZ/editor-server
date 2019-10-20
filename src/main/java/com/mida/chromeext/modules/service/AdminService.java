@@ -27,12 +27,13 @@ import java.util.UUID;
 public class AdminService {
 
     @Autowired
+    RoleService roleService;
+    @Autowired
     private AdminDAO adminDAO;
-
-    @Autowired RoleService roleService;
 
     /**
      * 创建管理员，同时指定其所拥有的角色
+     *
      * @param newAdmin
      * @return
      */
@@ -87,6 +88,7 @@ public class AdminService {
 
     /**
      * 根据number获取管理员
+     *
      * @param number
      * @return
      */
@@ -115,12 +117,13 @@ public class AdminService {
      * 根据角色获取管理员
      */
     public Admin getAdminByRoleName(String roleName) {
-       return adminDAO.selectAdminByRoleName(roleName);
+        return adminDAO.selectAdminByRoleName(roleName);
     }
 
     /**
      * 获取系统的第一个超级管理员
      * 该管理员理论上不可删除，不可变更
+     *
      * @return
      */
     public Admin getFirstSuperAdmin() {
@@ -128,7 +131,9 @@ public class AdminService {
         List<String> superName = new ArrayList<>(1);
         superName.add(RoleConstant.SUPER_ROLE);
         List<Admin> list = adminDAO.selectAdminByRoleNames(superName);
-        if (list == null || list.isEmpty()) { return null; }
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
         return list.get(0);
     }
 }

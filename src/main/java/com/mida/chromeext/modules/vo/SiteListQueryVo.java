@@ -3,9 +3,6 @@ package com.mida.chromeext.modules.vo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-import com.mida.chromeext.utils.Constant;
-
 
 /**
  * @author lihaoyu

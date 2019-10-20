@@ -1,7 +1,10 @@
 package com.mida.chromeext.modules.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DefaultMenu implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer did;

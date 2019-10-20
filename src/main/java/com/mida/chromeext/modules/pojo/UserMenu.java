@@ -1,11 +1,13 @@
 package com.mida.chromeext.modules.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserMenu implements Serializable {
     private static final long serialVersionUID = 1L;
     private String mid;

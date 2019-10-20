@@ -1,10 +1,8 @@
 package com.mida.chromeext.modules.service;
 
-import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.AdminRoleDAO;
 import com.mida.chromeext.modules.pojo.AdminRole;
 import com.mida.chromeext.modules.pojo.AdminRoleExample;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

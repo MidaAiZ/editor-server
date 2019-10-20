@@ -1,17 +1,16 @@
 package com.mida.chromeext.config;
 
-import java.util.List;
-
+import com.mida.chromeext.interceptor.LoginRecordInterceptor;
+import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
+import com.mida.chromeext.resolver.LoginAdminHandlerMethodArgumentResolver;
+import com.mida.chromeext.resolver.LoginUserHandlerMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.mida.chromeext.interceptor.LoginRecordInterceptor;
-import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
-import com.mida.chromeext.resolver.LoginAdminHandlerMethodArgumentResolver;
-import com.mida.chromeext.resolver.LoginUserHandlerMethodArgumentResolver;
+import java.util.List;
 
 /**
  * 类WebMvcConfig的功能描述:

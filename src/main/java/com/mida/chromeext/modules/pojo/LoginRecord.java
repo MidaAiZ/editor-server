@@ -4,17 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LoginRecord implements Serializable {
-    private Long rid;
-
-    private Integer uid;
-
-    private String ip;
-
-    private String ua;
-
-    private Date loginTime;
-
     private static final long serialVersionUID = 1L;
+    private Long rid;
+    private Integer uid;
+    private String clientId;
+    private String ip;
+    private String ua;
+    private Date loginTime;
 
     public Long getRid() {
         return rid;
@@ -30,6 +26,14 @@ public class LoginRecord implements Serializable {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId == null ? null : clientId.trim();
     }
 
     public String getIp() {
@@ -64,6 +68,7 @@ public class LoginRecord implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", rid=").append(rid);
         sb.append(", uid=").append(uid);
+        sb.append(", clientId=").append(clientId);
         sb.append(", ip=").append(ip);
         sb.append(", ua=").append(ua);
         sb.append(", loginTime=").append(loginTime);

@@ -30,8 +30,34 @@ import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 @RestController("oss-server")
-@Api(value="阿里云oss静态资源服务", tags="{}")
+@Api(value = "阿里云oss静态资源服务", tags = "{}")
 public class AliOssServer {
+    /**
+     * 验证RSA
+     *
+     * @param content
+     * @param sign
+     * @param publicKey
+     * @return
+     */
+    public static boolean doCheck(String content, byte[] sign, String publicKey) {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            byte[] encodedKey = BinaryUtil.fromBase64String(publicKey);
+            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
+            java.security.Signature signature = java.security.Signature.getInstance("MD5withRSA");
+            signature.initVerify(pubKey);
+            signature.update(content.getBytes());
+            boolean bverify = signature.verify(sign);
+            return bverify;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     /**
      * 获取文件上传token
      */
@@ -100,7 +126,7 @@ public class AliOssServer {
      * @param url
      * @return
      */
-    @SuppressWarnings({ "finally" })
+    @SuppressWarnings({"finally"})
     public String executeGet(String url) {
         BufferedReader in = null;
 
@@ -171,31 +197,5 @@ public class AliOssServer {
         authStr += "\n" + ossCallbackBody;
         ret = doCheck(authStr, authorization, retString);
         return ret;
-    }
-
-    /**
-     * 验证RSA
-     *
-     * @param content
-     * @param sign
-     * @param publicKey
-     * @return
-     */
-    public static boolean doCheck(String content, byte[] sign, String publicKey) {
-        try {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            byte[] encodedKey = BinaryUtil.fromBase64String(publicKey);
-            PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
-            java.security.Signature signature = java.security.Signature.getInstance("MD5withRSA");
-            signature.initVerify(pubKey);
-            signature.update(content.getBytes());
-            boolean bverify = signature.verify(sign);
-            return bverify;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
     }
 }

@@ -22,13 +22,11 @@ import java.util.*;
 @Component
 public class AppInit {
     @Autowired
+    PermissionService permissionService;
+    @Autowired
     private AdminService adminService;
-
     @Autowired
     private RoleService roleService;
-
-    @Autowired
-    PermissionService permissionService;
 
     @PostConstruct
     public void init() {
@@ -85,7 +83,9 @@ public class AppInit {
             // 获取权限所有变量的值
             Class claszInner = RoleConstant.class.getClass();
             Field[] fields = RoleConstant.class.getFields();
-            for (Field field : fields) { roleNameMap.put((String) field.get(claszInner), field); }
+            for (Field field : fields) {
+                roleNameMap.put((String) field.get(claszInner), field);
+            }
 
             // 从数据库中检索已存在角色
             List<String> roleNames = new ArrayList();
