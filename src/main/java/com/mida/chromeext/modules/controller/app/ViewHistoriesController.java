@@ -3,7 +3,6 @@ package com.mida.chromeext.modules.controller.app;
 import com.mida.chromeext.modules.pojo.SiteViewHistory;
 import com.mida.chromeext.modules.service.SiteViewHistoryService;
 import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.modules.vo.SiteViewHistoryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @RestController
 @RequestMapping("view_histories")

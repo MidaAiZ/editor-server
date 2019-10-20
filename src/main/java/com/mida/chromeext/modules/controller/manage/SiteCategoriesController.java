@@ -1,5 +1,6 @@
 package com.mida.chromeext.modules.controller.manage;
 
+import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.SiteCategoryService;
 import com.mida.chromeext.utils.Result;
@@ -10,8 +11,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import com.mida.chromeext.components.shiro.PermisConstant;
-
 
 import javax.validation.Valid;
 import java.util.List;

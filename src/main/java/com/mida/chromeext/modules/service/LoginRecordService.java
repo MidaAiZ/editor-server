@@ -16,7 +16,7 @@ public class LoginRecordService {
     LoginRecordDAO loginRecordDAO;
 
 
-    public void addRecord(LoginRecord record){
+    public void addRecord(LoginRecord record) {
         loginRecordDAO.insertSelective(record);
     }
 

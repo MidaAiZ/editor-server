@@ -3,14 +3,13 @@ package com.mida.chromeext.modules.service;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.CountriesSiteDAO;
 import com.mida.chromeext.modules.dao.SiteDAO;
-import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.CountriesSite;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteExample;
-import com.mida.chromeext.modules.vo.statistic.StatisticSiteByCategory;
-import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
+import com.mida.chromeext.modules.vo.statistic.CategorySitesCount;
+import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -100,6 +99,7 @@ public class SiteService {
 
     /**
      * 更新一条网站数据
+     *
      * @param site
      * @return
      */
@@ -192,6 +192,7 @@ public class SiteService {
 
     /**
      * 查询网站列表
+     *
      * @param queryVo
      * @return
      */
@@ -203,6 +204,7 @@ public class SiteService {
 
     /**
      * 查询网站列表，获取关联对象
+     *
      * @param queryVo
      * @return
      */
@@ -213,14 +215,14 @@ public class SiteService {
     }
 
     /**
-     * 统计所有种类下的网站个数
+     * 统计所有网站分类下的网站个数
      *
      * @param
      * @author lihaoyu
      * @date 2019/10/19 21:17
      */
-    public List<StatisticSiteByCategory> listCountByCategory(){
-        return siteDAO.listCountByCategory();
+    public List<CategorySitesCount> listSitesCountByCategory() {
+        return siteDAO.listSitesCountByCategory();
     }
 
     /**
@@ -230,7 +232,7 @@ public class SiteService {
      * @author lihaoyu
      * @date 2019/10/19 21:36
      */
-    public Long countAll(){
+    public Long countAll() {
         long count = siteDAO.countByExample(new SiteExample());
         return count;
     }

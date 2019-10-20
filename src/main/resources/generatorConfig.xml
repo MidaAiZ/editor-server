@@ -56,13 +56,14 @@
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
         <!-- 生成mapxml对应client，也就是接口dao -->
-        <javaClientGenerator targetPackage="com.mida.chromeext.modules.dao.mapper" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.mida.chromeext.modules.dao.mapper" targetProject="src/main/java"
+                             type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-<!--                <table tableName="admins" domainObjectName="Admin">-->
-<!--                    <generatedKey column="aid" sqlStatement="Mysql" identity="true"/>-->
-<!--                </table>-->
+        <!--                <table tableName="admins" domainObjectName="Admin">-->
+        <!--                    <generatedKey column="aid" sqlStatement="Mysql" identity="true"/>-->
+        <!--                </table>-->
 
         <!--        <table tableName="countries" domainObjectName="Country">-->
         <!--            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>-->
@@ -119,9 +120,9 @@
         <!--            <generatedKey column="did" sqlStatement="Mysql" identity="true"/>-->
         <!--        </table>-->
 
-<!--                <table tableName="login_records" domainObjectName="LoginRecord">-->
-<!--                    <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>-->
-<!--                </table>-->
+        <!--                <table tableName="login_records" domainObjectName="LoginRecord">-->
+        <!--                    <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>-->
+        <!--                </table>-->
 
         <!--   以后修改表时，先备份对应Po，生成之后再把Po还原回去。否则Po被覆盖，用Revert还原     -->
     </context>

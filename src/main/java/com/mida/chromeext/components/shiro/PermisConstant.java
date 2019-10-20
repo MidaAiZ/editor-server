@@ -9,11 +9,11 @@ public class PermisConstant {
     /**
      * 管理员操作
      */
-    @SysPermission(desc="添加管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "添加管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String ADD_ADMIN = "sys:admins:add";
-    @SysPermission(desc="修改管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "修改管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String MODIFY_ADMIN = "sys:admins:modify";
-    @SysPermission(desc="删除管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "删除管理员", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String DELETE_ADMIN = "sys:admins:delete";
     @SysPermission(desc = "查看管理员基本信息", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String SHOW_ADMIN = "sys:admins:show";
@@ -124,11 +124,11 @@ public class PermisConstant {
     /**
      * 国家地区操作
      */
-    @SysPermission(desc = "添加国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "添加国家(地区)", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String ADD_COUNTRY = "sys:countries:add";
-    @SysPermission(desc = "更新国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "更新国家(地区)", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String MODIFY_COUNTRY = "sys:countries:modify";
-    @SysPermission(desc = "删除国家(地区)", roles =  {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    @SysPermission(desc = "删除国家(地区)", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String DELETE_COUNTRY = "sys:countries:delete";
 }
 

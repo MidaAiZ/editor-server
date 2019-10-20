@@ -31,7 +31,9 @@ public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals(HttpMethod.OPTIONS)) { return true; }
+        if (request.getMethod().equals(HttpMethod.OPTIONS)) {
+            return true;
+        }
 
         LoginRequired annotation;
         if (handler instanceof HandlerMethod) {

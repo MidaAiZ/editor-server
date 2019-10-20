@@ -14,9 +14,10 @@
         <result column="updated_at" property="updatedAt"/>
         <result column="created_by" property="createdBy"/>
         <association property="createdAdmin" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
-                    notNullColumn="aid">
+                     notNullColumn="aid">
         </association>
-        <association property="category" resultMap="com.mida.chromeext.modules.dao.mapper.SiteCategoryMapper.BaseResultMap"
+        <association property="category"
+                     resultMap="com.mida.chromeext.modules.dao.mapper.SiteCategoryMapper.BaseResultMap"
                      notNullColumn="cid">
         </association>
     </resultMap>
@@ -113,18 +114,11 @@
         from sites
     </select>
 
-<select id="listCountByCategory" resultType="com.mida.chromeext.modules.vo.statistic.StatisticSiteByCategory">
-    SELECT
-        ifnull( s.`count`, 0 ) AS `count`,
-        cid,
-        title,
-        `index`,
-        sites_count,
-        created_at,
-        updated_at
-    FROM
-        site_categories AS c
-            LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
+    <select id="listSitesCountByCategory" resultType="com.mida.chromeext.modules.vo.statistic.CategorySitesCount">
+        SELECT c.cid, c.index, c.title, ifnull( s.`count`, 0 ) AS `sites_count`
+        FROM
+            site_categories AS c
+                LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
 
 </select>
 

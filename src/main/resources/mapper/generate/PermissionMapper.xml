@@ -70,7 +70,8 @@
     <sql id="Base_Column_List">
     pid, permision, url, description
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -137,7 +138,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.PermissionExample"
+            resultType="java.lang.Long">
         select count(*) from permissions
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>

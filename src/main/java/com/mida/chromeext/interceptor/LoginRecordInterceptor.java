@@ -1,24 +1,21 @@
 package com.mida.chromeext.interceptor;
 
 
-import java.util.UUID;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.mida.chromeext.modules.pojo.LoginRecord;
+import com.mida.chromeext.modules.service.LoginRecordService;
+import com.mida.chromeext.utils.Constant;
+import com.mida.chromeext.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.mida.chromeext.modules.pojo.LoginRecord;
-import com.mida.chromeext.modules.service.LoginRecordService;
-import com.mida.chromeext.utils.Constant;
-import com.mida.chromeext.utils.JwtUtils;
-
-import io.jsonwebtoken.Claims;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 /**
  * @author lihaoyu
@@ -34,7 +31,9 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals(HttpMethod.OPTIONS)) { return true; }
+        if (request.getMethod().equals(HttpMethod.OPTIONS)) {
+            return true;
+        }
 
         // 获取 登录记录 cookie
         String loginToken = "";
@@ -63,7 +62,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 如果没有 Client Token  是第一次
-        if(StringUtils.isBlank(clientToken)){
+        if (StringUtils.isBlank(clientToken)) {
             Cookie clientCookie = new Cookie(Constant.TOEKN_CLIENT, UUID.randomUUID().toString());
             response.addCookie(clientCookie);
             return true;

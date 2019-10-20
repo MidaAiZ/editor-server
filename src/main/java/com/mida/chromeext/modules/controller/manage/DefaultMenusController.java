@@ -4,7 +4,6 @@ import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
-import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

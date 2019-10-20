@@ -12,6 +12,7 @@ import redis.clients.jedis.JedisPoolConfig;
 /**
  * 类RedisConfig的功能描述:
  * Redis配置
+ *
  * @auther hxy
  * @date 2017-11-15 21:49:31
  */
@@ -30,19 +31,19 @@ public class RedisConfig {
     private int timeout;
 
     @Bean
-    public JedisPoolConfig getRedisConfig(){
+    public JedisPoolConfig getRedisConfig() {
         JedisPoolConfig config = new JedisPoolConfig();
         return config;
     }
 
     @Bean
-    public JedisPool getJedisPool(){
+    public JedisPool getJedisPool() {
         JedisPoolConfig config = getRedisConfig();
         JedisPool pool;
         if (StringUtils.isEmpty(password)) {
             pool = new JedisPool(config, host, port, timeout);
         } else {
-           pool = new JedisPool(config,host,port,timeout,password);
+            pool = new JedisPool(config, host, port, timeout, password);
         }
         logger.info("init JredisPool ...");
         return pool;

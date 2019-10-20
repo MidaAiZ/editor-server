@@ -58,6 +58,7 @@ public class BadRequestExceptionHandler {
     public Result validationParameterException(BindException exception) {
         return Result.error(exception.getFieldError().getDefaultMessage());
     }
+
     /**
      * 参数类型转换错误
      *

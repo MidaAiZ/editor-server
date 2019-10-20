@@ -1,13 +1,13 @@
 package com.mida.chromeext.modules.controller.manage;
 
 import com.mida.chromeext.annotation.CurrentAdmin;
+import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.dto.NewAdminDto;
 import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.Role;
 import com.mida.chromeext.modules.service.AdminService;
 import com.mida.chromeext.modules.service.RoleService;
-import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
@@ -49,7 +49,7 @@ public class AdminsController {
     @ApiOperation("获取当前管理员角色和权限")
     @RequiresAuthentication
     public Result<List<Role>> getAdminRolesById(@ApiIgnore @CurrentAdmin Admin admin) {
-       return Result.ok(roleService.getRolesByAdminId(admin.getAid()));
+        return Result.ok(roleService.getRolesByAdminId(admin.getAid()));
     }
 
     @PostMapping("")
@@ -62,7 +62,7 @@ public class AdminsController {
     @GetMapping("")
     @ApiOperation("获取管理员列表，需要相关权限")
     @RequiresPermissions(PermisConstant.SHOW_ADMIN)
-    public Result<List<Admin>> getAdmins(@ApiParam("当前页数") @RequestParam Integer pageNum, @ApiParam("分页大小") @RequestParam  Integer pageSize) {
+    public Result<List<Admin>> getAdmins(@ApiParam("当前页数") @RequestParam Integer pageNum, @ApiParam("分页大小") @RequestParam Integer pageSize) {
         return Result.ok(adminService.getAdminList(new ListQueryVo(pageNum, pageSize)));
     }
 
@@ -82,6 +82,7 @@ public class AdminsController {
      * 添加管理员权限
      * 系统默认的超级管理员权限和管理员权限受保护，因此具有额外的权限校验
      * 除此外的角色只要具有相关权限即可添加
+     *
      * @param adminId
      * @param rolesId
      * @return
@@ -116,6 +117,7 @@ public class AdminsController {
      * 删除管理员权限
      * 禁止管理员删除超级管理员以及同级管理员
      * 系统初始化的第一个超级管理员受保护无法被删除
+     *
      * @param adminId
      * @param roleIds
      * @return

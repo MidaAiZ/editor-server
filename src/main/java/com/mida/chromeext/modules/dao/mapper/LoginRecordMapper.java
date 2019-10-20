@@ -2,8 +2,9 @@ package com.mida.chromeext.modules.dao.mapper;
 
 import com.mida.chromeext.modules.pojo.LoginRecord;
 import com.mida.chromeext.modules.pojo.LoginRecordExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface LoginRecordMapper {
     long countByExample(LoginRecordExample example);

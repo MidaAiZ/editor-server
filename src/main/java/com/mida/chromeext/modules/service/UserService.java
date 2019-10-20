@@ -1,21 +1,6 @@
 package com.mida.chromeext.modules.service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
-import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
-import com.mida.chromeext.modules.vo.statistic.StatisticUserByCountry;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
-
 import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.exception.ExceptionEnum;
 import com.mida.chromeext.exception.MyException;
@@ -24,8 +9,17 @@ import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserExample;
 import com.mida.chromeext.modules.validation.UserValidation;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
+import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
+import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.ShiroUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.*;
 
 /**
  * @author lihaoyu
@@ -196,22 +190,22 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/10/17 15:40
      */
-    public List<User> listUserByMng(MngUserListQueryVo queryVo){
+    public List<User> listUserByMng(MngUserListQueryVo queryVo) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
-        if(!CollectionUtils.isEmpty(queryVo.getUserIdList())){
+        if (!CollectionUtils.isEmpty(queryVo.getUserIdList())) {
             criteria.andUidIn(queryVo.getUserIdList());
         }
-        if(!CollectionUtils.isEmpty(queryVo.getEmailList())){
+        if (!CollectionUtils.isEmpty(queryVo.getEmailList())) {
             criteria.andEmailIn(queryVo.getEmailList());
         }
-        if(!CollectionUtils.isEmpty(queryVo.getCountryCodeList())){
+        if (!CollectionUtils.isEmpty(queryVo.getCountryCodeList())) {
             criteria.andCountryCodeIn(queryVo.getCountryCodeList());
         }
-        if(queryVo.getBeginTime() != null){
+        if (queryVo.getBeginTime() != null) {
             criteria.andCreatedAtGreaterThan(queryVo.getBeginTime());
         }
-        if(queryVo.getEndTime() != null){
+        if (queryVo.getEndTime() != null) {
             criteria.andCreatedAtLessThan(queryVo.getEndTime());
         }
         PageHelper.startPage(queryVo);
@@ -219,7 +213,7 @@ public class UserService {
         return users;
     }
 
-    public void changePwdByMng(Integer userId, String pwd){
+    public void changePwdByMng(Integer userId, String pwd) {
         User user = new User();
         String salt = userDAO.selectByPrimaryKey(userId).getSalt();
         user.setPassword(ShiroUtils.EncodeSalt(pwd, salt));
@@ -231,14 +225,14 @@ public class UserService {
      * 从登录记录中查询某段时间的登录人数
      *
      * @param beginDate 开始时间必填
-     * @param  endDate  可以为空
+     * @param endDate   可以为空
      * @return 统计结果map    key是某天，value是人数
      * @author lihaoyu
      * @date 2019/10/19 16:12
      */
-    public Map<String,Long> listDailyCounts(Date beginDate, Date endDate){
+    public Map<String, Long> listDailyAliveUsersCount(Date beginDate, Date endDate) {
         // mybatis 返回的Map是每一行中多个列组成的map
-        List<StatisticCountVo> voList = userDAO.dailyCounts(beginDate, endDate);
+        List<StatisticCountVo> voList = userDAO.listDailyAliveUsersCount(beginDate, endDate);
         Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
         for (StatisticCountVo vo : voList) {
             resMap.put(vo.getName(), vo.getCount());
@@ -251,13 +245,13 @@ public class UserService {
      *
      * @param beginDate
      * @param endDate
-     * @return   同上
+     * @return 同上
      * @author lihaoyu
      * @date 2019/10/19 16:23
      */
-    public Map<String,Long> listMonthlyCounts(Date beginDate, Date endDate){
+    public Map<String, Long> listMonthlyAliveUsersCount(Date beginDate, Date endDate) {
         // mybatis 返回的Map是每一行中多个列组成的map
-        List<StatisticCountVo> voList = userDAO.monthlyCounts(beginDate, endDate);
+        List<StatisticCountVo> voList = userDAO.listMonthlyAliveUsersCount(beginDate, endDate);
         Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
         voList.forEach(vo -> resMap.put(vo.getName(), vo.getCount()));
         return resMap;
@@ -270,9 +264,8 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/10/19 17:40
      */
-    public List<StatisticUserByCountry> listCountsByCountry(){
-        return userDAO.listCountsByCountry();
-
+    public List<CountryUsersCount> listUsersCountByCountry() {
+        return userDAO.listUsersCountByCountry();
     }
 
     /**
@@ -282,7 +275,7 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/10/19 21:39
      */
-    public Long countAll(){
+    public Long getAllUsersCount() {
         return userDAO.countByExample(new UserExample());
     }
 }

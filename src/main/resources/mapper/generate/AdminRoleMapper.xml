@@ -68,7 +68,8 @@
     <sql id="Base_Column_List">
     admin_id, role_id
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -111,7 +112,8 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample" resultType="java.lang.Long">
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample"
+            resultType="java.lang.Long">
         select count(*) from admins_roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>

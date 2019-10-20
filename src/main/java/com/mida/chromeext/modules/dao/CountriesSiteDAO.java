@@ -1,11 +1,10 @@
 package com.mida.chromeext.modules.dao;
 
-import java.util.List;
-
+import com.mida.chromeext.modules.dao.mapper.CountriesSiteMapper;
+import com.mida.chromeext.modules.vo.statistic.CountrySitesCount;
 import org.springframework.stereotype.Repository;
 
-import com.mida.chromeext.modules.dao.mapper.CountriesSiteMapper;
-import com.mida.chromeext.modules.vo.statistic.StatisticSiteByCountry;
+import java.util.List;
 
 /**
  * @author lihaoyu
@@ -14,6 +13,6 @@ import com.mida.chromeext.modules.vo.statistic.StatisticSiteByCountry;
 @Repository
 public interface CountriesSiteDAO extends CountriesSiteMapper {
 
-    List<StatisticSiteByCountry> listCountByCountry();
+    List<CountrySitesCount> listSitesCountByCountry();
 
 }

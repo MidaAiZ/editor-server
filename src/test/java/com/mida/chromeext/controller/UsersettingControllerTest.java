@@ -1,5 +1,9 @@
 package com.mida.chromeext.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.mida.chromeext.ChromeExtApplication;
+import com.mida.chromeext.utils.Result;
+import com.mida.chromeext.utils.ResultCode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,11 +21,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.alibaba.fastjson.JSON;
-import com.mida.chromeext.ChromeExtApplication;
-import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.utils.ResultCode;
 
 import javax.servlet.http.Cookie;
 
@@ -57,34 +56,33 @@ public class UsersettingControllerTest {
         defaultTest();
     }
 
-    public void profileTest() throws Exception{
+    public void profileTest() throws Exception {
         Cookie cookie = userLogin();
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/user_settings/profile").cookie(cookie)
-                ).andReturn();
+        ).andReturn();
         assertFun(mvcResult);
     }
 
-    public void defaultTest() throws Exception{
+    public void defaultTest() throws Exception {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/user_settings/default")
         ).andReturn();
         assertFun(mvcResult);
     }
 
 
-
     public Cookie userLogin() throws Exception {
         String email = env.getProperty("email");
         String password = env.getProperty("password");
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login").
-                contentType(MediaType.APPLICATION_FORM_URLENCODED).param("password",password)
-                .param("email",email)).andReturn();
+                contentType(MediaType.APPLICATION_FORM_URLENCODED).param("password", password)
+                .param("email", email)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         Cookie token = response.getCookie("token");
         return token;
     }
 
-    private void assertFun(MvcResult mvcResult) throws Exception{
-        Assert.assertEquals(mvcResult.getResponse().getStatus(),200);
+    private void assertFun(MvcResult mvcResult) throws Exception {
+        Assert.assertEquals(mvcResult.getResponse().getStatus(), 200);
         Assert.assertEquals(JSON.parseObject(mvcResult.getResponse().getContentAsString(), Result.class).getCode(), ResultCode.SUCCESS.code());
     }
 }

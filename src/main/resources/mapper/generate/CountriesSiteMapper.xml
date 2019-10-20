@@ -68,7 +68,8 @@
     <sql id="Base_Column_List">
     country_code, site_id
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.CountriesSiteExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.CountriesSiteExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct

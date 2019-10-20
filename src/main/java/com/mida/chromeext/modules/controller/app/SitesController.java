@@ -1,27 +1,23 @@
 package com.mida.chromeext.modules.controller.app;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
 import com.google.common.collect.Lists;
+import com.mida.chromeext.modules.pojo.Site;
+import com.mida.chromeext.modules.service.SiteService;
+import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.utils.Constant;
+import com.mida.chromeext.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.mida.chromeext.modules.pojo.Site;
-import com.mida.chromeext.modules.service.SiteService;
-import com.mida.chromeext.modules.vo.SiteListQueryVo;
-import com.mida.chromeext.utils.Result;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * @author lihaoyu
