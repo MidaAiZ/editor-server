@@ -82,8 +82,7 @@ public class SiteCategoryService {
      */
     public List<SiteCategory> updateCategories(List<SiteCategory> categories) {
         for (SiteCategory category : categories) {
-            category.setUpdatedAt(new Date());
-            siteCategoryDAO.updateByPrimaryKey(category);
+            updateOneCategory(category);
         }
         return categories;
     }
@@ -92,8 +91,10 @@ public class SiteCategoryService {
      * 更新1个站点分类
      */
     public Boolean updateOneCategory(SiteCategory category) {
+        category.setSitesCount(null);
+        category.setCreatedAt(null);
         category.setUpdatedAt(new Date());
-        return siteCategoryDAO.updateByPrimaryKey(category) > 0;
+        return siteCategoryDAO.updateByPrimaryKeySelective(category) > 0;
     }
 
 }

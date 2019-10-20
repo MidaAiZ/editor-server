@@ -60,7 +60,7 @@ public class SiteCategoriesController {
         return Result.ok(categories);
     }
 
-    @PutMapping("cid")
+    @PutMapping("{cid}")
     @ApiOperation("修改1个网站分类，需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SITE_CATEGORY)
     public Result<Boolean> updateOne(@PathVariable Integer cid, @Valid @RequestBody SiteCategory category) {
