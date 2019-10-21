@@ -60,7 +60,7 @@ public class SiteCategoriesController {
         if (siteCategory == null) {
             return Result.error(ResultCode.NOT_FOUND.code(), "No such category with ID = " + cid.toString());
         }
-        return siteCategoryService.deleteById(cid) ? Result.ok(true) : Result.error();
+        return siteCategoryService.deleteById(cid) ? Result.ok(true) : Result.error("The category is not allowed to be deleted cause there is an existing website association");
     }
 
     @PutMapping("")

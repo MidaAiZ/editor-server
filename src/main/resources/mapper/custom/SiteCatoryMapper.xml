@@ -11,11 +11,11 @@
         select title from site_categories;
     </select>
 
-    <select id="batchDelete" resultType="int">
-        delete from site_categories where sid in
-        <foreach collection="siteIds" item="sid" open="(" close=")" separator=",">
-            #{sid}
+    <delete id="batchDelete">
+        delete from site_categories where cid in
+        <foreach collection="list" item="cid" open="(" close=")" separator=",">
+            #{cid}
         </foreach>
         and not exists (select 1 from sites where sites.cate_id = site_categories.cid);
-    </select>
+    </delete>
 </mapper>

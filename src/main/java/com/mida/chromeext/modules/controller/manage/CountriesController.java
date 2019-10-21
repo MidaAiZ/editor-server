@@ -63,13 +63,21 @@ public class CountriesController {
     @RequiresPermissions(PermisConstant.MODIFY_COUNTRY)
     public Result<Boolean> update(@PathVariable Integer cid, @RequestBody Country country) {
         country.setCid(cid);
+        Country existCountry = countryService.getOneById(cid);
+        if (existCountry == null) {
+            return Result.error(ResultCode.NOT_FOUND.code(), "No such country with ID = " + cid.toString());
+        }
         return countryService.updateById(country) ? Result.ok(true) : Result.error();
     }
 
     @DeleteMapping("{cid}")
-    @ApiOperation("删除一条国家（地区）记录")
+    @ApiOperation("删除一条国家（地区）记录，若该国家已有用户、网站等关联绑定，则无法删除")
     @RequiresPermissions(PermisConstant.DELETE_COUNTRY)
     public Result<Boolean> delete(@PathVariable Integer cid) {
-        return countryService.deleteById(cid) ? Result.ok(true) : Result.error();
+        Country country = countryService.getOneById(cid);
+        if (country == null) {
+            return Result.error(ResultCode.NOT_FOUND.code(), "No such country with ID = " + cid.toString());
+        }
+        return countryService.deleteOne(country) ? Result.ok(true) : Result.error();
     }
 }

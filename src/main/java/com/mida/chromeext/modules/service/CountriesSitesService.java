@@ -31,6 +31,15 @@ public class CountriesSitesService {
     }
 
     /**
+     * 根据国家码获取关联网站数
+     */
+    public long getSitesCountByCountryCode(String code) {
+        CountriesSiteExample example = new CountriesSiteExample();
+        example.createCriteria().andCountryCodeEqualTo(code);
+        return countriesSiteDAO.countByExample(example);
+    }
+
+    /**
      * 添加网站-国家关联
      * @param siteId
      * @param countryCodes

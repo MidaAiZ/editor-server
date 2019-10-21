@@ -8,6 +8,7 @@ import com.mida.chromeext.modules.dao.UserDAO;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserExample;
 import com.mida.chromeext.modules.validation.UserValidation;
+import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
 import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
@@ -213,6 +214,18 @@ public class UserService {
         return users;
     }
 
+    /**
+     * 根据国家（地区）码获取用户列表
+     * @param code
+     * @param queryVo
+     * @return
+     */
+    public List<User> listUserByCountryCode(String code, ListQueryVo queryVo) {
+        UserExample example = new UserExample();
+        example.createCriteria().andCountryCodeEqualTo(code);
+        return userDAO.selectByExample(example);
+    }
+
     public Boolean changePwdByMng(Integer userId, String pwd){
         User user = new User();
         String salt = userDAO.selectByPrimaryKey(userId).getSalt();
@@ -266,6 +279,17 @@ public class UserService {
      */
     public List<CountryUsersCount> listUsersCountByCountry() {
         return userDAO.listUsersCountByCountry();
+    }
+
+    /**
+     * 根据国家（地区）码获取用户数
+     * @param code
+     * @return
+     */
+    public long getUsersCountByCountryCode(String code) {
+        UserExample example = new UserExample();
+        example.createCriteria().andCountryCodeEqualTo(code);
+        return userDAO.countByExample(example);
     }
 
     /**
