@@ -60,12 +60,12 @@ public class SitesController {
         return sites;
     }
 
-    @GetMapping("{sid}")
+    @GetMapping("{siteId}")
     @ApiOperation(value = "通过网站id获取网站详细信息", notes = "包括关联对象，管理员、国家(地区)、分类等信息")
     @RequiresPermissions(PermisConstant.SHOW_SITE)
-    public Result<SiteRelationVo> showSite(@PathVariable Integer sid) {
-        SiteRelationVo site = siteService.getSiteByIdWithRelations(sid);
-        return site != null ? Result.ok(site) : Result.error(ResultCode.NOT_FOUND.code(), "No suc site with sid = " + sid.toString());
+    public Result<SiteRelationVo> showSite(@PathVariable Integer siteId) {
+        SiteRelationVo site = siteService.getSiteByIdWithRelations(siteId);
+        return site != null ? Result.ok(site) : Result.error(ResultCode.NOT_FOUND.code(), "No suc site with sid = " + siteId.toString());
     }
 
     /**

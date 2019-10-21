@@ -47,7 +47,7 @@ public class SiteCategoriesController {
     @DeleteMapping("")
     @ApiOperation("删除多个网站分类，返回成功删除的数量，仅能删除分类下没有关联网站的记录")
     @RequiresPermissions(PermisConstant.DELETE_SITE_CATEGORY)
-    public Result<Integer> delete(@ApiParam("种类id数组") @RequestBody List<Integer> ids) {
+    public Result<Integer> delete(@ApiParam("网站分类id数组") @RequestBody List<Integer> ids) {
         int affectedRows = siteCategoryService.batchDelete(ids);
         return Result.ok(affectedRows);
     }
