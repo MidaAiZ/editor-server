@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 管理员-角色多对多关联
+ */
 @Service
 public class AdminRoleService {
     @Autowired

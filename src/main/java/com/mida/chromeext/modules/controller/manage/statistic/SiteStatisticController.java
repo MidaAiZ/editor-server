@@ -1,7 +1,7 @@
 package com.mida.chromeext.modules.controller.manage.statistic;
 
 import com.mida.chromeext.components.shiro.PermisConstant;
-import com.mida.chromeext.modules.service.CountrySiteService;
+import com.mida.chromeext.modules.service.CountriesSitesService;
 import com.mida.chromeext.modules.service.SiteService;
 import com.mida.chromeext.modules.vo.statistic.CategorySitesCount;
 import com.mida.chromeext.modules.vo.statistic.CountrySitesCount;
@@ -27,7 +27,7 @@ import java.util.List;
 public class SiteStatisticController {
 
     @Autowired
-    CountrySiteService countrySiteService;
+    CountriesSitesService countriesSitesService;
 
     @Autowired
     SiteService siteService;
@@ -35,7 +35,7 @@ public class SiteStatisticController {
     @GetMapping("country_sites_count")
     @ApiOperation(value = "统计每个国家的精准网站数")
     public Result<List<CountrySitesCount>> listCountByCountry() {
-        List<CountrySitesCount> res = countrySiteService.listSitesCountByCountry();
+        List<CountrySitesCount> res = countriesSitesService.listSitesCountByCountry();
         return Result.ok(res);
     }
 

@@ -12,42 +12,51 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Site implements Serializable {
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value="网站主键ID")
     private Integer sid;
     @NotBlank(message = "Title can not be null")
+    @ApiModelProperty(value="网站名称")
     private String title;
     @NotBlank(message = "Url can not be null")
+    @ApiModelProperty(value="网站链接")
     private String url;
     @NotBlank(message = "Icon can not be null")
+    @ApiModelProperty(value="网站图标地址")
     private String icon;
-    @JsonIgnore
-    private Integer usedCount;
-    @JsonIgnore
-    private Integer pageViews;
+    @ApiModelProperty(value="网站分类ID")
     private Integer cateId;
     @JsonIgnore
     private Float weight;
-    @JsonIgnore
-    private Integer createdBy;
-    @JsonIgnore
-    private Date createdAt;
-    @JsonIgnore
-    private Date updatedAt;
-
+    @ApiModelProperty(value="网站状态，0表示未审核，1表示审核通过，2表示禁止访问")
+    private Short state;
+    @ApiModelProperty(value="网站标签")
+    private String marks;
     @ApiModelProperty(hidden = true)
     private Admin createdAdmin;
-
     @ApiModelProperty(hidden = true)
     private SiteCategory category;
-
     @ApiModelProperty(hidden = true)
     private List<Country> countryList;
+    @ApiModelProperty(hidden = true)
+    private Short creatorType;
+    @ApiModelProperty(hidden = true)
+    private Integer creatorId;
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private Integer usedCount;
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    private Integer pageViews;
+    @ApiModelProperty(hidden = true)
+    private Date createdAt;
+    @ApiModelProperty(hidden = true)
+    private Date updatedAt;
 
     public Integer getSid() {
         return sid;
@@ -81,22 +90,6 @@ public class Site implements Serializable {
         this.icon = icon == null ? null : icon.trim();
     }
 
-    public Integer getUsedCount() {
-        return usedCount;
-    }
-
-    public void setUsedCount(Integer usedCount) {
-        this.usedCount = usedCount;
-    }
-
-    public Integer getPageViews() {
-        return pageViews;
-    }
-
-    public void setPageViews(Integer pageViews) {
-        this.pageViews = pageViews;
-    }
-
     public Integer getCateId() {
         return cateId;
     }
@@ -113,12 +106,52 @@ public class Site implements Serializable {
         this.weight = weight;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
+    public String getMarks() {
+        return marks;
     }
 
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
+    public void setMarks(String marks) {
+        this.marks = marks == null ? null : marks.trim();
+    }
+
+    public Short getState() {
+        return state;
+    }
+
+    public void setState(Short state) {
+        this.state = state;
+    }
+
+    public Short getCreatorType() {
+        return creatorType;
+    }
+
+    public void setCreatorType(Short creatorType) {
+        this.creatorType = creatorType;
+    }
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public Integer getUsedCount() {
+        return usedCount;
+    }
+
+    public void setUsedCount(Integer usedCount) {
+        this.usedCount = usedCount;
+    }
+
+    public Integer getPageViews() {
+        return pageViews;
+    }
+
+    public void setPageViews(Integer pageViews) {
+        this.pageViews = pageViews;
     }
 
     public Date getCreatedAt() {
@@ -137,30 +170,6 @@ public class Site implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Admin getCreatedAdmin() {
-        return createdAdmin;
-    }
-
-    public void setCreatedAdmin(Admin createdAdmin) {
-        this.createdAdmin = createdAdmin;
-    }
-
-    public SiteCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(SiteCategory category) {
-        this.category = category;
-    }
-
-    public List<Country> getCountryList() {
-        return countryList;
-    }
-
-    public void setCountryList(List<Country> countryList) {
-        this.countryList = countryList;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -171,11 +180,14 @@ public class Site implements Serializable {
         sb.append(", title=").append(title);
         sb.append(", url=").append(url);
         sb.append(", icon=").append(icon);
-        sb.append(", usedCount=").append(usedCount);
-        sb.append(", pageViews=").append(pageViews);
         sb.append(", cateId=").append(cateId);
         sb.append(", weight=").append(weight);
-        sb.append(", createdBy=").append(createdBy);
+        sb.append(", marks=").append(marks);
+        sb.append(", state=").append(state);
+        sb.append(", creatorType=").append(creatorType);
+        sb.append(", creatorId=").append(creatorId);
+        sb.append(", usedCount=").append(usedCount);
+        sb.append(", pageViews=").append(pageViews);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);

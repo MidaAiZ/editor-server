@@ -12,7 +12,7 @@ public class Constant {
     // todo 要改成一小时 这里是12秒用于测试
     public static final int LOGIN_RECORD_GAP_TIME = 60 * 60 * 1000;
 
-    public static final String LOGIN_RECORD_TOKEN_NAME = "loginRecord";
+    public static final String LOGIN_RECORD_TOKEN_NAME = "user_last_login_time";
 
     public static final String TOEKN_CLIENT = "clientId";
 
@@ -73,6 +73,32 @@ public class Constant {
     public static final String ARTCLE_TYPE = "artcle_type";
 
     /*******************************数据字典mark 结束*************************/
+
+    /**
+     * 网站创建者管理员类型
+     */
+    public static final Short CREATED_BY_ADMIN = 0;
+
+    /**
+     * 网站创建者用户类型
+     */
+    public static final Short CREATED_BY_USER = 1;
+
+    /**
+     * 网站状态
+     * 正在审核中（或未审核）
+     */
+    public static final Short SITE_STATE_IN_REVIEWING = 0;
+
+    /**
+     * 审核通过，网站正常
+     */
+    public static final Short SITE_STATE_OK = 1;
+
+    /**
+     * 审核未通过或网站被屏蔽
+     */
+    public static final Short SITE_STATE_FORBIDDEN = 2;
 
     /**
      * 菜单类型

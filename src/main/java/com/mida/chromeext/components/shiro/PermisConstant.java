@@ -49,6 +49,8 @@ public class PermisConstant {
     public static final String DELETE_SITE = "app:sites:delete";
     @SysPermission(desc = "查看网站信息", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String SHOW_SITE = "app:sites:show";
+    @SysPermission(desc = "审核网站信息", roles= {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String REVIEW_SITE = "app:sites:review";
     @SysPermission(desc = "统计网站信息", roles = {RoleConstant.SUPER_ROLE})
     public static final String STATISTICS_SITE = "app:sites:statistics";
 

@@ -16,7 +16,7 @@ public class PermissionService {
     @Autowired
     private PermissionDAO permissionDAO;
     @Autowired
-    private RolePermissionService rolePermissionService;
+    private RolesPermissionsService rolesPermissionsService;
 
     /**
      * 创建permission
@@ -124,7 +124,7 @@ public class PermissionService {
      * @return
      */
     public Boolean deletePermissions(List<Integer> pids) {
-        rolePermissionService.removeRelationsByPermissionIds(pids);
+        rolesPermissionsService.removeRelationsByPermissionIds(pids);
         PermissionExample example = new PermissionExample();
         example.createCriteria().andPidIn(pids);
         return permissionDAO.deleteByExample(example) > 0;
@@ -138,7 +138,7 @@ public class PermissionService {
     public Boolean deletePermission(Integer permissionId) {
         List<Integer> list = new ArrayList(1);
         list.add(permissionId);
-        rolePermissionService.removeRelationsByPermissionIds(list);
+        rolesPermissionsService.removeRelationsByPermissionIds(list);
         return permissionDAO.deleteByPrimaryKey(permissionId) > 0;
     }
 }

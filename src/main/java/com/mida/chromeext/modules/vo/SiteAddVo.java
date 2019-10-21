@@ -35,6 +35,12 @@ public class SiteAddVo {
     @ApiModelProperty("网站适用的国家码列表")
     private List<String> countryCodes;
 
+    @ApiModelProperty("网站标志")
+    private String marks;
+
+    @ApiModelProperty("网站权重")
+    private Float weight = 50F;
+
     public String getTitle() {
         return title;
     }
@@ -73,5 +79,21 @@ public class SiteAddVo {
 
     public void setCateId(Integer cateId) {
         this.cateId = cateId;
+    }
+
+    public String getMarks() {
+        return marks;
+    }
+
+    public void setMarks(String marks) {
+        this.marks = marks;
+    }
+
+    public Float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Float weight) {
+        this.weight = weight;
     }
 }

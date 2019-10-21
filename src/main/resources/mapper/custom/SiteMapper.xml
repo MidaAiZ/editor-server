@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
-    <resultMap type="com.mida.chromeext.modules.pojo.Site" id="siteRelMap">
-        <id column="sid" property="sid"></id>
+    <resultMap type="com.mida.chromeext.modules.vo.SiteRelationVo" id="siteRelMap" autoMapping="true">
         <result column="site_title" property="title"/>
-        <result column="url" property="url"/>
-        <result column="icon" property="icon"/>
-        <result column="used_count" property="usedCount"/>
-        <result column="page_views" property="pageViews"/>
-        <result column="cate_id" property="cateId"/>
-        <result column="weight" property="weight"/>
-        <result column="created_at" property="createdAt"/>
-        <result column="updated_at" property="updatedAt"/>
-        <result column="created_by" property="createdBy"/>
         <association property="createdAdmin" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
                      notNullColumn="aid">
+        </association>
+        <association property="createdUser" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
+                     notNullColumn="uid">
         </association>
         <association property="category"
                      resultMap="com.mida.chromeext.modules.dao.mapper.SiteCategoryMapper.BaseResultMap"
@@ -58,7 +51,7 @@
     </select>
 
     <select id="queryList" resultType="com.mida.chromeext.modules.pojo.Site">
-        select s.sid,s.title,s.url,s.icon,s.cate_id
+        select s.*
         from sites s
         <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
             join countries_sites cs
@@ -82,9 +75,10 @@
     </select>
 
     <select id="queryListWithRelations" resultMap="siteRelMap">
-        select s.sid, s.title as site_title, s.url, s.icon, s.cate_id, c.cid, c.title, a.aid, a.number
+        select s.*, s.title as site_title, c.cid, c.title, a.aid, a.number, u.uid, u.number, u.avatar
         from sites s
-        left join admins a on a.aid = s.created_by
+        left join admins a on a.aid = s.creator_id and s.creator_type = 0
+        left join users u on u.uid = s.creator_id and s.creator_type = 1
         left join site_categories c on c.cid = s.cate_id
         <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
             join countries_sites cs
@@ -95,7 +89,19 @@
         </if>
         <where>
             <if test="queryVo.keyword != null and queryVo.keyword !=''">
-                s.title like CONCAT(CONCAT('%',#{queryVo.keyword}), '%')
+                and s.title like CONCAT(CONCAT('%',#{queryVo.keyword}), '%')
+            </if>
+            <if test="queryVo.state != null">
+                and s.state = #{queryVo.state}
+            </if>
+            <if test="queryVo.creatorType != null">
+                and s.creator_type = #{queryVo.creatorType}
+            </if>
+            <if test="queryVo.creatorIds != null and !queryVo.creatorIds.isEmpty()">
+                and s.creator_id in
+                <foreach collection="queryVo.creatorIds" item="cid" open="(" close=")" separator=",">
+                    #{cid}
+                </foreach>
             </if>
             <if test="queryVo.categoryIds != null and !queryVo.categoryIds.isEmpty()">
                 and s.cate_id in

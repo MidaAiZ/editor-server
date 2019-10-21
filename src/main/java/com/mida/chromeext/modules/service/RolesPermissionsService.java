@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 角色-权限多对多关联
+ */
 @Service
-public class RolePermissionService {
+public class RolesPermissionsService {
     @Autowired
     private RolePermissionDAO rolePermissionDAO;
 

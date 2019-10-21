@@ -15,20 +15,20 @@ public class SiteExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -375,126 +375,6 @@ public class SiteExample {
             return (Criteria) this;
         }
 
-        public Criteria andUsedCountIsNull() {
-            addCriterion("used_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountIsNotNull() {
-            addCriterion("used_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountEqualTo(Integer value) {
-            addCriterion("used_count =", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountNotEqualTo(Integer value) {
-            addCriterion("used_count <>", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountGreaterThan(Integer value) {
-            addCriterion("used_count >", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("used_count >=", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountLessThan(Integer value) {
-            addCriterion("used_count <", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountLessThanOrEqualTo(Integer value) {
-            addCriterion("used_count <=", value, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountIn(List<Integer> values) {
-            addCriterion("used_count in", values, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountNotIn(List<Integer> values) {
-            addCriterion("used_count not in", values, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountBetween(Integer value1, Integer value2) {
-            addCriterion("used_count between", value1, value2, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUsedCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("used_count not between", value1, value2, "usedCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsIsNull() {
-            addCriterion("page_views is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsIsNotNull() {
-            addCriterion("page_views is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsEqualTo(Integer value) {
-            addCriterion("page_views =", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsNotEqualTo(Integer value) {
-            addCriterion("page_views <>", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsGreaterThan(Integer value) {
-            addCriterion("page_views >", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsGreaterThanOrEqualTo(Integer value) {
-            addCriterion("page_views >=", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsLessThan(Integer value) {
-            addCriterion("page_views <", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsLessThanOrEqualTo(Integer value) {
-            addCriterion("page_views <=", value, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsIn(List<Integer> values) {
-            addCriterion("page_views in", values, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsNotIn(List<Integer> values) {
-            addCriterion("page_views not in", values, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsBetween(Integer value1, Integer value2) {
-            addCriterion("page_views between", value1, value2, "pageViews");
-            return (Criteria) this;
-        }
-
-        public Criteria andPageViewsNotBetween(Integer value1, Integer value2) {
-            addCriterion("page_views not between", value1, value2, "pageViews");
-            return (Criteria) this;
-        }
-
         public Criteria andCateIdIsNull() {
             addCriterion("cate_id is null");
             return (Criteria) this;
@@ -615,63 +495,373 @@ public class SiteExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByIsNull() {
-            addCriterion("created_by is null");
+        public Criteria andMarksIsNull() {
+            addCriterion("marks is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByIsNotNull() {
-            addCriterion("created_by is not null");
+        public Criteria andMarksIsNotNull() {
+            addCriterion("marks is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByEqualTo(Integer value) {
-            addCriterion("created_by =", value, "createdBy");
+        public Criteria andMarksEqualTo(String value) {
+            addCriterion("marks =", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByNotEqualTo(Integer value) {
-            addCriterion("created_by <>", value, "createdBy");
+        public Criteria andMarksNotEqualTo(String value) {
+            addCriterion("marks <>", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByGreaterThan(Integer value) {
-            addCriterion("created_by >", value, "createdBy");
+        public Criteria andMarksGreaterThan(String value) {
+            addCriterion("marks >", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByGreaterThanOrEqualTo(Integer value) {
-            addCriterion("created_by >=", value, "createdBy");
+        public Criteria andMarksGreaterThanOrEqualTo(String value) {
+            addCriterion("marks >=", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByLessThan(Integer value) {
-            addCriterion("created_by <", value, "createdBy");
+        public Criteria andMarksLessThan(String value) {
+            addCriterion("marks <", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByLessThanOrEqualTo(Integer value) {
-            addCriterion("created_by <=", value, "createdBy");
+        public Criteria andMarksLessThanOrEqualTo(String value) {
+            addCriterion("marks <=", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByIn(List<Integer> values) {
-            addCriterion("created_by in", values, "createdBy");
+        public Criteria andMarksLike(String value) {
+            addCriterion("marks like", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByNotIn(List<Integer> values) {
-            addCriterion("created_by not in", values, "createdBy");
+        public Criteria andMarksNotLike(String value) {
+            addCriterion("marks not like", value, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByBetween(Integer value1, Integer value2) {
-            addCriterion("created_by between", value1, value2, "createdBy");
+        public Criteria andMarksIn(List<String> values) {
+            addCriterion("marks in", values, "marks");
             return (Criteria) this;
         }
 
-        public Criteria andCreatedByNotBetween(Integer value1, Integer value2) {
-            addCriterion("created_by not between", value1, value2, "createdBy");
+        public Criteria andMarksNotIn(List<String> values) {
+            addCriterion("marks not in", values, "marks");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarksBetween(String value1, String value2) {
+            addCriterion("marks between", value1, value2, "marks");
+            return (Criteria) this;
+        }
+
+        public Criteria andMarksNotBetween(String value1, String value2) {
+            addCriterion("marks not between", value1, value2, "marks");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNull() {
+            addCriterion("`state` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNotNull() {
+            addCriterion("`state` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateEqualTo(Short value) {
+            addCriterion("`state` =", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotEqualTo(Short value) {
+            addCriterion("`state` <>", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThan(Short value) {
+            addCriterion("`state` >", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThanOrEqualTo(Short value) {
+            addCriterion("`state` >=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThan(Short value) {
+            addCriterion("`state` <", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThanOrEqualTo(Short value) {
+            addCriterion("`state` <=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIn(List<Short> values) {
+            addCriterion("`state` in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotIn(List<Short> values) {
+            addCriterion("`state` not in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateBetween(Short value1, Short value2) {
+            addCriterion("`state` between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotBetween(Short value1, Short value2) {
+            addCriterion("`state` not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeIsNull() {
+            addCriterion("creator_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeIsNotNull() {
+            addCriterion("creator_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeEqualTo(Boolean value) {
+            addCriterion("creator_type =", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeNotEqualTo(Boolean value) {
+            addCriterion("creator_type <>", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeGreaterThan(Boolean value) {
+            addCriterion("creator_type >", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("creator_type >=", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeLessThan(Boolean value) {
+            addCriterion("creator_type <", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeLessThanOrEqualTo(Boolean value) {
+            addCriterion("creator_type <=", value, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeIn(List<Boolean> values) {
+            addCriterion("creator_type in", values, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeNotIn(List<Boolean> values) {
+            addCriterion("creator_type not in", values, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeBetween(Boolean value1, Boolean value2) {
+            addCriterion("creator_type between", value1, value2, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorTypeNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("creator_type not between", value1, value2, "creatorType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdIsNull() {
+            addCriterion("creator_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdIsNotNull() {
+            addCriterion("creator_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdEqualTo(Integer value) {
+            addCriterion("creator_id =", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdNotEqualTo(Integer value) {
+            addCriterion("creator_id <>", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdGreaterThan(Integer value) {
+            addCriterion("creator_id >", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("creator_id >=", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdLessThan(Integer value) {
+            addCriterion("creator_id <", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("creator_id <=", value, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdIn(List<Integer> values) {
+            addCriterion("creator_id in", values, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdNotIn(List<Integer> values) {
+            addCriterion("creator_id not in", values, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdBetween(Integer value1, Integer value2) {
+            addCriterion("creator_id between", value1, value2, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("creator_id not between", value1, value2, "creatorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountIsNull() {
+            addCriterion("used_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountIsNotNull() {
+            addCriterion("used_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountEqualTo(Integer value) {
+            addCriterion("used_count =", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountNotEqualTo(Integer value) {
+            addCriterion("used_count <>", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountGreaterThan(Integer value) {
+            addCriterion("used_count >", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("used_count >=", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountLessThan(Integer value) {
+            addCriterion("used_count <", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountLessThanOrEqualTo(Integer value) {
+            addCriterion("used_count <=", value, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountIn(List<Integer> values) {
+            addCriterion("used_count in", values, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountNotIn(List<Integer> values) {
+            addCriterion("used_count not in", values, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountBetween(Integer value1, Integer value2) {
+            addCriterion("used_count between", value1, value2, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsedCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("used_count not between", value1, value2, "usedCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsIsNull() {
+            addCriterion("page_views is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsIsNotNull() {
+            addCriterion("page_views is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsEqualTo(Integer value) {
+            addCriterion("page_views =", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsNotEqualTo(Integer value) {
+            addCriterion("page_views <>", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsGreaterThan(Integer value) {
+            addCriterion("page_views >", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("page_views >=", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsLessThan(Integer value) {
+            addCriterion("page_views <", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsLessThanOrEqualTo(Integer value) {
+            addCriterion("page_views <=", value, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsIn(List<Integer> values) {
+            addCriterion("page_views in", values, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsNotIn(List<Integer> values) {
+            addCriterion("page_views not in", values, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsBetween(Integer value1, Integer value2) {
+            addCriterion("page_views between", value1, value2, "pageViews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageViewsNotBetween(Integer value1, Integer value2) {
+            addCriterion("page_views not between", value1, value2, "pageViews");
             return (Criteria) this;
         }
 
@@ -820,6 +1010,38 @@ public class SiteExample {
 
         private String typeHandler;
 
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
+
         protected Criterion(String condition) {
             super();
             this.condition = condition;
@@ -854,38 +1076,6 @@ public class SiteExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

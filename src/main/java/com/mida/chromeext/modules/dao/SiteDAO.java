@@ -3,6 +3,7 @@ package com.mida.chromeext.modules.dao;
 import com.mida.chromeext.modules.dao.mapper.SiteMapper;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
+import com.mida.chromeext.modules.vo.SiteRelationVo;
 import com.mida.chromeext.modules.vo.statistic.CategorySitesCount;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -77,7 +78,7 @@ public interface SiteDAO extends SiteMapper {
      * @param queryVo
      * @return
      */
-    List<Site> queryListWithRelations(@Param("queryVo") SiteListQueryVo queryVo);
+    List<SiteRelationVo> queryListWithRelations(@Param("queryVo") SiteListQueryVo queryVo);
 
     /**
      * 列出所有网站的名字

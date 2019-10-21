@@ -1,6 +1,8 @@
 package com.mida.chromeext.modules.service;
 
+import com.google.common.collect.Lists;
 import com.mida.chromeext.modules.dao.SiteCategoryDAO;
+import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.pojo.SiteCategoryExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class SiteCategoryService {
     @Autowired
     private SiteCategoryDAO siteCategoryDAO;
 
+    @Autowired
+    private SiteService siteService;
 
     /**
      * 获取网站分类列表，屏蔽敏感字段
@@ -69,11 +73,24 @@ public class SiteCategoryService {
         return categories;
     }
 
-    public int batchDelete(List<Integer> Ids) {
-        SiteCategoryExample example = new SiteCategoryExample();
-        example.createCriteria().andCidIn(Ids);
-        int affectedRows = siteCategoryDAO.deleteByExample(example);
-        return affectedRows;
+    /**
+     * 批量删除分类
+     * 仅能删除没有关联网站的分类
+     * @param ids
+     * @return
+     */
+    public int batchDelete(List<Integer> ids) {
+        return siteCategoryDAO.batchDelete(ids);
+    }
+
+    /**
+     * 删除一个分类
+     * 仅能删除没有关联网站的记录
+     * @param id
+     * @return
+     */
+    public boolean deleteById(int id) {
+        return siteCategoryDAO.batchDelete(Lists.newArrayList(id)) > 0;
     }
 
     /**

@@ -77,9 +77,9 @@
         <!--            <generatedKey column="hid" sqlStatement="Mysql" identity="true"/>-->
         <!--        </table>-->
 
-        <!--        <table tableName="sites" domainObjectName="Site">-->
-        <!--            <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>-->
-        <!--        </table>-->
+                <table tableName="sites" domainObjectName="Site">
+                    <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>
+                </table>
 
         <!--        <table tableName="user_settings" domainObjectName="UserSetting">-->
         <!--            <generatedKey column="sid" sqlStatement="Mysql" identity="true"/>-->

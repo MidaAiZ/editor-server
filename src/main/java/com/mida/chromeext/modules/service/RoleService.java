@@ -21,7 +21,7 @@ public class RoleService {
     @Autowired
     private RoleDAO roleDAO;
     @Autowired
-    private RolePermissionService rolePermissionService;
+    private RolesPermissionsService rolesPermissionsService;
     @Autowired
     private AdminRoleService adminRoleService;
 
@@ -149,7 +149,7 @@ public class RoleService {
     public int addPermissionsToRole(Integer roleId, List<Integer> permissionIds) {
         int count = 0;
         for (Integer pid : permissionIds) {
-            if (rolePermissionService.addRelation(roleId, pid)) {
+            if (rolesPermissionsService.addRelation(roleId, pid)) {
                 count++;
             }
         }
@@ -163,7 +163,7 @@ public class RoleService {
      * @param permissionIds
      */
     public Boolean removePermissionsOfRole(Integer roleId, List<Integer> permissionIds) {
-        return rolePermissionService.removeRelations(roleId, permissionIds);
+        return rolesPermissionsService.removeRelations(roleId, permissionIds);
     }
 
     /**
@@ -198,7 +198,7 @@ public class RoleService {
     public Boolean deleteRoleById(Integer roleId) {
         List<Integer> list = new ArrayList(1);
         list.add(roleId);
-        rolePermissionService.removeRelationsByRoleIds(list);
+        rolesPermissionsService.removeRelationsByRoleIds(list);
         return roleDAO.deleteByPrimaryKey(roleId) > 0;
     }
 
@@ -209,7 +209,7 @@ public class RoleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public Boolean deleteRoles(List<Integer> roleIds) {
-        rolePermissionService.removeRelationsByRoleIds(roleIds);
+        rolesPermissionsService.removeRelationsByRoleIds(roleIds);
         RoleExample example = new RoleExample();
         example.createCriteria().andRidIn(roleIds);
         return roleDAO.deleteByExample(example) > 0;

@@ -25,4 +25,5 @@ public interface SiteCategoryDAO extends SiteCategoryMapper {
 
     Set<String> listAllCategoriesTitle();
 
+    int batchDelete(List<Integer> cateIds);
 }
