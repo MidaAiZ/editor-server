@@ -66,9 +66,9 @@ public class SitesController {
 
     @GetMapping("popular")
     @ApiOperation(value = "获取热门站点接口", notes = "需要指定国家（地区）码，默认自动获取")
-    public Result<List<Site>> getPopularSites(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum,
-                                              @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize,
-                                              @RequestParam String countryCode, HttpServletRequest request) {
+    public Result<List<Site>> getPopularSites(@RequestParam @ApiParam("当前分页") Integer pageNum,
+                                              @RequestParam @ApiParam("每页数据量") Integer pageSize,
+                                              @RequestParam(required = false) String countryCode, HttpServletRequest request) {
         if (StringUtils.isEmpty(countryCode)) { countryCode = LocaleHelper.getContextCountryCode(request); }
         SiteListQueryVo queryVo = new SiteListQueryVo();
         queryVo.setPageNum(pageNum);
