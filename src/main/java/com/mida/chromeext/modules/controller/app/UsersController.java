@@ -6,6 +6,7 @@ import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.UserService;
 import com.mida.chromeext.utils.Constant;
+import com.mida.chromeext.utils.LocaleHelper;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.Api;
@@ -42,14 +43,7 @@ public class UsersController {
             @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),})
     public Result<User> register(@ApiIgnore @Validated User regUser, HttpServletRequest request) {
         // 如果没填国家码
-        if (StringUtils.isEmpty(regUser.getCountryCode())) {
-            Locale locale = RequestContextUtils.getLocaleResolver(request).resolveLocale(request);
-            String country = locale.getCountry();
-            if (StringUtils.isEmpty(country)) {
-                country = Constant.THE_WORLD;
-            }
-            regUser.setCountryCode(country);
-        }
+        if (StringUtils.isEmpty(regUser.getCountryCode())) { regUser.setCountryCode(LocaleHelper.getContextCountryCode(request)); }
         User user;
         try {
             user = userService.register(regUser);

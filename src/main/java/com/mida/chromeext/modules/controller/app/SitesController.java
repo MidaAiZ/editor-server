@@ -6,24 +6,24 @@ import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.SiteService;
+import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.utils.Constant;
+import com.mida.chromeext.utils.LocaleHelper;
 import com.mida.chromeext.utils.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.RequestContextUtils;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author lihaoyu
@@ -62,6 +62,19 @@ public class SitesController {
 
         List<Site> sites = siteService.queryList(queryVo);
         return Result.ok(sites);
+    }
+
+    @GetMapping("popular")
+    @ApiOperation(value = "获取热门站点接口", notes = "需要指定国家（地区）码，默认自动获取")
+    public Result<List<Site>> getPopularSites(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum,
+                                              @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize,
+                                              @RequestParam String countryCode, HttpServletRequest request) {
+        if (StringUtils.isEmpty(countryCode)) { countryCode = LocaleHelper.getContextCountryCode(request); }
+        SiteListQueryVo queryVo = new SiteListQueryVo();
+        queryVo.setPageNum(pageNum);
+        queryVo.setPageSize(pageSize);
+        queryVo.setCountryCodes(Lists.newArrayList(countryCode));
+        return Result.ok(siteService.queryList(queryVo));
     }
 
     @PostMapping("")

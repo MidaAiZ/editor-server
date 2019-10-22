@@ -3,6 +3,7 @@ package com.mida.chromeext.modules.controller.manage;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.SiteCategoryService;
+import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.Api;
@@ -27,8 +28,8 @@ public class SiteCategoriesController {
     @GetMapping
     @ApiOperation("获取网站分类列表")
     @RequiresPermissions(PermisConstant.SHOW_SITE_CATEGORY)
-    public Result<List<SiteCategory>> listAllCategories() {
-        List<SiteCategory> siteCategories = siteCategoryService.listAllCategories();
+    public Result<List<SiteCategory>> getCategories(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum, @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize) {
+        List<SiteCategory> siteCategories = siteCategoryService.listCategories(new ListQueryVo(pageNum, pageSize));
         return Result.ok(siteCategories);
     }
 

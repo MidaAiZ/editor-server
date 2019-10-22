@@ -2,6 +2,7 @@ package com.mida.chromeext.modules.controller.app;
 
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
+import com.mida.chromeext.utils.LocaleHelper;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,10 +28,7 @@ public class DefaultMenusController {
     @GetMapping("default")
     @ApiOperation(value = "通过唯一国家码获取默认菜单配置，如果指定的配置不存在，则返回系统数据库中的默认记录", notes = "国家码可选，如果不传后端则根据请求体自动获取国家")
     public Result<DefaultMenu> getOneByCountryCode(@ApiParam("国家码") @RequestParam(required = false) String code, HttpServletRequest request) {
-        if (StringUtils.isEmpty(code)) {
-            Locale locale = RequestContextUtils.getLocaleResolver(request).resolveLocale(request);
-            code = locale.getCountry();
-        }
+        if (StringUtils.isEmpty(code)) { code = LocaleHelper.getContextCountryCode(request); }
         DefaultMenu menu = defaultMenuService.getOneByCountryCode(code);
         if (menu == null) {
             menu = defaultMenuService.getDefaultMenu();

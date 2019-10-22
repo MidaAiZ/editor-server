@@ -1,10 +1,12 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.mida.chromeext.modules.dao.SiteCategoryDAO;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.pojo.SiteCategoryExample;
+import com.mida.chromeext.modules.vo.ListQueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +36,8 @@ public class SiteCategoryService {
      * @author lihaoyu
      * @date 2019/9/28 16:33
      */
-    public List<SiteCategory> listAllCategories() {
+    public List<SiteCategory> listCategories(ListQueryVo queryVo) {
+        PageHelper.startPage(queryVo);
         return siteCategoryDAO.listAllCategories();
     }
 

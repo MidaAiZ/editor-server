@@ -3,15 +3,20 @@
 <mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
     <resultMap type="com.mida.chromeext.modules.vo.SiteRelationVo" id="siteRelMap" autoMapping="true">
         <result column="site_title" property="title"/>
-        <association property="createdAdmin" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
+        <result column="s_created_at" property="createdAt"/>
+        <result column="s_updated_at" property="updatedAt"/>
+        <association property="createdAdmin" javaType="com.mida.chromeext.modules.pojo.Admin" autoMapping="true"
                      notNullColumn="aid">
+            <result column="a_number" property="number"/>
         </association>
-        <association property="createdUser" resultMap="com.mida.chromeext.modules.dao.mapper.AdminMapper.BaseResultMap"
+        <association property="createdUser" javaType="com.mida.chromeext.modules.pojo.User" autoMapping="true"
                      notNullColumn="uid">
+            <result column="u_number" property="number"/>
         </association>
         <association property="category"
-                     resultMap="com.mida.chromeext.modules.dao.mapper.SiteCategoryMapper.BaseResultMap"
+                     javaType="com.mida.chromeext.modules.pojo.SiteCategory" autoMapping="true"
                      notNullColumn="cid">
+            <result column="cate_title" property="title"/>
         </association>
     </resultMap>
 
@@ -71,11 +76,14 @@
                 </foreach>
             </if>
         </where>
-        order by s.weight desc
+        order by s.weight desc, s.sid desc
     </select>
 
     <select id="queryListWithRelations" resultMap="siteRelMap">
-        select s.*, s.title as site_title, c.cid, c.title, a.aid, a.number, u.uid, u.number, u.avatar
+        select s.sid, s.title as site_title, s.url, s.icon, s.cate_id, s.weight, s.marks, s.state, s.creator_type, s.creator_id, s.created_at as s_created_at, s.updated_at as s_updated_at,
+               c.cid, c.title as cate_title,
+               a.aid, a.number as a_number,
+               u.uid, u.number as u_number, u.avatar
         from sites s
         left join admins a on a.aid = s.creator_id and s.creator_type = 0
         left join users u on u.uid = s.creator_id and s.creator_type = 1
@@ -112,7 +120,7 @@
             <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
             </if>
         </where>
-        order by s.weight desc
+        order by s.weight desc, s.sid desc
     </select>
 
     <select id="listAllTitle" resultType="string">
