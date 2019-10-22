@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.server.PathParam;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -27,8 +28,11 @@ public class SiteCategoriesController {
 
     @GetMapping("")
     @ApiOperation("获取网站分类列表")
-    public Result<List<SiteCategory>> getCategories(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum, @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize) {
-        List<SiteCategory> siteCategories = siteCategoryService.listCategories(new ListQueryVo(pageNum, pageSize));
+    public Result<List<SiteCategory>> getCategories(@ApiParam("当前页数") @Min(1) @RequestParam(required = false) Integer pageNum, @ApiParam("每页数据量") @Max(100) @RequestParam(required = false) Integer pageSize) {
+        ListQueryVo queryVo = new ListQueryVo();
+        if (pageNum != null && pageNum > 0) { queryVo.setPageNum(pageNum); }
+        if (pageSize != null && pageSize > 0) { queryVo.setPageSize(pageSize); }
+        List<SiteCategory> siteCategories = siteCategoryService.listCategories(queryVo);
         return Result.ok(siteCategories);
     }
 }

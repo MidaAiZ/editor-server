@@ -29,7 +29,10 @@ public class SiteCategoriesController {
     @ApiOperation("获取网站分类列表")
     @RequiresPermissions(PermisConstant.SHOW_SITE_CATEGORY)
     public Result<List<SiteCategory>> getCategories(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum, @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize) {
-        List<SiteCategory> siteCategories = siteCategoryService.listCategories(new ListQueryVo(pageNum, pageSize));
+        ListQueryVo vo = new ListQueryVo();
+        if (pageSize != null && pageSize > 0) { vo.setPageSize(pageSize); }
+        if (pageNum != null && pageNum > 0) { vo.setPageNum(pageNum); }
+        List<SiteCategory> siteCategories = siteCategoryService.listCategories(vo);
         return Result.ok(siteCategories);
     }
 

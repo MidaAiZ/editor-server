@@ -22,6 +22,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,15 +68,18 @@ public class SitesController {
 
     @GetMapping("popular")
     @ApiOperation(value = "获取热门站点接口", notes = "需要指定国家（地区）码，默认自动获取")
-    public Result<List<Site>> getPopularSites(@RequestParam @ApiParam("当前分页") Integer pageNum,
-                                              @RequestParam @ApiParam("每页数据量") Integer pageSize,
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
+    public Result<List<Site>> getPopularSites(@ApiParam("当前页数") @Min(1) @RequestParam(required = false) Integer pageNum,
+                                              @ApiParam("每页数据量") @Max(100) @RequestParam(required = false) Integer pageSize,
                                               @RequestParam(required = false) String countryCode, HttpServletRequest request) {
+        SiteListQueryVo vo = new SiteListQueryVo();
+        if (pageNum != null && pageNum > 0) { vo.setPageNum(pageNum); }
+        if (pageSize != null && pageSize > 0) { vo.setPageSize(pageSize); }
         if (StringUtils.isEmpty(countryCode)) { countryCode = LocaleHelper.getContextCountryCode(request); }
-        SiteListQueryVo queryVo = new SiteListQueryVo();
-        queryVo.setPageNum(pageNum);
-        queryVo.setPageSize(pageSize);
-        queryVo.setCountryCodes(Lists.newArrayList(countryCode));
-        return Result.ok(siteService.queryList(queryVo));
+        vo.setCountryCodes(Lists.newArrayList(countryCode));
+        return Result.ok(siteService.queryList(vo));
     }
 
     @PostMapping("")

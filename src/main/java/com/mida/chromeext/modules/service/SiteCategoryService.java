@@ -38,7 +38,7 @@ public class SiteCategoryService {
      */
     public List<SiteCategory> listCategories(ListQueryVo queryVo) {
         PageHelper.startPage(queryVo);
-        return siteCategoryDAO.listAllCategories();
+        return siteCategoryDAO.selectByExample(new SiteCategoryExample());
     }
 
     /**
