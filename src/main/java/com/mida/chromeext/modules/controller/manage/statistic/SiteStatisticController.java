@@ -48,7 +48,7 @@ public class SiteStatisticController {
 
     @GetMapping("sites_count")
     @ApiOperation(value = "统计系统网站总数")
-    public Result<Long> listAllSite() {
+    public Result<Long> allSitesCount() {
         Long count = siteService.countAll();
         return Result.ok(count);
     }

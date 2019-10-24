@@ -11,4 +11,24 @@
         #{loc,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{lastViewTime,jdbcType=TIMESTAMP},
         #{browserUa,jdbcType=LONGVARCHAR})
     </insert>
+
+    <select id="listDailyViewCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+        SELECT date(created_at) as `name` , count(1) as count FROM `site_view_histories`
+        where
+        <![CDATA[ created_at >= #{beginTime,jdbcType=DATE}]]>
+        <if test="endTime != null">
+            and <![CDATA[ created_at <= #{endTime,jdbcType=DATE} ]]>
+        </if>
+        GROUP BY date(created_at)
+    </select>
+
+    <select id="listMonthlyViewCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+        SELECT DATE_FORMAT(created_at,'%Y-%m') as `name` , count(1) as count FROM `site_view_histories`
+        where
+        <![CDATA[ created_at >= #{beginTime,jdbcType=DATE}]]>
+        <if test="endTime != null">
+            and <![CDATA[ created_at <= #{endTime,jdbcType=DATE} ]]>
+        </if>
+        GROUP BY DATE_FORMAT(created_at,'%Y-%m')
+    </select>
 </mapper>
