@@ -1,6 +1,7 @@
 package com.mida.chromeext.components.quartz.manager;
 
 import com.mida.chromeext.components.quartz.job.BgPictureJob;
+import com.mida.chromeext.components.quartz.job.SiteViewHistoryJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,15 +15,31 @@ import java.util.Date;
 @Configuration
 public class QuartzManager {
 
-    public static final String JOB1 = "job1";
-    public static final String GROUP1 = "group1";
+    public static final String BG_PIC_JOB = "bg_pic_job";
+    public static final String LOGIN_RECORD_SAVE_JOB = "login_record_save_job";
+    public static final String DEFAULT_GROUP = "default_group";
     //默认每个星期凌晨一点执行
     // 每五秒 */5 * * * * ?     每天10点触发一次  0 0 10 * * ?
-    //public static final String DEFAULT_CRON="0 0 1 ? * L";
+    //public static final String CRON_AT_EVERY_DAY_10H="0 0 1 ? * L";
+    /**
+     * 每10秒执行一次
+     */
+    public static final String CRON_AT_EVERY_10SECOND = "*/10 * * * * ?";
+
     /**
      * 每天10点触发一次
      **/
-    public static final String DEFAULT_CRON = "0 0 1 * * ?";
+    public static final String CRON_AT_EVERY_DAY_10H = "0 0 1 * * ?";
+
+    /**
+     * 每半小时执行一次
+     */
+    public static final String CRON_AT_EVERY_HALF_HOUR = "0 0/30 * * *";
+
+    /**
+     * 每小时执行一次
+     */
+    public static final String CRON_AT_EVERY_HOUR = "0 0 0/1 * * ?";
 
     /**
      * 任务调度
@@ -46,12 +63,23 @@ public class QuartzManager {
      * @date 2019/10/6 16:46
      */
     private void startJobTask(Scheduler scheduler) throws SchedulerException {
-        JobDetail jobDetail = JobBuilder.newJob(BgPictureJob.class).withIdentity(JOB1, GROUP1).usingJobData("myFloatValue", 1f).usingJobData("myStringValue", "gg").build();
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(DEFAULT_CRON);
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(JOB1, GROUP1)
-                .withSchedule(cronScheduleBuilder).build();
+        JobDetail jobDetail;
+        CronTrigger cronTrigger;
+        /**
+         * 壁纸抓取
+         */
+        jobDetail = JobBuilder.newJob(BgPictureJob.class).withIdentity(BG_PIC_JOB, DEFAULT_GROUP).build();
+        cronTrigger = TriggerBuilder.newTrigger().withIdentity(BG_PIC_JOB, DEFAULT_GROUP)
+                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_DAY_10H)).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
 
+        /**
+         * 用户登录记录保存
+         */
+        jobDetail = JobBuilder.newJob(SiteViewHistoryJob.class).withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP).build();
+        cronTrigger = TriggerBuilder.newTrigger().withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP)
+                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_10SECOND)).build();
+        scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 
     /**
@@ -125,7 +153,7 @@ public class QuartzManager {
     }
 
     /**
-     * 恢复某个任务
+     * 恢复某个任务BgPictureJob
      */
     public void resumeJob(String name, String group) throws SchedulerException {
         JobKey jobKey = new JobKey(name, group);

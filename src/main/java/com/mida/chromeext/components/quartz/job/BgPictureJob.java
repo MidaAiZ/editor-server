@@ -27,11 +27,6 @@ public class BgPictureJob implements Job, Serializable {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) {
         log.info("壁纸获取任务开始");
-        JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
-        float myFloatValue = jobDataMap.getFloatValue("myFloatValue");
-        String myStringValue = jobDataMap.getString("myStringValue");
-        jobDataMap.put("myFloatValue", myFloatValue + 1f);
-        System.out.println(myStringValue + "    " + myFloatValue);
         executeTask();
         log.info("壁纸获取任务执行结束");
     }

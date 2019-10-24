@@ -55,7 +55,6 @@ public class ShiroRedisCacheManage implements CacheManager {
         @Override
         public V remove(K key) throws CacheException {
             BoundHashOperations<String, K, V> hash = redisTemplate.boundHashOps(cacheKey);
-
             Object k = hashKey(key);
             V value = hash.get(k);
             hash.delete(k);

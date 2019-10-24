@@ -27,7 +27,6 @@ public class BgPictureJobService {
     @Autowired
     BgPictureDAO bgPictureDAO;
 
-
     public void addBgPictures() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

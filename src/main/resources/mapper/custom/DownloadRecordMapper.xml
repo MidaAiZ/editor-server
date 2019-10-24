@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mida.chromeext.modules.dao.DownloadRecordDAO">
+
+    <insert id="insertWithId" parameterType="com.mida.chromeext.modules.pojo.DownloadRecord">
+       insert into download_records (did, ip, ua, created_at
+      )
+    values (#{did,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+    </insert>
+
+</mapper>

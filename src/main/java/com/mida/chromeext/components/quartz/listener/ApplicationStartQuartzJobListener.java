@@ -19,7 +19,6 @@ public class ApplicationStartQuartzJobListener implements ApplicationListener<Co
     @Autowired
     private QuartzManager quartzManager;
 
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         try {

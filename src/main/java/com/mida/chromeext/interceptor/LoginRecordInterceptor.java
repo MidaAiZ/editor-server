@@ -63,7 +63,9 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
 
         // 如果没有 Client Token  是第一次
         if (StringUtils.isBlank(clientToken)) {
-            Cookie clientCookie = new Cookie(Constant.TOEKN_CLIENT, UUID.randomUUID().toString());
+            Cookie clientCookie = new Cookie(Constant.TOEKN_CLIENT, UUID.randomUUID().toString().replaceAll("-", ""));
+            clientCookie.setHttpOnly(true);
+            clientCookie.setMaxAge(Integer.MAX_VALUE);
             response.addCookie(clientCookie);
             return true;
         }
@@ -99,7 +101,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         record.setClientId(clientToken);
         record.setIp(request.getRemoteAddr());
         record.setUa(request.getHeader("user-agent"));
-        loginRecordService.addRecord(record);
+        loginRecordService.addRecordCache(record);
         return cookie;
     }
 }
