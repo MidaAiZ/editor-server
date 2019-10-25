@@ -1,6 +1,8 @@
 package com.mida.chromeext.components.shiro;
 
 import com.mida.chromeext.annotation.SysPermission;
+import com.mida.chromeext.modules.pojo.Role;
+import com.mida.chromeext.modules.pojo.RolePermission;
 
 /**
  * 权限常量
@@ -132,5 +134,11 @@ public class PermisConstant {
     public static final String MODIFY_COUNTRY = "sys:countries:modify";
     @SysPermission(desc = "删除国家(地区)", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
     public static final String DELETE_COUNTRY = "sys:countries:delete";
+
+    /**
+     * 软件下载记录统计
+     */
+    @SysPermission(desc = "软件下载记录统计", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String STATISTICS_DLOAD_RECORD = "app:doanwload::statistics";
 }
 
