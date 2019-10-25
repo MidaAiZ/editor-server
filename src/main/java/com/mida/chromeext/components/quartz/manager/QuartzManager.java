@@ -34,7 +34,7 @@ public class QuartzManager {
     /**
      * 每半小时执行一次
      */
-    public static final String CRON_AT_EVERY_HALF_HOUR = "0 0/30 * * *";
+    public static final String CRON_AT_EVERY_HALF_HOUR = "0 0/30 * * * ?";
 
     /**
      * 每小时执行一次
@@ -78,7 +78,7 @@ public class QuartzManager {
          */
         jobDetail = JobBuilder.newJob(SiteViewHistoryJob.class).withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP).build();
         cronTrigger = TriggerBuilder.newTrigger().withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP)
-                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_10SECOND)).build();
+                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_HALF_HOUR)).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 

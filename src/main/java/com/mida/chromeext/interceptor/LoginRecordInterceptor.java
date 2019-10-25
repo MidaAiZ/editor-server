@@ -78,8 +78,9 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
 
         //验证token
         // loginToken为空 或者 超过一小时，记录登录
-        if (StringUtils.isBlank(loginToken) ||
-                System.currentTimeMillis() - Long.parseLong(loginToken) > Constant.LOGIN_RECORD_GAP_TIME) {
+        if (StringUtils.isBlank(loginToken) || System.currentTimeMillis() - Long.parseLong(loginToken) > Constant.LOGIN_RECORD_GAP_TIME) {
+            long a = System.currentTimeMillis() - Long.parseLong(loginToken);
+            int b = Constant.LOGIN_RECORD_GAP_TIME;
             // 更新 cookie
             createCookie(Constant.LOGIN_RECORD_TOKEN_NAME, userId, clientToken, request, response);
         }

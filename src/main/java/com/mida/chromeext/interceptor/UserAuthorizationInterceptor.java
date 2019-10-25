@@ -42,7 +42,7 @@ public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
             // 如果不是映射到方法直接通过
             return true;
         }
-        //如果不需要登陆验证，直接通过
+        // 如果不需要登陆验证，直接通过
         if (annotation == null) {
             return true;
         }

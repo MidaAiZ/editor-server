@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("manage/statistics")
-//@RequiresPermissions(PermisConstant.STATISTICS_DLOAD_RECORD)
+@RequiresPermissions(PermisConstant.STATISTICS_DLOAD_RECORD)
 @Api(value = "后台统计插件下载的相关接口", tags = "提供下载记录统计相关的 Rest API")
 public class DloadTimesStatisticController {
     @Autowired

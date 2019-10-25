@@ -91,41 +91,44 @@ public class AppInit {
             List<String> roleNames = new ArrayList();
             roleNames.addAll(roleNameMap.keySet());
             List<Role> roles = roleService.getRolesByNames(roleNames);
-            List<String> existRoleNames = new ArrayList();
+            Map<String, Role> existRoles = new HashMap<>();
             for (Role role : roles) {
-                existRoleNames.add(role.getName());
+                existRoles.put(role.getName(), role);
             }
 
             for (Map.Entry<String, Field> entry : roleNameMap.entrySet()) {
                 System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
                 // 数据库中不存在这个角色
-                if (!existRoleNames.contains(entry.getKey())) {
+                Role role;
+                if (!existRoles.containsKey(entry.getKey())) {
                     // 创建角色
-                    Role role = new Role();
+                    role = new Role();
                     Field field = entry.getValue();
                     role.setName((entry.getKey()));
                     role.setDescription(field.getAnnotation(SysRole.class).desc());
                     roleService.createRole(role);
-
-                    // 获取这个角色所拥有的所有权限
-                    List<String> rolePermissions = new ArrayList<>();
-                    Class pClaszInner = PermisConstant.class.getClass();
-                    Field[] pFields = PermisConstant.class.getFields();
-                    for (Field pField : pFields) {
-                        if (Arrays.asList(pField.getAnnotation(SysPermission.class).roles()).contains(entry.getKey())) {
-                            rolePermissions.add((String) pField.get(pClaszInner));
-                        }
+                } else { role = existRoles.get(entry.getKey()); }
+                // 获取这个角色所拥有的所有权限
+                List<String> rolePermissions = new ArrayList<>();
+                Class pClaszInner = PermisConstant.class.getClass();
+                Field[] pFields = PermisConstant.class.getFields();
+                for (Field pField : pFields) {
+                    if (Arrays.asList(pField.getAnnotation(SysPermission.class).roles()).contains(entry.getKey())) {
+                        rolePermissions.add((String) pField.get(pClaszInner));
                     }
+                }
 
-                    // 赋予权限
-                    List<Permission> existPs = permissionService.getPermissionsByPermiss(rolePermissions);
-                    List<Integer> psIds = new ArrayList<>();
-                    for (Permission p : existPs) {
+                // 赋予权限
+                List<Permission> sysPs = permissionService.getPermissionsByPermiss(rolePermissions);
+                List<Integer> existPsIds = new ArrayList<>();
+                for (Permission p : permissionService.getPermissionsByRoleId(role.getRid())) { existPsIds.add(p.getPid()); }
+                List<Integer> psIds = new ArrayList<>();
+                for (Permission p : sysPs) {
+                    if (!existPsIds.contains(p.getPid())) {
                         psIds.add(p.getPid());
                     }
-                    roleService.addPermissionsToRole(role.getRid(), psIds);
-
                 }
+                roleService.addPermissionsToRole(role.getRid(), psIds);
             }
         } catch (Exception e) {
             System.out.println(e);
