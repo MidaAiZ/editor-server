@@ -37,8 +37,10 @@ public class SiteCategoryService {
      * @date 2019/9/28 16:33
      */
     public List<SiteCategory> listCategories(ListQueryVo queryVo) {
+        SiteCategoryExample example = new SiteCategoryExample();
+        example.setOrderByClause("index ASC, id DESC");
         PageHelper.startPage(queryVo);
-        return siteCategoryDAO.selectByExample(new SiteCategoryExample());
+        return siteCategoryDAO.selectByExample(example);
     }
 
     /**

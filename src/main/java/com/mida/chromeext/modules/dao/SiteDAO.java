@@ -97,5 +97,4 @@ public interface SiteDAO extends SiteMapper {
      * @date 2019/10/19 21:17
      */
     List<CategorySitesCount> listSitesCountByCategory();
-
 }

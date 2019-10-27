@@ -90,6 +90,7 @@ public class SiteViewHistoryService {
             criteria.andLastViewTimeGreaterThanOrEqualTo(queryVo.getLastViewTimeAfter());
         }
 
+        example.setOrderByClause("created_at desc");
         PageHelper.startPage(queryVo);
         List<SiteViewHistory> histories = siteViewHistoryDAO.selectByExample(example);
         return histories;

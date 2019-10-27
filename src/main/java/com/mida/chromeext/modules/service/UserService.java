@@ -209,6 +209,7 @@ public class UserService {
         if(queryVo.getCreatedBefore() != null){
             criteria.andCreatedAtLessThan(queryVo.getCreatedBefore());
         }
+        example.setOrderByClause("id desc");
         PageHelper.startPage(queryVo);
         List<User> users = userDAO.selectByExample(example);
         return users;

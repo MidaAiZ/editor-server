@@ -55,9 +55,9 @@ public class SitesController {
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     @RequiresPermissions(PermisConstant.SHOW_SITE)
-    public List<SiteRelationVo> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
+    public Result<List<SiteRelationVo>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
         List<SiteRelationVo> sites = siteService.queryListWithRelations(queryVo);
-        return sites;
+        return Result.ok(sites);
     }
 
     @GetMapping("{siteId}")

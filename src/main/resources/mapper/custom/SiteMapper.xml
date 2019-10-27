@@ -133,6 +133,7 @@
         FROM
             site_categories AS c
                 LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
+        order by s.weight desc, s.sid desc
 
 </select>
 
