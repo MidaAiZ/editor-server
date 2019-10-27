@@ -81,15 +81,6 @@ public interface SiteDAO extends SiteMapper {
     List<SiteRelationVo> queryListWithRelations(@Param("queryVo") SiteListQueryVo queryVo);
 
     /**
-     * 列出所有网站的名字
-     *
-     * @return 所有名字
-     * @author lihaoyu
-     * @date 2019/9/28 21:37
-     */
-    Set<String> listAllTitle();
-
-    /**
      * 统计所有种类下的网站个数
      *
      * @return
@@ -97,4 +88,10 @@ public interface SiteDAO extends SiteMapper {
      * @date 2019/10/19 21:17
      */
     List<CategorySitesCount> listSitesCountByCategory();
+
+    /**
+     * 获取实时热门站点
+     * @return
+     */
+    List<Map> listHotSites();
 }

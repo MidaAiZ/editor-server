@@ -5,19 +5,29 @@
     <select id="listDailyAliveUsersCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
         SELECT date(login_time) as `name` , count(DISTINCT(client_id)) as count FROM `login_records`
         where
-        <![CDATA[ login_time >= #{beginTime,jdbcType=DATE}]]>
+        <![CDATA[ login_time >= #{beginTime}]]>
         <if test="endTime != null">
-            and <![CDATA[ login_time <= #{endTime,jdbcType=DATE} ]]>
+            and <![CDATA[ login_time <= #{endTime} ]]>
         </if>
         GROUP BY date(login_time)
+    </select>
+
+    <select id="listDailyNewUsersCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+        SELECT date(created_at) as `name` , count(1) as count FROM `users`
+        where
+        <![CDATA[ created_at >= #{beginTime}]]>
+        <if test="endTime != null">
+            and <![CDATA[ created_at <= #{endTime} ]]>
+        </if>
+        GROUP BY date(created_at)
     </select>
 
     <select id="listMonthlyAliveUsersCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
         SELECT DATE_FORMAT(login_time,'%Y-%m') as `name` , count(DISTINCT(client_id)) as count FROM `login_records`
         where
-        <![CDATA[ login_time >= #{beginTime,jdbcType=DATE}]]>
+        <![CDATA[ login_time >= #{beginTime}]]>
         <if test="endTime != null">
-            and <![CDATA[ login_time <= #{endTime,jdbcType=DATE} ]]>
+            and <![CDATA[ login_time <= #{endTime} ]]>
         </if>
         GROUP BY DATE_FORMAT(login_time,'%Y-%m')
     </select>

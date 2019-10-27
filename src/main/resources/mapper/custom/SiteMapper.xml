@@ -123,18 +123,20 @@
         order by s.weight desc, s.sid desc
     </select>
 
-    <select id="listAllTitle" resultType="string">
-        select title
-        from sites
-    </select>
-
     <select id="listSitesCountByCategory" resultType="com.mida.chromeext.modules.vo.statistic.CategorySitesCount">
         SELECT c.cid, c.index, c.title, ifnull( s.`count`, 0 ) AS `sites_count`
         FROM
             site_categories AS c
                 LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
         order by s.weight desc, s.sid desc
+    </select>
 
-</select>
+    <select id="listHotSites" resultType="Map">
+        SELECT h.site_url, h.site_title, count( site_url ) AS view_times
+        FROM site_view_histories h
+        GROUP BY h.site_url, h.site_title
+        ORDER BY times DESC
+        LIMIT 100
+    </select>
 
 </mapper>

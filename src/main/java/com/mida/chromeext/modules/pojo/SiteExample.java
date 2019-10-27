@@ -635,52 +635,52 @@ public class SiteExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeEqualTo(Boolean value) {
+        public Criteria andCreatorTypeEqualTo(Short value) {
             addCriterion("creator_type =", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeNotEqualTo(Boolean value) {
+        public Criteria andCreatorTypeNotEqualTo(Short value) {
             addCriterion("creator_type <>", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeGreaterThan(Boolean value) {
+        public Criteria andCreatorTypeGreaterThan(Short value) {
             addCriterion("creator_type >", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andCreatorTypeGreaterThanOrEqualTo(Short value) {
             addCriterion("creator_type >=", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeLessThan(Boolean value) {
+        public Criteria andCreatorTypeLessThan(Short value) {
             addCriterion("creator_type <", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeLessThanOrEqualTo(Boolean value) {
+        public Criteria andCreatorTypeLessThanOrEqualTo(Short value) {
             addCriterion("creator_type <=", value, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeIn(List<Boolean> values) {
+        public Criteria andCreatorTypeIn(List<Short> values) {
             addCriterion("creator_type in", values, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeNotIn(List<Boolean> values) {
+        public Criteria andCreatorTypeNotIn(List<Short> values) {
             addCriterion("creator_type not in", values, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeBetween(Boolean value1, Boolean value2) {
+        public Criteria andCreatorTypeBetween(Short value1, Short value2) {
             addCriterion("creator_type between", value1, value2, "creatorType");
             return (Criteria) this;
         }
 
-        public Criteria andCreatorTypeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andCreatorTypeNotBetween(Short value1, Short value2) {
             addCriterion("creator_type not between", value1, value2, "creatorType");
             return (Criteria) this;
         }

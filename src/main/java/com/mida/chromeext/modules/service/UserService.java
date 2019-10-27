@@ -12,6 +12,7 @@ import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
 import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
+import com.mida.chromeext.utils.DateUtils;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.ShiroUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -268,6 +269,22 @@ public class UserService {
         List<StatisticCountVo> voList = userDAO.listMonthlyAliveUsersCount(beginDate, endDate);
         Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
         voList.forEach(vo -> resMap.put(vo.getName(), vo.getCount()));
+        return resMap;
+    }
+
+    /**
+     * 获取每日新注册的用户数量
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    public Map<String, Long> listDailyNewUsersCount(Date beginDate, Date endDate) {
+        // mybatis 返回的Map是每一行中多个列组成的map
+        List<StatisticCountVo> voList = userDAO.listDailyNewUsersCount(beginDate, endDate);
+        Map<String, Long> resMap = new HashMap<>(NumConst.NUM16);
+        for (StatisticCountVo vo : voList) {
+            resMap.put(vo.getName(), vo.getCount());
+        }
         return resMap;
     }
 

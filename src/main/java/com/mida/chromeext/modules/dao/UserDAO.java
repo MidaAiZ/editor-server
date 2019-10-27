@@ -18,6 +18,8 @@ public interface UserDAO extends UserMapper {
 
     List<StatisticCountVo> listDailyAliveUsersCount(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
+    List<StatisticCountVo> listDailyNewUsersCount(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
+
     List<StatisticCountVo> listMonthlyAliveUsersCount(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 
     List<CountryUsersCount> listUsersCountByCountry();

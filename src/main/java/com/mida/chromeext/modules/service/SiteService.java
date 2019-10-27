@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lihaoyu
@@ -290,4 +291,32 @@ public class SiteService {
         return count;
     }
 
+    /**
+     * 获取系统创建的网站数
+     * @return
+     */
+    public Long countSysSites() {
+        SiteExample example = new SiteExample();
+        example.createCriteria().andCreatorTypeEqualTo(Constant.CREATED_BY_ADMIN);
+        return siteDAO.countByExample(example);
+    }
+
+
+    /**
+     * 获取用户创建的网站数
+     * @return
+     */
+    public Long countUserSites() {
+        SiteExample example = new SiteExample();
+        example.createCriteria().andCreatorTypeEqualTo(Constant.CREATED_BY_USER);
+        return siteDAO.countByExample(example);
+    }
+
+    /**
+     * 获取当日热门站点
+     * @return
+     */
+    public List<Map> hotSites() {
+        return siteDAO.listHotSites();
+    }
 }

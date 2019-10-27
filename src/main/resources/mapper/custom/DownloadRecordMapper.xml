@@ -11,9 +11,9 @@
     <select id="listDailyDloadsCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
         SELECT date(created_at) as `name` , count(1) as count FROM `download_records`
         where
-        <![CDATA[ created_at >= #{beginTime,jdbcType=DATE}]]>
+        <![CDATA[ created_at >= #{beginTime}]]>
         <if test="endTime != null">
-            and <![CDATA[ created_at <= #{endTime,jdbcType=DATE} ]]>
+            and <![CDATA[ created_at <= #{endTime} ]]>
         </if>
         GROUP BY date(created_at)
     </select>
@@ -21,9 +21,9 @@
     <select id="listMonthlyDloadsCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
         SELECT DATE_FORMAT(created_at,'%Y-%m') as `name` , count(1) as count FROM `download_records`
         where
-        <![CDATA[ created_at >= #{beginTime,jdbcType=DATE}]]>
+        <![CDATA[ created_at >= #{beginTime}]]>
         <if test="endTime != null">
-            and <![CDATA[ created_at <= #{endTime,jdbcType=DATE} ]]>
+            and <![CDATA[ created_at <= #{endTime} ]]>
         </if>
         GROUP BY DATE_FORMAT(created_at,'%Y-%m')
     </select>

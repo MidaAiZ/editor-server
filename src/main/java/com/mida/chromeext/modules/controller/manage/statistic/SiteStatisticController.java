@@ -1,12 +1,15 @@
 package com.mida.chromeext.modules.controller.manage.statistic;
 
 import com.mida.chromeext.components.shiro.PermisConstant;
+import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.service.CountriesSitesService;
 import com.mida.chromeext.modules.service.SiteService;
 import com.mida.chromeext.modules.vo.statistic.CategorySitesCount;
 import com.mida.chromeext.modules.vo.statistic.CountrySitesCount;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lihaoyu
@@ -48,8 +53,26 @@ public class SiteStatisticController {
 
     @GetMapping("sites_count")
     @ApiOperation(value = "统计系统网站总数")
-    public Result<Long> allSitesCount() {
-        Long count = siteService.countAll();
-        return Result.ok(count);
+    public Result<Map<String, Long>> allSitesCount() {
+        /**
+         * 用户创建的网站总数
+         */
+        Long userSitesCount = siteService.countUserSites();
+        /**
+         * 系统（管理员）创建的网站总数
+         */
+        Long sysSitesCount = siteService.countSysSites();
+        Long totalCount = userSitesCount + sysSitesCount;
+        Map<String, Long> returnMap = new HashMap();
+        returnMap.put("totalCount", totalCount);
+        returnMap.put("sysSitesCount", sysSitesCount);
+        returnMap.put("userSitesCount", userSitesCount);
+        return Result.ok(returnMap);
+    }
+
+    @GetMapping("hot_sites")
+    @ApiOperation(value = "实时热门站点")
+    public Result<List<Map>> hotSites() {
+        return Result.ok(siteService.hotSites());
     }
 }

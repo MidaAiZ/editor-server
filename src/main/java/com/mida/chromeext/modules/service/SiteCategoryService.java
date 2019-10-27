@@ -38,7 +38,7 @@ public class SiteCategoryService {
      */
     public List<SiteCategory> listCategories(ListQueryVo queryVo) {
         SiteCategoryExample example = new SiteCategoryExample();
-        example.setOrderByClause("index ASC, id DESC");
+        example.setOrderByClause("`index` ASC, cid DESC");
         PageHelper.startPage(queryVo);
         return siteCategoryDAO.selectByExample(example);
     }
