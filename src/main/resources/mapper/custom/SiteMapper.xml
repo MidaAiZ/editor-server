@@ -128,14 +128,14 @@
         FROM
             site_categories AS c
                 LEFT JOIN ( SELECT cate_id, count( 1 ) count FROM sites GROUP BY cate_id ) AS s ON c.cid = s.cate_id
-        order by s.weight desc, s.sid desc
+        order by sites_count desc
     </select>
 
     <select id="listHotSites" resultType="Map">
-        SELECT h.site_url, h.site_title, count( site_url ) AS view_times
+        SELECT h.site_url as url, h.site_title as title, count( site_url ) AS view_times
         FROM site_view_histories h
-        GROUP BY h.site_url, h.site_title
-        ORDER BY times DESC
+        GROUP BY h.site_url, h.site_title HAVING view_times > 0
+        ORDER BY view_times DESC
         LIMIT 100
     </select>
 

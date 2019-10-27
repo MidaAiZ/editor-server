@@ -8,6 +8,7 @@
         left JOIN (SELECT country_code as `code`, count(1) count
                             FROM countries_sites
                             GROUP BY country_code) AS cs ON c.`code` = cs.`code`
+        order by sites_count desc;
      </select>
 
 </mapper>

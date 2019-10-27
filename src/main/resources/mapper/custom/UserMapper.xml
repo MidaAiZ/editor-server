@@ -38,5 +38,6 @@
         FROM
             countries AS c
                 left JOIN ( SELECT country_code as `code`, count(1) count FROM users GROUP BY country_code ) AS u ON c.`code` = u.`code`
+        order by users_count desc
     </select>
 </mapper>
