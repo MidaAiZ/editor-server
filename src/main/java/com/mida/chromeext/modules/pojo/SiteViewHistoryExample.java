@@ -15,20 +15,20 @@ public class SiteViewHistoryExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -575,133 +575,73 @@ public class SiteViewHistoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andTimesIsNull() {
-            addCriterion("times is null");
+        public Criteria andCountryCodeIsNull() {
+            addCriterion("country_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andTimesIsNotNull() {
-            addCriterion("times is not null");
+        public Criteria andCountryCodeIsNotNull() {
+            addCriterion("country_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTimesEqualTo(Integer value) {
-            addCriterion("times =", value, "times");
+        public Criteria andCountryCodeEqualTo(String value) {
+            addCriterion("country_code =", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotEqualTo(Integer value) {
-            addCriterion("times <>", value, "times");
+        public Criteria andCountryCodeNotEqualTo(String value) {
+            addCriterion("country_code <>", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesGreaterThan(Integer value) {
-            addCriterion("times >", value, "times");
+        public Criteria andCountryCodeGreaterThan(String value) {
+            addCriterion("country_code >", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesGreaterThanOrEqualTo(Integer value) {
-            addCriterion("times >=", value, "times");
+        public Criteria andCountryCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("country_code >=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesLessThan(Integer value) {
-            addCriterion("times <", value, "times");
+        public Criteria andCountryCodeLessThan(String value) {
+            addCriterion("country_code <", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesLessThanOrEqualTo(Integer value) {
-            addCriterion("times <=", value, "times");
+        public Criteria andCountryCodeLessThanOrEqualTo(String value) {
+            addCriterion("country_code <=", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesIn(List<Integer> values) {
-            addCriterion("times in", values, "times");
+        public Criteria andCountryCodeLike(String value) {
+            addCriterion("country_code like", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotIn(List<Integer> values) {
-            addCriterion("times not in", values, "times");
+        public Criteria andCountryCodeNotLike(String value) {
+            addCriterion("country_code not like", value, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesBetween(Integer value1, Integer value2) {
-            addCriterion("times between", value1, value2, "times");
+        public Criteria andCountryCodeIn(List<String> values) {
+            addCriterion("country_code in", values, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andTimesNotBetween(Integer value1, Integer value2) {
-            addCriterion("times not between", value1, value2, "times");
+        public Criteria andCountryCodeNotIn(List<String> values) {
+            addCriterion("country_code not in", values, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andLocIsNull() {
-            addCriterion("loc is null");
+        public Criteria andCountryCodeBetween(String value1, String value2) {
+            addCriterion("country_code between", value1, value2, "countryCode");
             return (Criteria) this;
         }
 
-        public Criteria andLocIsNotNull() {
-            addCriterion("loc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocEqualTo(String value) {
-            addCriterion("loc =", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocNotEqualTo(String value) {
-            addCriterion("loc <>", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocGreaterThan(String value) {
-            addCriterion("loc >", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocGreaterThanOrEqualTo(String value) {
-            addCriterion("loc >=", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocLessThan(String value) {
-            addCriterion("loc <", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocLessThanOrEqualTo(String value) {
-            addCriterion("loc <=", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocLike(String value) {
-            addCriterion("loc like", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocNotLike(String value) {
-            addCriterion("loc not like", value, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocIn(List<String> values) {
-            addCriterion("loc in", values, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocNotIn(List<String> values) {
-            addCriterion("loc not in", values, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocBetween(String value1, String value2) {
-            addCriterion("loc between", value1, value2, "loc");
-            return (Criteria) this;
-        }
-
-        public Criteria andLocNotBetween(String value1, String value2) {
-            addCriterion("loc not between", value1, value2, "loc");
+        public Criteria andCountryCodeNotBetween(String value1, String value2) {
+            addCriterion("country_code not between", value1, value2, "countryCode");
             return (Criteria) this;
         }
 
@@ -764,66 +704,6 @@ public class SiteViewHistoryExample {
             addCriterion("created_at not between", value1, value2, "createdAt");
             return (Criteria) this;
         }
-
-        public Criteria andLastViewTimeIsNull() {
-            addCriterion("last_view_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeIsNotNull() {
-            addCriterion("last_view_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeEqualTo(Date value) {
-            addCriterion("last_view_time =", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeNotEqualTo(Date value) {
-            addCriterion("last_view_time <>", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeGreaterThan(Date value) {
-            addCriterion("last_view_time >", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("last_view_time >=", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeLessThan(Date value) {
-            addCriterion("last_view_time <", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeLessThanOrEqualTo(Date value) {
-            addCriterion("last_view_time <=", value, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeIn(List<Date> values) {
-            addCriterion("last_view_time in", values, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeNotIn(List<Date> values) {
-            addCriterion("last_view_time not in", values, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeBetween(Date value1, Date value2) {
-            addCriterion("last_view_time between", value1, value2, "lastViewTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andLastViewTimeNotBetween(Date value1, Date value2) {
-            addCriterion("last_view_time not between", value1, value2, "lastViewTime");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -849,6 +729,38 @@ public class SiteViewHistoryExample {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -884,38 +796,6 @@ public class SiteViewHistoryExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

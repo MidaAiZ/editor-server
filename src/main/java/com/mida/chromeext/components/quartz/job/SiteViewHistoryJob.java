@@ -1,12 +1,14 @@
 package com.mida.chromeext.components.quartz.job;
 
-import com.mida.chromeext.components.quartz.service.BgPictureJobService;
 import com.mida.chromeext.modules.pojo.DownloadRecord;
 import com.mida.chromeext.modules.pojo.LoginRecord;
 import com.mida.chromeext.modules.service.DownloadRecordService;
 import com.mida.chromeext.modules.service.LoginRecordService;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.*;
+import org.quartz.DisallowConcurrentExecution;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.PersistJobDataAfterExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -68,7 +69,7 @@ public class SiteViewHistoryJob implements Job, Serializable {
      * 持久化数据
      * @param record
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     void saveData(LoginRecord record) {
         loginRecordService.save(record);
         // 如果不存在这个登录记录的话则记作1个下载记录
@@ -78,6 +79,7 @@ public class SiteViewHistoryJob implements Job, Serializable {
             dRecod.setDid(did);
             dRecod.setIp(record.getIp());
             dRecod.setUa(record.getUa());
+            dRecod.setCountryCode(record.getCountryCode());
             dRecod.setCreatedAt(record.getLoginTime());
             downloadRecordService.save(dRecod);
         }

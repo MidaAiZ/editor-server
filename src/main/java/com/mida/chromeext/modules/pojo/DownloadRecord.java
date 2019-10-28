@@ -10,6 +10,8 @@ public class DownloadRecord implements Serializable {
 
     private String ua;
 
+    private String countryCode;
+
     private Date createdAt;
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +40,14 @@ public class DownloadRecord implements Serializable {
         this.ua = ua == null ? null : ua.trim();
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode == null ? null : countryCode.trim();
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -55,6 +65,7 @@ public class DownloadRecord implements Serializable {
         sb.append(", did=").append(did);
         sb.append(", ip=").append(ip);
         sb.append(", ua=").append(ua);
+        sb.append(", countryCode=").append(countryCode);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

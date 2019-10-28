@@ -7,6 +7,7 @@ import com.mida.chromeext.modules.pojo.SiteViewHistory;
 import com.mida.chromeext.modules.pojo.SiteViewHistoryExample;
 import com.mida.chromeext.modules.vo.SiteViewHistoryVo;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
+import com.mida.chromeext.utils.LocaleHelper;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,13 @@ public class SiteViewHistoryService {
      * @return
      */
     public SiteViewHistory create(SiteViewHistory history, HttpServletRequest request) {
-        history.setLastViewTime(new Date());
         history.setCreatedAt(new Date());
-        history.setTimes(1);
         // 设置请求IP
         history.setIp(request.getRemoteAddr());
         // 设置请求浏览器信息
         history.setBrowserUa(request.getHeader("user-agent"));
+        // 设置countryCode
+        history.setCountryCode(LocaleHelper.getContextCountryCode(request));
         // 设置用户ID
         Object uid = request.getAttribute(UserAuthorizationInterceptor.CURRENT_USER);
         if (uid != null) {
@@ -82,12 +83,6 @@ public class SiteViewHistoryService {
         }
         if (queryVo.getCreatedAfter() != null) {
             criteria.andCreatedAtGreaterThanOrEqualTo(queryVo.getCreatedAfter());
-        }
-        if (queryVo.getLastViewTimeBefore() != null) {
-            criteria.andLastViewTimeLessThanOrEqualTo(queryVo.getLastViewTimeBefore());
-        }
-        if (queryVo.getLastViewTimeAfter() != null) {
-            criteria.andLastViewTimeGreaterThanOrEqualTo(queryVo.getLastViewTimeAfter());
         }
 
         example.setOrderByClause("created_at desc");

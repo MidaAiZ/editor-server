@@ -12,10 +12,6 @@ public class SiteViewHistoryVo extends ListQueryVo {
     private Date createdBefore;
     @ApiModelProperty(value = "创建记录日期<=，格式2019-01-01 00:00:00")
     private Date createdAfter;
-    @ApiModelProperty(value = "最后一次浏览日期日期>=，格式2019-01-01 00:00:00")
-    private Date lastViewTimeBefore;
-    @ApiModelProperty(value = "最后一次浏览日期日期<=，格式2019-01-01 00:00:00")
-    private Date lastViewTimeAfter;
     @ApiModelProperty(value = "网站URL，模糊查询")
     private String siteUrl;
     @ApiModelProperty(value = "网站名称，模糊查询")
@@ -45,22 +41,6 @@ public class SiteViewHistoryVo extends ListQueryVo {
 
     public void setCreatedAfter(Date createdAfter) {
         this.createdAfter = createdAfter;
-    }
-
-    public Date getLastViewTimeBefore() {
-        return lastViewTimeBefore;
-    }
-
-    public void setLastViewTimeBefore(Date lastViewTimeBefore) {
-        this.lastViewTimeBefore = lastViewTimeBefore;
-    }
-
-    public Date getLastViewTimeAfter() {
-        return lastViewTimeAfter;
-    }
-
-    public void setLastViewTimeAfter(Date lastViewTimeAfter) {
-        this.lastViewTimeAfter = lastViewTimeAfter;
     }
 
     public String getSiteUrl() {

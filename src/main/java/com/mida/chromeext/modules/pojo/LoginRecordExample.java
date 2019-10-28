@@ -15,20 +15,20 @@ public class LoginRecordExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -494,6 +494,76 @@ public class LoginRecordExample {
             addCriterion("login_time not between", value1, value2, "loginTime");
             return (Criteria) this;
         }
+
+        public Criteria andCountryCodeIsNull() {
+            addCriterion("country_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeIsNotNull() {
+            addCriterion("country_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeEqualTo(String value) {
+            addCriterion("country_code =", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotEqualTo(String value) {
+            addCriterion("country_code <>", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeGreaterThan(String value) {
+            addCriterion("country_code >", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("country_code >=", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeLessThan(String value) {
+            addCriterion("country_code <", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeLessThanOrEqualTo(String value) {
+            addCriterion("country_code <=", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeLike(String value) {
+            addCriterion("country_code like", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotLike(String value) {
+            addCriterion("country_code not like", value, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeIn(List<String> values) {
+            addCriterion("country_code in", values, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotIn(List<String> values) {
+            addCriterion("country_code not in", values, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeBetween(String value1, String value2) {
+            addCriterion("country_code between", value1, value2, "countryCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCountryCodeNotBetween(String value1, String value2) {
+            addCriterion("country_code not between", value1, value2, "countryCode");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -519,6 +589,38 @@ public class LoginRecordExample {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -554,38 +656,6 @@ public class LoginRecordExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

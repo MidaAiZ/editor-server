@@ -1,299 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.mapper.SiteViewHistoryMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.SiteViewHistory">
-        <id column="hid" jdbcType="VARCHAR" property="hid"/>
-        <result column="ip" jdbcType="VARCHAR" property="ip"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="site_id" jdbcType="INTEGER" property="siteId"/>
-        <result column="site_title" jdbcType="VARCHAR" property="siteTitle"/>
-        <result column="site_url" jdbcType="VARCHAR" property="siteUrl"/>
-        <result column="browser_ua" jdbcType="VARCHAR" property="browserUa"/>
-        <result column="times" jdbcType="INTEGER" property="times"/>
-        <result column="loc" jdbcType="VARCHAR" property="loc"/>
-        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
-        <result column="last_view_time" jdbcType="TIMESTAMP" property="lastViewTime"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.SiteViewHistory">
+    <id column="hid" jdbcType="VARCHAR" property="hid" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="site_id" jdbcType="INTEGER" property="siteId" />
+    <result column="site_title" jdbcType="VARCHAR" property="siteTitle" />
+    <result column="site_url" jdbcType="VARCHAR" property="siteUrl" />
+    <result column="browser_ua" jdbcType="VARCHAR" property="browserUa" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-    hid, ip, user_id, site_id, site_title, site_url, browser_ua, times, loc, created_at, 
-    last_view_time
+          </trim>
+        </if>
+      </foreach>
+    </where>
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample"
-            resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
         </if>
-        <include refid="Base_Column_List"/>
-        from site_view_histories
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from site_view_histories
-        where hid = #{hid,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hid, ip, user_id, site_id, site_title, site_url, browser_ua, country_code, created_at
+  </sql>
+  <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from site_view_histories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from site_view_histories
+    where hid = #{hid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from site_view_histories
     where hid = #{hid,jdbcType=VARCHAR}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample">
-        delete from site_view_histories
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
-        <selectKey keyProperty="hid" order="AFTER" resultType="java.lang.String">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into site_view_histories (ip, user_id, site_id,
-        site_title, site_url, browser_ua,
-        times, loc, created_at,
-        last_view_time)
-        values (#{ip,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{siteId,jdbcType=INTEGER},
-        #{siteTitle,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, #{browserUa,jdbcType=VARCHAR},
-        #{times,jdbcType=INTEGER}, #{loc,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
-        #{lastViewTime,jdbcType=TIMESTAMP})
-    </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
-        <selectKey keyProperty="hid" order="AFTER" resultType="java.lang.String">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into site_view_histories
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="ip != null">
-                ip,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="siteId != null">
-                site_id,
-            </if>
-            <if test="siteTitle != null">
-                site_title,
-            </if>
-            <if test="siteUrl != null">
-                site_url,
-            </if>
-            <if test="browserUa != null">
-                browser_ua,
-            </if>
-            <if test="times != null">
-                times,
-            </if>
-            <if test="loc != null">
-                loc,
-            </if>
-            <if test="createdAt != null">
-                created_at,
-            </if>
-            <if test="lastViewTime != null">
-                last_view_time,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="ip != null">
-                #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="siteId != null">
-                #{siteId,jdbcType=INTEGER},
-            </if>
-            <if test="siteTitle != null">
-                #{siteTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="siteUrl != null">
-                #{siteUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="browserUa != null">
-                #{browserUa,jdbcType=VARCHAR},
-            </if>
-            <if test="times != null">
-                #{times,jdbcType=INTEGER},
-            </if>
-            <if test="loc != null">
-                #{loc,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="lastViewTime != null">
-                #{lastViewTime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample"
-            resultType="java.lang.Long">
-        select count(*) from site_view_histories
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update site_view_histories
-        <set>
-            <if test="record.hid != null">
-                hid = #{record.hid,jdbcType=VARCHAR},
-            </if>
-            <if test="record.ip != null">
-                ip = #{record.ip,jdbcType=VARCHAR},
-            </if>
-            <if test="record.userId != null">
-                user_id = #{record.userId,jdbcType=INTEGER},
-            </if>
-            <if test="record.siteId != null">
-                site_id = #{record.siteId,jdbcType=INTEGER},
-            </if>
-            <if test="record.siteTitle != null">
-                site_title = #{record.siteTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="record.siteUrl != null">
-                site_url = #{record.siteUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="record.browserUa != null">
-                browser_ua = #{record.browserUa,jdbcType=VARCHAR},
-            </if>
-            <if test="record.times != null">
-                times = #{record.times,jdbcType=INTEGER},
-            </if>
-            <if test="record.loc != null">
-                loc = #{record.loc,jdbcType=VARCHAR},
-            </if>
-            <if test="record.createdAt != null">
-                created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.lastViewTime != null">
-                last_view_time = #{record.lastViewTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update site_view_histories
-        set hid = #{record.hid,jdbcType=VARCHAR},
+  <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample">
+    delete from site_view_histories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
+    <selectKey keyProperty="hid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into site_view_histories (ip, user_id, site_id, 
+      site_title, site_url, browser_ua, 
+      country_code, created_at)
+    values (#{ip,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{siteId,jdbcType=INTEGER}, 
+      #{siteTitle,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, #{browserUa,jdbcType=VARCHAR}, 
+      #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
+    <selectKey keyProperty="hid" order="AFTER" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into site_view_histories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="siteId != null">
+        site_id,
+      </if>
+      <if test="siteTitle != null">
+        site_title,
+      </if>
+      <if test="siteUrl != null">
+        site_url,
+      </if>
+      <if test="browserUa != null">
+        browser_ua,
+      </if>
+      <if test="countryCode != null">
+        country_code,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null">
+        #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="siteTitle != null">
+        #{siteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null">
+        #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="browserUa != null">
+        #{browserUa,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistoryExample" resultType="java.lang.Long">
+    select count(*) from site_view_histories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update site_view_histories
+    <set>
+      <if test="record.hid != null">
+        hid = #{record.hid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteId != null">
         site_id = #{record.siteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.siteTitle != null">
         site_title = #{record.siteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteUrl != null">
         site_url = #{record.siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.browserUa != null">
         browser_ua = #{record.browserUa,jdbcType=VARCHAR},
-        times = #{record.times,jdbcType=INTEGER},
-        loc = #{record.loc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryCode != null">
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-        last_view_time = #{record.lastViewTime,jdbcType=TIMESTAMP}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
-        update site_view_histories
-        <set>
-            <if test="ip != null">
-                ip = #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="siteId != null">
-                site_id = #{siteId,jdbcType=INTEGER},
-            </if>
-            <if test="siteTitle != null">
-                site_title = #{siteTitle,jdbcType=VARCHAR},
-            </if>
-            <if test="siteUrl != null">
-                site_url = #{siteUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="browserUa != null">
-                browser_ua = #{browserUa,jdbcType=VARCHAR},
-            </if>
-            <if test="times != null">
-                times = #{times,jdbcType=INTEGER},
-            </if>
-            <if test="loc != null">
-                loc = #{loc,jdbcType=VARCHAR},
-            </if>
-            <if test="createdAt != null">
-                created_at = #{createdAt,jdbcType=TIMESTAMP},
-            </if>
-            <if test="lastViewTime != null">
-                last_view_time = #{lastViewTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where hid = #{hid,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update site_view_histories
+    set hid = #{record.hid,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      site_id = #{record.siteId,jdbcType=INTEGER},
+      site_title = #{record.siteTitle,jdbcType=VARCHAR},
+      site_url = #{record.siteUrl,jdbcType=VARCHAR},
+      browser_ua = #{record.browserUa,jdbcType=VARCHAR},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
+    update site_view_histories
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="siteId != null">
+        site_id = #{siteId,jdbcType=INTEGER},
+      </if>
+      <if test="siteTitle != null">
+        site_title = #{siteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="siteUrl != null">
+        site_url = #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="browserUa != null">
+        browser_ua = #{browserUa,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        country_code = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
     update site_view_histories
     set ip = #{ip,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
@@ -301,10 +266,8 @@
       site_title = #{siteTitle,jdbcType=VARCHAR},
       site_url = #{siteUrl,jdbcType=VARCHAR},
       browser_ua = #{browserUa,jdbcType=VARCHAR},
-      times = #{times,jdbcType=INTEGER},
-      loc = #{loc,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      last_view_time = #{lastViewTime,jdbcType=TIMESTAMP}
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
     where hid = #{hid,jdbcType=VARCHAR}
   </update>
 </mapper>

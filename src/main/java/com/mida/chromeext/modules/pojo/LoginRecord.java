@@ -4,13 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LoginRecord implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long rid;
+
     private Integer uid;
+
     private String clientId;
+
     private String ip;
+
     private String ua;
+
     private Date loginTime;
+
+    private String countryCode;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getRid() {
         return rid;
@@ -60,6 +68,14 @@ public class LoginRecord implements Serializable {
         this.loginTime = loginTime;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode == null ? null : countryCode.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -72,6 +88,7 @@ public class LoginRecord implements Serializable {
         sb.append(", ip=").append(ip);
         sb.append(", ua=").append(ua);
         sb.append(", loginTime=").append(loginTime);
+        sb.append(", countryCode=").append(countryCode);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -5,6 +5,7 @@ import com.mida.chromeext.modules.pojo.LoginRecord;
 import com.mida.chromeext.modules.service.LoginRecordService;
 import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.JwtUtils;
+import com.mida.chromeext.utils.LocaleHelper;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         record.setClientId(clientToken);
         record.setIp(request.getRemoteAddr());
         record.setUa(request.getHeader("user-agent"));
+        record.setCountryCode(LocaleHelper.getContextCountryCode(request));
         loginRecordService.addRecordCache(record);
         return cookie;
     }

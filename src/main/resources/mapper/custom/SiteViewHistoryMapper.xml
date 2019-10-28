@@ -3,12 +3,10 @@
 <mapper namespace="com.mida.chromeext.modules.dao.SiteViewHistoryDAO">
     <insert id="insertWithUUID" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
         insert into site_view_histories (hid, ip, user_id, site_id,
-        site_title, site_url, times,
-        loc, created_at, last_view_time,
-        browser_ua)
+        site_title, site_url, country_code, created_at, browser_ua)
         values (#{hid, jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{siteId,jdbcType=INTEGER},
-        #{siteTitle,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER},
-        #{loc,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{lastViewTime,jdbcType=TIMESTAMP},
+        #{siteTitle,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR},
+        #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
         #{browserUa,jdbcType=LONGVARCHAR})
     </insert>
 
