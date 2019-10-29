@@ -180,11 +180,9 @@ public class RoleService {
     /**
      * 获取角色列表，不包含权限信息
      *
-     * @param queryVo
      * @return
      */
-    public List<Role> getRoles(ListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
+    public List<Role> getRoles() {
         RoleExample example = new RoleExample();
         return roleDAO.selectByExample(example);
     }

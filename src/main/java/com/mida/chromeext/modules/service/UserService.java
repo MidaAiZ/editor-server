@@ -1,5 +1,6 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.exception.ExceptionEnum;
@@ -9,6 +10,7 @@ import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserExample;
 import com.mida.chromeext.modules.validation.UserValidation;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
 import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
@@ -192,7 +194,7 @@ public class UserService {
      * @author lihaoyu
      * @date 2019/10/17 15:40
      */
-    public List<User> listUserByMng(MngUserListQueryVo queryVo) {
+    public ListResultVo<User> listUserByMng(MngUserListQueryVo queryVo) {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         if (!CollectionUtils.isEmpty(queryVo.getUserIdList())) {
@@ -211,9 +213,9 @@ public class UserService {
             criteria.andCreatedAtLessThan(queryVo.getCreatedBefore());
         }
         example.setOrderByClause("id desc");
-        PageHelper.startPage(queryVo);
-        List<User> users = userDAO.selectByExample(example);
-        return users;
+        Page page = PageHelper.startPage(queryVo);
+        userDAO.selectByExample(example);
+        return new ListResultVo(page);
     }
 
     /**

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Repository
 public interface SiteViewHistoryDAO extends SiteViewHistoryMapper {
-    int insertWithUUID(SiteViewHistory history);
+    int insertSelectiveWithUUID(SiteViewHistory history);
 
     List<StatisticCountVo> listDailyViewCount(@Param("beginTime") Date beginTime, @Param("endTime") Date endTime);
 

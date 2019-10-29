@@ -1,18 +1,20 @@
 package com.mida.chromeext.modules.controller.manage;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.SiteCategoryService;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,14 +28,17 @@ public class SiteCategoriesController {
     private SiteCategoryService siteCategoryService;
 
     @GetMapping
-    @ApiOperation("获取网站分类列表")
+    @ApiOperation(value = "获取网站分类列表", notes = "当传入pageSize=-1时将默认返回所有分类数据")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     @RequiresPermissions(PermisConstant.SHOW_SITE_CATEGORY)
-    public Result<List<SiteCategory>> getCategories(@RequestParam(required = false) @ApiParam("当前分页") Integer pageNum, @RequestParam(required = false) @ApiParam("每页数据量") Integer pageSize) {
-        ListQueryVo vo = new ListQueryVo();
-        if (pageSize != null && pageSize > 0) { vo.setPageSize(pageSize); }
-        if (pageNum != null && pageNum > 0) { vo.setPageNum(pageNum); }
-        List<SiteCategory> siteCategories = siteCategoryService.listCategories(vo);
-        return Result.ok(siteCategories);
+    public Result<ListResultVo<SiteCategory>> getCategories(@ApiIgnore ListQueryVo queryVo) {
+        if (queryVo.getPageSize() == -1) {
+            queryVo.setPageNum(1);
+            queryVo.setPageSize(0);
+        }
+        return Result.ok(siteCategoryService.listCategories(queryVo));
     }
 
     @PostMapping

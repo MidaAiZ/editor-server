@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.mida.chromeext.exception.MyException;
@@ -9,6 +10,7 @@ import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.pojo.SiteExample;
 import com.mida.chromeext.modules.pojo.User;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.modules.vo.SiteRelationVo;
@@ -245,27 +247,27 @@ public class SiteService {
     }
 
     /**
-     * 查询网站列表
+     * 前台查询网站列表
      *
      * @param queryVo
      * @return
      */
     public List<Site> queryList(SiteListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
+        PageHelper.startPage(queryVo.getPageNum(), queryVo.getPageSize(), false);
         List<Site> sites = siteDAO.queryList(queryVo);
         return sites;
     }
 
     /**
-     * 查询网站列表，获取关联对象
+     * 后台查询网站列表，获取关联对象
      *
      * @param queryVo
      * @return
      */
-    public List<SiteRelationVo> queryListWithRelations(SiteListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
-        List<SiteRelationVo> sites = siteDAO.queryListWithRelations(queryVo);
-        return sites;
+    public ListResultVo<SiteRelationVo> queryListWithRelations(SiteListQueryVo queryVo) {
+        Page<SiteRelationVo> page = PageHelper.startPage(queryVo);
+        siteDAO.queryListWithRelations(queryVo);
+        return new ListResultVo(page);
     }
 
     /**

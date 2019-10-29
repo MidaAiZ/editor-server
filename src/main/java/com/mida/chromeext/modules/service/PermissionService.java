@@ -1,10 +1,12 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.PermissionDAO;
 import com.mida.chromeext.modules.pojo.Permission;
 import com.mida.chromeext.modules.pojo.PermissionExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,9 +52,10 @@ public class PermissionService {
      * @param queryVo
      * @return
      */
-    public List<Permission> getPermissions(ListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
-        return permissionDAO.selectByExample(new PermissionExample());
+    public ListResultVo<Permission> getPermissions(ListQueryVo queryVo) {
+        Page page = PageHelper.startPage(queryVo);
+        permissionDAO.selectByExample(new PermissionExample());
+        return new ListResultVo(page);
     }
 
     /**

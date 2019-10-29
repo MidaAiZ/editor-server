@@ -1,10 +1,12 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.interceptor.UserAuthorizationInterceptor;
 import com.mida.chromeext.modules.dao.SiteViewHistoryDAO;
 import com.mida.chromeext.modules.pojo.SiteViewHistory;
 import com.mida.chromeext.modules.pojo.SiteViewHistoryExample;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.SiteViewHistoryVo;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
 import com.mida.chromeext.utils.LocaleHelper;
@@ -44,7 +46,7 @@ public class SiteViewHistoryService {
         }
         // 设置浏览记录主键
         history.setHid(UUID.randomUUID().toString().replace("-", ""));
-        siteViewHistoryDAO.insertWithUUID(history);
+        siteViewHistoryDAO.insertSelectiveWithUUID(history);
         return history;
     }
 
@@ -53,7 +55,7 @@ public class SiteViewHistoryService {
      * @param queryVo
      * @return
      */
-    public List<SiteViewHistory> getList(SiteViewHistoryVo queryVo) {
+    public ListResultVo<SiteViewHistory> getList(SiteViewHistoryVo queryVo) {
         SiteViewHistoryExample example = new SiteViewHistoryExample();
         SiteViewHistoryExample.Criteria criteria = example.createCriteria();
 
@@ -86,9 +88,9 @@ public class SiteViewHistoryService {
         }
 
         example.setOrderByClause("created_at desc");
-        PageHelper.startPage(queryVo);
-        List<SiteViewHistory> histories = siteViewHistoryDAO.selectByExample(example);
-        return histories;
+        Page page = PageHelper.startPage(queryVo);
+        siteViewHistoryDAO.selectByExample(example);
+        return new ListResultVo(page);
     }
 
 

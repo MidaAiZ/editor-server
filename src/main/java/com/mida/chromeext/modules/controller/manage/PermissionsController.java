@@ -5,6 +5,7 @@ import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.pojo.Permission;
 import com.mida.chromeext.modules.service.PermissionService;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +29,7 @@ public class PermissionsController {
     @GetMapping("")
     @ApiOperation("获取权限列表")
     @RequiresPermissions(PermisConstant.SHOW_SYS_ROLE)
-    public Result<List<Permission>> getList(@ApiParam("分页参数") @RequestParam ListQueryVo queryVo) {
+    public Result<ListResultVo<Permission>> getList(@ApiParam("分页参数") @RequestParam ListQueryVo queryVo) {
         return Result.ok(permissionService.getPermissions(queryVo));
     }
 

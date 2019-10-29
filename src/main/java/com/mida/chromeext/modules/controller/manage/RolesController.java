@@ -30,8 +30,8 @@ public class RolesController {
     @GetMapping("")
     @ApiOperation(value = "获取角色列表，不包含权限信息")
     @RequiresPermissions(PermisConstant.SHOW_SYS_ROLE)
-    public Result<List<Role>> getList(@RequestParam("当前页数") Integer pageNum, @RequestParam("每页数据量") Integer pageSize) {
-        return Result.ok(roleService.getRoles(new ListQueryVo(pageNum, pageSize)));
+    public Result<List<Role>> getList() {
+        return Result.ok(roleService.getRoles());
     }
 
     @GetMapping("{roleId}")

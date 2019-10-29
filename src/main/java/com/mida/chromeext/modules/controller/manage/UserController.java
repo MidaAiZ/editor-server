@@ -6,6 +6,7 @@ import com.mida.chromeext.exception.ExceptionEnum;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.UserService;
 import com.mida.chromeext.modules.validation.UserValidation;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
@@ -45,7 +46,7 @@ public class UserController {
             @ApiImplicitParam(name = "createdAfter", value = "用户注册时间>=，格式yyyy-MM-dd HH:mm:ss", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
-    public Result<List<User>> listUser(@ApiIgnore  MngUserListQueryVo queryVo) {
+    public Result<ListResultVo<User>> listUser(@ApiIgnore  MngUserListQueryVo queryVo) {
         return Result.ok(userService.listUserByMng(queryVo));
     }
 

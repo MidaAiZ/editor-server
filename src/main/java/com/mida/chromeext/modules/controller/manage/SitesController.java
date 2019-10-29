@@ -8,6 +8,7 @@ import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.CountriesSitesService;
 import com.mida.chromeext.modules.service.SiteCategoryService;
 import com.mida.chromeext.modules.service.SiteService;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.modules.vo.SiteRelationVo;
@@ -55,8 +56,8 @@ public class SitesController {
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     @RequiresPermissions(PermisConstant.SHOW_SITE)
-    public Result<List<SiteRelationVo>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
-        List<SiteRelationVo> sites = siteService.queryListWithRelations(queryVo);
+    public Result<ListResultVo<SiteRelationVo>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
+        ListResultVo<SiteRelationVo> sites = siteService.queryListWithRelations(queryVo);
         return Result.ok(sites);
     }
 

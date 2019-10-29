@@ -3,12 +3,10 @@ package com.mida.chromeext.modules.controller.manage;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.pojo.SiteViewHistory;
 import com.mida.chromeext.modules.service.SiteViewHistoryService;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.SiteViewHistoryVo;
 import com.mida.chromeext.utils.Result;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +17,7 @@ import java.util.List;
 
 @RestController("mngViewHistoriesController")
 @RequestMapping("manage/view_histories")
+@Api(value = "后台网站浏览历史记录操作接口", tags = "{}")
 public class ViewHistoriesController {
     @Autowired
     private SiteViewHistoryService siteViewHistoryService;
@@ -38,8 +37,7 @@ public class ViewHistoriesController {
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     @RequiresPermissions(PermisConstant.SHOW_SITE_VIEW_HISTORY)
-    public Result<List<SiteViewHistory>> listSitesByPage(@Validated @ApiIgnore @RequestParam SiteViewHistoryVo queryVo) {
-        List<SiteViewHistory> histories = siteViewHistoryService.getList(queryVo);
-        return Result.ok(histories);
+    public Result<ListResultVo<SiteViewHistory>> listSitesByPage(@Validated @ApiIgnore @RequestParam SiteViewHistoryVo queryVo) {
+        return Result.ok(siteViewHistoryService.getList(queryVo));
     }
 }
