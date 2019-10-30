@@ -1,7 +1,10 @@
 package com.mida.chromeext.modules.controller.manage;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.components.shiro.RoleConstant;
+import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
 import com.mida.chromeext.utils.Result;
@@ -21,6 +24,17 @@ import java.util.List;
 public class DefaultMenusController {
     @Autowired
     private DefaultMenuService defaultMenuService;
+
+    @GetMapping("{did}")
+    @ApiOperation("后台获取一条默认菜单配置，需要管理员权限")
+    @RequiresPermissions(PermisConstant.SHOW_DEFAULT_MENU)
+    public Result<List<UserMenuItemDto>> getOne(@PathVariable Integer did) {
+        DefaultMenu menu = defaultMenuService.getOneById(did);
+        if (menu == null) {
+            return Result.ok(null);
+        }
+        return Result.ok(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
+    }
 
     @GetMapping("")
     @ApiOperation("后台获取默认菜单配置列表，需要管理员权限")

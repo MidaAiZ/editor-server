@@ -39,6 +39,14 @@ public class DefaultMenuService {
         return defaultMenuDAO.selectByCountryCode(countryCode);
     }
 
+    /**
+     * 通过主键获取记录
+     * @param id
+     * @return
+     */
+    public DefaultMenu getOneById(Integer id) {
+        return defaultMenuDAO.selectByPrimaryKey(id);
+    }
 
     /**
      * 创建一个默认菜单配置

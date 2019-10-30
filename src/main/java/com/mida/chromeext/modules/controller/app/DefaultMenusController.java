@@ -1,5 +1,8 @@
 package com.mida.chromeext.modules.controller.app;
 
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
+import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
 import com.mida.chromeext.utils.LocaleHelper;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Locale;
 
 @RestController
@@ -27,9 +31,12 @@ public class DefaultMenusController {
 
     @GetMapping("default")
     @ApiOperation(value = "通过唯一国家码获取默认菜单配置，如果指定的配置不存在，则返回系统数据库中的默认记录", notes = "国家码可选，如果不传后端则根据请求体自动获取国家")
-    public Result<DefaultMenu> getOneByCountryCode(@ApiParam("国家码") @RequestParam(required = false) String code, HttpServletRequest request) {
+    public Result<List<UserMenuItemDto>> getOneByCountryCode(@ApiParam("国家码") @RequestParam(required = false) String code, HttpServletRequest request) {
         if (StringUtils.isEmpty(code)) { code = LocaleHelper.getContextCountryCode(request); }
         DefaultMenu menu = defaultMenuService.getOneByCountryCode(code);
-        return Result.ok(menu);
+        if (menu == null) {
+            return Result.ok(Lists.newArrayList());
+        }
+        return Result.ok(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
     }
 }
