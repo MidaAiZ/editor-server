@@ -91,6 +91,19 @@ public class PermisConstant {
     public static final String DELETE_SEARCH_ENGINE = "app:search_engines:delete";
 
     /**
+     * 浏览记录追踪器
+     */
+    @SysPermission(desc = "查看不同国家的浏览记录追踪器", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String SHOW_SITE_TRACKER = "app:site_trackers:show";
+    @SysPermission(desc = "添加不同国家的浏览记录追踪器", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String ADD_SITE_TRACKER = "app:site_trackers:add";
+    @SysPermission(desc = "修改不同国家的浏览记录追踪器", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String MODIFY_SITE_TRACKER = "app:site_trackers:modify";
+    @SysPermission(desc = "删除不同国家的浏览记录追踪器", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})
+    public static final String DELETE_SITE_TRACKER = "app:site_trackers:delete";
+
+
+    /**
      * 壁纸操作
      */
     @SysPermission(desc = "添加壁纸库", roles = {RoleConstant.SUPER_ROLE, RoleConstant.ADMIN_ROLE})

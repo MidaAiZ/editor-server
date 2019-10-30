@@ -133,7 +133,7 @@
 
     <select id="listHotSites" resultType="Map">
         SELECT h.site_url as url, h.site_title as title, count( site_url ) AS view_times
-        FROM site_view_histories h
+        FROM site_view_histories h where h.created_at > date_sub((select max(created_at) from site_view_histories), interval 1 day)
         GROUP BY h.site_url, h.site_title HAVING view_times > 0
         ORDER BY view_times DESC
         LIMIT 100
