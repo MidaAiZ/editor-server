@@ -1,13 +1,15 @@
 package com.mida.chromeext.modules.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.modules.dao.SiteDAO;
 import com.mida.chromeext.modules.dao.UserMenuDAO;
+import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import com.mida.chromeext.modules.pojo.UserMenuExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,90 +30,48 @@ public class UserMenuService {
      * @param userId 用户id
      * @return UserMenu集合 用户所添加的菜单列表
      */
-    public List<UserMenu> getMenuListByUserId(Integer userId) {
-        return userMenuDAO.listMenuByUserId(userId);
+    public UserMenu getMenuItemsByUserId(Integer userId) {
+        return userMenuDAO.getMenuItemsByUserId(userId);
     }
 
-    /**
-     * 用户添加网站 校验网站是否存在
-     *
-     * @param userId 用户Id
-     * @param menu   用户菜单
-     * @return userMenu 用户菜单
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public UserMenu addOneUserMenu(Integer userId, UserMenu menu) {
-        if (menu.getIsFolder() != null && menu.getIsFolder()) {
-            menu.setFolderId(0);
-        }
+    public Boolean create(Integer userId, UserMenu menu) {
         menu.setUserId(userId);
         menu.setCreatedAt(new Date());
-        menu.setMid(UUID.randomUUID().toString().replaceAll("-", ""));
-        userMenuDAO.insertWithUUID(menu);
-        return menu;
+        menu.setUpdatedAt(new Date());
+        return userMenuDAO.insertSelective(menu) > 0;
     }
 
     /**
-     * 用户批量添加网站
-     *
-     * @param userId   用户id
-     * @param menuList 用户菜单列表
-     * @return boolean 是否成功
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public int addAndReplaceUserMenuList(Integer userId, List<UserMenu> menuList) {
-        // 删除用户所有列表后重新生成
-        UserMenuExample example = new UserMenuExample();
-        example.createCriteria().andUserIdEqualTo(userId);
-        userMenuDAO.deleteByExample(example);
-        for (UserMenu menu : menuList) {
-            if (menu.getIsFolder() != null && menu.getIsFolder()) {
-                menu.setFolderId(0);
-            }
-            menu.setUserId(userId);
-            menu.setMid(UUID.randomUUID().toString().replaceAll("-", ""));
-        }
-        // 生成新列表
-        return userMenuDAO.batchInsert(userId, menuList);
-    }
-
-    /**
-     * 更新一个用户菜单
+     * 更新用户菜单
      *
      * @param userId 用户Id
-     * @param menu   用户菜单
+     * @param menuItems   用户菜单
      * @return int
      */
-    public int updateOneMenu(Integer userId, UserMenu menu) {
+    public Boolean update(Integer userId, List<UserMenuItemDto> menuItems) {
         UserMenuExample example = new UserMenuExample();
-        // 禁止更新用户id
-        menu.setUserId(null);
-        // 文件夹类型禁止内嵌文件夹
-        if (menu.getIsFolder() != null && menu.getIsFolder()) {
-            menu.setFolderId(0);
+        UserMenu menu = new UserMenu();
+        List<Integer> siteIds = new ArrayList<>();
+        for (UserMenuItemDto item : menuItems) {
+            // 设置siteIds快照
+            if (item.getSiteId() != null && item.getSiteId() > 0) {
+                siteIds.add(item.getSiteId());
+            }
+            // 禁止文件夹嵌套
+            if (item.getIsFolder() && item.getChildren() != null) {
+                for (UserMenuItemDto son : item.getChildren()) {
+                    son.setIsFolder(false);
+                    son.setChildren(null);
+                }
+            }
         }
-        example.createCriteria().andUserIdEqualTo(userId).andMidEqualTo(menu.getMid());
-        return userMenuDAO.updateByExampleSelective(menu, example);
-    }
-
-    /**
-     * 批量更新用户菜单
-     *
-     * @param userId   用户Id
-     * @param menuList 用户菜单列表
-     * @return int
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public int updateMenuList(Integer userId, List<UserMenu> menuList) {
-        int size = 0;
-        for (UserMenu menu : menuList) {
-            size += updateOneMenu(userId, menu);
+        menu.setSiteIds(JSONObject.toJSONString(siteIds));
+        menu.setMenus(JSONObject.toJSONString(menuItems));
+        example.createCriteria().andUserIdEqualTo(userId);
+        if (getMenuItemsByUserId(userId) == null) {
+            return create(userId, menu);
         }
-        return size;
-    }
-
-
-    public int deleteUserMenus(Integer userId, List<Long> menuIdList) {
-        return userMenuDAO.batchDelete(userId, menuIdList);
+        menu.setUpdatedAt(new Date());
+        return userMenuDAO.updateByExampleSelective(menu, example) > 0;
     }
 }

@@ -1,74 +1,29 @@
 package com.mida.chromeext.modules.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 import java.util.Date;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserMenu implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private String mid;
-    private String title;
-    private String url;
-    private String iconSrc;
-    private Boolean isFolder;
-    private Integer folderId;
-    @ApiModelProperty(hidden = true)
-    @JsonIgnore
+    private Integer mid;
+
     private Integer userId;
-    private Short index;
-    @ApiModelProperty(hidden = true)
+
     private Date createdAt;
 
-    public String getMid() {
+    private Date updatedAt;
+
+    private String menus;
+
+    private String siteIds;
+
+    private static final long serialVersionUID = 1L;
+
+    public Integer getMid() {
         return mid;
     }
 
-    public void setMid(String mid) {
-        this.mid = mid == null ? null : mid.trim();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public String getIconSrc() {
-        return iconSrc;
-    }
-
-    public void setIconSrc(String iconSrc) {
-        this.iconSrc = iconSrc == null ? null : iconSrc.trim();
-    }
-
-    public Boolean getIsFolder() {
-        return isFolder;
-    }
-
-    public void setIsFolder(Boolean isFolder) {
-        this.isFolder = isFolder;
-    }
-
-    public Integer getFolderId() {
-        return folderId;
-    }
-
-    public void setFolderId(Integer folderId) {
-        this.folderId = folderId;
+    public void setMid(Integer mid) {
+        this.mid = mid;
     }
 
     public Integer getUserId() {
@@ -79,20 +34,36 @@ public class UserMenu implements Serializable {
         this.userId = userId;
     }
 
-    public Short getIndex() {
-        return index;
-    }
-
-    public void setIndex(Short index) {
-        this.index = index;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getMenus() {
+        return menus;
+    }
+
+    public void setMenus(String menus) {
+        this.menus = menus == null ? null : menus.trim();
+    }
+
+    public String getSiteIds() {
+        return siteIds;
+    }
+
+    public void setSiteIds(String siteIds) {
+        this.siteIds = siteIds == null ? null : siteIds.trim();
     }
 
     @Override
@@ -102,14 +73,11 @@ public class UserMenu implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", mid=").append(mid);
-        sb.append(", title=").append(title);
-        sb.append(", url=").append(url);
-        sb.append(", iconSrc=").append(iconSrc);
-        sb.append(", isFolder=").append(isFolder);
-        sb.append(", folderId=").append(folderId);
         sb.append(", userId=").append(userId);
-        sb.append(", index=").append(index);
         sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", menus=").append(menus);
+        sb.append(", siteIds=").append(siteIds);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

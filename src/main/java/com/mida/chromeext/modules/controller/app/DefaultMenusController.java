@@ -30,9 +30,6 @@ public class DefaultMenusController {
     public Result<DefaultMenu> getOneByCountryCode(@ApiParam("国家码") @RequestParam(required = false) String code, HttpServletRequest request) {
         if (StringUtils.isEmpty(code)) { code = LocaleHelper.getContextCountryCode(request); }
         DefaultMenu menu = defaultMenuService.getOneByCountryCode(code);
-        if (menu == null) {
-            menu = defaultMenuService.getDefaultMenu();
-        }
         return Result.ok(menu);
     }
 }

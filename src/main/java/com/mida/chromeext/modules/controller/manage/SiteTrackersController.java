@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController("mngSiteTrackersController")
-@Api(value = "后台用户浏览跟踪操作", tags = "{}")
+@Api(value = "后台用户流量跟踪操作", tags = "{}")
 @RequestMapping("manage/site_trackers")
 public class SiteTrackersController {
     @Autowired

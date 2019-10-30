@@ -22,14 +22,6 @@ public class DefaultMenusController {
     @Autowired
     private DefaultMenuService defaultMenuService;
 
-    @PostMapping("default")
-    @ApiOperation(value = "设置系统的默认菜单列表")
-    @RequiresRoles(RoleConstant.SUPER_ROLE)
-    @RequiresPermissions(PermisConstant.MODIFY_DEFAULT_MENU)
-    public Result<Boolean> setDefault(@ApiParam("默认菜单配置主键") @RequestParam Integer did, @ApiParam("是否默认") @RequestParam Boolean isDefault) {
-        return defaultMenuService.setDefault(did, isDefault) ? Result.ok(true) : Result.error();
-    }
-
     @GetMapping("")
     @ApiOperation("后台获取默认菜单配置列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.SHOW_DEFAULT_MENU)

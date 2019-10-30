@@ -5,7 +5,6 @@ import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.exception.BaseException;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.UserService;
-import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.LocaleHelper;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
@@ -17,11 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.RequestContextUtils;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("users")

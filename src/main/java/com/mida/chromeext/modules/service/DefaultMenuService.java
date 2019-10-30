@@ -1,9 +1,12 @@
 package com.mida.chromeext.modules.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.DefaultMenuDAO;
+import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
+import com.mida.chromeext.modules.pojo.UserMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,38 +39,6 @@ public class DefaultMenuService {
         return defaultMenuDAO.selectByCountryCode(countryCode);
     }
 
-    /**
-     * 获取默认的默认菜单配置
-     *
-     * @return DefaultMenu
-     */
-    public DefaultMenu getDefaultMenu() {
-        DefaultMenu menu = defaultMenuDAO.selectDefaultMenu();
-        if (menu == null) {
-            PageHelper.startPage(1, 1);
-            List<DefaultMenu> menuList = getAllList();
-            menu = menuList.size() > 0 ? menuList.get(0) : null;
-        }
-        return menu;
-    }
-
-    /**
-     * 设置系统默认的默认菜单列表配置
-     *
-     * @param did
-     * @param isDefault
-     * @return Boolean
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public boolean setDefault(Integer did, boolean isDefault) {
-        DefaultMenuExample example = new DefaultMenuExample();
-        DefaultMenu menu = new DefaultMenu();
-        menu.setIsDefault(false);
-        defaultMenuDAO.updateByExampleSelective(menu, example);
-        menu.setIsDefault(isDefault);
-        menu.setDid(did);
-        return defaultMenuDAO.updateByPrimaryKeySelective(menu) > 0;
-    }
 
     /**
      * 创建一个默认菜单配置
@@ -76,6 +47,8 @@ public class DefaultMenuService {
      * @return Boolean
      */
     public boolean create(DefaultMenu menu) {
+        // 过滤内容
+        menu.setMenus(JSONObject.toJSONString(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class)));
         return defaultMenuDAO.insertSelective(menu) > 0;
     }
 
@@ -86,6 +59,7 @@ public class DefaultMenuService {
      * @return Boolean
      */
     public boolean update(DefaultMenu menu) {
+        menu.setMenus(JSONObject.toJSONString(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class)));
         return defaultMenuDAO.updateByPrimaryKeySelective(menu) > 0;
     }
 
