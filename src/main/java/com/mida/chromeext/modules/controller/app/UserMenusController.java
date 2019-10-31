@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.modules.dto.UserMenuItemDto;
-import com.mida.chromeext.modules.dto.UserMenuPageDto;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import com.mida.chromeext.modules.service.UserMenuService;
@@ -32,18 +31,18 @@ public class UserMenusController {
     @LoginRequired
     @GetMapping("")
     @ApiOperation("获取用户菜单列表")
-    public Result<List<UserMenuPageDto>> getUserMenuList(@ApiIgnore @CurrentUser User user) {
+    public Result<List> getUserMenuList(@ApiIgnore @CurrentUser User user) {
         UserMenu menu = userMenuService.getMenuItemsByUserId(user.getUid());
         if (menu == null) {
             return Result.ok(Lists.newArrayList());
         }
-        return Result.ok(JSONObject.parseArray(menu.getMenus(), UserMenuPageDto.class));
+        return Result.ok(JSONObject.parseArray(menu.getMenus(), List.class));
     }
 
     @LoginRequired
     @PostMapping("")
     @ApiOperation("设置用户菜单列表")
-    public Result<List<UserMenuPageDto>> setMenu(@ApiIgnore @CurrentUser User user, @RequestBody @Valid List<UserMenuPageDto> menuPages) {
+    public Result<List<List<UserMenuItemDto>>> setMenu(@ApiIgnore @CurrentUser User user, @RequestBody List<List<@Valid UserMenuItemDto>> menuPages) {
         return userMenuService.update(user.getUid(), menuPages) ? Result.ok(menuPages) : Result.error();
     }
 }

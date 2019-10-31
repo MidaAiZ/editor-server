@@ -2,7 +2,7 @@ package com.mida.chromeext.modules.service;
 
 import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.modules.dao.SearchEngineDAO;
-import com.mida.chromeext.modules.dto.EngineDto;
+import com.mida.chromeext.modules.dto.SearchEngineItemDto;
 import com.mida.chromeext.modules.dto.SearchEngineAddDto;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.pojo.SearchEngineExample;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,12 +73,38 @@ public class SearchEngineService {
         if (searchEngine != null) {
             return null;
         }
-        List<EngineDto> engineDtoList = dto.getEngineDtoList();
-        String engineJson = JSON.toJSONString(engineDtoList);
+        List<SearchEngineItemDto> searchEngineItemDtoList = dto.getEngines();
+        String engineJson = JSON.toJSONString(searchEngineItemDtoList);
         Date date = new Date();
         searchEngine = SearchEngine.builder().countryCode(dto.getCountryCode()).createdAt(date).updatedAt(date).engines(engineJson).createdBy(NumConst.NUM0).build();
-        searchEngineDAO.insert(searchEngine);
-        return searchEngine;
+        return searchEngineDAO.insert(searchEngine) > 0 ? searchEngine : null;
+
+    }
+
+    /**
+     * 批量添加
+     * @param engineDtoList
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public List<SearchEngine> addSearchEngineList(List<SearchEngineAddDto> engineDtoList) {
+        List<SearchEngine> engineList = new ArrayList<>();
+        for (SearchEngineAddDto dto : engineDtoList) {
+            SearchEngine record = addSearchEngine(dto);
+            if (record != null) {
+                engineList.add(record);
+            }
+        }
+        return engineList;
+    }
+
+    /**
+     * 根据主键更新记录
+     * @param record
+     * @return
+     */
+    public Boolean updateSearchEngine(SearchEngine record) {
+        return searchEngineDAO.updateByPrimaryKeySelective(record) > 0;
     }
 
     /**
@@ -89,11 +116,8 @@ public class SearchEngineService {
      * @date 2019/10/8 16:37
      */
     @Transactional(rollbackFor = Exception.class)
-    public int deleteSearchEngine(String code) {
-        SearchEngineExample example = new SearchEngineExample();
-        example.createCriteria().andCountryCodeEqualTo(code);
-        int affectRow = searchEngineDAO.deleteByExample(example);
-        return affectRow;
+    public Boolean deleteSearchEngine(Integer eid) {
+        return searchEngineDAO.deleteByPrimaryKey(eid) > 0;
     }
 
 

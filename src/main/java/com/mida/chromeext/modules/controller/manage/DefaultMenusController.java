@@ -7,6 +7,7 @@ import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
+import com.mida.chromeext.utils.ObjectToMap;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,11 +38,13 @@ public class DefaultMenusController {
         if (menu == null) {
             return Result.ok(null);
         }
-        Map<String, Object> returnMap = JSONObject.parseObject(menu.toString(), HashMap.class);
-//        returnMap.put("did", menu.getDid());
-//        returnMap.put("countryCode", menu.getCountryCode());
-        returnMap.put("menus", JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
-        return Result.ok(returnMap);
+        try {
+            Map<String, Object> returnMap = ObjectToMap.convert(menu);
+            returnMap.put("menus", JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
+            return Result.ok(returnMap);
+        } catch (Exception e) {
+            return Result.error(e.getMessage());
+        }
     }
 
     @GetMapping("")

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.modules.dao.SiteDAO;
 import com.mida.chromeext.modules.dao.UserMenuDAO;
 import com.mida.chromeext.modules.dto.UserMenuItemDto;
-import com.mida.chromeext.modules.dto.UserMenuPageDto;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import com.mida.chromeext.modules.pojo.UserMenuExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 用户添加的菜单列表
@@ -49,11 +47,11 @@ public class UserMenuService {
      * @param menuPages   用户菜单
      * @return int
      */
-    public Boolean update(Integer userId, List<UserMenuPageDto> menuPages) {
+    public Boolean update(Integer userId, List<List<UserMenuItemDto>> menuPages) {
         UserMenuExample example = new UserMenuExample();
         UserMenu menu = new UserMenu();
         List<Integer> siteIds = new ArrayList<>();
-        for (UserMenuPageDto page : menuPages) {
+        for (List<UserMenuItemDto> page : menuPages) {
             for (UserMenuItemDto item : page) {
                 System.out.println(item);
 //                // 设置siteIds快照

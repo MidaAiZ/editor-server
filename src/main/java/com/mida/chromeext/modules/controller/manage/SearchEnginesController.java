@@ -1,43 +1,35 @@
 package com.mida.chromeext.modules.controller.manage;
 
+import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.components.shiro.PermisConstant;
+import com.mida.chromeext.modules.dto.SearchEngineItemDto;
 import com.mida.chromeext.modules.dto.SearchEngineAddDto;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.service.SearchEngineService;
 import com.mida.chromeext.utils.NumConst;
+import com.mida.chromeext.utils.ObjectToMap;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 @RestController("mngSearchEnginesController")
 @RequestMapping("manage/search-engines")
 @Api(value = "后台默认搜索引擎配置操作", tags = "{}")
+@Validated
 public class SearchEnginesController {
 
     @Autowired
     SearchEngineService searchEngineService;
-
-    @GetMapping("default")
-    @ApiOperation(value = "通过唯一国家码获取搜索引擎，如果指定的配置不存在，获取默认值", notes = "国家码可选，如果不传后端则根据请求体自动获取国家")
-    @RequiresPermissions(PermisConstant.SHOW_SEARCH_ENGINE)
-    public Result<SearchEngine> getSearchEngine(@ApiParam("国家码") @RequestParam(required = false) String code, HttpServletRequest request) {
-        if (StringUtils.isEmpty(code)) {
-            Locale locale = RequestContextUtils.getLocaleResolver(request).resolveLocale(request);
-            code = locale.getCountry();
-        }
-        SearchEngine searchEngine = searchEngineService.getSearchEngine(code);
-        return Result.ok(searchEngine);
-    }
 
     @GetMapping("")
     @ApiOperation(value = "获取所有国家的搜索引擎,需要管理员权限")
@@ -46,41 +38,46 @@ public class SearchEnginesController {
         return Result.ok(searchEngineService.listAllSearchEngine());
     }
 
-    @PostMapping("")
-    @ApiOperation(value = "添加某个国家的搜索引擎,需要管理员权限")
-    @RequiresPermissions(PermisConstant.ADD_SEARCH_ENGINE)
-    public Result<SearchEngine> addSearchEngine(@ApiParam("必须包含所有字段") @RequestBody SearchEngineAddDto dto) {
-        SearchEngine searchEngine = searchEngineService.addSearchEngine(dto);
+    @GetMapping("{code}")
+    @ApiOperation(value = "通过唯一国家码获取搜索引擎")
+    @RequiresPermissions(PermisConstant.SHOW_SEARCH_ENGINE)
+    public Result<Map> getSearchEngine(@ApiParam("国家码") @PathVariable String code, HttpServletRequest request) {
+        SearchEngine searchEngine = searchEngineService.getSearchEngine(code);
         if (searchEngine == null) {
-            return Result.error("已经存在，不能添加");
+            return Result.ok();
         }
-        return Result.ok(searchEngine);
+        try {
+            Map returnMap = ObjectToMap.convert(searchEngine);
+            returnMap.put("engines", JSONObject.parseArray(searchEngine.getEngines(), SearchEngineItemDto.class));
+            return Result.ok(returnMap);
+        } catch (Exception e) {
+            return Result.error(e.getMessage());
+        }
     }
 
-    @DeleteMapping("")
+    @PostMapping("list")
+    @ApiOperation(value = "批量添加某个国家的搜索引擎,需要管理员权限", notes = "返回新建的搜索引擎列表")
+    @RequiresPermissions(PermisConstant.ADD_SEARCH_ENGINE)
+    public Result<List<SearchEngine>> addSearchEngine(@ApiParam("必须包含所有字段") @RequestBody List<@Valid SearchEngineAddDto> engineDtoList) {
+        return Result.ok(searchEngineService.addSearchEngineList(engineDtoList));
+    }
+
+    @DeleteMapping("{eid}")
     @ApiOperation(value = "删除某个国家的搜索引擎,需要管理员权限")
     @RequiresPermissions(PermisConstant.DELETE_SEARCH_ENGINE)
-    public Result addSearchEngine(@ApiParam("国家码") String code) {
-        int affectRow = searchEngineService.deleteSearchEngine(code);
-        if (affectRow == NumConst.NUM1) {
-            return Result.ok("删除成功");
-        }
-        return Result.error("不存在，删除失败");
+    public Result addSearchEngine(@ApiParam("主键eid") @PathVariable Integer eid) {
+        return searchEngineService.deleteSearchEngine(eid) ? Result.ok(true) : Result.error();
     }
 
-    @PutMapping("")
+    @PutMapping("{eid}")
     @ApiOperation(value = "修改某个国家的搜索引擎,需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_SEARCH_ENGINE)
-    public Result<SearchEngine> updateSearchEngine(@ApiParam("必须包含所有字段") @RequestBody SearchEngineAddDto dto) {
-        int deleteNumber = searchEngineService.deleteSearchEngine(dto.getCountryCode());
-        if (deleteNumber != NumConst.NUM1) {
-            return Result.error("不存在，修改失败");
-        }
-        SearchEngine searchEngine = searchEngineService.addSearchEngine(dto);
-        if (searchEngine == null) {
-            return Result.error("修改失败");
-        }
-        return Result.ok(searchEngine);
+    public Result<SearchEngine> updateSearchEngine(@PathVariable Integer eid, @ApiParam("必须包含所有字段") @Valid @RequestBody SearchEngineAddDto engineDto) {
+        SearchEngine searchEngine = new SearchEngine();
+        searchEngine.setEid(eid);
+        searchEngine.setCountryCode(searchEngine.getCountryCode());
+        searchEngine.setEngines(JSONObject.toJSONString(engineDto.getEngines()));
+        return searchEngineService.updateSearchEngine(searchEngine) ? Result.ok(searchEngine) : Result.error();
     }
 
 }

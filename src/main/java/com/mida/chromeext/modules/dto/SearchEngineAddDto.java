@@ -1,5 +1,7 @@
 package com.mida.chromeext.modules.dto;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,11 +10,10 @@ import java.util.List;
  * @date 2019/10/7 20:08
  */
 public class SearchEngineAddDto implements Serializable {
-
+    @NotBlank
     private String countryCode;
-
-    private List<EngineDto> engineDtoList;
-
+    @Valid
+    private List<SearchEngineItemDto> engines;
 
     public String getCountryCode() {
         return countryCode;
@@ -22,12 +23,12 @@ public class SearchEngineAddDto implements Serializable {
         this.countryCode = countryCode;
     }
 
-    public List<EngineDto> getEngineDtoList() {
-        return engineDtoList;
+    public List<SearchEngineItemDto> getEngines() {
+        return engines;
     }
 
-    public void setEngineDtoList(List<EngineDto> engineDtoList) {
-        this.engineDtoList = engineDtoList;
+    public void setEngines(List<SearchEngineItemDto> engines) {
+        this.engines = engines;
     }
 }
 
