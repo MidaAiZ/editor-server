@@ -1,8 +1,6 @@
 package com.mida.chromeext.modules.service;
 
-import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.modules.dao.SiteTrackerDAO;
-import com.mida.chromeext.modules.dto.SiteTrackerDto;
 import com.mida.chromeext.modules.pojo.SiteTracker;
 import com.mida.chromeext.modules.pojo.SiteTrackerExample;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,32 +35,29 @@ public class SiteTrackerService {
         return siteTrackerDAO.selectByPrimaryKey(id);
     }
 
-    public Boolean updateOne(SiteTrackerDto record) {
-        return siteTrackerDAO.updateByPrimaryKeySelective(JSONObject.parseObject(JSONObject.toJSONString(record), SiteTracker.class)) > 0;
+    public Boolean updateByCountryCode(SiteTracker record) {
+        SiteTrackerExample example = new SiteTrackerExample();
+        example.createCriteria().andCountryCodeEqualTo(record.getCountryCode());
+        return siteTrackerDAO.updateByExampleSelective(record, example) > 0;
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Integer updateList(List<SiteTrackerDto> list) {
+    public Integer updateList(List<SiteTracker> list) {
         int count = 0;
-        for (SiteTrackerDto record : list) {
-            if (updateOne(record)) { count++; }
+        for (SiteTracker record : list) {
+            if (updateByCountryCode(record)) { count++; }
         }
         return count;
     }
 
-    public Boolean createOne(SiteTrackerDto record) {
-        SiteTracker tracker = JSONObject.parseObject(JSONObject.toJSONString(record), SiteTracker.class);
-        if (siteTrackerDAO.insertSelective(tracker) > 0) {
-            record.setTid(tracker.getTid());
-            return true;
-        }
-        return false;
+    public Boolean createOne(SiteTracker record) {
+        return siteTrackerDAO.insertSelective(record) > 0;
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public List<SiteTrackerDto> createList(List<SiteTrackerDto> list) {
-        List<SiteTrackerDto> trackers = new ArrayList<>();
-        for (SiteTrackerDto record : list) {
+    public List<SiteTracker> createList(List<SiteTracker> list) {
+        List<SiteTracker> trackers = new ArrayList<>();
+        for (SiteTracker record : list) {
             if (createOne(record)) { trackers.add(record); }
         }
         return trackers;

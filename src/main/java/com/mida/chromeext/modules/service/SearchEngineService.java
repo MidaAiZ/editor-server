@@ -99,16 +99,18 @@ public class SearchEngineService {
     }
 
     /**
-     * 根据主键更新记录
+     * 根据countryCode更新记录
      * @param record
      * @return
      */
-    public Boolean updateSearchEngine(SearchEngine record) {
-        return searchEngineDAO.updateByPrimaryKeySelective(record) > 0;
+    public Boolean updateByCountryCode(SearchEngine record) {
+        SearchEngineExample example = new SearchEngineExample();
+        example.createCriteria().andCountryCodeEqualTo(record.getCountryCode());
+        return searchEngineDAO.updateByExampleSelective(record, example) > 0;
     }
 
     /**
-     * 根据国家码进行删除
+     * 删除默认搜索引擎列表
      *
      * @param
      * @return int 1为成功删除
@@ -116,8 +118,10 @@ public class SearchEngineService {
      * @date 2019/10/8 16:37
      */
     @Transactional(rollbackFor = Exception.class)
-    public Boolean deleteSearchEngine(Integer eid) {
-        return searchEngineDAO.deleteByPrimaryKey(eid) > 0;
+    public Integer deleteSearchEngines(List<Integer> eids) {
+        SearchEngineExample example = new SearchEngineExample();
+        example.createCriteria().andEidIn(eids);
+        return searchEngineDAO.deleteByExample(example);
     }
 
 

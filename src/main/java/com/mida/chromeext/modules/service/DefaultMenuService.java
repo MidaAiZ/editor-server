@@ -8,6 +8,7 @@ import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,20 +56,19 @@ public class DefaultMenuService {
      * @return Boolean
      */
     public boolean create(DefaultMenu menu) {
-        // 过滤内容
-        menu.setMenus(JSONObject.toJSONString(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class)));
         return defaultMenuDAO.insertSelective(menu) > 0;
     }
 
     /**
-     * 更新一个默认菜单配置
+     * 根据code更新一个默认菜单配置
      *
      * @param menu
      * @return Boolean
      */
-    public boolean update(DefaultMenu menu) {
-        menu.setMenus(JSONObject.toJSONString(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class)));
-        return defaultMenuDAO.updateByPrimaryKeySelective(menu) > 0;
+    public boolean updateByCountyCode(DefaultMenu menu) {
+        DefaultMenuExample example = new DefaultMenuExample();
+        example.createCriteria().andCountryCodeEqualTo(menu.getCountryCode());
+        return defaultMenuDAO.updateByExampleSelective(menu, example) > 0;
     }
 
     /**
@@ -77,7 +77,7 @@ public class DefaultMenuService {
      * @param did
      * @return Boolean
      */
-    public boolean delete(int did) {
+    public boolean deleteById(int did) {
         return defaultMenuDAO.deleteByPrimaryKey(did) > 0;
     }
 
@@ -108,7 +108,7 @@ public class DefaultMenuService {
     public int updateList(List<DefaultMenu> menuList) {
         int count = 0;
         for (DefaultMenu menu : menuList) {
-            if (update(menu)) {
+            if (updateByCountyCode(menu)) {
                 count++;
             }
         }
@@ -125,7 +125,7 @@ public class DefaultMenuService {
     public int deleteList(List<Integer> idList) {
         int count = 0;
         for (Integer id : idList) {
-            if (delete(id)) {
+            if (deleteById(id)) {
                 count++;
             }
         }
