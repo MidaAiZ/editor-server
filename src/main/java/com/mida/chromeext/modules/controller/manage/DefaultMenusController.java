@@ -13,10 +13,14 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController("mngDefaultMenusController")
 @RequestMapping("manage/default_menus")
@@ -25,15 +29,19 @@ public class DefaultMenusController {
     @Autowired
     private DefaultMenuService defaultMenuService;
 
-    @GetMapping("{did}")
-    @ApiOperation("后台获取一条默认菜单配置，需要管理员权限")
+    @GetMapping("{code}")
+    @ApiOperation("通过地区码获取一条默认菜单配置，需要管理员权限")
     @RequiresPermissions(PermisConstant.SHOW_DEFAULT_MENU)
-    public Result<List<UserMenuItemDto>> getOne(@PathVariable Integer did) {
-        DefaultMenu menu = defaultMenuService.getOneById(did);
+    public Result<Map> getOne(@PathVariable String code) {
+        DefaultMenu menu = defaultMenuService.getOneByCountryCode(code);
         if (menu == null) {
             return Result.ok(null);
         }
-        return Result.ok(JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
+        Map<String, Object> returnMap = JSONObject.parseObject(menu.toString(), HashMap.class);
+//        returnMap.put("did", menu.getDid());
+//        returnMap.put("countryCode", menu.getCountryCode());
+        returnMap.put("menus", JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
+        return Result.ok(returnMap);
     }
 
     @GetMapping("")
