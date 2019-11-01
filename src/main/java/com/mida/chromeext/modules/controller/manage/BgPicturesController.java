@@ -6,6 +6,7 @@ import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.BgPicture;
 import com.mida.chromeext.modules.service.BgPictureService;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.Api;
@@ -28,7 +29,7 @@ public class BgPicturesController {
     @GetMapping("")
     @ApiOperation("获取系统中的壁纸列表")
     @RequiresPermissions(PermisConstant.SHOW_BG_PICTURE)
-    public Result<List<BgPicture>> list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    public Result<ListResultVo<BgPicture>> list(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
         return Result.ok(bgPictureService.getList(new ListQueryVo(pageNum, pageSize)));
     }
 

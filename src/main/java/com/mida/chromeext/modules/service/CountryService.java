@@ -99,7 +99,7 @@ public class CountryService {
     public Country getOneByCode(String code) {
         CountryExample ex = new CountryExample();
         ex.createCriteria().andCodeEqualTo(code);
-        PageHelper.startPage(1, 1);
+        PageHelper.startPage(1, 1, false);
         List<Country> cs = countryDAO.selectByExample(ex);
         if (cs == null || cs.isEmpty()) {
             return null;

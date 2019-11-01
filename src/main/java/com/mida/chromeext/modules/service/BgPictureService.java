@@ -1,10 +1,12 @@
 package com.mida.chromeext.modules.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.BgPictureDAO;
 import com.mida.chromeext.modules.pojo.BgPicture;
 import com.mida.chromeext.modules.pojo.BgPictureExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
+import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +47,11 @@ public class BgPictureService {
      * @param queryVo
      * @return
      */
-    public List<BgPicture> getList(ListQueryVo queryVo) {
+    public ListResultVo<BgPicture> getList(ListQueryVo queryVo) {
         BgPictureExample ex = new BgPictureExample();
-        PageHelper.startPage(queryVo);
-        return bgPictureDAO.selectByExample(ex);
+        Page page = PageHelper.startPage(queryVo);
+        bgPictureDAO.selectByExample(ex);
+        return new ListResultVo(page);
     }
 
     /**

@@ -100,7 +100,7 @@ public class AdminService {
      * 获取管理员列表
      */
     public List<Admin> getAdminList(ListQueryVo queryVo) {
-        PageHelper.startPage(queryVo);
+        PageHelper.startPage(queryVo.getPageNum(), queryVo.getPageSize(), false);
         AdminExample ex = new AdminExample();
         return adminDAO.selectByExample(ex);
     }
@@ -109,7 +109,7 @@ public class AdminService {
      * 根据角色列表获取管理员
      */
     public List<Admin> getAdminListByRoleNames(ListQueryVo queryVo, List<String> roleNames) {
-        PageHelper.startPage(queryVo);
+        PageHelper.startPage(queryVo.getPageNum(), queryVo.getPageSize(), false);
         return adminDAO.selectAdminByRoleNames(roleNames);
     }
 
@@ -127,7 +127,7 @@ public class AdminService {
      * @return
      */
     public Admin getFirstSuperAdmin() {
-        PageHelper.startPage(1, 1);
+        PageHelper.startPage(1, 1, false);
         List<String> superName = new ArrayList<>(1);
         superName.add(RoleConstant.SUPER_ROLE);
         List<Admin> list = adminDAO.selectAdminByRoleNames(superName);
