@@ -6,7 +6,6 @@ import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.service.SiteService;
-import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.modules.vo.SiteAddVo;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.utils.Constant;
@@ -18,14 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.RequestContextUtils;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author lihaoyu
@@ -53,13 +50,12 @@ public class SitesController {
         if (queryVo.getCountryCodes() == null || queryVo.getCountryCodes().isEmpty()) {
             queryVo.setCountryCodes(Lists.newArrayList(Constant.THE_WORLD));
         }
-        if (queryVo.getCategoryIds() == null || queryVo.getCategoryIds().isEmpty()) {
+        // 设置前端筛选条件，keyword和category_id至少有一个不为空
+        if (StringUtils.isEmpty(queryVo.getKeyword()) &&
+                (queryVo.getCategoryIds() == null || queryVo.getCategoryIds().isEmpty())) {
             queryVo.setCategoryIds(Lists.newArrayList(0));
         }
-
-        /**
-         * 强制设置搜索条件，屏蔽不允许前端搜索的字段
-         */
+        // 强制设置搜索条件，屏蔽不允许前端搜索的字段
         queryVo.setDefaultConsForClient();
 
         List<Site> sites = siteService.queryList(queryVo);
@@ -75,9 +71,15 @@ public class SitesController {
                                               @ApiParam("每页数据量") @Max(100) @RequestParam(required = false) Integer pageSize,
                                               @RequestParam(required = false) String countryCode, HttpServletRequest request) {
         SiteListQueryVo vo = new SiteListQueryVo();
-        if (pageNum != null && pageNum > 0) { vo.setPageNum(pageNum); }
-        if (pageSize != null && pageSize > 0) { vo.setPageSize(pageSize); }
-        if (StringUtils.isEmpty(countryCode)) { countryCode = LocaleHelper.getContextCountryCode(request); }
+        if (pageNum != null && pageNum > 0) {
+            vo.setPageNum(pageNum);
+        }
+        if (pageSize != null && pageSize > 0) {
+            vo.setPageSize(pageSize);
+        }
+        if (StringUtils.isEmpty(countryCode)) {
+            countryCode = LocaleHelper.getContextCountryCode(request);
+        }
         vo.setCountryCodes(Lists.newArrayList(countryCode));
         return Result.ok(siteService.queryList(vo));
     }
