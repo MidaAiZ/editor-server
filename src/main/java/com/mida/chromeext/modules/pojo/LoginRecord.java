@@ -4,21 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LoginRecord implements Serializable {
-    private Long rid;
-
-    private Integer uid;
-
-    private String clientId;
-
-    private String ip;
-
-    private String ua;
-
-    private Date loginTime;
-
-    private String countryCode;
-
     private static final long serialVersionUID = 1L;
+    private Long rid;
+    private Integer uid;
+    private String clientId;
+    private String ip;
+    private String ua;
+    private Date loginTime;
+    private String countryCode;
 
     public Long getRid() {
         return rid;

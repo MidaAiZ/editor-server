@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.mida.chromeext.modules.dto.SearchEngineItemDto;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.service.SearchEngineService;
-import com.mida.chromeext.utils.ObjectToMap;
 import com.mida.chromeext.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,10 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author lihaoyu

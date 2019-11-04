@@ -9,6 +9,7 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SiteViewHistory implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(hidden = true)
     private String hid;
     @ApiModelProperty(hidden = true)
@@ -28,8 +29,6 @@ public class SiteViewHistory implements Serializable {
     private String countryCode;
     @ApiModelProperty(hidden = true)
     private Date createdAt;
-
-    private static final long serialVersionUID = 1L;
 
     public String getHid() {
         return hid;

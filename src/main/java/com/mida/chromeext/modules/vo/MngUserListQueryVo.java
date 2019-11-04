@@ -23,10 +23,10 @@ public class MngUserListQueryVo extends ListQueryVo {
     /***
      * 注册的开始和结束时间
      */
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdBefore;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAfter;
 
     public Date getCreatedBefore() {

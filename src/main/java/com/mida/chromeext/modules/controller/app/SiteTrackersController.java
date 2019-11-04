@@ -1,6 +1,5 @@
 package com.mida.chromeext.modules.controller.app;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mida.chromeext.modules.dto.SiteTrackerItemDto;
 import com.mida.chromeext.modules.pojo.SiteTracker;

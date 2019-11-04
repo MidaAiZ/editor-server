@@ -1,7 +1,6 @@
 package com.mida.chromeext.modules.controller.app;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.Lists;
 import com.mida.chromeext.annotation.CurrentUser;
 import com.mida.chromeext.annotation.LoginRequired;
 import com.mida.chromeext.modules.dto.UserMenuItemDto;

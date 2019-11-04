@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.mida.chromeext.modules.dao.SiteCategoryDAO;
-import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.pojo.SiteCategoryExample;
 import com.mida.chromeext.modules.vo.ListQueryVo;
@@ -41,7 +40,7 @@ public class SiteCategoryService {
     public ListResultVo<SiteCategory> listCategories(ListQueryVo queryVo) {
         SiteCategoryExample example = new SiteCategoryExample();
         example.setOrderByClause("`index` ASC, cid DESC");
-        Page page =PageHelper.startPage(queryVo);
+        Page page = PageHelper.startPage(queryVo);
         siteCategoryDAO.selectByExample(example);
         return new ListResultVo(page);
     }
@@ -84,6 +83,7 @@ public class SiteCategoryService {
     /**
      * 批量删除分类
      * 仅能删除没有关联网站的分类
+     *
      * @param ids
      * @return
      */
@@ -94,6 +94,7 @@ public class SiteCategoryService {
     /**
      * 删除一个分类
      * 仅能删除没有关联网站的记录
+     *
      * @param id
      * @return
      */

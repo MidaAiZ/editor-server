@@ -58,7 +58,7 @@ public class SiteTrackersController {
         record.setCountryCode(code);
         record.setTrackers(JSONObject.toJSONString(items));
         try {
-           return siteTrackerService.createOne(record) ? Result.ok(record) : Result.error();
+            return siteTrackerService.createOne(record) ? Result.ok(record) : Result.error();
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

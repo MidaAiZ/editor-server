@@ -1,14 +1,9 @@
 package com.mida.chromeext.modules.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.modules.dao.DefaultMenuDAO;
-import com.mida.chromeext.modules.dto.UserMenuItemDto;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
-import com.mida.chromeext.modules.pojo.UserMenu;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +37,7 @@ public class DefaultMenuService {
 
     /**
      * 通过主键获取记录
+     *
      * @param id
      * @return
      */

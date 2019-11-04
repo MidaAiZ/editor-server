@@ -16,7 +16,6 @@ import com.mida.chromeext.modules.vo.SiteListQueryVo;
 import com.mida.chromeext.modules.vo.SiteRelationVo;
 import com.mida.chromeext.modules.vo.statistic.CategorySitesCount;
 import com.mida.chromeext.utils.Constant;
-import com.mida.chromeext.utils.MergeObject;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,7 +71,7 @@ public class SiteService {
     public SiteRelationVo getSiteByIdWithRelations(Integer id) {
         Site site = getSiteById(id);
         if (site != null) {
-            SiteRelationVo siteRel =  JSONObject.parseObject(JSONObject.toJSON(site).toString(), SiteRelationVo.class);
+            SiteRelationVo siteRel = JSONObject.parseObject(JSONObject.toJSON(site).toString(), SiteRelationVo.class);
             if (siteRel.getCreatorType().equals(Constant.CREATED_BY_USER)) {
                 siteRel.setCreatedUser(userService.getUserById(site.getCreatorId()));
             } else if (siteRel.getCreatorType().equals(Constant.CREATED_BY_ADMIN)) {
@@ -122,6 +121,7 @@ public class SiteService {
      * 用户添加网站
      * 添加的网站需要由管理员审核
      * 审核通过后才可以被搜索到
+     *
      * @param siteAddVo
      * @param user
      * @return
@@ -130,12 +130,14 @@ public class SiteService {
     public Site addOneSiteByUser(SiteAddVo siteAddVo, User user) {
         Date date = new Date();
         Site newSite = Site.builder().createdAt(date).updatedAt(date).creatorType(Constant.CREATED_BY_USER).creatorId(user.getUid())
-                        .cateId(siteAddVo.getCateId()).title(siteAddVo.getTitle()).url(siteAddVo.getUrl()).icon(siteAddVo.getIcon())
-                        .weight(50F).state(Constant.SITE_STATE_IN_REVIEWING).build();
+                .cateId(siteAddVo.getCateId()).title(siteAddVo.getTitle()).url(siteAddVo.getUrl()).icon(siteAddVo.getIcon())
+                .weight(50F).state(Constant.SITE_STATE_IN_REVIEWING).build();
         siteDAO.insertSelective(newSite);
         // 设置网站所适用的国家
         String countryCode = user.getCountryCode();
-        if (StringUtils.isEmpty(countryCode)) { countryCode = Constant.THE_WORLD; }
+        if (StringUtils.isEmpty(countryCode)) {
+            countryCode = Constant.THE_WORLD;
+        }
         countriesSitesService.AddRelations(newSite.getSid(), Lists.newArrayList(countryCode));
         return newSite;
     }
@@ -154,6 +156,7 @@ public class SiteService {
 
     /**
      * 通过主键删除网站，同时移除网站-国家
+     *
      * @param sid
      * @return
      */
@@ -165,13 +168,16 @@ public class SiteService {
 
     /**
      * 删除多条网站记录，同时删除关联
+     *
      * @param sids
      * @return
      */
     public int deleteSitesByIds(List<Integer> sids) {
         int count = 0;
         for (int id : sids) {
-            if (deleteById(id)) { count++; }
+            if (deleteById(id)) {
+                count++;
+            }
         }
         return count;
     }
@@ -295,6 +301,7 @@ public class SiteService {
 
     /**
      * 获取系统创建的网站数
+     *
      * @return
      */
     public Long countSysSites() {
@@ -306,6 +313,7 @@ public class SiteService {
 
     /**
      * 获取用户创建的网站数
+     *
      * @return
      */
     public Long countUserSites() {
@@ -316,6 +324,7 @@ public class SiteService {
 
     /**
      * 获取当日热门站点
+     *
      * @return
      */
     public List<Map> hotSites() {

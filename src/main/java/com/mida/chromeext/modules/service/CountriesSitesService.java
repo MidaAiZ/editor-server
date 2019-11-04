@@ -24,6 +24,7 @@ public class CountriesSitesService {
 
     /**
      * 获取所有国家下的网站数量
+     *
      * @return
      */
     public List<CountrySitesCount> listSitesCountByCountry() {
@@ -41,6 +42,7 @@ public class CountriesSitesService {
 
     /**
      * 添加网站-国家关联
+     *
      * @param siteId
      * @param countryCodes
      * @return
@@ -48,7 +50,9 @@ public class CountriesSitesService {
     public int AddRelations(Integer siteId, List<String> countryCodes) {
         int count = 0;
         Site site = siteService.getSiteById(siteId);
-        if (site == null) { return 0; }
+        if (site == null) {
+            return 0;
+        }
         for (String code : countryCodes) {
             CountriesSite cs = new CountriesSite();
             cs.setSiteId(siteId);
@@ -61,6 +65,7 @@ public class CountriesSitesService {
 
     /**
      * 移除关系
+     *
      * @param siteId
      * @param countryCodes
      * @return
@@ -73,6 +78,7 @@ public class CountriesSitesService {
 
     /**
      * 通过国家(地区)码移出关系
+     *
      * @param countryCode
      * @return
      */
@@ -84,6 +90,7 @@ public class CountriesSitesService {
 
     /**
      * 通过网站id移除关系
+     *
      * @param siteId
      * @return
      */

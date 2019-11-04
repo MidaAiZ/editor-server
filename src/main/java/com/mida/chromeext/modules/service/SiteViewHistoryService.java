@@ -27,6 +27,7 @@ public class SiteViewHistoryService {
 
     /**
      * 创建浏览记录
+     *
      * @param history
      * @param request
      * @return
@@ -52,6 +53,7 @@ public class SiteViewHistoryService {
 
     /**
      * 根据条件查询浏览记录列表
+     *
      * @param queryVo
      * @return
      */
@@ -96,6 +98,7 @@ public class SiteViewHistoryService {
 
     /**
      * 获取浏览记录日数据
+     *
      * @param beginDate
      * @param endDate
      * @return
@@ -113,6 +116,7 @@ public class SiteViewHistoryService {
 
     /**
      * 获取浏览数据月数据
+     *
      * @param beginDate
      * @param endDate
      * @return

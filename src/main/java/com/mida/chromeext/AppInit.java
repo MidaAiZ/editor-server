@@ -107,7 +107,9 @@ public class AppInit {
                     role.setName((entry.getKey()));
                     role.setDescription(field.getAnnotation(SysRole.class).desc());
                     roleService.createRole(role);
-                } else { role = existRoles.get(entry.getKey()); }
+                } else {
+                    role = existRoles.get(entry.getKey());
+                }
                 // 获取这个角色所拥有的所有权限
                 List<String> rolePermissions = new ArrayList<>();
                 Class pClaszInner = PermisConstant.class.getClass();
@@ -121,7 +123,9 @@ public class AppInit {
                 // 赋予权限
                 List<Permission> sysPs = permissionService.getPermissionsByPermiss(rolePermissions);
                 List<Integer> existPsIds = new ArrayList<>();
-                for (Permission p : permissionService.getPermissionsByRoleId(role.getRid())) { existPsIds.add(p.getPid()); }
+                for (Permission p : permissionService.getPermissionsByRoleId(role.getRid())) {
+                    existPsIds.add(p.getPid());
+                }
                 List<Integer> psIds = new ArrayList<>();
                 for (Permission p : sysPs) {
                     if (!existPsIds.contains(p.getPid())) {

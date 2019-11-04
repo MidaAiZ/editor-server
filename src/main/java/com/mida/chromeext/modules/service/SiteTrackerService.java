@@ -45,7 +45,9 @@ public class SiteTrackerService {
     public Integer updateList(List<SiteTracker> list) {
         int count = 0;
         for (SiteTracker record : list) {
-            if (updateByCountryCode(record)) { count++; }
+            if (updateByCountryCode(record)) {
+                count++;
+            }
         }
         return count;
     }
@@ -58,7 +60,9 @@ public class SiteTrackerService {
     public List<SiteTracker> createList(List<SiteTracker> list) {
         List<SiteTracker> trackers = new ArrayList<>();
         for (SiteTracker record : list) {
-            if (createOne(record)) { trackers.add(record); }
+            if (createOne(record)) {
+                trackers.add(record);
+            }
         }
         return trackers;
     }
@@ -71,7 +75,10 @@ public class SiteTrackerService {
     public int deleteList(List<Integer> ids) {
         int count = 0;
         for (int id : ids) {
-            if (deleteOne(id)) { count++; };
+            if (deleteOne(id)) {
+                count++;
+            }
+            ;
         }
         return count;
     }

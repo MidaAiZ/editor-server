@@ -3,19 +3,18 @@ package com.mida.chromeext.modules.controller.app;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.SiteCategoryService;
 import com.mida.chromeext.modules.vo.ListQueryVo;
-import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.utils.Result;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController

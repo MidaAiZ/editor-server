@@ -6,13 +6,10 @@ import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SiteTracker implements Serializable {
-    private Integer tid;
-
-    private String countryCode;
-
-    private String trackers;
-
     private static final long serialVersionUID = 1L;
+    private Integer tid;
+    private String countryCode;
+    private String trackers;
 
     public Integer getTid() {
         return tid;

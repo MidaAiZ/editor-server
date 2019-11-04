@@ -1,7 +1,5 @@
 package com.mida.chromeext.modules.controller.manage;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.pojo.SiteCategory;
 import com.mida.chromeext.modules.service.SiteCategoryService;

@@ -3,7 +3,6 @@ package com.mida.chromeext.modules.service;
 import com.mida.chromeext.modules.dao.DownloadRecordDAO;
 import com.mida.chromeext.modules.pojo.DownloadRecord;
 import com.mida.chromeext.modules.pojo.DownloadRecordExample;
-import com.mida.chromeext.modules.pojo.UserExample;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ public class DownloadRecordService {
 
     /**
      * 保存一条下载记录，所有的字段应该事先设置好
+     *
      * @param record
      * @return
      */
@@ -34,6 +34,7 @@ public class DownloadRecordService {
 
     /**
      * 通过id获取
+     *
      * @param id
      * @return
      */
@@ -43,6 +44,7 @@ public class DownloadRecordService {
 
     /**
      * 统计每日下载量
+     *
      * @param beginDate
      * @param endDate
      * @return
@@ -60,6 +62,7 @@ public class DownloadRecordService {
 
     /**
      * 统计每月下载量
+     *
      * @param beginDate
      * @param endDate
      * @return

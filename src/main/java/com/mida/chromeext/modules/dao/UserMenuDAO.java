@@ -4,8 +4,6 @@ import com.mida.chromeext.modules.dao.mapper.UserMenuMapper;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface UserMenuDAO extends UserMenuMapper {
     /**

@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserMenu implements Serializable {
-    private Integer mid;
-
-    private Integer userId;
-
-    private Date createdAt;
-
-    private Date updatedAt;
-
-    private String menus;
-
-    private String siteIds;
-
     private static final long serialVersionUID = 1L;
+    private Integer mid;
+    private Integer userId;
+    private Date createdAt;
+    private Date updatedAt;
+    private String menus;
+    private String siteIds;
 
     public Integer getMid() {
         return mid;

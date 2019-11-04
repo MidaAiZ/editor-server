@@ -15,7 +15,6 @@ import com.mida.chromeext.modules.vo.SiteRelationVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.*;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +132,7 @@ public class SitesController {
     @RequiresPermissions(PermisConstant.MODIFY_SITE)
     public Result<Site> update(@PathVariable Integer siteId, @ApiParam("待更新的网站记录") @RequestBody Site site) {
         Site updateSite = Site.builder().title(site.getTitle()).icon(site.getIcon()).url(site.getUrl())
-                            .marks(site.getMarks()).weight(site.getWeight()).build();
+                .marks(site.getMarks()).weight(site.getWeight()).build();
         updateSite.setSid(siteId);
         return siteService.update(updateSite) ? Result.ok(updateSite) : Result.error();
     }
@@ -143,7 +142,9 @@ public class SitesController {
     @RequiresPermissions(PermisConstant.DELETE_SITE)
     public Result<Boolean> delete(@PathVariable Integer siteId) {
         Site site = siteService.getSiteById(siteId);
-        if (site == null) { return Result.error(ResultCode.NOT_FOUND.code(), "No such site with ID = " + siteId.toString()); }
+        if (site == null) {
+            return Result.error(ResultCode.NOT_FOUND.code(), "No such site with ID = " + siteId.toString());
+        }
         return siteService.deleteById(siteId) ? Result.ok(true) : Result.error();
     }
 

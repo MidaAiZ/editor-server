@@ -1,339 +1,341 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.mapper.SiteMapper">
-  <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Site">
-    <id column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
-    <result column="weight" jdbcType="REAL" property="weight" />
-    <result column="marks" jdbcType="VARCHAR" property="marks" />
-    <result column="state" jdbcType="SMALLINT" property="state" />
-    <result column="creator_type" jdbcType="BIT" property="creatorType" />
-    <result column="creator_id" jdbcType="INTEGER" property="creatorId" />
-    <result column="used_count" jdbcType="INTEGER" property="usedCount" />
-    <result column="page_views" jdbcType="INTEGER" property="pageViews" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Site">
+        <id column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="cate_id" jdbcType="INTEGER" property="cateId"/>
+        <result column="weight" jdbcType="REAL" property="weight"/>
+        <result column="marks" jdbcType="VARCHAR" property="marks"/>
+        <result column="state" jdbcType="SMALLINT" property="state"/>
+        <result column="creator_type" jdbcType="BIT" property="creatorType"/>
+        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="used_count" jdbcType="INTEGER" property="usedCount"/>
+        <result column="page_views" jdbcType="INTEGER" property="pageViews"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     sid, title, url, icon, cate_id, weight, marks, `state`, creator_type, creator_id, 
     used_count, page_views, created_at, updated_at
   </sql>
-  <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from sites
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sites
-    where sid = #{sid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from sites
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sites
+        where sid = #{sid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sites
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample">
-    delete from sites
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Site">
-    <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into sites (title, url, icon, 
-      cate_id, weight, marks, 
-      `state`, creator_type, creator_id, 
-      used_count, page_views, created_at, 
-      updated_at)
-    values (#{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{cateId,jdbcType=INTEGER}, #{weight,jdbcType=REAL}, #{marks,jdbcType=VARCHAR}, 
-      #{state,jdbcType=SMALLINT}, #{creatorType,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, 
-      #{usedCount,jdbcType=INTEGER}, #{pageViews,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Site">
-    <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into sites
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        title,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="icon != null">
-        icon,
-      </if>
-      <if test="cateId != null">
-        cate_id,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-      <if test="marks != null">
-        marks,
-      </if>
-      <if test="state != null">
-        `state`,
-      </if>
-      <if test="creatorType != null">
-        creator_type,
-      </if>
-      <if test="creatorId != null">
-        creator_id,
-      </if>
-      <if test="usedCount != null">
-        used_count,
-      </if>
-      <if test="pageViews != null">
-        page_views,
-      </if>
-      <if test="createdAt != null">
-        created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="cateId != null">
-        #{cateId,jdbcType=INTEGER},
-      </if>
-      <if test="weight != null">
-        #{weight,jdbcType=REAL},
-      </if>
-      <if test="marks != null">
-        #{marks,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=SMALLINT},
-      </if>
-      <if test="creatorType != null">
-        #{creatorType,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null">
-        #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="usedCount != null">
-        #{usedCount,jdbcType=INTEGER},
-      </if>
-      <if test="pageViews != null">
-        #{pageViews,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultType="java.lang.Long">
-    select count(*) from sites
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update sites
-    <set>
-      <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=INTEGER},
-      </if>
-      <if test="record.title != null">
+    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample">
+        delete from sites
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Site">
+        <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sites (title, url, icon,
+        cate_id, weight, marks,
+        `state`, creator_type, creator_id,
+        used_count, page_views, created_at,
+        updated_at)
+        values (#{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+        #{cateId,jdbcType=INTEGER}, #{weight,jdbcType=REAL}, #{marks,jdbcType=VARCHAR},
+        #{state,jdbcType=SMALLINT}, #{creatorType,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER},
+        #{usedCount,jdbcType=INTEGER}, #{pageViews,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
+        #{updatedAt,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Site">
+        <selectKey keyProperty="sid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into sites
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                title,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="cateId != null">
+                cate_id,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="marks != null">
+                marks,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="creatorType != null">
+                creator_type,
+            </if>
+            <if test="creatorId != null">
+                creator_id,
+            </if>
+            <if test="usedCount != null">
+                used_count,
+            </if>
+            <if test="pageViews != null">
+                page_views,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="cateId != null">
+                #{cateId,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=REAL},
+            </if>
+            <if test="marks != null">
+                #{marks,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=SMALLINT},
+            </if>
+            <if test="creatorType != null">
+                #{creatorType,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="usedCount != null">
+                #{usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="pageViews != null">
+                #{pageViews,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteExample" resultType="java.lang.Long">
+        select count(*) from sites
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update sites
+        <set>
+            <if test="record.sid != null">
+                sid = #{record.sid,jdbcType=INTEGER},
+            </if>
+            <if test="record.title != null">
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.url != null">
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.icon != null">
+                icon = #{record.icon,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cateId != null">
+                cate_id = #{record.cateId,jdbcType=INTEGER},
+            </if>
+            <if test="record.weight != null">
+                weight = #{record.weight,jdbcType=REAL},
+            </if>
+            <if test="record.marks != null">
+                marks = #{record.marks,jdbcType=VARCHAR},
+            </if>
+            <if test="record.state != null">
+                `state` = #{record.state,jdbcType=SMALLINT},
+            </if>
+            <if test="record.creatorType != null">
+                creator_type = #{record.creatorType,jdbcType=BIT},
+            </if>
+            <if test="record.creatorId != null">
+                creator_id = #{record.creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="record.usedCount != null">
+                used_count = #{record.usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.pageViews != null">
+                page_views = #{record.pageViews,jdbcType=INTEGER},
+            </if>
+            <if test="record.createdAt != null">
+                created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updatedAt != null">
+                updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update sites
+        set sid = #{record.sid,jdbcType=INTEGER},
         title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.url != null">
         url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.icon != null">
         icon = #{record.icon,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cateId != null">
         cate_id = #{record.cateId,jdbcType=INTEGER},
-      </if>
-      <if test="record.weight != null">
         weight = #{record.weight,jdbcType=REAL},
-      </if>
-      <if test="record.marks != null">
         marks = #{record.marks,jdbcType=VARCHAR},
-      </if>
-      <if test="record.state != null">
         `state` = #{record.state,jdbcType=SMALLINT},
-      </if>
-      <if test="record.creatorType != null">
         creator_type = #{record.creatorType,jdbcType=BIT},
-      </if>
-      <if test="record.creatorId != null">
         creator_id = #{record.creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.usedCount != null">
         used_count = #{record.usedCount,jdbcType=INTEGER},
-      </if>
-      <if test="record.pageViews != null">
         page_views = #{record.pageViews,jdbcType=INTEGER},
-      </if>
-      <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updatedAt != null">
-        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update sites
-    set sid = #{record.sid,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR},
-      icon = #{record.icon,jdbcType=VARCHAR},
-      cate_id = #{record.cateId,jdbcType=INTEGER},
-      weight = #{record.weight,jdbcType=REAL},
-      marks = #{record.marks,jdbcType=VARCHAR},
-      `state` = #{record.state,jdbcType=SMALLINT},
-      creator_type = #{record.creatorType,jdbcType=BIT},
-      creator_id = #{record.creatorId,jdbcType=INTEGER},
-      used_count = #{record.usedCount,jdbcType=INTEGER},
-      page_views = #{record.pageViews,jdbcType=INTEGER},
-      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Site">
-    update sites
-    <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="cateId != null">
-        cate_id = #{cateId,jdbcType=INTEGER},
-      </if>
-      <if test="weight != null">
-        weight = #{weight,jdbcType=REAL},
-      </if>
-      <if test="marks != null">
-        marks = #{marks,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        `state` = #{state,jdbcType=SMALLINT},
-      </if>
-      <if test="creatorType != null">
-        creator_type = #{creatorType,jdbcType=BIT},
-      </if>
-      <if test="creatorId != null">
-        creator_id = #{creatorId,jdbcType=INTEGER},
-      </if>
-      <if test="usedCount != null">
-        used_count = #{usedCount,jdbcType=INTEGER},
-      </if>
-      <if test="pageViews != null">
-        page_views = #{pageViews,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where sid = #{sid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Site">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Site">
+        update sites
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="cateId != null">
+                cate_id = #{cateId,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=REAL},
+            </if>
+            <if test="marks != null">
+                marks = #{marks,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                `state` = #{state,jdbcType=SMALLINT},
+            </if>
+            <if test="creatorType != null">
+                creator_type = #{creatorType,jdbcType=BIT},
+            </if>
+            <if test="creatorId != null">
+                creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="usedCount != null">
+                used_count = #{usedCount,jdbcType=INTEGER},
+            </if>
+            <if test="pageViews != null">
+                page_views = #{pageViews,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where sid = #{sid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Site">
     update sites
     set title = #{title,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

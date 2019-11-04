@@ -17,8 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-
 @RestController("mngBgPicturesController")
 @RequestMapping("manage/bg_pictures")
 @Api(value = "后台壁纸图片操作接口", tags = "{}")

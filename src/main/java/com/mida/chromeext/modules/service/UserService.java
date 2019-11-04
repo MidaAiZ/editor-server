@@ -14,7 +14,6 @@ import com.mida.chromeext.modules.vo.ListResultVo;
 import com.mida.chromeext.modules.vo.MngUserListQueryVo;
 import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
-import com.mida.chromeext.utils.DateUtils;
 import com.mida.chromeext.utils.NumConst;
 import com.mida.chromeext.utils.ShiroUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -206,10 +205,10 @@ public class UserService {
         if (!CollectionUtils.isEmpty(queryVo.getCountryCodeList())) {
             criteria.andCountryCodeIn(queryVo.getCountryCodeList());
         }
-        if(queryVo.getCreatedAfter() != null){
+        if (queryVo.getCreatedAfter() != null) {
             criteria.andCreatedAtGreaterThan(queryVo.getCreatedAfter());
         }
-        if(queryVo.getCreatedBefore() != null){
+        if (queryVo.getCreatedBefore() != null) {
             criteria.andCreatedAtLessThan(queryVo.getCreatedBefore());
         }
         example.setOrderByClause("id desc");
@@ -220,6 +219,7 @@ public class UserService {
 
     /**
      * 根据国家（地区）码获取用户列表
+     *
      * @param code
      * @param queryVo
      * @return
@@ -230,7 +230,7 @@ public class UserService {
         return userDAO.selectByExample(example);
     }
 
-    public Boolean changePwdByMng(Integer userId, String pwd){
+    public Boolean changePwdByMng(Integer userId, String pwd) {
         User user = new User();
         String salt = userDAO.selectByPrimaryKey(userId).getSalt();
         user.setPassword(ShiroUtils.EncodeSalt(pwd, salt));
@@ -276,6 +276,7 @@ public class UserService {
 
     /**
      * 获取每日新注册的用户数量
+     *
      * @param beginDate
      * @param endDate
      * @return
@@ -303,6 +304,7 @@ public class UserService {
 
     /**
      * 根据国家（地区）码获取用户数
+     *
      * @param code
      * @return
      */

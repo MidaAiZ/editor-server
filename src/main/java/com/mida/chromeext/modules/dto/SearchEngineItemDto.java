@@ -4,13 +4,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.jdom.IllegalDataException;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
 @ApiModel
 public class SearchEngineItemDto implements Serializable {
@@ -55,7 +52,7 @@ public class SearchEngineItemDto implements Serializable {
         if (!urls.containsKey(WebUrl)) {
             throw new IllegalDataException("urls中web类型的url不能为空");
         }
-        String regex = "^("+ WebUrl +"|" + ImageUrl + "|" + NewsUrl + "|" + VideoUrl + "|" + MapUrl +")$";
+        String regex = "^(" + WebUrl + "|" + ImageUrl + "|" + NewsUrl + "|" + VideoUrl + "|" + MapUrl + ")$";
         for (String key : urls.keySet()) {
             if (!key.matches(regex)) {
                 throw new IllegalDataException("urls包含不支持的key值, 仅支持满足以下正则的key值：" + regex);

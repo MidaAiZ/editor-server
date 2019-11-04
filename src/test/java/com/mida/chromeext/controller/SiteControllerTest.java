@@ -1,10 +1,7 @@
 package com.mida.chromeext.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.ChromeExtApplication;
 import com.mida.chromeext.modules.vo.SiteListQueryVo;
-import com.mida.chromeext.utils.Result;
-import com.mida.chromeext.utils.ResultCode;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;

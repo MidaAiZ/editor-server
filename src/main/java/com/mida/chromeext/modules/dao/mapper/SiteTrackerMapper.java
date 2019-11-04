@@ -2,8 +2,9 @@ package com.mida.chromeext.modules.dao.mapper;
 
 import com.mida.chromeext.modules.pojo.SiteTracker;
 import com.mida.chromeext.modules.pojo.SiteTrackerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SiteTrackerMapper {
     long countByExample(SiteTrackerExample example);

@@ -18,24 +18,24 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Site implements Serializable {
     private static final long serialVersionUID = 1L;
-    @ApiModelProperty(value="网站主键ID")
+    @ApiModelProperty(value = "网站主键ID")
     private Integer sid;
     @NotBlank(message = "Title can not be null")
-    @ApiModelProperty(value="网站名称")
+    @ApiModelProperty(value = "网站名称")
     private String title;
     @NotBlank(message = "Url can not be null")
-    @ApiModelProperty(value="网站链接")
+    @ApiModelProperty(value = "网站链接")
     private String url;
     @NotBlank(message = "Icon can not be null")
-    @ApiModelProperty(value="网站图标地址")
+    @ApiModelProperty(value = "网站图标地址")
     private String icon;
-    @ApiModelProperty(value="网站分类ID")
+    @ApiModelProperty(value = "网站分类ID")
     private Integer cateId;
     @JsonIgnore
     private Float weight;
-    @ApiModelProperty(value="网站状态，0表示未审核，1表示审核通过，2表示禁止访问")
+    @ApiModelProperty(value = "网站状态，0表示未审核，1表示审核通过，2表示禁止访问")
     private Short state;
-    @ApiModelProperty(value="网站标签")
+    @ApiModelProperty(value = "网站标签")
     private String marks;
     @ApiModelProperty(hidden = true)
     private Admin createdAdmin;

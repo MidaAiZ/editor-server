@@ -2,7 +2,6 @@ package com.mida.chromeext.modules.dao;
 
 import com.mida.chromeext.modules.dao.mapper.DownloadRecordMapper;
 import com.mida.chromeext.modules.pojo.DownloadRecord;
-import com.mida.chromeext.modules.vo.statistic.CountryUsersCount;
 import com.mida.chromeext.modules.vo.statistic.StatisticCountVo;
 import org.apache.ibatis.annotations.Param;
 

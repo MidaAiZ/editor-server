@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author lihaoyu
@@ -91,6 +90,7 @@ public interface SiteDAO extends SiteMapper {
 
     /**
      * 获取实时热门站点
+     *
      * @return
      */
     List<Map> listHotSites();

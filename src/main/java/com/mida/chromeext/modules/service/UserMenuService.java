@@ -43,8 +43,8 @@ public class UserMenuService {
     /**
      * 更新用户菜单
      *
-     * @param userId 用户Id
-     * @param menuPages   用户菜单
+     * @param userId    用户Id
+     * @param menuPages 用户菜单
      * @return int
      */
     public Boolean update(Integer userId, List<List<UserMenuItemDto>> menuPages) {

@@ -4,17 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DownloadRecord implements Serializable {
-    private String did;
-
-    private String ip;
-
-    private String ua;
-
-    private String countryCode;
-
-    private Date createdAt;
-
     private static final long serialVersionUID = 1L;
+    private String did;
+    private String ip;
+    private String ua;
+    private String countryCode;
+    private Date createdAt;
 
     public String getDid() {
         return did;

@@ -40,7 +40,9 @@ public class UsersController {
             @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "query"),})
     public Result<User> register(@ApiIgnore @Validated User regUser, HttpServletRequest request) {
         // 如果没填国家码
-        if (StringUtils.isEmpty(regUser.getCountryCode())) { regUser.setCountryCode(LocaleHelper.getContextCountryCode(request)); }
+        if (StringUtils.isEmpty(regUser.getCountryCode())) {
+            regUser.setCountryCode(LocaleHelper.getContextCountryCode(request));
+        }
         User user;
         try {
             user = userService.register(regUser);

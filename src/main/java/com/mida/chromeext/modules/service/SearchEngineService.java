@@ -2,8 +2,8 @@ package com.mida.chromeext.modules.service;
 
 import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.modules.dao.SearchEngineDAO;
-import com.mida.chromeext.modules.dto.SearchEngineItemDto;
 import com.mida.chromeext.modules.dto.SearchEngineAddDto;
+import com.mida.chromeext.modules.dto.SearchEngineItemDto;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.pojo.SearchEngineExample;
 import com.mida.chromeext.utils.Constant;
@@ -83,6 +83,7 @@ public class SearchEngineService {
 
     /**
      * 批量添加
+     *
      * @param engineDtoList
      * @return
      */
@@ -100,6 +101,7 @@ public class SearchEngineService {
 
     /**
      * 根据countryCode更新记录
+     *
      * @param record
      * @return
      */

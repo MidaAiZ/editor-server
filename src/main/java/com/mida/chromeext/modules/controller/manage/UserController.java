@@ -19,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-
 /**
  * 管理员对用户的操作
  *
@@ -46,7 +44,7 @@ public class UserController {
             @ApiImplicitParam(name = "createdAfter", value = "用户注册时间>=，格式yyyy-MM-dd HH:mm:ss", dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
-    public Result<ListResultVo<User>> listUser(@ApiIgnore  MngUserListQueryVo queryVo) {
+    public Result<ListResultVo<User>> listUser(@ApiIgnore MngUserListQueryVo queryVo) {
         return Result.ok(userService.listUserByMng(queryVo));
     }
 
@@ -62,8 +60,8 @@ public class UserController {
     @ApiOperation("修改用户密码")
     @RequiresPermissions(PermisConstant.MODIFY_USER)
     public Result<Boolean> changePwd(@PathVariable Integer uid, @RequestParam String password) {
-        if(!UserValidation.isPassWord(password)) {
-           throw new BaseException(ExceptionEnum.USER_REGISTER_PASSWORD);
+        if (!UserValidation.isPassWord(password)) {
+            throw new BaseException(ExceptionEnum.USER_REGISTER_PASSWORD);
         }
         return userService.changePwdByMng(uid, password) ? Result.ok(true) : Result.error();
     }

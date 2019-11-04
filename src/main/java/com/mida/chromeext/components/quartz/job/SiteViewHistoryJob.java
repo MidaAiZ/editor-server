@@ -50,9 +50,9 @@ public class SiteViewHistoryJob implements Job, Serializable {
 
     public void executeTask() {
         long count = 0;
-        Cursor<Map.Entry<Object,Object>> cursor = redisTemplate.opsForHash().scan(LoginRecordService.CACHE_KEY, ScanOptions.scanOptions().build());
-        while (cursor.hasNext()){
-            Map.Entry<Object,Object> entry = cursor.next();
+        Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash().scan(LoginRecordService.CACHE_KEY, ScanOptions.scanOptions().build());
+        while (cursor.hasNext()) {
+            Map.Entry<Object, Object> entry = cursor.next();
             try {
                 LoginRecord record = (LoginRecord) entry.getValue();
                 saveData(record);
@@ -67,6 +67,7 @@ public class SiteViewHistoryJob implements Job, Serializable {
 
     /**
      * 持久化数据
+     *
      * @param record
      */
     @Transactional(rollbackFor = Exception.class)

@@ -3,14 +3,11 @@ package com.mida.chromeext.modules.service;
 import com.mida.chromeext.modules.dao.LoginRecordDAO;
 import com.mida.chromeext.modules.pojo.LoginRecord;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * @author lihaoyu
@@ -26,12 +23,23 @@ public class LoginRecordService {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
+    /**
+     * 获取缓存key值
+     *
+     * @param record
+     * @return
+     */
+    public static String getHashKey(LoginRecord record) {
+        return record.getClientId();
+    }
+
     public void save(LoginRecord record) {
         loginRecordDAO.insertSelective(record);
     }
 
     /**
      * 把记录添加至缓存中，由定时器批量插入
+     *
      * @param record
      * @return
      */
@@ -39,14 +47,5 @@ public class LoginRecordService {
         Date now = new Date();
         record.setLoginTime(now);
         redisTemplate.opsForHash().put(LoginRecordService.CACHE_KEY, getHashKey(record), record);
-    }
-
-    /**
-     * 获取缓存key值
-     * @param record
-     * @return
-     */
-    public static String getHashKey(LoginRecord record) {
-        return record.getClientId();
     }
 }

@@ -4,7 +4,6 @@ import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.components.shiro.RoleConstant;
 import com.mida.chromeext.modules.pojo.Role;
 import com.mida.chromeext.modules.service.RoleService;
-import com.mida.chromeext.modules.vo.ListQueryVo;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.Api;
