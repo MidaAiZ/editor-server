@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("user_menus")
@@ -30,13 +32,16 @@ public class UserMenusController {
 
     @LoginRequired
     @GetMapping("")
-    @ApiOperation("获取用户菜单列表")
-    public Result<List> getUserMenuList(@ApiIgnore @CurrentUser User user) {
+    @ApiOperation(value = "获取用户菜单列表", notes = "返回字段包括version和menu，当用户不存在菜单时返回null")
+    public Result<Map> getUserMenuList(@ApiIgnore @CurrentUser User user) {
         UserMenu menu = userMenuService.getMenuItemsByUserId(user.getUid());
         if (menu == null) {
-            return Result.ok(Lists.newArrayList());
+            return Result.ok(null);
         }
-        return Result.ok(JSONObject.parseArray(menu.getMenus(), List.class));
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("version", menu.getUpdatedAt());
+        returnMap.put("menu", JSONObject.parseArray(menu.getMenus(), List.class));
+        return Result.ok(returnMap);
     }
 
     @LoginRequired
