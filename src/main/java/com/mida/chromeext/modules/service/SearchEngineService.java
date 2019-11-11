@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.mida.chromeext.modules.dao.SearchEngineDAO;
 import com.mida.chromeext.modules.dto.SearchEngineAddDto;
 import com.mida.chromeext.modules.dto.SearchEngineItemDto;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.pojo.SearchEngineExample;
+import com.mida.chromeext.modules.vo.SeachEngineRelVo;
 import com.mida.chromeext.utils.Constant;
 import com.mida.chromeext.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,7 @@ public class SearchEngineService {
      * @author lihaoyu
      * @date 2019/10/7 20:02
      */
-    public List<SearchEngine> listAllSearchEngine() {
+    public List<SeachEngineRelVo> listAllSearchEngine() {
         return searchEngineDAO.listAllSearchEngine();
     }
 
@@ -67,16 +69,15 @@ public class SearchEngineService {
      * @date 2019/10/7 20:47
      */
     @Transactional(rollbackFor = Exception.class)
-    public SearchEngine addSearchEngine(SearchEngineAddDto dto) {
-        SearchEngine searchEngine = searchEngineDAO.getByCountryCode(dto.getCountryCode());
-        // 已经存在，不能添加
-        if (searchEngine != null) {
-            return null;
-        }
-        List<SearchEngineItemDto> searchEngineItemDtoList = dto.getEngines();
-        String engineJson = JSON.toJSONString(searchEngineItemDtoList);
+    public SearchEngine addSearchEngine(SearchEngineAddDto dto, Admin admin) {
         Date date = new Date();
-        searchEngine = SearchEngine.builder().countryCode(dto.getCountryCode()).createdAt(date).updatedAt(date).engines(engineJson).createdBy(NumConst.NUM0).build();
+        SearchEngine searchEngine = SearchEngine.builder().countryCode(dto.getCountryCode()).createdAt(date).updatedAt(date).engines(JSON.toJSONString(dto.getEngines())).createdBy(admin.getAid()).build();
+        // 已经存在，覆盖式添加
+        if (searchEngineDAO.getByCountryCode(dto.getCountryCode()) != null) {
+            updateByCountryCode(searchEngine);
+            return searchEngine;
+        }
+
         return searchEngineDAO.insert(searchEngine) > 0 ? searchEngine : null;
 
     }
@@ -88,10 +89,10 @@ public class SearchEngineService {
      * @return
      */
     @Transactional(rollbackFor = Exception.class)
-    public List<SearchEngine> addSearchEngineList(List<SearchEngineAddDto> engineDtoList) {
+    public List<SearchEngine> addSearchEngineList(List<SearchEngineAddDto> engineDtoList, Admin admin) {
         List<SearchEngine> engineList = new ArrayList<>();
         for (SearchEngineAddDto dto : engineDtoList) {
-            SearchEngine record = addSearchEngine(dto);
+            SearchEngine record = addSearchEngine(dto, admin);
             if (record != null) {
                 engineList.add(record);
             }
@@ -108,6 +109,7 @@ public class SearchEngineService {
     public Boolean updateByCountryCode(SearchEngine record) {
         SearchEngineExample example = new SearchEngineExample();
         example.createCriteria().andCountryCodeEqualTo(record.getCountryCode());
+        record.setUpdatedAt(new Date());
         return searchEngineDAO.updateByExampleSelective(record, example) > 0;
     }
 

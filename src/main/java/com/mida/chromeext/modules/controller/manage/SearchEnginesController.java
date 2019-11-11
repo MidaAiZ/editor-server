@@ -1,11 +1,14 @@
 package com.mida.chromeext.modules.controller.manage;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mida.chromeext.annotation.CurrentAdmin;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.dto.SearchEngineAddDto;
 import com.mida.chromeext.modules.dto.SearchEngineItemDto;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.SearchEngine;
 import com.mida.chromeext.modules.service.SearchEngineService;
+import com.mida.chromeext.modules.vo.SeachEngineRelVo;
 import com.mida.chromeext.utils.ObjectToMap;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
@@ -16,6 +19,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -34,7 +38,7 @@ public class SearchEnginesController {
     @GetMapping("")
     @ApiOperation(value = "获取所有国家的搜索引擎,需要管理员权限")
     @RequiresPermissions(PermisConstant.SHOW_SEARCH_ENGINE)
-    public Result<List<SearchEngine>> listAllSearchEngine() {
+    public Result<List<SeachEngineRelVo>> listAllSearchEngine() {
         return Result.ok(searchEngineService.listAllSearchEngine());
     }
 
@@ -58,9 +62,9 @@ public class SearchEnginesController {
     @PostMapping("{code}")
     @ApiOperation(value = "批量添加某个国家的搜索引擎,需要管理员权限", notes = "返回新建的搜索引擎列表")
     @RequiresPermissions(PermisConstant.ADD_SEARCH_ENGINE)
-    public Result<SearchEngine> addSearchEngine(@PathVariable String code, @ApiParam("必须包含所有字段") @RequestBody @Valid SearchEngineAddDto engineDto) {
+    public Result<SearchEngine> addSearchEngine(@PathVariable String code, @ApiParam("必须包含所有字段") @RequestBody @Valid SearchEngineAddDto engineDto, @ApiIgnore @CurrentAdmin Admin admin) {
         engineDto.setCountryCode(code);
-        return Result.ok(searchEngineService.addSearchEngine(engineDto));
+        return Result.ok(searchEngineService.addSearchEngine(engineDto, admin));
     }
 
 
@@ -78,6 +82,7 @@ public class SearchEnginesController {
     @ApiOperation(value = "批量删除默认搜索引擎列表,需要管理员权限", notes = "返回删除成功的数量")
     @RequiresPermissions(PermisConstant.DELETE_SEARCH_ENGINE)
     public Result<Integer> addSearchEngine(@RequestBody List<Integer> eids) {
-        return Result.ok(searchEngineService.deleteSearchEngines(eids));
+        int count = searchEngineService.deleteSearchEngines(eids);
+        return count > 0 ? Result.ok(count) : Result.error();
     }
 }

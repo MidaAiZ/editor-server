@@ -2,9 +2,8 @@ package com.mida.chromeext.modules.dao.mapper;
 
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface DefaultMenuMapper {
     long countByExample(DefaultMenuExample example);

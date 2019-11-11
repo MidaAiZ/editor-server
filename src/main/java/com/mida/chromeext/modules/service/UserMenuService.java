@@ -45,9 +45,9 @@ public class UserMenuService {
      *
      * @param userId    用户Id
      * @param menuPages 用户菜单
-     * @return int
+     * @return String 更新日期
      */
-    public Boolean update(Integer userId, List<List<UserMenuItemDto>> menuPages) {
+    public UserMenu update(Integer userId, List<List<UserMenuItemDto>> menuPages) {
         UserMenuExample example = new UserMenuExample();
         UserMenu menu = new UserMenu();
         List<Integer> siteIds = new ArrayList<>();
@@ -71,9 +71,9 @@ public class UserMenuService {
         menu.setMenus(JSONObject.toJSONString(menuPages));
         example.createCriteria().andUserIdEqualTo(userId);
         if (getMenuItemsByUserId(userId) == null) {
-            return create(userId, menu);
+            return create(userId, menu) ? menu : null;
         }
         menu.setUpdatedAt(new Date());
-        return userMenuDAO.updateByExampleSelective(menu, example) > 0;
+        return userMenuDAO.updateByExampleSelective(menu, example) > 0 ? menu : null;
     }
 }

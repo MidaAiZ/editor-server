@@ -1,6 +1,7 @@
 package com.mida.chromeext.modules.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DefaultMenuExample {
@@ -14,20 +15,20 @@ public class DefaultMenuExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -234,63 +235,183 @@ public class DefaultMenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultIsNull() {
-            addCriterion("is_default is null");
+        public Criteria andCreatedByIsNull() {
+            addCriterion("created_by is null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultIsNotNull() {
-            addCriterion("is_default is not null");
+        public Criteria andCreatedByIsNotNull() {
+            addCriterion("created_by is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultEqualTo(Boolean value) {
-            addCriterion("is_default =", value, "isDefault");
+        public Criteria andCreatedByEqualTo(Integer value) {
+            addCriterion("created_by =", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotEqualTo(Boolean value) {
-            addCriterion("is_default <>", value, "isDefault");
+        public Criteria andCreatedByNotEqualTo(Integer value) {
+            addCriterion("created_by <>", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultGreaterThan(Boolean value) {
-            addCriterion("is_default >", value, "isDefault");
+        public Criteria andCreatedByGreaterThan(Integer value) {
+            addCriterion("created_by >", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("is_default >=", value, "isDefault");
+        public Criteria andCreatedByGreaterThanOrEqualTo(Integer value) {
+            addCriterion("created_by >=", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultLessThan(Boolean value) {
-            addCriterion("is_default <", value, "isDefault");
+        public Criteria andCreatedByLessThan(Integer value) {
+            addCriterion("created_by <", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultLessThanOrEqualTo(Boolean value) {
-            addCriterion("is_default <=", value, "isDefault");
+        public Criteria andCreatedByLessThanOrEqualTo(Integer value) {
+            addCriterion("created_by <=", value, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultIn(List<Boolean> values) {
-            addCriterion("is_default in", values, "isDefault");
+        public Criteria andCreatedByIn(List<Integer> values) {
+            addCriterion("created_by in", values, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotIn(List<Boolean> values) {
-            addCriterion("is_default not in", values, "isDefault");
+        public Criteria andCreatedByNotIn(List<Integer> values) {
+            addCriterion("created_by not in", values, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_default between", value1, value2, "isDefault");
+        public Criteria andCreatedByBetween(Integer value1, Integer value2) {
+            addCriterion("created_by between", value1, value2, "createdBy");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("is_default not between", value1, value2, "isDefault");
+        public Criteria andCreatedByNotBetween(Integer value1, Integer value2) {
+            addCriterion("created_by not between", value1, value2, "createdBy");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIsNull() {
+            addCriterion("created_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIsNotNull() {
+            addCriterion("created_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtEqualTo(Date value) {
+            addCriterion("created_at =", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotEqualTo(Date value) {
+            addCriterion("created_at <>", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtGreaterThan(Date value) {
+            addCriterion("created_at >", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("created_at >=", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtLessThan(Date value) {
+            addCriterion("created_at <", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("created_at <=", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIn(List<Date> values) {
+            addCriterion("created_at in", values, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotIn(List<Date> values) {
+            addCriterion("created_at not in", values, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtBetween(Date value1, Date value2) {
+            addCriterion("created_at between", value1, value2, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("created_at not between", value1, value2, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIsNull() {
+            addCriterion("updated_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIsNotNull() {
+            addCriterion("updated_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtEqualTo(Date value) {
+            addCriterion("updated_at =", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotEqualTo(Date value) {
+            addCriterion("updated_at <>", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtGreaterThan(Date value) {
+            addCriterion("updated_at >", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("updated_at >=", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtLessThan(Date value) {
+            addCriterion("updated_at <", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("updated_at <=", value, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtIn(List<Date> values) {
+            addCriterion("updated_at in", values, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotIn(List<Date> values) {
+            addCriterion("updated_at not in", values, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtBetween(Date value1, Date value2) {
+            addCriterion("updated_at between", value1, value2, "updatedAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("updated_at not between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
     }
@@ -318,6 +439,38 @@ public class DefaultMenuExample {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -353,38 +506,6 @@ public class DefaultMenuExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

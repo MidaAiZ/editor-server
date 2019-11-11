@@ -15,6 +15,8 @@ public class SiteRelationVo extends Site {
     private SiteCategory category;
     @ApiModelProperty("网站所关联的国家（地区）列表")
     private List<Country> countryList;
+    @ApiModelProperty("网站所关联的国家（地区）数量")
+    private int countriesCount;
 
     public Admin getCreatedAdmin() {
         return createdAdmin;
@@ -46,5 +48,13 @@ public class SiteRelationVo extends Site {
 
     public void setCountryList(List<Country> countryList) {
         this.countryList = countryList;
+    }
+
+    public int getCountriesCount() {
+        return countriesCount;
+    }
+
+    public void setCountriesCount(int countriesCount) {
+        this.countriesCount = countriesCount;
     }
 }

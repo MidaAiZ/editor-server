@@ -1,10 +1,13 @@
 package com.mida.chromeext.modules.controller.manage;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mida.chromeext.annotation.CurrentAdmin;
 import com.mida.chromeext.components.shiro.PermisConstant;
 import com.mida.chromeext.modules.dto.UserMenuItemDto;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.service.DefaultMenuService;
+import com.mida.chromeext.modules.vo.DefaultMenuRelVo;
 import com.mida.chromeext.utils.ObjectToMap;
 import com.mida.chromeext.utils.Result;
 import com.mida.chromeext.utils.ResultCode;
@@ -15,6 +18,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,7 +35,7 @@ public class DefaultMenusController {
     @GetMapping("")
     @ApiOperation("后台获取默认菜单配置列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.SHOW_DEFAULT_MENU)
-    public Result<List<DefaultMenu>> getList() {
+    public Result<List<DefaultMenuRelVo>> getList() {
         return Result.ok(defaultMenuService.getAllList());
     }
 
@@ -56,12 +60,12 @@ public class DefaultMenusController {
     @PostMapping("{code}")
     @ApiOperation("新建默认菜单列表，返回新建成功的列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.ADD_DEFAULT_MENU)
-    public Result<DefaultMenu> createList(@PathVariable String code, @RequestBody @ApiParam("新建的默认菜单配置数组") List<@Valid UserMenuItemDto> menuList) {
+    public Result<DefaultMenu> createList(@PathVariable String code, @RequestBody @ApiParam("新建的默认菜单配置数组") List<@Valid UserMenuItemDto> menuList, @ApiIgnore @CurrentAdmin Admin admin) {
         DefaultMenu defaultMenu = new DefaultMenu();
         defaultMenu.setCountryCode(code);
         defaultMenu.setMenus(JSONObject.toJSONString(menuList));
         try {
-            return defaultMenuService.create(defaultMenu) ? Result.ok(defaultMenu) : Result.error();
+            return defaultMenuService.create(defaultMenu, admin) ? Result.ok(defaultMenu) : Result.error();
         } catch (Exception e) {
             return Result.error(e.getMessage());
         }

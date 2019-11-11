@@ -88,33 +88,29 @@ public class SiteService {
     /**
      * 管理员添加网站列表   同时添加 site 和 country 关联
      *
-     * @param SiteAddVos
+     * @param siteAddVo
      * @param adminId
      * @return List<Site>
      * @author lihaoyu
      * @date 2019/9/28 21:30
      */
     @Transactional
-    public List<Site> addSitesByAdmin(List<SiteAddVo> SiteAddVos, Integer adminId) {
-        List<Site> addSiteList = new ArrayList<>();
+    public Site addSiteByAdmin(SiteAddVo siteAddVo, Integer adminId) {
         Date date = new Date();
-        for (SiteAddVo siteAddVo : SiteAddVos) {
-            Site site = Site.builder().creatorId(adminId).createdAt(date).updatedAt(date)
-                    .icon(siteAddVo.getIcon()).title(siteAddVo.getTitle()).cateId(siteAddVo.getCateId())
-                    .weight(siteAddVo.getWeight()).creatorType(Constant.CREATED_BY_ADMIN).state(Constant.SITE_STATE_OK)
-                    .url(siteAddVo.getUrl()).build();
-            siteDAO.insertSelective(site);
-            addSiteList.add(site);
+        Site site = Site.builder().creatorId(adminId).createdAt(date).updatedAt(date)
+                .icon(siteAddVo.getIcon()).title(siteAddVo.getTitle()).cateId(siteAddVo.getCateId())
+                .weight(siteAddVo.getWeight()).creatorType(Constant.CREATED_BY_ADMIN).state(Constant.SITE_STATE_OK)
+                .url(siteAddVo.getUrl()).build();
+        siteDAO.insertSelective(site);
 
-            SiteCategory category = siteCategoryService.getCateById(site.getCateId());
-            if (category == null) {
-                throw new MyException("No such category with ID = " + site.getCateId().toString());
-            }
-
-            // 添加国家网站关联表
-            countriesSitesService.AddRelations(site.getSid(), siteAddVo.getCountryCodes());
+        SiteCategory category = siteCategoryService.getCateById(site.getCateId());
+        if (category == null) {
+            throw new MyException("No such category with ID = " + site.getCateId().toString());
         }
-        return addSiteList;
+
+        // 添加国家网站关联表
+        countriesSitesService.addRelations(site.getSid(), siteAddVo.getCountryCodes());
+        return site;
     }
 
     /**
@@ -138,7 +134,7 @@ public class SiteService {
         if (StringUtils.isEmpty(countryCode)) {
             countryCode = Constant.THE_WORLD;
         }
-        countriesSitesService.AddRelations(newSite.getSid(), Lists.newArrayList(countryCode));
+        countriesSitesService.addRelations(newSite.getSid(), Lists.newArrayList(countryCode));
         return newSite;
     }
 

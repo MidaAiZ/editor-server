@@ -8,6 +8,7 @@ import com.mida.chromeext.modules.pojo.User;
 import com.mida.chromeext.modules.pojo.UserMenu;
 import com.mida.chromeext.modules.service.UserMenuService;
 import com.mida.chromeext.utils.Result;
+import com.mida.chromeext.utils.ResultCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +47,16 @@ public class UserMenusController {
 
     @LoginRequired
     @PostMapping("")
-    @ApiOperation("设置用户菜单列表")
-    public Result<List<List<UserMenuItemDto>>> setMenu(@ApiIgnore @CurrentUser User user, @RequestBody List<List<@Valid UserMenuItemDto>> menuPages) {
-        return userMenuService.update(user.getUid(), menuPages) ? Result.ok(menuPages) : Result.error();
+    @ApiOperation("设置用户菜单列表和版本信息")
+    public Result<Map> setMenu(@ApiIgnore @CurrentUser User user, @RequestBody List<List<@Valid UserMenuItemDto>> menuPages) {
+        // 菜单版本
+        UserMenu menu = userMenuService.update(user.getUid(), menuPages);
+        if (menu != null) {
+            Map<String, Object> returnMap = new HashMap(2);
+            returnMap.put("menu", menuPages);
+            returnMap.put("version", menu.getUpdatedAt());
+            return Result.ok(returnMap);
+        }
+        return Result.error();
     }
 }

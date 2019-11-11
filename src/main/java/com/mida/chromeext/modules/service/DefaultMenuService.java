@@ -1,12 +1,15 @@
 package com.mida.chromeext.modules.service;
 
 import com.mida.chromeext.modules.dao.DefaultMenuDAO;
+import com.mida.chromeext.modules.pojo.Admin;
 import com.mida.chromeext.modules.pojo.DefaultMenu;
 import com.mida.chromeext.modules.pojo.DefaultMenuExample;
+import com.mida.chromeext.modules.vo.DefaultMenuRelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,10 +22,8 @@ public class DefaultMenuService {
      *
      * @return List<DefaultMenu>
      */
-    public List<DefaultMenu> getAllList() {
-        DefaultMenuExample example = new DefaultMenuExample();
-        example.setOrderByClause("did desc");
-        return defaultMenuDAO.selectByExample(example);
+    public List<DefaultMenuRelVo> getAllList() {
+        return defaultMenuDAO.listAllMenus();
     }
 
     /**
@@ -51,7 +52,14 @@ public class DefaultMenuService {
      * @param menu
      * @return Boolean
      */
-    public boolean create(DefaultMenu menu) {
+    public boolean create(DefaultMenu menu, Admin admin) {
+        if (defaultMenuDAO.selectByCountryCode(menu.getCountryCode()) != null) {
+            return updateByCountyCode(menu);
+        }
+        menu.setCreatedBy(admin.getAid());
+        Date now = new Date();
+        menu.setCreatedAt(now);
+        menu.setUpdatedAt(now);
         return defaultMenuDAO.insertSelective(menu) > 0;
     }
 
@@ -64,6 +72,7 @@ public class DefaultMenuService {
     public boolean updateByCountyCode(DefaultMenu menu) {
         DefaultMenuExample example = new DefaultMenuExample();
         example.createCriteria().andCountryCodeEqualTo(menu.getCountryCode());
+        menu.setUpdatedAt(new Date());
         return defaultMenuDAO.updateByExampleSelective(menu, example) > 0;
     }
 
@@ -84,10 +93,10 @@ public class DefaultMenuService {
      * @return count
      */
     @Transactional(rollbackFor = Exception.class)
-    public int createList(List<DefaultMenu> menuList) {
+    public int createList(List<DefaultMenu> menuList, Admin admin) {
         int count = 0;
         for (DefaultMenu menu : menuList) {
-            if (create(menu)) {
+            if (create(menu, admin)) {
                 count++;
             }
         }

@@ -84,7 +84,8 @@
         s.creator_id, s.created_at as s_created_at, s.updated_at as s_updated_at,
         c.cid, c.title as cate_title,
         a.aid, a.number as a_number,
-        u.uid, u.number as u_number, u.avatar
+        u.uid, u.number as u_number, u.avatar,
+        (select count(distinct css.country_code) from countries_sites css where css.site_id = s.sid) as countries_count
         from sites s
         left join admins a on a.aid = s.creator_id and s.creator_type = 0
         left join users u on u.uid = s.creator_id and s.creator_type = 1

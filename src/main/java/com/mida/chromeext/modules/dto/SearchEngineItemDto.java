@@ -23,8 +23,8 @@ public class SearchEngineItemDto implements Serializable {
     @NotNull(message = "title不允许为空")
     @NotBlank(message = "title不允许为空")
     private String title;
-    @NotNull(message = "iconSrc不允许为空")
-    @NotBlank(message = "iconSrc不允许为空")
+//    @NotNull(message = "iconSrc不允许为空")
+//    @NotBlank(message = "iconSrc不允许为空")
     private String iconSrc;
 
 

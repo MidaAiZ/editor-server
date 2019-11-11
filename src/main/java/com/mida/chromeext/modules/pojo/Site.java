@@ -31,7 +31,6 @@ public class Site implements Serializable {
     private String icon;
     @ApiModelProperty(value = "网站分类ID")
     private Integer cateId;
-    @JsonIgnore
     private Float weight;
     @ApiModelProperty(value = "网站状态，0表示未审核，1表示审核通过，2表示禁止访问")
     private Short state;

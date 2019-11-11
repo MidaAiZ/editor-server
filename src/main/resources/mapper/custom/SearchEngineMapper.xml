@@ -2,12 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.SearchEngineDAO">
 
+    <resultMap type="com.mida.chromeext.modules.vo.SeachEngineRelVo" id="engineMap" autoMapping="true">
+        <result column="e_created_at" property="createdAt"/>
+        <result column="e_updated_at" property="updatedAt"/>
+        <association property="createdAdmin" javaType="com.mida.chromeext.modules.pojo.Admin" autoMapping="true"
+                     notNullColumn="aid">
+            <result column="number" property="number"/>
+        </association>
+        <association property="country" javaType="com.mida.chromeext.modules.pojo.Country" autoMapping="true"
+                     notNullColumn="cid">
+            <result column="c_name" property="name"/>
+        </association>
+    </resultMap>
     <select id="getByCountryCode" resultType="com.mida.chromeext.modules.pojo.SearchEngine">
-    select * from search_engines where country_code = #{countryCode}
-</select>
+        select * from search_engines where country_code = #{countryCode}
+    </select>
 
-    <select id="listAllSearchEngine" resultType="com.mida.chromeext.modules.pojo.SearchEngine">
-    select eid, country_code, created_at, updated_at, created_by from search_engines;
-</select>
+    <select id="listAllSearchEngine" resultMap="engineMap">
+        select eid, country_code, es.created_at as e_created_at, es.updated_at as e_updated_at, engines,
+               cs.code, cs.cid, cs.name as c_name, admins.aid, admins.number
+        from search_engines es
+        left join countries cs on cs.code = es.country_code
+        left join admins on admins.aid = es.created_by
+    </select>
 
 </mapper>

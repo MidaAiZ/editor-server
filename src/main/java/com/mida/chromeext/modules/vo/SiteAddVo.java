@@ -15,19 +15,19 @@ import java.util.List;
  */
 public class SiteAddVo {
 
-    @NotBlank
+    @NotBlank(message = "网站标题不能为空")
     @ApiModelProperty("网站标题")
     private String title;
 
-    @NotBlank
+    @NotBlank(message = "网站链接不能为空")
     @ApiModelProperty("网站链接")
     private String url;
 
-    @NotBlank
+    @NotBlank(message = "网站图标不能为空")
     @ApiModelProperty("网站图标")
     private String icon;
 
-    @NotNull
+    @NotNull(message = "网站分类不能为空")
     @ApiModelProperty("网站分类ID")
     private Integer cateId;
 

@@ -71,29 +71,34 @@ public class SitesController {
     /**
      * 管理员添加网站  同时添加 site 和 country 关联
      *
-     * @param sites
-     * @return List<Site>
+     * @param site
+     * @return Site
      */
     @PostMapping("")
     @ApiOperation(value = "添加网站", notes = "添加网站时需要传入tile、url、icon、cateId等必填字段，其中，cateId要求必须存在对应的分类，否则会添加失败噢")
     @RequiresPermissions(PermisConstant.ADD_SITE)
-    public Result<List<Site>> addSites(@Valid @RequestBody List<SiteAddVo> sites, @ApiIgnore @CurrentAdmin Admin admin) {
-        List<Site> insertedSiteList;
+    public Result<Site> addSites(@Valid @RequestBody SiteAddVo site, @ApiIgnore @CurrentAdmin Admin admin) {
         try {
-            insertedSiteList = siteService.addSitesByAdmin(sites, admin.getAid());
+            return Result.ok(siteService.addSiteByAdmin(site, admin.getAid()));
         } catch (Exception e) {
             log.error(e.getMessage());
             e.printStackTrace();
             return Result.error(e.getMessage());
         }
-        return Result.ok(insertedSiteList);
     }
 
     @PostMapping("{siteId}/countries")
     @ApiOperation("添加网站所适用的国家列表，不可重复添加")
     @RequiresPermissions(PermisConstant.MODIFY_SITE)
     public Result<Boolean> bindSiteToCountries(@PathVariable Integer siteId, @RequestBody List<String> countryCodes) {
-        return countriesSitesService.AddRelations(siteId, countryCodes) > 0 ? Result.ok(true) : Result.ok((false));
+        return countriesSitesService.addRelations(siteId, countryCodes) > 0 ? Result.ok(true) : Result.ok((false));
+    }
+
+    @PutMapping("{siteId}/countries")
+    @ApiOperation("覆盖网站所适用区域列表")
+    @RequiresPermissions(PermisConstant.MODIFY_SITE)
+    public Result<Boolean> resetSiteToCountries(@PathVariable Integer siteId, @RequestBody List<String> countryCodes) {
+        return countriesSitesService.resetRelations(siteId, countryCodes) > 0 ? Result.ok(true) : Result.ok((false));
     }
 
     @DeleteMapping("{siteId}/countries")
@@ -148,10 +153,10 @@ public class SitesController {
         return siteService.deleteById(siteId) ? Result.ok(true) : Result.error();
     }
 
-    @DeleteMapping("list")
+    @DeleteMapping("")
     @ApiOperation("删除多条网站记录")
     @RequiresPermissions(PermisConstant.DELETE_SITE)
-    public Result<Boolean> delete(@PathVariable Integer sid, @RequestBody List<Integer> siteIds) {
+    public Result<Boolean> delete(@RequestBody List<Integer> siteIds) {
         return siteService.deleteSitesByIds(siteIds) > 0 ? Result.ok(true) : Result.error();
     }
 }

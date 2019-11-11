@@ -2,6 +2,7 @@ package com.mida.chromeext.modules.dao;
 
 import com.mida.chromeext.modules.dao.mapper.SearchEngineMapper;
 import com.mida.chromeext.modules.pojo.SearchEngine;
+import com.mida.chromeext.modules.vo.SeachEngineRelVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,5 +31,5 @@ public interface SearchEngineDAO extends SearchEngineMapper {
      * @author lihaoyu
      * @date 2019/10/7 20:02
      */
-    List<SearchEngine> listAllSearchEngine();
+    List<SeachEngineRelVo> listAllSearchEngine();
 }

@@ -1,16 +1,22 @@
 package com.mida.chromeext.modules.pojo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.io.Serializable;
+import java.util.Date;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DefaultMenu implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer did;
+
     private String countryCode;
-    private Boolean isDefault;
+
+    private Integer createdBy;
+
+    private Date createdAt;
+
+    private Date updatedAt;
+
     private String menus;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getDid() {
         return did;
@@ -28,12 +34,28 @@ public class DefaultMenu implements Serializable {
         this.countryCode = countryCode == null ? null : countryCode.trim();
     }
 
-    public Boolean getIsDefault() {
-        return isDefault;
+    public Integer getCreatedBy() {
+        return createdBy;
     }
 
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getMenus() {
@@ -52,7 +74,9 @@ public class DefaultMenu implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", did=").append(did);
         sb.append(", countryCode=").append(countryCode);
-        sb.append(", isDefault=").append(isDefault);
+        sb.append(", createdBy=").append(createdBy);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
         sb.append(", menus=").append(menus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

@@ -7,6 +7,7 @@ import com.mida.chromeext.modules.pojo.Site;
 import com.mida.chromeext.modules.vo.statistic.CountrySitesCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class CountriesSitesService {
      * @param countryCodes
      * @return
      */
-    public int AddRelations(Integer siteId, List<String> countryCodes) {
+    public int addRelations(Integer siteId, List<String> countryCodes) {
         int count = 0;
         Site site = siteService.getSiteById(siteId);
         if (site == null) {
@@ -61,6 +62,18 @@ public class CountriesSitesService {
             count++;
         }
         return count;
+    }
+
+    /**
+     * 重置网站适用的区域
+     * @param siteId
+     * @param countryCodes
+     * @return
+     */
+    @Transactional
+    public int resetRelations(Integer siteId, List<String> countryCodes) {
+        removeRelationsBySiteId(siteId);
+        return addRelations(siteId, countryCodes);
     }
 
     /**

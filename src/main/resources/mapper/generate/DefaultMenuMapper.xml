@@ -1,239 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mida.chromeext.modules.dao.mapper.DefaultMenuMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.DefaultMenu">
-        <id column="did" jdbcType="INTEGER" property="did"/>
-        <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
-        <result column="is_default" jdbcType="BIT" property="isDefault"/>
-    </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.DefaultMenu">
-        <result column="menus" jdbcType="LONGVARCHAR" property="menus"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.DefaultMenu">
+    <id column="did" jdbcType="INTEGER" property="did" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.DefaultMenu">
+    <result column="menus" jdbcType="LONGVARCHAR" property="menus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-    did, country_code, is_default
+          </trim>
+        </if>
+      </foreach>
+    </where>
   </sql>
-    <sql id="Blob_Column_List">
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    did, country_code, created_by, created_at, updated_at
+  </sql>
+  <sql id="Blob_Column_List">
     menus
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample"
-            resultMap="ResultMapWithBLOBs">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from default_menus
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample"
-            resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from default_menus
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from default_menus
-        where did = #{did,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from default_menus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from default_menus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from default_menus
+    where did = #{did,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from default_menus
     where did = #{did,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample">
-        delete from default_menus
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
-        <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into default_menus (country_code, is_default, menus
-        )
-        values (#{countryCode,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, #{menus,jdbcType=LONGVARCHAR}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
-        <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into default_menus
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="countryCode != null">
-                country_code,
-            </if>
-            <if test="isDefault != null">
-                is_default,
-            </if>
-            <if test="menus != null">
-                menus,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="countryCode != null">
-                #{countryCode,jdbcType=VARCHAR},
-            </if>
-            <if test="isDefault != null">
-                #{isDefault,jdbcType=BIT},
-            </if>
-            <if test="menus != null">
-                #{menus,jdbcType=LONGVARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample"
-            resultType="java.lang.Long">
-        select count(*) from default_menus
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update default_menus
-        <set>
-            <if test="record.did != null">
-                did = #{record.did,jdbcType=INTEGER},
-            </if>
-            <if test="record.countryCode != null">
-                country_code = #{record.countryCode,jdbcType=VARCHAR},
-            </if>
-            <if test="record.isDefault != null">
-                is_default = #{record.isDefault,jdbcType=BIT},
-            </if>
-            <if test="record.menus != null">
-                menus = #{record.menus,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExampleWithBLOBs" parameterType="map">
-        update default_menus
-        set did = #{record.did,jdbcType=INTEGER},
+  <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample">
+    delete from default_menus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
+    <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into default_menus (country_code, created_by, created_at, 
+      updated_at, menus)
+    values (#{countryCode,jdbcType=VARCHAR}, #{createdBy,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{menus,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
+    <selectKey keyProperty="did" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into default_menus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countryCode != null">
+        country_code,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="menus != null">
+        menus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menus != null">
+        #{menus,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.DefaultMenuExample" resultType="java.lang.Long">
+    select count(*) from default_menus
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update default_menus
+    <set>
+      <if test="record.did != null">
+        did = #{record.did,jdbcType=INTEGER},
+      </if>
+      <if test="record.countryCode != null">
         country_code = #{record.countryCode,jdbcType=VARCHAR},
-        is_default = #{record.isDefault,jdbcType=BIT},
-        menus = #{record.menus,jdbcType=LONGVARCHAR}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update default_menus
-        set did = #{record.did,jdbcType=INTEGER},
-        country_code = #{record.countryCode,jdbcType=VARCHAR},
-        is_default = #{record.isDefault,jdbcType=BIT}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
-        update default_menus
-        <set>
-            <if test="countryCode != null">
-                country_code = #{countryCode,jdbcType=VARCHAR},
-            </if>
-            <if test="isDefault != null">
-                is_default = #{isDefault,jdbcType=BIT},
-            </if>
-            <if test="menus != null">
-                menus = #{menus,jdbcType=LONGVARCHAR},
-            </if>
-        </set>
-        where did = #{did,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
+      </if>
+      <if test="record.createdBy != null">
+        created_by = #{record.createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.menus != null">
+        menus = #{record.menus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update default_menus
+    set did = #{record.did,jdbcType=INTEGER},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
+      created_by = #{record.createdBy,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      menus = #{record.menus,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update default_menus
+    set did = #{record.did,jdbcType=INTEGER},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
+      created_by = #{record.createdBy,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
+    update default_menus
+    <set>
+      <if test="countryCode != null">
+        country_code = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menus != null">
+        menus = #{menus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where did = #{did,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
     update default_menus
     set country_code = #{countryCode,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       menus = #{menus,jdbcType=LONGVARCHAR}
     where did = #{did,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
+  <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.DefaultMenu">
     update default_menus
     set country_code = #{countryCode,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT}
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where did = #{did,jdbcType=INTEGER}
   </update>
 </mapper>
