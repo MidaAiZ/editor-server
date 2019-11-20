@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.SiteViewHistoryDAO">
-    <insert id="insertSelectiveWithUUID" parameterType="com.mida.chromeext.modules.pojo.SiteViewHistory">
+<mapper namespace="net.tabplus.api.modules.dao.SiteViewHistoryDAO">
+    <insert id="insertSelectiveWithUUID" parameterType="net.tabplus.api.modules.pojo.SiteViewHistory">
         insert into site_view_histories
         <trim prefix="(" suffix=")" suffixOverrides=",">
             hid,
@@ -59,7 +59,7 @@
         </trim>
     </insert>
 
-    <select id="listDailyViewCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+    <select id="listDailyViewCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">
         SELECT date(created_at) as `name` , count(1) as count FROM `site_view_histories`
         where
         <![CDATA[ created_at >= #{beginTime}]]>
@@ -69,7 +69,7 @@
         GROUP BY date(created_at)
     </select>
 
-    <select id="listMonthlyViewCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+    <select id="listMonthlyViewCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">
         SELECT DATE_FORMAT(created_at,'%Y-%m') as `name` , count(1) as count FROM `site_view_histories`
         where
         <![CDATA[ created_at >= #{beginTime}]]>

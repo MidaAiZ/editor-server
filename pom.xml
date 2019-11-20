@@ -8,10 +8,10 @@
         <version>2.1.8.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.mida</groupId>
-    <artifactId>chrome-ext</artifactId>
+    <groupId>net.tabplus</groupId>
+    <artifactId>tabplus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>chrome-ext</name>
+    <name>api</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -165,7 +165,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.mida.chromeext.ChromeExtApplication</mainClass>
+                    <mainClass>net.tabplus.api.TabplusApplication</mainClass>
                 </configuration>
                 <version>2.1.6.RELEASE</version>
             </plugin>

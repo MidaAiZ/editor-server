@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.UserSettingDAO">
-    <select id="selectOneByUserId" parameterType="integer" resultType="com.mida.chromeext.modules.pojo.UserSetting">
+<mapper namespace="net.tabplus.api.modules.dao.UserSettingDAO">
+    <select id="selectOneByUserId" parameterType="integer" resultType="net.tabplus.api.modules.pojo.UserSetting">
         SELECT sid, uid, settings
         FROM user_settings
         WHERE user_settings.uid = #{userId}

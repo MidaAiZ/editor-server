@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.SiteCategoryDAO">
+<mapper namespace="net.tabplus.api.modules.dao.SiteCategoryDAO">
 
-    <select id="listAllCategories" resultType="com.mida.chromeext.modules.pojo.SiteCategory">
+    <select id="listAllCategories" resultType="net.tabplus.api.modules.pojo.SiteCategory">
         select cid,title,created_at,updated_at,`index`
         from site_categories;
     </select>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.BgPictureDAO">
+<mapper namespace="net.tabplus.api.modules.dao.BgPictureDAO">
 
     <insert id="batchInsertBgPicture" parameterType="map">
         insert into bg_pictures(src, title, created_by, created_at)
@@ -16,7 +16,7 @@
     </insert>
 
 
-    <select id="listRandomBgPicture" parameterType="map" resultType="com.mida.chromeext.modules.pojo.BgPicture">
+    <select id="listRandomBgPicture" parameterType="map" resultType="net.tabplus.api.modules.pojo.BgPicture">
         SELECT *
         FROM `bg_pictures` AS t1
                  JOIN (

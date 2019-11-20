@@ -31,7 +31,7 @@ public class SiteListQueryVo extends ListQueryVo {
     private List<Integer> categoryIds;
 
     @ApiModelProperty("国家(地区)码数组")
-    private ArrayList<String> countryCodes; // = Lists.newArrayList(Constant.THE_WORLD);
+    private ArrayList<String> countryCodes; // = Lists.newArrayList(Constant.DEFAULT_AREA);
 
     /**
      * 为前端设置默认条件

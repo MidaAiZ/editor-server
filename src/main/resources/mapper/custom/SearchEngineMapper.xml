@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.SearchEngineDAO">
+<mapper namespace="net.tabplus.api.modules.dao.SearchEngineDAO">
 
-    <resultMap type="com.mida.chromeext.modules.vo.SeachEngineRelVo" id="engineMap" autoMapping="true">
+    <resultMap type="net.tabplus.api.modules.vo.SeachEngineRelVo" id="engineMap" autoMapping="true">
         <result column="e_created_at" property="createdAt"/>
         <result column="e_updated_at" property="updatedAt"/>
-        <association property="createdAdmin" javaType="com.mida.chromeext.modules.pojo.Admin" autoMapping="true"
+        <association property="createdAdmin" javaType="net.tabplus.api.modules.pojo.Admin" autoMapping="true"
                      notNullColumn="aid">
             <result column="number" property="number"/>
         </association>
-        <association property="country" javaType="com.mida.chromeext.modules.pojo.Country" autoMapping="true"
+        <association property="country" javaType="net.tabplus.api.modules.pojo.Country" autoMapping="true"
                      notNullColumn="cid">
             <result column="c_name" property="name"/>
         </association>
     </resultMap>
-    <select id="getByCountryCode" resultType="com.mida.chromeext.modules.pojo.SearchEngine">
+    <select id="getByCountryCode" resultType="net.tabplus.api.modules.pojo.SearchEngine">
         select * from search_engines where country_code = #{countryCode}
     </select>
 

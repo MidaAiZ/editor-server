@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.SiteDAO">
-    <resultMap type="com.mida.chromeext.modules.vo.SiteRelationVo" id="siteRelMap" autoMapping="true">
+<mapper namespace="net.tabplus.api.modules.dao.SiteDAO">
+    <resultMap type="net.tabplus.api.modules.vo.SiteRelationVo" id="siteRelMap" autoMapping="true">
         <result column="site_title" property="title"/>
         <result column="s_created_at" property="createdAt"/>
         <result column="s_updated_at" property="updatedAt"/>
-        <association property="createdAdmin" javaType="com.mida.chromeext.modules.pojo.Admin" autoMapping="true"
+        <association property="createdAdmin" javaType="net.tabplus.api.modules.pojo.Admin" autoMapping="true"
                      notNullColumn="aid">
             <result column="a_number" property="number"/>
         </association>
-        <association property="createdUser" javaType="com.mida.chromeext.modules.pojo.User" autoMapping="true"
+        <association property="createdUser" javaType="net.tabplus.api.modules.pojo.User" autoMapping="true"
                      notNullColumn="uid">
             <result column="u_number" property="number"/>
         </association>
         <association property="category"
-                     javaType="com.mida.chromeext.modules.pojo.SiteCategory" autoMapping="true"
+                     javaType="net.tabplus.api.modules.pojo.SiteCategory" autoMapping="true"
                      notNullColumn="cid">
             <result column="cate_title" property="title"/>
         </association>
@@ -55,7 +55,7 @@
         from sites;
     </select>
 
-    <select id="queryList" resultType="com.mida.chromeext.modules.pojo.Site">
+    <select id="queryList" resultType="net.tabplus.api.modules.pojo.Site">
         select s.*
         from sites s
         <if test="queryVo.countryCodes != null and !queryVo.countryCodes.isEmpty()">
@@ -125,7 +125,7 @@
         order by s.weight desc, s.sid desc
     </select>
 
-    <select id="listSitesCountByCategory" resultType="com.mida.chromeext.modules.vo.statistic.CategorySitesCount">
+    <select id="listSitesCountByCategory" resultType="net.tabplus.api.modules.vo.statistic.CategorySitesCount">
         SELECT c.cid, c.index, c.title, ifnull( s.`count`, 0 ) AS `sites_count`
         FROM
             site_categories AS c

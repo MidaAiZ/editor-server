@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.AdminRoleMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.AdminRole">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.AdminRoleMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.AdminRole">
         <result column="admin_id" jdbcType="INTEGER" property="adminId"/>
         <result column="role_id" jdbcType="INTEGER" property="roleId"/>
     </resultMap>
@@ -68,7 +68,7 @@
     <sql id="Base_Column_List">
     admin_id, role_id
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample"
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.AdminRoleExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -83,17 +83,17 @@
             order by ${orderByClause}
         </if>
     </select>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.AdminRoleExample">
         delete from admins_roles
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.AdminRole">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.AdminRole">
     insert into admins_roles (admin_id, role_id)
     values (#{adminId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.AdminRole">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.AdminRole">
         insert into admins_roles
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="adminId != null">
@@ -112,7 +112,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.AdminRoleExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.AdminRoleExample"
             resultType="java.lang.Long">
         select count(*) from admins_roles
         <if test="_parameter != null">

@@ -14,7 +14,7 @@ public class LocaleHelper {
     public static String getContextCountryCode(HttpServletRequest request) {
         String countryCode = RequestContextUtils.getLocaleResolver(request).resolveLocale(request).getCountry();
         if (StringUtils.isEmpty(countryCode)) {
-            countryCode = Constant.THE_WORLD;
+            countryCode = Constant.DEFAULT_AREA;
         }
         return countryCode;
     }

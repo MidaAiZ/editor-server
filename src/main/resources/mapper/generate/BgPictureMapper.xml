@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.BgPictureMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.BgPicture">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.BgPictureMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.BgPicture">
         <id column="pid" jdbcType="INTEGER" property="pid"/>
         <result column="src" jdbcType="VARCHAR" property="src"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
@@ -71,7 +71,7 @@
     <sql id="Base_Column_List">
     pid, src, title, created_by, created_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.BgPictureExample"
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.BgPictureExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -96,13 +96,13 @@
     delete from bg_pictures
     where pid = #{pid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.BgPictureExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.BgPictureExample">
         delete from bg_pictures
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.BgPicture">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.BgPicture">
         <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -111,7 +111,7 @@
         values (#{src,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{createdBy,jdbcType=INTEGER},
         #{createdAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.BgPicture">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.BgPicture">
         <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -145,7 +145,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.BgPictureExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.BgPictureExample"
             resultType="java.lang.Long">
         select count(*) from bg_pictures
         <if test="_parameter != null">
@@ -186,7 +186,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.BgPicture">
+    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.BgPicture">
         update bg_pictures
         <set>
             <if test="src != null">
@@ -204,7 +204,7 @@
         </set>
         where pid = #{pid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.BgPicture">
+    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.BgPicture">
     update bg_pictures
     set src = #{src,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},

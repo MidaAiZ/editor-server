@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.UserMenuMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.UserMenu">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.UserMenuMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.UserMenu">
         <id column="mid" jdbcType="INTEGER" property="mid"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.UserMenu">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.tabplus.api.modules.pojo.UserMenu">
         <result column="menus" jdbcType="LONGVARCHAR" property="menus"/>
         <result column="site_ids" jdbcType="LONGVARCHAR" property="siteIds"/>
     </resultMap>
@@ -77,7 +77,7 @@
     <sql id="Blob_Column_List">
     menus, site_ids
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample"
+    <select id="selectByExampleWithBLOBs" parameterType="net.tabplus.api.modules.pojo.UserMenuExample"
             resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
@@ -94,7 +94,7 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample"
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.UserMenuExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -121,13 +121,13 @@
     delete from user_menus
     where mid = #{mid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.UserMenuExample">
         delete from user_menus
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.UserMenu">
         <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -136,7 +136,7 @@
         values (#{userId,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP},
         #{menus,jdbcType=LONGVARCHAR}, #{siteIds,jdbcType=LONGVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.UserMenu">
         <selectKey keyProperty="mid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -176,7 +176,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.UserMenuExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.UserMenuExample"
             resultType="java.lang.Long">
         select count(*) from user_menus
         <if test="_parameter != null">
@@ -231,7 +231,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
+    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.UserMenu">
         update user_menus
         <set>
             <if test="userId != null">
@@ -252,7 +252,7 @@
         </set>
         where mid = #{mid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.tabplus.api.modules.pojo.UserMenu">
     update user_menus
     set user_id = #{userId,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -261,7 +261,7 @@
       site_ids = #{siteIds,jdbcType=LONGVARCHAR}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.UserMenu">
+    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.UserMenu">
     update user_menus
     set user_id = #{userId,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},

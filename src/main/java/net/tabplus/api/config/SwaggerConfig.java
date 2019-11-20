@@ -18,14 +18,14 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.mida.chromeext"))
+                .apis(RequestHandlerSelectors.basePackage("net.tabplus.api"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("ChromeExt API说明文档")
+                .title("Tabplus API说明文档")
                 .description("Restful文档规范")
                 .version("1.0")
                 .build();

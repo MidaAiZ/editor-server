@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.LoginRecordMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.LoginRecord">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.LoginRecordMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.LoginRecord">
         <id column="rid" jdbcType="BIGINT" property="rid"/>
         <result column="uid" jdbcType="INTEGER" property="uid"/>
         <result column="client_id" jdbcType="VARCHAR" property="clientId"/>
@@ -73,7 +73,7 @@
     <sql id="Base_Column_List">
     rid, `uid`, client_id, ip, ua, login_time, country_code
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.LoginRecordExample"
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -98,13 +98,13 @@
     delete from login_records
     where rid = #{rid,jdbcType=BIGINT}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.LoginRecordExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample">
         delete from login_records
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
         <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -115,7 +115,7 @@
         #{ua,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, #{countryCode,jdbcType=VARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
         <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -161,7 +161,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.LoginRecordExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample"
             resultType="java.lang.Long">
         select count(*) from login_records
         <if test="_parameter != null">
@@ -210,7 +210,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
+    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
         update login_records
         <set>
             <if test="uid != null">
@@ -234,7 +234,7 @@
         </set>
         where rid = #{rid,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.LoginRecord">
+    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
     update login_records
     set `uid` = #{uid,jdbcType=INTEGER},
       client_id = #{clientId,jdbcType=VARCHAR},

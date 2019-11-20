@@ -42,7 +42,7 @@ public class SearchEngineService {
         }
         // 该国家没有默认值，则使用ALL的默认值
         if (searchEngine == null) {
-            searchEngine = searchEngineDAO.getByCountryCode(Constant.THE_WORLD);
+            searchEngine = searchEngineDAO.getByCountryCode(Constant.DEFAULT_AREA);
         }
         return searchEngine;
     }

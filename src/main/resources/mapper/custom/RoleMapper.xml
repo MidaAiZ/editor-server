@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.RoleDAO">
+<mapper namespace="net.tabplus.api.modules.dao.RoleDAO">
     <!-- 多对多关系映射，使用1对多和多对1嵌套实现，注意映射关系的三张表的主键名称要不相同（rid,pid,rpid），否则只能查到1条记录 -->
-    <resultMap type="com.mida.chromeext.modules.pojo.Role" id="roleMap">
+    <resultMap type="net.tabplus.api.modules.pojo.Role" id="roleMap">
         <id column="rid" property="rid"></id>
         <result column="name" property="name"/>
         <result column="desc_r" property="description"/>
         <collection property="permissions"
-                    resultMap="com.mida.chromeext.modules.dao.mapper.PermissionMapper.BaseResultMap"
+                    resultMap="net.tabplus.api.modules.dao.mapper.PermissionMapper.BaseResultMap"
                     notNullColumn="pid">
         </collection>
     </resultMap>

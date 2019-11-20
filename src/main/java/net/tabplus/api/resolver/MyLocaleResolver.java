@@ -30,7 +30,7 @@ public class MyLocaleResolver implements LocaleResolver {
         } else {
             String[] split = l.split("_");
             //语言、国家构造器
-            return split.length == 2 ? new Locale(split[0], split[1]) : new Locale(split[0], Constant.THE_WORLD);
+            return split.length == 2 ? new Locale(split[0], split[1]) : new Locale(split[0], Constant.DEFAULT_AREA);
         }
     }
 

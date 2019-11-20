@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.SiteTrackerMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.SiteTracker">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.SiteTrackerMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.SiteTracker">
         <id column="tid" jdbcType="INTEGER" property="tid"/>
         <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.mida.chromeext.modules.pojo.SiteTracker">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.tabplus.api.modules.pojo.SiteTracker">
         <result column="trackers" jdbcType="LONGVARCHAR" property="trackers"/>
     </resultMap>
     <sql id="Example_Where_Clause">
@@ -74,7 +74,7 @@
     <sql id="Blob_Column_List">
     trackers
   </sql>
-    <select id="selectByExampleWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.SiteTrackerExample"
+    <select id="selectByExampleWithBLOBs" parameterType="net.tabplus.api.modules.pojo.SiteTrackerExample"
             resultMap="ResultMapWithBLOBs">
         select
         <if test="distinct">
@@ -91,7 +91,7 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.SiteTrackerExample"
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.SiteTrackerExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -118,20 +118,20 @@
     delete from site_trackers
     where tid = #{tid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.SiteTrackerExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.SiteTrackerExample">
         delete from site_trackers
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.SiteTracker">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.SiteTracker">
         <selectKey keyProperty="tid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into site_trackers (country_code, trackers)
         values (#{countryCode,jdbcType=VARCHAR}, #{trackers,jdbcType=LONGVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.SiteTracker">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.SiteTracker">
         <selectKey keyProperty="tid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -153,7 +153,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.SiteTrackerExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.SiteTrackerExample"
             resultType="java.lang.Long">
         select count(*) from site_trackers
         <if test="_parameter != null">
@@ -194,7 +194,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.SiteTracker">
+    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.SiteTracker">
         update site_trackers
         <set>
             <if test="countryCode != null">
@@ -206,13 +206,13 @@
         </set>
         where tid = #{tid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mida.chromeext.modules.pojo.SiteTracker">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.tabplus.api.modules.pojo.SiteTracker">
     update site_trackers
     set country_code = #{countryCode,jdbcType=VARCHAR},
       trackers = #{trackers,jdbcType=LONGVARCHAR}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.SiteTracker">
+    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.SiteTracker">
     update site_trackers
     set country_code = #{countryCode,jdbcType=VARCHAR}
     where tid = #{tid,jdbcType=INTEGER}

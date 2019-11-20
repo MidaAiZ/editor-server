@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.AdminDAO">
-    <select id="selectAdminByNumber" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
+<mapper namespace="net.tabplus.api.modules.dao.AdminDAO">
+    <select id="selectAdminByNumber" parameterType="String" resultType="net.tabplus.api.modules.pojo.Admin">
         SELECT admins.*
         FROM admins
         WHERE admins.number = #{number} limit 1
     </select>
 
-    <select id="selectAdminByRoleNames" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
+    <select id="selectAdminByRoleNames" parameterType="String" resultType="net.tabplus.api.modules.pojo.Admin">
         SELECT admins.*
         FROM admins
         JOIN admins_roles ar ON ar.admin_id = admins.aid
@@ -18,7 +18,7 @@
         ORDER BY admins.aid ASC
     </select>
 
-    <select id="selectAdminByRoleName" parameterType="String" resultType="com.mida.chromeext.modules.pojo.Admin">
+    <select id="selectAdminByRoleName" parameterType="String" resultType="net.tabplus.api.modules.pojo.Admin">
         SELECT admins.*
         FROM admins
         JOIN admins_roles ar ON ar.admin_id = admins.aid

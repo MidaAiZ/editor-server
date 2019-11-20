@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.DownloadRecordDAO">
-    <insert id="insertWithId" parameterType="com.mida.chromeext.modules.pojo.DownloadRecord">
+<mapper namespace="net.tabplus.api.modules.dao.DownloadRecordDAO">
+    <insert id="insertWithId" parameterType="net.tabplus.api.modules.pojo.DownloadRecord">
        insert into download_records (did, ip, ua, created_at
       )
     values (#{did,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
       )
     </insert>
 
-    <select id="listDailyDloadsCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+    <select id="listDailyDloadsCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">
         SELECT date(created_at) as `name` , count(1) as count FROM `download_records`
         where
         <![CDATA[ created_at >= #{beginTime}]]>
@@ -18,7 +18,7 @@
         GROUP BY date(created_at)
     </select>
 
-    <select id="listMonthlyDloadsCount" resultType="com.mida.chromeext.modules.vo.statistic.StatisticCountVo">
+    <select id="listMonthlyDloadsCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">
         SELECT DATE_FORMAT(created_at,'%Y-%m') as `name` , count(1) as count FROM `download_records`
         where
         <![CDATA[ created_at >= #{beginTime}]]>

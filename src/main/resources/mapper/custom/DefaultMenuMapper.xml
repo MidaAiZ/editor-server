@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.DefaultMenuDAO">
-    <resultMap type="com.mida.chromeext.modules.vo.DefaultMenuRelVo" id="menuMap" autoMapping="true">
+<mapper namespace="net.tabplus.api.modules.dao.DefaultMenuDAO">
+    <resultMap type="net.tabplus.api.modules.vo.DefaultMenuRelVo" id="menuMap" autoMapping="true">
         <result column="m_created_at" property="createdAt"/>
         <result column="m_updated_at" property="updatedAt"/>
-        <association property="createdAdmin" javaType="com.mida.chromeext.modules.pojo.Admin" autoMapping="true"
+        <association property="createdAdmin" javaType="net.tabplus.api.modules.pojo.Admin" autoMapping="true"
                      notNullColumn="aid">
             <result column="number" property="number"/>
         </association>
-        <association property="country" javaType="com.mida.chromeext.modules.pojo.Country" autoMapping="true"
+        <association property="country" javaType="net.tabplus.api.modules.pojo.Country" autoMapping="true"
                      notNullColumn="cid">
             <result column="c_name" property="name"/>
         </association>
     </resultMap>
-    <select id="selectByCountryCode" resultType="com.mida.chromeext.modules.pojo.DefaultMenu">
+    <select id="selectByCountryCode" resultType="net.tabplus.api.modules.pojo.DefaultMenu">
         select * from default_menus where country_code = #{code} limit 1
     </select>
 

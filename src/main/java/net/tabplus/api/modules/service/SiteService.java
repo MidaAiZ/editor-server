@@ -131,7 +131,7 @@ public class SiteService {
         // 设置网站所适用的国家
         String countryCode = user.getCountryCode();
         if (StringUtils.isEmpty(countryCode)) {
-            countryCode = Constant.THE_WORLD;
+            countryCode = Constant.DEFAULT_AREA;
         }
         countriesSitesService.addRelations(newSite.getSid(), Lists.newArrayList(countryCode));
         return newSite;

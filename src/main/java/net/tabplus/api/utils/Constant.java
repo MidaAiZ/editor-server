@@ -7,9 +7,9 @@ package net.tabplus.api.utils;
  * @Date 2017/4/27
  */
 public class Constant {
-    public static final String THE_WORLD = "ALL";
+    // 默认地区
+    public static final String DEFAULT_AREA = "DEFAULT";
 
-    // todo 要改成一小时 这里是12秒用于测试
     public static final int LOGIN_RECORD_GAP_TIME = 60 * 60 * 1000;
 
     public static final String LOGIN_RECORD_TOKEN_NAME = "user_last_login_time";

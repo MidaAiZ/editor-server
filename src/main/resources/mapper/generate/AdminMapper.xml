@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mida.chromeext.modules.dao.mapper.AdminMapper">
-    <resultMap id="BaseResultMap" type="com.mida.chromeext.modules.pojo.Admin">
+<mapper namespace="net.tabplus.api.modules.dao.mapper.AdminMapper">
+    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.Admin">
         <id column="aid" jdbcType="INTEGER" property="aid"/>
         <result column="number" jdbcType="VARCHAR" property="number"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
@@ -76,7 +76,7 @@
     <sql id="Base_Column_List">
     aid, `number`, `password`, salt, email, tel, tel_prefix, roles, created_at, updated_at
   </sql>
-    <select id="selectByExample" parameterType="com.mida.chromeext.modules.pojo.AdminExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.AdminExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -100,13 +100,13 @@
     delete from admins
     where aid = #{aid,jdbcType=INTEGER}
   </delete>
-    <delete id="deleteByExample" parameterType="com.mida.chromeext.modules.pojo.AdminExample">
+    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.AdminExample">
         delete from admins
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.mida.chromeext.modules.pojo.Admin">
+    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.Admin">
         <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -119,7 +119,7 @@
         #{roles,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.mida.chromeext.modules.pojo.Admin">
+    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.Admin">
         <selectKey keyProperty="aid" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -183,7 +183,7 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.mida.chromeext.modules.pojo.AdminExample"
+    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.AdminExample"
             resultType="java.lang.Long">
         select count(*) from admins
         <if test="_parameter != null">
@@ -244,7 +244,7 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.mida.chromeext.modules.pojo.Admin">
+    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.Admin">
         update admins
         <set>
             <if test="number != null">
@@ -277,7 +277,7 @@
         </set>
         where aid = #{aid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.mida.chromeext.modules.pojo.Admin">
+    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.Admin">
     update admins
     set `number` = #{number,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},

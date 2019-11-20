@@ -1,6 +1,9 @@
 package net.tabplus.api.modules.controller.app;
 
+import com.github.pagehelper.util.StringUtil;
+import com.mchange.v2.lang.StringUtils;
 import net.tabplus.api.modules.service.SiteCategoryService;
+import net.tabplus.api.utils.LocaleUtils;
 import net.tabplus.api.utils.Result;
 import net.tabplus.api.modules.pojo.SiteCategory;
 import net.tabplus.api.modules.vo.ListQueryVo;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("site_categories")
@@ -26,11 +30,20 @@ public class SiteCategoriesController {
     private SiteCategoryService siteCategoryService;
 
     @GetMapping("")
-    @ApiOperation("获取网站分类列表")
+    @ApiOperation(value = "获取网站分类列表", notes = "返回的分类是经过本地化翻译后的分类")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "当前页数，最小为1", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     public Result<List<SiteCategory>> getCategories(@ApiIgnore @Validated ListQueryVo queryVo) {
-        return Result.ok(siteCategoryService.listCategories(queryVo).getList());
+        List<SiteCategory> categories = siteCategoryService.listCategories(queryVo).getList();
+        // 设置本地化翻译
+        // TODO：后期加缓存噢
+        for (SiteCategory c : categories) {
+            String localeTitle = LocaleUtils.getMsg("categories." + c.getTitle());
+            if (!StringUtil.isEmpty(localeTitle)) {
+                c.setTitle(localeTitle);
+            }
+        }
+        return Result.ok(categories);
     }
 }

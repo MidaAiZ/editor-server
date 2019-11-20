@@ -56,7 +56,7 @@ public class SiteCategoriesController {
     @RequiresPermissions(PermisConstant.DELETE_SITE_CATEGORY)
     public Result<Integer> delete(@ApiParam("网站分类id数组") @RequestBody List<Integer> ids) {
         int affectedRows = siteCategoryService.batchDelete(ids);
-        return Result.ok(affectedRows);
+        return affectedRows > 0 ? Result.ok(affectedRows) : Result.error();
     }
 
     @DeleteMapping("{cid}")

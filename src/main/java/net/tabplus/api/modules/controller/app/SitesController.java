@@ -48,7 +48,7 @@ public class SitesController {
             @ApiImplicitParam(name = "pageSize", value = "每页数据量，最大为100", required = true, dataType = "Integer", paramType = "query"),})
     public Result<List<Site>> listSitesByPage(@ApiIgnore @Validated SiteListQueryVo queryVo) {
         if (queryVo.getCountryCodes() == null || queryVo.getCountryCodes().isEmpty()) {
-            queryVo.setCountryCodes(Lists.newArrayList(Constant.THE_WORLD));
+            queryVo.setCountryCodes(Lists.newArrayList(Constant.DEFAULT_AREA));
         }
         // 设置前端筛选条件，keyword和category_id至少有一个不为空
         if (StringUtils.isEmpty(queryVo.getKeyword()) &&
