@@ -100,6 +100,7 @@ public class AliOssServer {
             respMap.put("signature", postSignature);
             // respMap.put("dir", AliOssConfig.dirPrefix);
             respMap.put("host", AliOssConfig.host);
+            respMap.put("cdnHost", AliOssConfig.cdnHost);
             // respMap.put("expire", String.valueOf(expireEndTime / 1000));
             respMap.put("key", fileName);
             // respMap.put("expire", formatISO8601Date(expiration));

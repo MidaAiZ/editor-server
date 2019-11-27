@@ -11,6 +11,7 @@ public class AliOssConfig {
     public static String endpoint;
     public static String bucket;
     public static String host;
+    public static String cdnHost;
     public static String callbackUrl;
     public static String dirPrefix;
 
@@ -32,6 +33,10 @@ public class AliOssConfig {
 
     public void setHost(String host) {
         AliOssConfig.host = host;
+    }
+
+    public void setCdnHost(String cdnHost) {
+        AliOssConfig.cdnHost = cdnHost;
     }
 
     public void setCallbackUrl(String callbackUrl) {
