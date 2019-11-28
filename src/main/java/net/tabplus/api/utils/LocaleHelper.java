@@ -16,6 +16,6 @@ public class LocaleHelper {
         if (StringUtils.isEmpty(countryCode)) {
             countryCode = Constant.DEFAULT_AREA;
         }
-        return countryCode;
+        return countryCode.toUpperCase();
     }
 }
