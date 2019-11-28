@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-@RestController
+@RestController("mngSessionController")
 @Api(value = "后台管理员登录操作接口", tags = "{}")
 @RequestMapping("manage")
-public class AdminSessionController {
+public class SessionController {
     @Autowired
     private AdminService adminService;
 

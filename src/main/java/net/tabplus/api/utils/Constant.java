@@ -12,7 +12,7 @@ public class Constant {
 
     public static final int LOGIN_RECORD_GAP_TIME = 60 * 60 * 1000;
 
-    public static final String LOGIN_RECORD_TOKEN_NAME = "user_last_login_time";
+    public static final String USER_LOGIN_TIME_TOKEN = "user_last_login_time";
 
     public static final String TOEKN_CLIENT = "clientId";
 

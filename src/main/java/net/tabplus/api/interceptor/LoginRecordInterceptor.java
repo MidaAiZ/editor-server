@@ -36,11 +36,23 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        // 获取 登录记录 cookie
-        String loginToken = "";
+        /**
+         * 用户最近一次登录的时间
+         */
+        String lastLoginTime = "";
+        /**
+         * 用户身份标识token
+         */
         String userToken = "";
+        /**
+         * 客户端唯一标识token
+         */
         String clientToken = "";
+        /**
+         * 已登录用户的ID
+         */
         Integer userId = null;
+
         // 通过cookie获取用户token
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
@@ -51,8 +63,8 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
                     userToken = cookie.getValue();
                     continue;
                 }
-                if (cookie.getName().equals(Constant.LOGIN_RECORD_TOKEN_NAME)) {
-                    loginToken = cookie.getValue();
+                if (cookie.getName().equals(Constant.USER_LOGIN_TIME_TOKEN)) {
+                    lastLoginTime = cookie.getValue();
                     continue;
                 }
                 if (cookie.getName().equals(Constant.TOEKN_CLIENT)) {
@@ -68,6 +80,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
             clientCookie.setHttpOnly(true);
             clientCookie.setMaxAge(Integer.MAX_VALUE);
             response.addCookie(clientCookie);
+            // 直接返回
             return true;
         }
 
@@ -77,24 +90,22 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
             userId = Integer.parseInt(claims.getSubject());
         }
 
-        //验证token
-        // loginToken为空 或者 超过一小时，记录登录
-        if (StringUtils.isBlank(loginToken) || System.currentTimeMillis() - Long.parseLong(loginToken) > Constant.LOGIN_RECORD_GAP_TIME) {
-            long a = System.currentTimeMillis() - Long.parseLong(loginToken);
-            int b = Constant.LOGIN_RECORD_GAP_TIME;
+        // 验证token
+        // lastLoginTime为空 或者 超过一小时，记录登录
+        if (StringUtils.isBlank(lastLoginTime) || System.currentTimeMillis() - Long.parseLong(lastLoginTime) > Constant.LOGIN_RECORD_GAP_TIME) {
             // 更新 cookie
-            createCookie(Constant.LOGIN_RECORD_TOKEN_NAME, userId, clientToken, request, response);
+            String token = String.valueOf(System.currentTimeMillis());
+            Cookie cookie = new Cookie(Constant.USER_LOGIN_TIME_TOKEN, token);
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge((int) jwtUtils.getExpire());
+            response.addCookie(cookie);
+            createLoginRecord(userId, clientToken, request, response);
         }
-        // 否则什么也不做
+
         return true;
     }
 
-    private Cookie createCookie(String header, Integer userId, String clientToken, HttpServletRequest request, HttpServletResponse response) {
-        String token = String.valueOf(System.currentTimeMillis());
-        Cookie cookie = new Cookie(header, token);
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge((int) jwtUtils.getExpire());
-        response.addCookie(cookie);
+    private void createLoginRecord(Integer userId, String clientToken, HttpServletRequest request, HttpServletResponse response) {
         // 入库
         LoginRecord record = new LoginRecord();
         if (userId != null) {
@@ -105,6 +116,5 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         record.setUa(request.getHeader("user-agent"));
         record.setCountryCode(LocaleHelper.getContextCountryCode(request));
         loginRecordService.addRecordCache(record);
-        return cookie;
     }
 }
