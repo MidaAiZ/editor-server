@@ -27,9 +27,9 @@ public class UserMenuItemDto implements Serializable {
     @ApiModelProperty("网站url")
     private String url;
 
-    @NotNull
-    @NotBlank
-    @Length(min = 1, max = 1024)
+//    @NotNull
+//    @NotBlank
+    @Length(max = 1024)
     @ApiModelProperty("网站图标")
     private String iconSrc;
 

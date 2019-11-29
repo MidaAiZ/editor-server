@@ -37,6 +37,8 @@ public class DefaultUserSettingDto implements Serializable {
     private String fontColorValue;
     private Boolean cloudSave;
     private LayoutSetting iconLayout;
+    private String defaultSearchEngine;
+    private String defaultLocale;
 
     public String getBgSrc() {
         return bgSrc;
@@ -220,6 +222,22 @@ public class DefaultUserSettingDto implements Serializable {
 
     public void setIconLayout(LayoutSetting iconLayout) {
         this.iconLayout = iconLayout;
+    }
+
+    public String getDefaultSearchEngine() {
+        return defaultSearchEngine;
+    }
+
+    public void setDefaultSearchEngine(String defaultSearchEngine) {
+        this.defaultSearchEngine = defaultSearchEngine;
+    }
+
+    public String getDefaultLocale() {
+        return defaultLocale;
+    }
+
+    public void setDefaultLocale(String defaultLocale) {
+        this.defaultLocale = defaultLocale;
     }
 
     @Component

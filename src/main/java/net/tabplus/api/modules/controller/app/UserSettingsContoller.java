@@ -40,9 +40,9 @@ public class UserSettingsContoller {
     @LoginRequired
     @PostMapping("profile")
     @ApiOperation(value = "设置或更新用户配置，要求用户已登录", notes = "上传需要保存的配置字段，如果该字段为复合对象（JSON），请提交完整字段对象，否则缺失的子对象字段会被覆盖丢失。返回插入的用户配置")
-    public Result<DefaultUserSettingDto> createOrUpdate(@ApiIgnore @CurrentUser User user, @Validated @RequestBody DefaultUserSettingDto setting, BindingResult bindingResult) {
+    public Result<DefaultUserSettingDto> createOrUpdate(@ApiIgnore @CurrentUser User user, @Validated @RequestBody DefaultUserSettingDto setting) {
         DefaultUserSettingDto res = userSettingService.addUserSetting(user.getUid(), setting);
-        return res != null ? Result.ok(res) : Result.error(bindingResult.getFieldError().getDefaultMessage());
+        return res == null ? Result.error() : Result.ok(res);
     }
 
     @GetMapping("default")

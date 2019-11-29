@@ -45,8 +45,9 @@ public class UserSettingService {
      */
     public DefaultUserSettingDto addUserSetting(Integer userId, DefaultUserSettingDto dd) {
         // 如果已存在记录，则执行更新方法
-        if (dd == null || getUserSettingByUserId(userId) != null) {
-            return updateUserSetting(userId, dd);
+        UserSetting existSetting = getUserSettingByUserId(userId);
+        if (dd == null || existSetting != null) {
+            return updateUserSetting(existSetting, dd);
         }
         // 设置userId
         UserSetting setting = new UserSetting();
@@ -73,19 +74,14 @@ public class UserSettingService {
      * @author lihaoyu
      * @date 2019/9/22 16:30
      */
-    public DefaultUserSettingDto updateUserSetting(Integer userId, DefaultUserSettingDto setting) {
+    public DefaultUserSettingDto updateUserSetting(UserSetting existSetting, DefaultUserSettingDto setting) {
         // 如果记录不存在，则插入用户设置
-        UserSetting existSetting = getUserSettingByUserId(userId);
         DefaultUserSettingDto dd = null;
-        if (existSetting == null) {
-            return addUserSetting(userId, setting);
-        } else {
-            try {
-                dd = MergeObject.merge(JSONObject.parseObject(existSetting.getSettings(), DefaultUserSettingDto.class), setting);
-                existSetting.setSettings(JSONObject.toJSONString(dd));
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+        try {
+            dd = MergeObject.merge(JSONObject.parseObject(existSetting.getSettings(), DefaultUserSettingDto.class), setting);
+            existSetting.setSettings(JSONObject.toJSONString(dd));
+        } catch (Exception e) {
+            System.out.println(e);
         }
         int affectedRows = userSettingDAO.updateByPrimaryKeySelective(existSetting);
         if (affectedRows != NumConst.NUM1) {

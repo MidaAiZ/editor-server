@@ -49,7 +49,7 @@ public class DefaultMenusController {
         }
         try {
             Map<String, Object> returnMap = ObjectToMap.convert(menu);
-            returnMap.put("menus", JSONObject.parseArray(menu.getMenus(), UserMenuItemDto.class));
+            returnMap.put("menus", JSONObject.parseArray(menu.getMenus(), List.class));
             return Result.ok(returnMap);
         } catch (Exception e) {
             return Result.error(e.getMessage());
@@ -60,7 +60,7 @@ public class DefaultMenusController {
     @PostMapping("{code}")
     @ApiOperation("新建默认菜单列表，返回新建成功的列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.ADD_DEFAULT_MENU)
-    public Result<DefaultMenu> createList(@PathVariable String code, @RequestBody @ApiParam("新建的默认菜单配置数组") List<@Valid UserMenuItemDto> menuList, @ApiIgnore @CurrentAdmin Admin admin) {
+    public Result<DefaultMenu> createList(@PathVariable String code, @RequestBody @ApiParam("新建的默认菜单配置数组") List<List<@Valid UserMenuItemDto>> menuList, @ApiIgnore @CurrentAdmin Admin admin) {
         DefaultMenu defaultMenu = new DefaultMenu();
         defaultMenu.setCountryCode(code);
         defaultMenu.setMenus(JSONObject.toJSONString(menuList));
@@ -74,7 +74,7 @@ public class DefaultMenusController {
     @PutMapping("{code}")
     @ApiOperation("批量更新默认菜单列表，返回更新后的列表，需要管理员权限")
     @RequiresPermissions(PermisConstant.MODIFY_DEFAULT_MENU)
-    public Result<DefaultMenu> updateList(@PathVariable String code, @RequestBody @ApiParam("更新的默认菜单配置数组，必须包含主键did") List<UserMenuItemDto> menuList) {
+    public Result<DefaultMenu> updateList(@PathVariable String code, @RequestBody @ApiParam("更新的默认菜单配置数组，必须包含主键did") List<List<@Valid UserMenuItemDto>> menuList) {
         try {
             DefaultMenu defaultMenu = new DefaultMenu();
             defaultMenu.setCountryCode(code);
