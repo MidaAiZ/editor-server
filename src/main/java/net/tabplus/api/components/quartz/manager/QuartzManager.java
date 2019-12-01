@@ -1,7 +1,7 @@
 package net.tabplus.api.components.quartz.manager;
 
 import net.tabplus.api.components.quartz.job.BgPictureJob;
-import net.tabplus.api.components.quartz.job.SiteViewHistoryJob;
+import net.tabplus.api.components.quartz.job.LoginRecordJob;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -76,7 +76,7 @@ public class QuartzManager {
         /**
          * 用户登录记录保存
          */
-        jobDetail = JobBuilder.newJob(SiteViewHistoryJob.class).withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP).build();
+        jobDetail = JobBuilder.newJob(LoginRecordJob.class).withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP).build();
         cronTrigger = TriggerBuilder.newTrigger().withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP)
                 .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_HALF_HOUR)).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);

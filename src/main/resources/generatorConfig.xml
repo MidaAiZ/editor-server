@@ -116,9 +116,9 @@
         <!--            <generatedKey column="mid" sqlStatement="Mysql" identity="true"/>-->
         <!--        </table>-->
 
-<!--                <table tableName="default_menus" domainObjectName="DefaultMenu">-->
-<!--                    <generatedKey column="did" sqlStatement="Mysql" identity="true"/>-->
-<!--                </table>-->
+        <!--        <table tableName="default_menus" domainObjectName="DefaultMenu">-->
+        <!--            <generatedKey column="did" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
 
         <!--        <table tableName="login_records" domainObjectName="LoginRecord">-->
         <!--            <generatedKey column="rid" sqlStatement="Mysql" identity="true"/>-->

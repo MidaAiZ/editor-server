@@ -15,20 +15,20 @@ public class LoginRecordExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -435,63 +435,73 @@ public class LoginRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeIsNull() {
-            addCriterion("login_time is null");
+        public Criteria andPluginPlatformIsNull() {
+            addCriterion("plugin_platform is null");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeIsNotNull() {
-            addCriterion("login_time is not null");
+        public Criteria andPluginPlatformIsNotNull() {
+            addCriterion("plugin_platform is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeEqualTo(Date value) {
-            addCriterion("login_time =", value, "loginTime");
+        public Criteria andPluginPlatformEqualTo(String value) {
+            addCriterion("plugin_platform =", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeNotEqualTo(Date value) {
-            addCriterion("login_time <>", value, "loginTime");
+        public Criteria andPluginPlatformNotEqualTo(String value) {
+            addCriterion("plugin_platform <>", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeGreaterThan(Date value) {
-            addCriterion("login_time >", value, "loginTime");
+        public Criteria andPluginPlatformGreaterThan(String value) {
+            addCriterion("plugin_platform >", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("login_time >=", value, "loginTime");
+        public Criteria andPluginPlatformGreaterThanOrEqualTo(String value) {
+            addCriterion("plugin_platform >=", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeLessThan(Date value) {
-            addCriterion("login_time <", value, "loginTime");
+        public Criteria andPluginPlatformLessThan(String value) {
+            addCriterion("plugin_platform <", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeLessThanOrEqualTo(Date value) {
-            addCriterion("login_time <=", value, "loginTime");
+        public Criteria andPluginPlatformLessThanOrEqualTo(String value) {
+            addCriterion("plugin_platform <=", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeIn(List<Date> values) {
-            addCriterion("login_time in", values, "loginTime");
+        public Criteria andPluginPlatformLike(String value) {
+            addCriterion("plugin_platform like", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeNotIn(List<Date> values) {
-            addCriterion("login_time not in", values, "loginTime");
+        public Criteria andPluginPlatformNotLike(String value) {
+            addCriterion("plugin_platform not like", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeBetween(Date value1, Date value2) {
-            addCriterion("login_time between", value1, value2, "loginTime");
+        public Criteria andPluginPlatformIn(List<String> values) {
+            addCriterion("plugin_platform in", values, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andLoginTimeNotBetween(Date value1, Date value2) {
-            addCriterion("login_time not between", value1, value2, "loginTime");
+        public Criteria andPluginPlatformNotIn(List<String> values) {
+            addCriterion("plugin_platform not in", values, "pluginPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatformBetween(String value1, String value2) {
+            addCriterion("plugin_platform between", value1, value2, "pluginPlatform");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatformNotBetween(String value1, String value2) {
+            addCriterion("plugin_platform not between", value1, value2, "pluginPlatform");
             return (Criteria) this;
         }
 
@@ -564,6 +574,66 @@ public class LoginRecordExample {
             addCriterion("country_code not between", value1, value2, "countryCode");
             return (Criteria) this;
         }
+
+        public Criteria andLoginTimeIsNull() {
+            addCriterion("login_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeIsNotNull() {
+            addCriterion("login_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeEqualTo(Date value) {
+            addCriterion("login_time =", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeNotEqualTo(Date value) {
+            addCriterion("login_time <>", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeGreaterThan(Date value) {
+            addCriterion("login_time >", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("login_time >=", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeLessThan(Date value) {
+            addCriterion("login_time <", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeLessThanOrEqualTo(Date value) {
+            addCriterion("login_time <=", value, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeIn(List<Date> values) {
+            addCriterion("login_time in", values, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeNotIn(List<Date> values) {
+            addCriterion("login_time not in", values, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeBetween(Date value1, Date value2) {
+            addCriterion("login_time between", value1, value2, "loginTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLoginTimeNotBetween(Date value1, Date value2) {
+            addCriterion("login_time not between", value1, value2, "loginTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -589,6 +659,38 @@ public class LoginRecordExample {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -624,38 +726,6 @@ public class LoginRecordExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

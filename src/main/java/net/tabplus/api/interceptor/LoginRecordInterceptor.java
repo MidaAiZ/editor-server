@@ -114,6 +114,7 @@ public class LoginRecordInterceptor extends HandlerInterceptorAdapter {
         record.setClientId(clientToken);
         record.setIp(request.getRemoteAddr());
         record.setUa(request.getHeader("user-agent"));
+        record.setPluginPlatform(request.getHeader("Plugin-Platform"));
         record.setCountryCode(LocaleHelper.getContextCountryCode(request));
         loginRecordService.addRecordCache(record);
     }

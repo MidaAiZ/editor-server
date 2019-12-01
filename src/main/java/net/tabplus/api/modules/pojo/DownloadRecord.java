@@ -4,12 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DownloadRecord implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String did;
+
     private String ip;
+
     private String ua;
+
     private String countryCode;
+
     private Date createdAt;
+
+    private String pluginPlatform;
+
+    private static final long serialVersionUID = 1L;
 
     public String getDid() {
         return did;
@@ -51,6 +58,14 @@ public class DownloadRecord implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getPluginPlatform() {
+        return pluginPlatform;
+    }
+
+    public void setPluginPlatform(String pluginPlatform) {
+        this.pluginPlatform = pluginPlatform == null ? null : pluginPlatform.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -62,6 +77,7 @@ public class DownloadRecord implements Serializable {
         sb.append(", ua=").append(ua);
         sb.append(", countryCode=").append(countryCode);
         sb.append(", createdAt=").append(createdAt);
+        sb.append(", pluginPlatform=").append(pluginPlatform);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -4,14 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LoginRecord implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long rid;
+
     private Integer uid;
+
     private String clientId;
+
     private String ip;
+
     private String ua;
-    private Date loginTime;
+
+    private String pluginPlatform;
+
     private String countryCode;
+
+    private Date loginTime;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getRid() {
         return rid;
@@ -53,12 +62,12 @@ public class LoginRecord implements Serializable {
         this.ua = ua == null ? null : ua.trim();
     }
 
-    public Date getLoginTime() {
-        return loginTime;
+    public String getPluginPlatform() {
+        return pluginPlatform;
     }
 
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
+    public void setPluginPlatform(String pluginPlatform) {
+        this.pluginPlatform = pluginPlatform == null ? null : pluginPlatform.trim();
     }
 
     public String getCountryCode() {
@@ -67,6 +76,14 @@ public class LoginRecord implements Serializable {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode == null ? null : countryCode.trim();
+    }
+
+    public Date getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
     }
 
     @Override
@@ -80,8 +97,9 @@ public class LoginRecord implements Serializable {
         sb.append(", clientId=").append(clientId);
         sb.append(", ip=").append(ip);
         sb.append(", ua=").append(ua);
-        sb.append(", loginTime=").append(loginTime);
+        sb.append(", pluginPlatform=").append(pluginPlatform);
         sb.append(", countryCode=").append(countryCode);
+        sb.append(", loginTime=").append(loginTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

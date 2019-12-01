@@ -1,247 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.tabplus.api.modules.dao.mapper.LoginRecordMapper">
-    <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.LoginRecord">
-        <id column="rid" jdbcType="BIGINT" property="rid"/>
-        <result column="uid" jdbcType="INTEGER" property="uid"/>
-        <result column="client_id" jdbcType="VARCHAR" property="clientId"/>
-        <result column="ip" jdbcType="VARCHAR" property="ip"/>
-        <result column="ua" jdbcType="VARCHAR" property="ua"/>
-        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
-        <result column="country_code" jdbcType="VARCHAR" property="countryCode"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="net.tabplus.api.modules.pojo.LoginRecord">
+    <id column="rid" jdbcType="BIGINT" property="rid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="ua" jdbcType="VARCHAR" property="ua" />
+    <result column="plugin_platform" jdbcType="VARCHAR" property="pluginPlatform" />
+    <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-    rid, `uid`, client_id, ip, ua, login_time, country_code
+          </trim>
+        </if>
+      </foreach>
+    </where>
   </sql>
-    <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample"
-            resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
         </if>
-        <include refid="Base_Column_List"/>
-        from login_records
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from login_records
-        where rid = #{rid,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rid, `uid`, client_id, ip, ua, plugin_platform, country_code, login_time
+  </sql>
+  <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from login_records
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login_records
+    where rid = #{rid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from login_records
     where rid = #{rid,jdbcType=BIGINT}
   </delete>
-    <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample">
-        delete from login_records
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
-        <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into login_records (`uid`, client_id, ip,
-        ua, login_time, country_code
-        )
-        values (#{uid,jdbcType=INTEGER}, #{clientId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
-        #{ua,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, #{countryCode,jdbcType=VARCHAR}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
-        <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into login_records
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="uid != null">
-                `uid`,
-            </if>
-            <if test="clientId != null">
-                client_id,
-            </if>
-            <if test="ip != null">
-                ip,
-            </if>
-            <if test="ua != null">
-                ua,
-            </if>
-            <if test="loginTime != null">
-                login_time,
-            </if>
-            <if test="countryCode != null">
-                country_code,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="uid != null">
-                #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="clientId != null">
-                #{clientId,jdbcType=VARCHAR},
-            </if>
-            <if test="ip != null">
-                #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="ua != null">
-                #{ua,jdbcType=VARCHAR},
-            </if>
-            <if test="loginTime != null">
-                #{loginTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="countryCode != null">
-                #{countryCode,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample"
-            resultType="java.lang.Long">
-        select count(*) from login_records
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update login_records
-        <set>
-            <if test="record.rid != null">
-                rid = #{record.rid,jdbcType=BIGINT},
-            </if>
-            <if test="record.uid != null">
-                `uid` = #{record.uid,jdbcType=INTEGER},
-            </if>
-            <if test="record.clientId != null">
-                client_id = #{record.clientId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.ip != null">
-                ip = #{record.ip,jdbcType=VARCHAR},
-            </if>
-            <if test="record.ua != null">
-                ua = #{record.ua,jdbcType=VARCHAR},
-            </if>
-            <if test="record.loginTime != null">
-                login_time = #{record.loginTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="record.countryCode != null">
-                country_code = #{record.countryCode,jdbcType=VARCHAR},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update login_records
-        set rid = #{record.rid,jdbcType=BIGINT},
+  <delete id="deleteByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample">
+    delete from login_records
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
+    <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into login_records (`uid`, client_id, ip, 
+      ua, plugin_platform, country_code, 
+      login_time)
+    values (#{uid,jdbcType=INTEGER}, #{clientId,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{ua,jdbcType=VARCHAR}, #{pluginPlatform,jdbcType=VARCHAR}, #{countryCode,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
+    <selectKey keyProperty="rid" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into login_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        `uid`,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="ua != null">
+        ua,
+      </if>
+      <if test="pluginPlatform != null">
+        plugin_platform,
+      </if>
+      <if test="countryCode != null">
+        country_code,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ua != null">
+        #{ua,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginPlatform != null">
+        #{pluginPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.tabplus.api.modules.pojo.LoginRecordExample" resultType="java.lang.Long">
+    select count(*) from login_records
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update login_records
+    <set>
+      <if test="record.rid != null">
+        rid = #{record.rid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null">
         `uid` = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientId != null">
         client_id = #{record.clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ua != null">
         ua = #{record.ua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pluginPlatform != null">
+        plugin_platform = #{record.pluginPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryCode != null">
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTime != null">
         login_time = #{record.loginTime,jdbcType=TIMESTAMP},
-        country_code = #{record.countryCode,jdbcType=VARCHAR}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
-        update login_records
-        <set>
-            <if test="uid != null">
-                `uid` = #{uid,jdbcType=INTEGER},
-            </if>
-            <if test="clientId != null">
-                client_id = #{clientId,jdbcType=VARCHAR},
-            </if>
-            <if test="ip != null">
-                ip = #{ip,jdbcType=VARCHAR},
-            </if>
-            <if test="ua != null">
-                ua = #{ua,jdbcType=VARCHAR},
-            </if>
-            <if test="loginTime != null">
-                login_time = #{loginTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="countryCode != null">
-                country_code = #{countryCode,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where rid = #{rid,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update login_records
+    set rid = #{record.rid,jdbcType=BIGINT},
+      `uid` = #{record.uid,jdbcType=INTEGER},
+      client_id = #{record.clientId,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      ua = #{record.ua,jdbcType=VARCHAR},
+      plugin_platform = #{record.pluginPlatform,jdbcType=VARCHAR},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
+    update login_records
+    <set>
+      <if test="uid != null">
+        `uid` = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="ua != null">
+        ua = #{ua,jdbcType=VARCHAR},
+      </if>
+      <if test="pluginPlatform != null">
+        plugin_platform = #{pluginPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null">
+        country_code = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
     update login_records
     set `uid` = #{uid,jdbcType=INTEGER},
       client_id = #{clientId,jdbcType=VARCHAR},
       ip = #{ip,jdbcType=VARCHAR},
       ua = #{ua,jdbcType=VARCHAR},
-      login_time = #{loginTime,jdbcType=TIMESTAMP},
-      country_code = #{countryCode,jdbcType=VARCHAR}
+      plugin_platform = #{pluginPlatform,jdbcType=VARCHAR},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP}
     where rid = #{rid,jdbcType=BIGINT}
   </update>
 </mapper>

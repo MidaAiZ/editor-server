@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -28,7 +29,7 @@ import java.util.Map;
 @Component
 @PersistJobDataAfterExecution // 持久化JobDataMap里的数据，使下一个定时任务还能获取到这些值
 @DisallowConcurrentExecution // 禁止并发多任务执行，所以永远只有一个任务在执行中
-public class SiteViewHistoryJob implements Job, Serializable {
+public class LoginRecordJob implements Job, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -75,11 +76,12 @@ public class SiteViewHistoryJob implements Job, Serializable {
         loginRecordService.save(record);
         // 如果不存在这个登录记录的话则记作1个下载记录
         String did = record.getClientId().replaceAll("-", "");
-        if (downloadRecordService.getById(did) == null) {
+        if (!StringUtils.isEmpty(record.getPluginPlatform()) && downloadRecordService.getById(did) == null) {
             DownloadRecord dRecod = new DownloadRecord();
             dRecod.setDid(did);
             dRecod.setIp(record.getIp());
             dRecod.setUa(record.getUa());
+            dRecod.setPluginPlatform(record.getPluginPlatform());
             dRecod.setCountryCode(record.getCountryCode());
             dRecod.setCreatedAt(record.getLoginTime());
             downloadRecordService.save(dRecod);
