@@ -1,10 +1,9 @@
 package net.tabplus.api.modules.dao.mapper;
 
+import java.util.List;
 import net.tabplus.api.modules.pojo.SiteViewHistory;
 import net.tabplus.api.modules.pojo.SiteViewHistoryExample;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 public interface SiteViewHistoryMapper {
     long countByExample(SiteViewHistoryExample example);

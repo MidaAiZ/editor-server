@@ -23,6 +23,9 @@
             <if test="browserUa != null">
                 browser_ua,
             </if>
+            <if test="pluginPlatform != null">
+                plugin_platform,
+            </if>
             <if test="countryCode != null">
                 country_code,
             </if>
@@ -49,6 +52,9 @@
             </if>
             <if test="browserUa != null">
                 #{browserUa,jdbcType=VARCHAR},
+            </if>
+            <if test="pluginPlatform != null">
+                #{pluginPlatform,jdbcType=VARCHAR},
             </if>
             <if test="countryCode != null">
                 #{countryCode,jdbcType=VARCHAR},

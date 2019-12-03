@@ -2,6 +2,7 @@ package net.tabplus.api.modules.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import net.tabplus.api.annotation.LoginRequired;
 import net.tabplus.api.modules.vo.statistic.StatisticCountVo;
 import net.tabplus.api.interceptor.UserAuthorizationInterceptor;
 import net.tabplus.api.modules.dao.SiteViewHistoryDAO;
@@ -9,6 +10,7 @@ import net.tabplus.api.modules.pojo.SiteViewHistory;
 import net.tabplus.api.modules.pojo.SiteViewHistoryExample;
 import net.tabplus.api.modules.vo.ListResultVo;
 import net.tabplus.api.modules.vo.SiteViewHistoryVo;
+import net.tabplus.api.utils.Constant;
 import net.tabplus.api.utils.LocaleHelper;
 import net.tabplus.api.utils.NumConst;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,9 @@ public class SiteViewHistoryService {
         // 设置请求IP
         history.setIp(request.getRemoteAddr());
         // 设置请求浏览器信息
-        history.setBrowserUa(request.getHeader("user-agent"));
+        history.setBrowserUa(request.getHeader(Constant.USER_AGENT_HEADER));
+        // 设置请求插件平台信息
+        history.setPluginPlatfrom(request.getHeader(Constant.PLUGIN_PLATFORM_HEADER));
         // 设置countryCode
         history.setCountryCode(LocaleHelper.getContextCountryCode(request));
         // 设置用户ID

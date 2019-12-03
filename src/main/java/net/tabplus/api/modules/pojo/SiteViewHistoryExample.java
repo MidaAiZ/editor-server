@@ -15,20 +15,20 @@ public class SiteViewHistoryExample {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -704,6 +704,76 @@ public class SiteViewHistoryExample {
             addCriterion("created_at not between", value1, value2, "createdAt");
             return (Criteria) this;
         }
+
+        public Criteria andPluginPlatfromIsNull() {
+            addCriterion("plugin_platfrom is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromIsNotNull() {
+            addCriterion("plugin_platfrom is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromEqualTo(String value) {
+            addCriterion("plugin_platfrom =", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromNotEqualTo(String value) {
+            addCriterion("plugin_platfrom <>", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromGreaterThan(String value) {
+            addCriterion("plugin_platfrom >", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromGreaterThanOrEqualTo(String value) {
+            addCriterion("plugin_platfrom >=", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromLessThan(String value) {
+            addCriterion("plugin_platfrom <", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromLessThanOrEqualTo(String value) {
+            addCriterion("plugin_platfrom <=", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromLike(String value) {
+            addCriterion("plugin_platfrom like", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromNotLike(String value) {
+            addCriterion("plugin_platfrom not like", value, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromIn(List<String> values) {
+            addCriterion("plugin_platfrom in", values, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromNotIn(List<String> values) {
+            addCriterion("plugin_platfrom not in", values, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromBetween(String value1, String value2) {
+            addCriterion("plugin_platfrom between", value1, value2, "pluginPlatfrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andPluginPlatfromNotBetween(String value1, String value2) {
+            addCriterion("plugin_platfrom not between", value1, value2, "pluginPlatfrom");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -729,6 +799,38 @@ public class SiteViewHistoryExample {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -764,38 +866,6 @@ public class SiteViewHistoryExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

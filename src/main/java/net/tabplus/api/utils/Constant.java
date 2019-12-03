@@ -51,6 +51,17 @@ public class Constant {
      */
     public static final String ACT_MUIT_VAR_NAME = "user";
 
+
+    /**
+     * 获取浏览器信息的请求头
+     */
+    public static final String USER_AGENT_HEADER = "user-agent";
+
+    /**
+     * 获取插件平台的请求头
+     */
+    public static final String PLUGIN_PLATFORM_HEADER = "Plugin-Platform";
+
     /**
      * 云存储配置KEY
      */

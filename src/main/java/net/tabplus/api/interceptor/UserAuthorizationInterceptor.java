@@ -67,16 +67,16 @@ public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
 //            token = request.getParameter(jwtUtils.getHeader());
 //        }
 
-        //凭证为空
-        if (StringUtils.isBlank(token)) {
-            throw new MyException("无token，请重新登录");
-        }
-
-        //验证token
+        /**
+         * 要求强制登录选项
+         * 未登录时就抛出异常
+         */
         Claims claims = jwtUtils.getClaimByToken(token);
-        if (claims == null || jwtUtils.isTokenExpired(claims.getExpiration())) {
-            throw new MyException("凭证失效，请重新登录");
+        if (claims != null && jwtUtils.isTokenExpired(claims.getExpiration())) {
+            claims = null;
         }
+        //凭证为空 && 要求强制登录
+        if (annotation.force() && StringUtils.isBlank(token)) { throw new MyException("无token，请重新登录"); }
 
         //验证用户信息
 //        User user = userService.getUserById(Integer.valueOf(claims.getSubject()));
@@ -85,7 +85,9 @@ public class UserAuthorizationInterceptor extends HandlerInterceptorAdapter {
 //        }
 
         //设置userId到request里，后续根据userId，获取用户信息
-        request.setAttribute(CURRENT_USER, claims.getSubject());
+        if (claims != null) {
+            request.setAttribute(CURRENT_USER, claims.getSubject());
+        }
 
         return true;
     }

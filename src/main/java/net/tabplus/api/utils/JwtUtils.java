@@ -53,7 +53,7 @@ public class JwtUtils {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
-            logger.debug("token验证错误,请重新登陆 ", e);
+            logger.debug("token验证错误,无效token ", e);
             return null;
         }
     }

@@ -1,15 +1,14 @@
 package net.tabplus.api.modules.pojo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SiteViewHistory implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(hidden = true)
     private String hid;
     @ApiModelProperty(hidden = true)
@@ -29,6 +28,8 @@ public class SiteViewHistory implements Serializable {
     private String countryCode;
     @ApiModelProperty(hidden = true)
     private Date createdAt;
+    @ApiModelProperty(hidden = true)
+    private String pluginPlatfrom;
 
     public String getHid() {
         return hid;
@@ -102,6 +103,14 @@ public class SiteViewHistory implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getPluginPlatfrom() {
+        return pluginPlatfrom;
+    }
+
+    public void setPluginPlatfrom(String pluginPlatfrom) {
+        this.pluginPlatfrom = pluginPlatfrom == null ? null : pluginPlatfrom.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -117,6 +126,7 @@ public class SiteViewHistory implements Serializable {
         sb.append(", browserUa=").append(browserUa);
         sb.append(", countryCode=").append(countryCode);
         sb.append(", createdAt=").append(createdAt);
+        sb.append(", pluginPlatfrom=").append(pluginPlatfrom);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

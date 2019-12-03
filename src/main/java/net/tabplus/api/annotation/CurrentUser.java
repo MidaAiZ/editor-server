@@ -14,5 +14,4 @@ import java.lang.annotation.Target;
 // 运行时有效
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CurrentUser {
-
 }
