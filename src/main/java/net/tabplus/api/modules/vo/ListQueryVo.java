@@ -20,7 +20,7 @@ public class ListQueryVo {
     @Min(value = 1, message = "每页数量，最小值为1")
     @Max(value = 100, message = "每页数量，最大值为100")
     @ApiModelProperty(value = "每页数量，最小值为1，最大值为100", required = true)
-    private Integer pageSize = 10;
+    private Integer pageSize = 15;
 
     public ListQueryVo() {
     }

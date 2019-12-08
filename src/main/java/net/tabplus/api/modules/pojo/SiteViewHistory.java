@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SiteViewHistory implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     @ApiModelProperty(hidden = true)
     private String hid;
     @ApiModelProperty(hidden = true)
@@ -29,7 +27,8 @@ public class SiteViewHistory implements Serializable {
     @ApiModelProperty(hidden = true)
     private Date createdAt;
     @ApiModelProperty(hidden = true)
-    private String pluginPlatfrom;
+    private String pluginPlatform;
+    private static final long serialVersionUID = 1L;
 
     public String getHid() {
         return hid;
@@ -103,12 +102,12 @@ public class SiteViewHistory implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public String getPluginPlatfrom() {
-        return pluginPlatfrom;
+    public String getPluginPlatform() {
+        return pluginPlatform;
     }
 
-    public void setPluginPlatfrom(String pluginPlatfrom) {
-        this.pluginPlatfrom = pluginPlatfrom == null ? null : pluginPlatfrom.trim();
+    public void setPluginPlatform(String pluginPlatform) {
+        this.pluginPlatform = pluginPlatform == null ? null : pluginPlatform.trim();
     }
 
     @Override
@@ -126,7 +125,7 @@ public class SiteViewHistory implements Serializable {
         sb.append(", browserUa=").append(browserUa);
         sb.append(", countryCode=").append(countryCode);
         sb.append(", createdAt=").append(createdAt);
-        sb.append(", pluginPlatfrom=").append(pluginPlatfrom);
+        sb.append(", pluginPlatform=").append(pluginPlatform);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

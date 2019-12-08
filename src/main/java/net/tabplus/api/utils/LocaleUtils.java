@@ -13,7 +13,12 @@ public class LocaleUtils {
 
     public static String getMsg(String key) {
         Locale locale = LocaleContextHolder.getLocale();
-        return messageSource.getMessage(key, null, locale);
+        try {
+            return messageSource.getMessage(key, null, locale);
+        } catch (Exception e) {
+            String[] keys = key.split("\\.");
+            return keys[keys.length - 1];
+        }
     }
 
     public static String getMsg(String key, String... arg) {

@@ -41,7 +41,7 @@ public class SiteViewHistoryService {
         // 设置请求浏览器信息
         history.setBrowserUa(request.getHeader(Constant.USER_AGENT_HEADER));
         // 设置请求插件平台信息
-        history.setPluginPlatfrom(request.getHeader(Constant.PLUGIN_PLATFORM_HEADER));
+        history.setPluginPlatform(request.getHeader(Constant.PLUGIN_PLATFORM_HEADER));
         // 设置countryCode
         history.setCountryCode(LocaleHelper.getContextCountryCode(request));
         // 设置用户ID

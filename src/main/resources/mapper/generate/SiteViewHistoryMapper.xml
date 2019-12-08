@@ -11,7 +11,7 @@
     <result column="browser_ua" jdbcType="VARCHAR" property="browserUa" />
     <result column="country_code" jdbcType="VARCHAR" property="countryCode" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="plugin_platfrom" jdbcType="VARCHAR" property="pluginPlatfrom" />
+    <result column="plugin_platform" jdbcType="VARCHAR" property="pluginPlatform" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     hid, ip, user_id, site_id, site_title, site_url, browser_ua, country_code, created_at, 
-    plugin_platfrom
+    plugin_platform
   </sql>
   <select id="selectByExample" parameterType="net.tabplus.api.modules.pojo.SiteViewHistoryExample" resultMap="BaseResultMap">
     select
@@ -111,11 +111,11 @@
     </selectKey>
     insert into site_view_histories (ip, user_id, site_id, 
       site_title, site_url, browser_ua, 
-      country_code, created_at, plugin_platfrom
+      country_code, created_at, plugin_platform
       )
     values (#{ip,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{siteId,jdbcType=INTEGER}, 
       #{siteTitle,jdbcType=VARCHAR}, #{siteUrl,jdbcType=VARCHAR}, #{browserUa,jdbcType=VARCHAR}, 
-      #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{pluginPlatfrom,jdbcType=VARCHAR}
+      #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{pluginPlatform,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="net.tabplus.api.modules.pojo.SiteViewHistory">
@@ -148,8 +148,8 @@
       <if test="createdAt != null">
         created_at,
       </if>
-      <if test="pluginPlatfrom != null">
-        plugin_platfrom,
+      <if test="pluginPlatform != null">
+        plugin_platform,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -177,8 +177,8 @@
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="pluginPlatfrom != null">
-        #{pluginPlatfrom,jdbcType=VARCHAR},
+      <if test="pluginPlatform != null">
+        #{pluginPlatform,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -218,8 +218,8 @@
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.pluginPlatfrom != null">
-        plugin_platfrom = #{record.pluginPlatfrom,jdbcType=VARCHAR},
+      <if test="record.pluginPlatform != null">
+        plugin_platform = #{record.pluginPlatform,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -237,7 +237,7 @@
       browser_ua = #{record.browserUa,jdbcType=VARCHAR},
       country_code = #{record.countryCode,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-      plugin_platfrom = #{record.pluginPlatfrom,jdbcType=VARCHAR}
+      plugin_platform = #{record.pluginPlatform,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -269,8 +269,8 @@
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="pluginPlatfrom != null">
-        plugin_platfrom = #{pluginPlatfrom,jdbcType=VARCHAR},
+      <if test="pluginPlatform != null">
+        plugin_platform = #{pluginPlatform,jdbcType=VARCHAR},
       </if>
     </set>
     where hid = #{hid,jdbcType=VARCHAR}
@@ -285,7 +285,7 @@
       browser_ua = #{browserUa,jdbcType=VARCHAR},
       country_code = #{countryCode,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
-      plugin_platfrom = #{pluginPlatfrom,jdbcType=VARCHAR}
+      plugin_platform = #{pluginPlatform,jdbcType=VARCHAR}
     where hid = #{hid,jdbcType=VARCHAR}
   </update>
 </mapper>

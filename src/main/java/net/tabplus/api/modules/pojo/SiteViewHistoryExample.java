@@ -705,73 +705,73 @@ public class SiteViewHistoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromIsNull() {
-            addCriterion("plugin_platfrom is null");
+        public Criteria andPluginPlatformIsNull() {
+            addCriterion("plugin_platform is null");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromIsNotNull() {
-            addCriterion("plugin_platfrom is not null");
+        public Criteria andPluginPlatformIsNotNull() {
+            addCriterion("plugin_platform is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromEqualTo(String value) {
-            addCriterion("plugin_platfrom =", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformEqualTo(String value) {
+            addCriterion("plugin_platform =", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromNotEqualTo(String value) {
-            addCriterion("plugin_platfrom <>", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformNotEqualTo(String value) {
+            addCriterion("plugin_platform <>", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromGreaterThan(String value) {
-            addCriterion("plugin_platfrom >", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformGreaterThan(String value) {
+            addCriterion("plugin_platform >", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromGreaterThanOrEqualTo(String value) {
-            addCriterion("plugin_platfrom >=", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformGreaterThanOrEqualTo(String value) {
+            addCriterion("plugin_platform >=", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromLessThan(String value) {
-            addCriterion("plugin_platfrom <", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformLessThan(String value) {
+            addCriterion("plugin_platform <", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromLessThanOrEqualTo(String value) {
-            addCriterion("plugin_platfrom <=", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformLessThanOrEqualTo(String value) {
+            addCriterion("plugin_platform <=", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromLike(String value) {
-            addCriterion("plugin_platfrom like", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformLike(String value) {
+            addCriterion("plugin_platform like", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromNotLike(String value) {
-            addCriterion("plugin_platfrom not like", value, "pluginPlatfrom");
+        public Criteria andPluginPlatformNotLike(String value) {
+            addCriterion("plugin_platform not like", value, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromIn(List<String> values) {
-            addCriterion("plugin_platfrom in", values, "pluginPlatfrom");
+        public Criteria andPluginPlatformIn(List<String> values) {
+            addCriterion("plugin_platform in", values, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromNotIn(List<String> values) {
-            addCriterion("plugin_platfrom not in", values, "pluginPlatfrom");
+        public Criteria andPluginPlatformNotIn(List<String> values) {
+            addCriterion("plugin_platform not in", values, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromBetween(String value1, String value2) {
-            addCriterion("plugin_platfrom between", value1, value2, "pluginPlatfrom");
+        public Criteria andPluginPlatformBetween(String value1, String value2) {
+            addCriterion("plugin_platform between", value1, value2, "pluginPlatform");
             return (Criteria) this;
         }
 
-        public Criteria andPluginPlatfromNotBetween(String value1, String value2) {
-            addCriterion("plugin_platfrom not between", value1, value2, "pluginPlatfrom");
+        public Criteria andPluginPlatformNotBetween(String value1, String value2) {
+            addCriterion("plugin_platform not between", value1, value2, "pluginPlatform");
             return (Criteria) this;
         }
     }
