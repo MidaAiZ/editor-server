@@ -10,11 +10,13 @@
     </parent>
     <groupId>net.tabplus</groupId>
     <artifactId>tabplus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${tabplus.version}</version>
+    <packaging>jar</packaging>
     <name>api</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
+        <tabplus.version>0.1.0</tabplus.version>
         <java.version>1.8</java.version>
         <druid.version>1.1.20</druid.version>
         <commons.lang.version>2.6</commons.lang.version>
@@ -187,6 +189,7 @@
     </profiles>
 
     <build>
+        <finalName>tabplus-${tabplus.version}-${spring.profiles.active}</finalName>
         <plugins>
 
             <plugin>

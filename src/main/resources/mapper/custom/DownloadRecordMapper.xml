@@ -3,7 +3,7 @@
 <mapper namespace="net.tabplus.api.modules.dao.DownloadRecordDAO">
     <insert id="insertWithId" parameterType="net.tabplus.api.modules.pojo.DownloadRecord">
         insert into download_records (did, ip, ua, plugin_platform, country_code, created_at)
-        values (#{did,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, #{plugin_platform,jdbcType=VARCHAR}, #{country_code,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+        values (#{did,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, #{pluginPlatform,jdbcType=VARCHAR}, #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
     </insert>
 
     <select id="listDailyDloadsCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">

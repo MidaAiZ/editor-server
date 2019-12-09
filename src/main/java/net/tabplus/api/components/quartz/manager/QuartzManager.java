@@ -34,7 +34,7 @@ public class QuartzManager {
     /**
      * 每半小时执行一次
      */
-    public static final String CRON_AT_EVERY_HALF_HOUR = "0 0/30 * * * ?";
+    public static final String CRON_AT_EVERY_HALF_HOUR = "1 * * * * ?";
 
     /**
      * 每小时执行一次
