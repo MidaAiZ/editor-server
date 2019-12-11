@@ -115,52 +115,62 @@ public class LoginRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andRidEqualTo(Long value) {
+        public Criteria andRidEqualTo(String value) {
             addCriterion("rid =", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidNotEqualTo(Long value) {
+        public Criteria andRidNotEqualTo(String value) {
             addCriterion("rid <>", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidGreaterThan(Long value) {
+        public Criteria andRidGreaterThan(String value) {
             addCriterion("rid >", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidGreaterThanOrEqualTo(Long value) {
+        public Criteria andRidGreaterThanOrEqualTo(String value) {
             addCriterion("rid >=", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidLessThan(Long value) {
+        public Criteria andRidLessThan(String value) {
             addCriterion("rid <", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidLessThanOrEqualTo(Long value) {
+        public Criteria andRidLessThanOrEqualTo(String value) {
             addCriterion("rid <=", value, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidIn(List<Long> values) {
+        public Criteria andRidLike(String value) {
+            addCriterion("rid like", value, "rid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRidNotLike(String value) {
+            addCriterion("rid not like", value, "rid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRidIn(List<String> values) {
             addCriterion("rid in", values, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidNotIn(List<Long> values) {
+        public Criteria andRidNotIn(List<String> values) {
             addCriterion("rid not in", values, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidBetween(Long value1, Long value2) {
+        public Criteria andRidBetween(String value1, String value2) {
             addCriterion("rid between", value1, value2, "rid");
             return (Criteria) this;
         }
 
-        public Criteria andRidNotBetween(Long value1, Long value2) {
+        public Criteria andRidNotBetween(String value1, String value2) {
             addCriterion("rid not between", value1, value2, "rid");
             return (Criteria) this;
         }

@@ -86,7 +86,7 @@ public class BadRequestExceptionHandler {
 
     @ExceptionHandler(MyException.class)
     public Result handleException(MyException e) {
-        logger.error(e.getMessage(), e);
+//        logger.error(e.getMessage(), e);
         return Result.error(e.getMessage());
     }
 }

@@ -1,17 +1,15 @@
 package net.tabplus.api.utils;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
+@Slf4j
 @Component
 public class RedisUtil {
-
-    private Logger log = Logger.getLogger(RedisUtil.class);
-
     @Autowired
     private JedisPool jedisPool;
 

@@ -1,17 +1,14 @@
 package net.tabplus.api.utils;
 
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.codec.Base64;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
 
+@Slf4j
 public class SerializeUtil {
-
-    private static Logger log = Logger.getLogger(SerializeUtil.class);
-
-
     /**
      * 反序列化
      *

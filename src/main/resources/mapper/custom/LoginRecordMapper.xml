@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.tabplus.api.modules.dao.LoginRecordDAO">
+    <insert id="insertWithId" parameterType="net.tabplus.api.modules.pojo.LoginRecord">
+        insert into login_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rid != null">
+                `rid`,
+            </if>
+            <if test="uid != null">
+                `uid`,
+            </if>
+            <if test="clientId != null">
+                client_id,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="ua != null">
+                ua,
+            </if>
+            <if test="pluginPlatform != null">
+                plugin_platform,
+            </if>
+            <if test="countryCode != null">
+                country_code,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rid != null">
+                #{rid,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=INTEGER},
+            </if>
+            <if test="clientId != null">
+                #{clientId,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="ua != null">
+                #{ua,jdbcType=VARCHAR},
+            </if>
+            <if test="pluginPlatform != null">
+                #{pluginPlatform,jdbcType=VARCHAR},
+            </if>
+            <if test="countryCode != null">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+</mapper>

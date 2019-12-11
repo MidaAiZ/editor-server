@@ -61,9 +61,9 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!--                <table tableName="admins" domainObjectName="Admin">-->
-        <!--                    <generatedKey column="aid" sqlStatement="Mysql" identity="true"/>-->
-        <!--                </table>-->
+        <!--        <table tableName="admins" domainObjectName="Admin">-->
+        <!--            <generatedKey column="aid" sqlStatement="Mysql" identity="true"/>-->
+        <!--        </table>-->
 
         <!--        <table tableName="countries" domainObjectName="Country">-->
         <!--            <generatedKey column="cid" sqlStatement="Mysql" identity="true"/>-->

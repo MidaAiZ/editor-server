@@ -10,7 +10,7 @@ public interface LoginRecordMapper {
 
     int deleteByExample(LoginRecordExample example);
 
-    int deleteByPrimaryKey(Long rid);
+    int deleteByPrimaryKey(String rid);
 
     int insert(LoginRecord record);
 
@@ -18,7 +18,7 @@ public interface LoginRecordMapper {
 
     List<LoginRecord> selectByExample(LoginRecordExample example);
 
-    LoginRecord selectByPrimaryKey(Long rid);
+    LoginRecord selectByPrimaryKey(String rid);
 
     int updateByExampleSelective(@Param("record") LoginRecord record, @Param("example") LoginRecordExample example);
 

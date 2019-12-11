@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class LoginRecord implements Serializable {
-    private Long rid;
+    private String rid;
 
     private Integer uid;
 
@@ -22,12 +22,12 @@ public class LoginRecord implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getRid() {
+    public String getRid() {
         return rid;
     }
 
-    public void setRid(Long rid) {
-        this.rid = rid;
+    public void setRid(String rid) {
+        this.rid = rid == null ? null : rid.trim();
     }
 
     public Integer getUid() {

@@ -1,6 +1,6 @@
 package net.tabplus.api.config;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +16,11 @@ import redis.clients.jedis.JedisPoolConfig;
  * @auther hxy
  * @date 2017-11-15 21:49:31
  */
+@Slf4j
 @Configuration
 @EnableAutoConfiguration
 @ConfigurationProperties(prefix = "spring.redis")
 public class RedisConfig {
-    private static Logger logger = Logger.getLogger(RedisConfig.class);
-
     private String host;
 
     private int port;
@@ -45,7 +44,7 @@ public class RedisConfig {
         } else {
             pool = new JedisPool(config, host, port, timeout, password);
         }
-        logger.info("init JredisPool ...");
+        log.info("init JredisPool ...");
         return pool;
     }
 

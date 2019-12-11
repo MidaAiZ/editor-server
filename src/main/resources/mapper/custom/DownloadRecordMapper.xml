@@ -2,8 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.tabplus.api.modules.dao.DownloadRecordDAO">
     <insert id="insertWithId" parameterType="net.tabplus.api.modules.pojo.DownloadRecord">
-        insert into download_records (did, ip, ua, plugin_platform, country_code, created_at)
-        values (#{did,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{ua,jdbcType=VARCHAR}, #{pluginPlatform,jdbcType=VARCHAR}, #{countryCode,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+        insert into download_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="did != null">
+                did,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="ua != null">
+                ua,
+            </if>
+            <if test="countryCode != null">
+                country_code,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="pluginPlatform != null">
+                plugin_platform,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="did != null">
+                #{did,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="ua != null">
+                #{ua,jdbcType=VARCHAR},
+            </if>
+            <if test="countryCode != null">
+                #{countryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pluginPlatform != null">
+                #{pluginPlatform,jdbcType=VARCHAR},
+            </if>
+        </trim>
     </insert>
 
     <select id="listDailyDloadsCount" resultType="net.tabplus.api.modules.vo.statistic.StatisticCountVo">

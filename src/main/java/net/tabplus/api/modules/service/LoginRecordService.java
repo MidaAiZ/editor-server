@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author lihaoyu
@@ -35,7 +36,8 @@ public class LoginRecordService {
     }
 
     public void save(LoginRecord record) {
-        loginRecordDAO.insertSelective(record);
+        record.setRid(UUID.randomUUID().toString().replaceAll("-", ""));
+        loginRecordDAO.insertWithId(record);
     }
 
     /**

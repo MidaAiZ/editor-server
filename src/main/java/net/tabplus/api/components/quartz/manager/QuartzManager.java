@@ -22,24 +22,24 @@ public class QuartzManager {
     // 每五秒 */5 * * * * ?     每天10点触发一次  0 0 10 * * ?
     //public static final String CRON_AT_EVERY_DAY_10H="0 0 1 ? * L";
     /**
-     * 每10秒执行一次
+     * 每5分钟执行一次
      */
-    public static final String CRON_AT_EVERY_10SECOND = "*/10 * * * * ?";
+    public static final String CRON_AT_EVERY_5MINUTE = "0 0/5 * * * ?";
 
     /**
      * 每天10点触发一次
      **/
-    public static final String CRON_AT_EVERY_DAY_10H = "0 0 1 * * ?";
+    public static final String CRON_AT_EVERY_DAY_10H = "0 0 10 * * ?";
 
     /**
      * 每半小时执行一次
      */
-    public static final String CRON_AT_EVERY_HALF_HOUR = "1 * * * * ?";
+    public static final String CRON_AT_EVERY_HALF_HOUR = "0 0/30 * * * ?";
 
     /**
      * 每小时执行一次
      */
-    public static final String CRON_AT_EVERY_HOUR = "0 0 0/1 * * ?";
+    public static final String CRON_AT_EVERY_HOUR = "0 0 */1 * * ?";
 
     /**
      * 任务调度
@@ -78,7 +78,7 @@ public class QuartzManager {
          */
         jobDetail = JobBuilder.newJob(LoginRecordJob.class).withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP).build();
         cronTrigger = TriggerBuilder.newTrigger().withIdentity(LOGIN_RECORD_SAVE_JOB, DEFAULT_GROUP)
-                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_HALF_HOUR)).build();
+                .withSchedule(CronScheduleBuilder.cronSchedule(CRON_AT_EVERY_5MINUTE)).build();
         scheduler.scheduleJob(jobDetail, cronTrigger);
     }
 

@@ -31,6 +31,7 @@ target/
 build/
 target/
 lib/
+log/
 
 ### VS Code ###
 .vscode/
