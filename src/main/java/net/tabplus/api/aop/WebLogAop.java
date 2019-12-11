@@ -1,7 +1,6 @@
 package net.tabplus.api.aop;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.client.ResponseContext;
 import lombok.extern.slf4j.Slf4j;
 import net.tabplus.api.utils.Result;
 import org.aspectj.lang.JoinPoint;
@@ -11,12 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.Response;
 
 /**
  * @author www.exception.site (exception 教程网)
@@ -42,7 +39,6 @@ public class WebLogAop {
         // 开始打印请求日志
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-//        attributes.getResponse()
         Object[] args = joinPoint.getArgs();
         Object[] arguments  = new Object[args.length];
         for (int i = 0; i < args.length; i++) {
@@ -74,7 +70,7 @@ public class WebLogAop {
         // 打印请求的 IP
         log.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
-        log.info("Request Args   : {}", arguments);
+        log.info("Request Args   : {}", paramter);
     }
 
     /**
