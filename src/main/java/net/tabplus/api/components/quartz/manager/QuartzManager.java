@@ -24,7 +24,7 @@ public class QuartzManager {
     /**
      * 每5分钟执行一次
      */
-    public static final String CRON_AT_EVERY_5MINUTE = "0 0/5 * * * ?";
+    public static final String CRON_AT_EVERY_5MINUTE = "0 0/1 * * * ?";
 
     /**
      * 每天10点触发一次

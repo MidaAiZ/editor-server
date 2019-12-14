@@ -36,41 +36,41 @@ public class WebLogAop {
      */
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
-        // 开始打印请求日志
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        Object[] args = joinPoint.getArgs();
-        Object[] arguments  = new Object[args.length];
-        for (int i = 0; i < args.length; i++) {
-            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse || args[i] instanceof MultipartFile) {
-                //ServletRequest不能序列化，从入参里排除，否则报异常：java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
-                //ServletResponse不能序列化 从入参里排除，否则报异常：java.lang.IllegalStateException: getOutputStream() has already been called for this response
-                continue;
-            }
-            arguments[i] = args[i];
-        }
-        String paramter = "";
-        if (arguments != null) {
-            try {
-                paramter = JSONObject.toJSONString(arguments);
-            } catch (Exception e) {
-                paramter = arguments.toString();
-            }
-        }
-
-        // 打印请求相关参数
-        log.info("========================================== Start ==========================================");
-        // log.info(request.getMethod() + " " + request.getRequestURL().toString() + "\n IP: " + request.getRemoteAddr() + "\n Class Method: " + joinPoint.getSignature().getDeclaringTypeName() + joinPoint.getSignature().getName() + "\n Request Args : {}", JSONObject.toJSONString(joinPoint.getArgs()));
-        // 打印请求 url
-        log.info("URL            : {}", request.getRequestURL().toString());
-        // 打印 Http method
-        log.info("HTTP Method    : {}", request.getMethod());
-        // 打印调用 controller 的全路径以及执行方法
-        log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
-        // 打印请求的 IP
-        log.info("IP             : {}", request.getRemoteAddr());
-        // 打印请求入参
-        log.info("Request Args   : {}", paramter);
+//        // 开始打印请求日志
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//        Object[] args = joinPoint.getArgs();
+//        Object[] arguments  = new Object[args.length];
+//        for (int i = 0; i < args.length; i++) {
+//            if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse || args[i] instanceof MultipartFile) {
+//                //ServletRequest不能序列化，从入参里排除，否则报异常：java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
+//                //ServletResponse不能序列化 从入参里排除，否则报异常：java.lang.IllegalStateException: getOutputStream() has already been called for this response
+//                continue;
+//            }
+//            arguments[i] = args[i];
+//        }
+//        String paramter = "";
+//        if (arguments != null) {
+//            try {
+//                paramter = JSONObject.toJSONString(arguments);
+//            } catch (Exception e) {
+//                paramter = arguments.toString();
+//            }
+//        }
+//
+//        // 打印请求相关参数
+//        log.info("========================================== Start ==========================================");
+//        // log.info(request.getMethod() + " " + request.getRequestURL().toString() + "\n IP: " + request.getRemoteAddr() + "\n Class Method: " + joinPoint.getSignature().getDeclaringTypeName() + joinPoint.getSignature().getName() + "\n Request Args : {}", JSONObject.toJSONString(joinPoint.getArgs()));
+//        // 打印请求 url
+//        log.info("URL            : {}", request.getRequestURL().toString());
+//        // 打印 Http method
+//        log.info("HTTP Method    : {}", request.getMethod());
+//        // 打印调用 controller 的全路径以及执行方法
+//        log.info("Class Method   : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
+//        // 打印请求的 IP
+//        log.info("IP             : {}", request.getRemoteAddr());
+//        // 打印请求入参
+//        log.info("Request Args   : {}", paramter);
     }
 
     /**
@@ -79,9 +79,9 @@ public class WebLogAop {
      */
     @After("webLog()")
     public void doAfter() throws Throwable {
-        log.info("=========================================== End ===========================================");
+//        log.info("=========================================== End ===========================================");
         // 每个请求之间空一行
-        log.info("");
+//        log.info("");
     }
 
     /**
@@ -92,16 +92,45 @@ public class WebLogAop {
      */
     @Around("webLog()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        long startTime = System.currentTimeMillis();
-        Result result = (Result) proceedingJoinPoint.proceed();
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletResponse response = attributes.getResponse();
+        try {
+            long startTime = System.currentTimeMillis();
+            // 获取执行结果
+            Result result = (Result) proceedingJoinPoint.proceed();
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = attributes.getRequest();
+            HttpServletResponse response = attributes.getResponse();
 
-        // 打印出参
-        log.info("Response       : Status {}, Code: {}, Message: {}, Size: {}KB", response.getStatus(), result.getCode(), result.getMessage(), response.getBufferSize() / 1024);
-        // 执行耗时
-        log.info("Time-Consuming : {} ms", System.currentTimeMillis() - startTime);
-        return result;
+            Object[] args = proceedingJoinPoint.getArgs();
+            Object[] arguments  = new Object[args.length];
+            for (int i = 0; i < args.length; i++) {
+                if (args[i] instanceof ServletRequest || args[i] instanceof ServletResponse || args[i] instanceof MultipartFile) {
+                    //ServletRequest不能序列化，从入参里排除，否则报异常：java.lang.IllegalStateException: It is illegal to call this method if the current request is not in asynchronous mode (i.e. isAsyncStarted() returns false)
+                    //ServletResponse不能序列化 从入参里排除，否则报异常：java.lang.IllegalStateException: getOutputStream() has already been called for this response
+                    continue;
+                }
+                arguments[i] = args[i];
+            }
+            String paramter = "";
+            if (arguments != null) {
+                try {
+                    paramter = JSONObject.toJSONString(arguments);
+                } catch (Exception e) {
+                    paramter = arguments.toString();
+                }
+            }
+
+            // 打印请求相关参数
+            log.info("\n{} {} \nIP: {} \nClass Method: {}.{} \nRequest Args: {} \nResponse: {}, Code: {} \nTime-Consuming: {}ms",
+                    request.getMethod(), request.getRequestURL(),
+                    request.getRemoteAddr(),
+                    proceedingJoinPoint.getSignature().getDeclaringTypeName(), proceedingJoinPoint.getSignature().getName(),
+                    paramter, response.getStatus(), result.getCode(),
+                    System.currentTimeMillis() - startTime
+            );
+            return result;
+        } catch (Exception e) {
+            return proceedingJoinPoint.proceed();
+        }
     }
 }
 
