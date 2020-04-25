@@ -17,4 +17,4 @@ put ./target/tabplus-production.jar tabplus-production.jar
 EOF
 ssh root@139.196.120.93 "./run-tabplus_prod.sh"
 
-echo "程序执行完毕"
+echo "程序执行完毕!"
