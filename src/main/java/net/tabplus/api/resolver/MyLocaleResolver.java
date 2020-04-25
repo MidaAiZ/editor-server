@@ -6,6 +6,8 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -25,7 +27,8 @@ public class MyLocaleResolver implements LocaleResolver {
     public Locale resolveLocale(HttpServletRequest request) {
         String l = request.getParameter("lang");
         if (StringUtils.isEmpty(l)) {
-            //路径上没有国际化语言参数，采用默认的（从请求头中获取）
+            // 路径上没有国际化语言参数，采用默认的（从请求头中获取）
+            // Enumeration<Locale> el = request.getLocales();
             return request.getLocale();
         } else {
             String[] split = l.split("_");
